@@ -1,0 +1,26 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID"
+      }
+    },
+    "pages": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "page": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["page"],
+              "label": "Undirsíða"
+            }
+          }
+        },
+        "label": "Undirsíður"
+      }
+    }
+  }
+}
