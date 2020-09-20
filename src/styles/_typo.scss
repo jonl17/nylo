@@ -1,0 +1,40 @@
+@import "./variables";
+
+@font-face {
+  src: url("./fonts/Jungka-Regular.otf");
+  font-family: Jungka;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  src: url("./fonts/Jungka-RegularItalic.otf");
+  font-family: Jungka;
+  font-weight: 400;
+  font-style: italic;
+}
+
+body {
+  font-family: Jungka;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
+}
+
+.heading1 {
+  font-size: $heading-1;
+}
+
+.heading2 {
+  font-size: $heading-2;
+}
+
+.heading3 {
+  font-size: $heading-3;
+}

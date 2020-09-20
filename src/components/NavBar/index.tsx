@@ -1,16 +1,33 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import useMenuQuery from './useMenuQuery'
+import React from "react"
+import { Link } from "gatsby"
+import useMenuQuery from "./useMenuQuery"
+import cn from "classnames"
+import styles from "./Navbar.module.scss"
 
-export default () => {
+const Menu = () => {
   const { mainMenu } = useMenuQuery()
   return (
-    <nav className='col-3 offset-10 mt-3'>
+    <div>
       {mainMenu.data.pages.map((item, idx) => (
-        <Link key={idx} to={`/${item.page.uid}`}>
-          <h2>{item.page.document.data.title.text}</h2>
+        <Link
+          activeClassName={styles.anchorActive}
+          partiallyActive
+          key={idx}
+          to={`/${item.page.uid}`}
+          className={styles.anchor}
+        >
+          <span />
+          <h2 className="heading1">{item.page.document.data.title.text}</h2>
         </Link>
       ))}
+    </div>
+  )
+}
+
+export default () => {
+  return (
+    <nav className={cn(styles.navbar, "d-flex flex-column pt-3 h-100")}>
+      <Menu />
     </nav>
   )
 }
