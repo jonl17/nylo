@@ -2,4 +2,14 @@
 
 .imageWrap {
   width: 125%;
+  filter: invert(0%) sepia(15%) saturate(929%) hue-rotate(70deg)
+    brightness(102%) contrast(98%);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
