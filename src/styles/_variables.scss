@@ -1,6 +1,7 @@
 $black: #000;
 $white: #fff;
 $green: #a4fcb6;
+$gray: #d1d3d4;
 
 $spacer: 1rem !default;
 $spacers: () !default;
@@ -36,9 +37,5 @@ $spacers: map-merge(
   ),
   $spacers
 );
-
-$heading-1: 45px;
-$heading-2: 23px;
-$heading-3: 33px;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

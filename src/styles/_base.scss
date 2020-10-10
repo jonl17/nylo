@@ -16,3 +16,19 @@ a {
     display: block;
   }
 }
+
+.removeGenericButtonStyles {
+  outline: 0;
+  border: none;
+  background: inherit;
+
+  &:focus {
+    outline: 0 !important;
+    border: none;
+  }
+}
+
+::selection {
+  background: $black;
+  color: $white;
+}

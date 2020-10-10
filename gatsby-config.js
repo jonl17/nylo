@@ -2,6 +2,8 @@ require("dotenv").config({
   path: `.env.development`,
 })
 
+const { htmlSerializer } = require("./src/prismic/htmlSerializer")
+
 module.exports = {
   plugins: [
     `gatsby-plugin-sass`,
@@ -35,9 +37,7 @@ module.exports = {
           element,
           content,
           children
-        ) => {
-          // Your HTML serializer
-        },
+        ) => htmlSerializer(element, content),
         schemas: {
           page: require(`./src/schemas/page.json`),
           menu: require(`./src/schemas/menu.json`),

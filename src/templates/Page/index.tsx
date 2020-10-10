@@ -2,9 +2,25 @@ import React from "react"
 import { graphql, PageProps } from "gatsby"
 import styles from "./Page.module.scss"
 import { Tween, PlayState } from "react-gsap"
+import "~/styles/components/_image.scss"
+import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
 
 type BGcolor = "Green" | "White" | null
+
+interface RichTextSliceType {
+  content: {
+    html: string
+    text: string
+  }
+}
+
+interface ImageReelSliceType {
+  image: {
+    url: string
+    alt: string
+  }
+}
 
 interface Props {
   data: {
@@ -14,29 +30,31 @@ interface Props {
           text: string
         }
         background_color: BGcolor
-        content: {
-          html: string
-        }
+        body: {
+          __typename: string
+          primary: RichTextSliceType
+          items: ImageReelSliceType[]
+        }[]
       }
     }
   }
+  rest: PageProps
 }
 
-const Page: React.FC<Props> = ({ data }) => {
+const Page: React.FC<Props> = ({ data, ...rest }) => {
+  console.log(data)
   const { background_color } = data.prismicPage.data
   const findColor = (color: BGcolor) => {
     if (color === "Green") return styles.bgGreen
     else return styles.bgWhite
   }
+  const slices = data.prismicPage.data.body
+
   return (
-    <Tween from={{ x: "-100%" }} duration={0.2}>
+    <Tween from={{ x: "-100%" }} duration={0.25}>
       <div className={cn(findColor(background_color), styles.pageContainer)}>
-        <div
-          className="heading3 mt-3"
-          dangerouslySetInnerHTML={{
-            __html: data.prismicPage.data.content.html,
-          }}
-        />
+        {slices &&
+          slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
       </div>
     </Tween>
   )
@@ -52,8 +70,23 @@ export const query = graphql`
           text
         }
         background_color
-        content {
-          html
+        body {
+          __typename
+          ... on PrismicPageBodyImageReel {
+            items {
+              image {
+                url
+                alt
+              }
+            }
+          }
+          ... on PrismicPageBodyRichText {
+            primary {
+              content {
+                html
+              }
+            }
+          }
         }
       }
     }

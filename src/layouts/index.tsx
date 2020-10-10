@@ -1,6 +1,6 @@
 import React from "react"
-import NavBar from "~/components/NavBar"
-import Banner from "~/components/Banner"
+import NavBar from "~/components/Site/NavBar"
+import Banner from "~/components/Site/Banner"
 
 const Layout: React.FC<{ children: React.ReactChildren }> = ({ children }) => {
   return (

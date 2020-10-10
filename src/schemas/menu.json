@@ -1,12 +1,12 @@
 {
   "Main": {
-    "uid": {
-      "type": "UID",
+    "name": {
+      "type": "Text",
       "config": {
-        "label": "UID"
+        "label": "Name"
       }
     },
-    "pages": {
+    "items": {
       "type": "Group",
       "config": {
         "fields": {
@@ -15,11 +15,19 @@
             "config": {
               "select": "document",
               "customtypes": ["page"],
-              "label": "Undirsíða"
+              "label": "Page"
+            }
+          },
+          "submenu": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["menu"],
+              "label": "Submenu"
             }
           }
         },
-        "label": "Undirsíður"
+        "label": "Items"
       }
     }
   }

@@ -13,6 +13,14 @@
         "label": "Titill"
       }
     },
+    "subpage": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": ["page"],
+        "label": "Subpage of"
+      }
+    },
     "background_color": {
       "type": "Select",
       "config": {
@@ -21,20 +29,55 @@
         "label": "Bakgrunns litur"
       }
     },
-    "subpage": {
-      "type": "Link",
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
       "config": {
-        "select": "document",
-        "customtypes": ["page"],
-        "label": "Undirsíða"
-      }
-    },
-    "content": {
-      "type": "StructuredText",
-      "config": {
-        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
-        "allowTargetBlank": true,
-        "label": "Efni"
+        "labels": {
+          "image_reel": [],
+          "rich_text": []
+        },
+        "choices": {
+          "image_reel": {
+            "type": "Slice",
+            "fieldset": "Image reel",
+            "description": "Images",
+            "icon": "burst_mode",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": 430,
+                    "height": 304
+                  },
+                  "thumbnails": [],
+                  "label": "Image"
+                }
+              }
+            }
+          },
+          "rich_text": {
+            "type": "Slice",
+            "fieldset": "Rich text",
+            "description": "Add text, with links and more.",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "content": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "allowTargetBlank": true,
+                  "label": "Content"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
       }
     }
   }

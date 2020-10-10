@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: Jungka;
+  font-family: Jungka !important;
   font-style: normal;
 }
 
@@ -24,17 +24,29 @@ h2,
 h3,
 h4,
 h5 {
-  font-weight: normal;
+  font-weight: 400 !important;
 }
 
-.heading1 {
-  font-size: $heading-1;
+.hdln {
+  &--1 {
+    font-size: 45px;
+  }
+  &--2 {
+    font-size: 33px;
+  }
+  &--3 {
+    font-size: 23px;
+  }
+  &--4 {
+    font-size: 15px;
+  }
 }
 
-.heading2 {
-  font-size: $heading-2;
-}
-
-.heading3 {
-  font-size: $heading-3;
+.para {
+  &--1 {
+    font-size: 33px;
+  }
+  &--2 {
+    font-size: 23px;
+  }
 }
