@@ -8,7 +8,6 @@ const ImageReel: React.FC<{
   console.log(items)
   return (
     <div className={cn("d-flex position-relative", styles.imageWrap)}>
-      <span className={styles.overlay} />
       {items.map((item, idx) => (
         <img
           className="col-6 pl-0"
