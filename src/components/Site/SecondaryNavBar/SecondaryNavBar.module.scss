@@ -1,0 +1,10 @@
+@import "../../../styles/variables";
+
+.menuWrap {
+  position: absolute;
+  left: 0;
+}
+
+.activeItem {
+  text-decoration: underline !important;
+}

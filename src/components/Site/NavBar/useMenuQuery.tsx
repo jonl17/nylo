@@ -47,7 +47,6 @@ const useMenuQuery = () => {
         ? {
             name: item.submenu.document.data.name,
             items: item.submenu.document.data.items.map(i => {
-              console.log(i.page)
               return { url: i.page.uid, name: i.page.document.data.title.text }
             }),
           }

@@ -5,7 +5,7 @@ const RichText: React.FC<{ primary: { content: { html: string } } }> = ({
 }) => {
   return (
     <div
-      className="para--1 my-3"
+      className="parag--1 my-3 mr-6"
       dangerouslySetInnerHTML={{
         __html: primary.content.html,
       }}

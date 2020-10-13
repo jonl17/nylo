@@ -29,7 +29,7 @@ const Menu = () => {
               activeClassName={styles.anchorActive}
               partiallyActive
               to={`/${slugify(item.submenu.name, { lower: true })}/${
-                item.submenu.items[0].url
+                item.submenu.items[0].url // default to first item on list | save last chosen item in context?
               }`}
               key={idx}
               className={cn("removeGenericButtonStyles pl-0", styles.anchor)}

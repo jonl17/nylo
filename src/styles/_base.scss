@@ -1,5 +1,4 @@
 @import "./variables";
-@import "./typo";
 
 a {
   text-decoration: none !important;
@@ -32,3 +31,9 @@ a {
   background: $black;
   color: $white;
 }
+
+.secondary-menuitem-active {
+  text-decoration: underline;
+}
+
+@import "./typo";

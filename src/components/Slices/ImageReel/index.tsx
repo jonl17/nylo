@@ -5,9 +5,8 @@ import styles from "./ImageReel.module.scss"
 const ImageReel: React.FC<{
   items: { image: { url: string; alt: string } }[]
 }> = ({ items }) => {
-  console.log(items)
   return (
-    <div className={cn("d-flex position-relative", styles.imageWrap)}>
+    <div className={cn("d-flex position-relative py-3", styles.imageWrap)}>
       {items.map((item, idx) => (
         <img
           className="col-6 pl-0"

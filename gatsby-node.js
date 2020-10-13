@@ -23,6 +23,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   pages.data.allPrismicPage.nodes.forEach(node => {
     let path = `/${node.uid}`
+
     if (node.uid === "frontpage") {
       path = `/`
     } else if (node.data.subpage && node.data.subpage.uid) {
@@ -34,6 +35,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: pageTemplate,
       context: {
         id: node.id,
+        parentPageUid: node.data.subpage ? node.data.subpage.uid : null,
       },
     })
   })

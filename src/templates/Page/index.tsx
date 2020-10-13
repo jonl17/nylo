@@ -1,26 +1,13 @@
 import React from "react"
 import { graphql, PageProps } from "gatsby"
 import styles from "./Page.module.scss"
-import { Tween, PlayState } from "react-gsap"
+import { Tween } from "react-gsap"
 import "~/styles/components/_image.scss"
 import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
-
-type BGcolor = "Green" | "White" | null
-
-interface RichTextSliceType {
-  content: {
-    html: string
-    text: string
-  }
-}
-
-interface ImageReelSliceType {
-  image: {
-    url: string
-    alt: string
-  }
-}
+import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
+import SecondaryNavBar from "~/components/Site/SecondaryNavBar"
+import Icon from "~/components/Site/Icon"
 
 interface Props {
   data: {
@@ -38,25 +25,32 @@ interface Props {
       }
     }
   }
-  rest: PageProps
+  pageContext: {
+    id: string
+    parentPageUid?: string
+  }
 }
 
-const Page: React.FC<Props> = ({ data, ...rest }) => {
-  console.log(data)
+const Page: React.FC<Props> = ({ data, pageContext }) => {
   const { background_color } = data.prismicPage.data
+
   const findColor = (color: BGcolor) => {
     if (color === "Green") return styles.bgGreen
     else return styles.bgWhite
   }
+
   const slices = data.prismicPage.data.body
 
   return (
-    <Tween from={{ x: "-100%" }} duration={0.25}>
+    <>
       <div className={cn(findColor(background_color), styles.pageContainer)}>
+        {pageContext.parentPageUid && (
+          <SecondaryNavBar parentPageUid={pageContext.parentPageUid} />
+        )}
         {slices &&
           slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
       </div>
-    </Tween>
+    </>
   )
 }
 
@@ -66,6 +60,9 @@ export const query = graphql`
   query($id: String!) {
     prismicPage(id: { eq: $id }) {
       data {
+        subpage {
+          uid
+        }
         title {
           text
         }

@@ -7,7 +7,6 @@ const SliceMapping = ({ slice }) => {
     PrismicPageBodyRichText: RichText,
     PrismicPageBodyImageReel: ImageReel,
   }
-  console.log(slice)
   const Cmp = slices[slice.__typename]
   if (!Cmp) {
     return null
