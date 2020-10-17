@@ -35,7 +35,8 @@
       "config": {
         "labels": {
           "image_reel": [],
-          "rich_text": []
+          "rich_text": [],
+          "all_news": []
         },
         "choices": {
           "image_reel": {
@@ -75,6 +76,15 @@
                 }
               }
             },
+            "repeat": {}
+          },
+          "all_news": {
+            "type": "Slice",
+            "fieldset": "All news",
+            "description": "Displays news in a grid, ordered by date.",
+            "icon": "grid_on",
+            "display": "list",
+            "non-repeat": {},
             "repeat": {}
           }
         }

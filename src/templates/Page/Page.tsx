@@ -1,13 +1,11 @@
 import React from "react"
 import { graphql, PageProps } from "gatsby"
 import styles from "./Page.module.scss"
-import { Tween } from "react-gsap"
 import "~/styles/components/_image.scss"
 import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
 import SecondaryNavBar from "~/components/Site/SecondaryNavBar"
-import Icon from "~/components/Site/Icon"
 
 interface Props {
   data: {
@@ -69,6 +67,9 @@ export const query = graphql`
         background_color
         body {
           __typename
+          ... on PrismicPageBodyAllNews {
+            id
+          }
           ... on PrismicPageBodyImageReel {
             items {
               image {

@@ -5,8 +5,8 @@ export default () => {
     prismicAnnouncementBanner: {
       data: {
         the_announcement: {
-          text: string
-        }[]
+          html: string
+        }
       }
     }
   } = useStaticQuery(graphql`
@@ -14,13 +14,12 @@ export default () => {
       prismicAnnouncementBanner {
         data {
           the_announcement {
-            text
+            html
           }
         }
       }
     }
   `)
-  const announcement =
-    data.prismicAnnouncementBanner.data.the_announcement[0].text
+  const announcement = data.prismicAnnouncementBanner.data.the_announcement.html
   return { announcement }
 }

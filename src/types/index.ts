@@ -13,3 +13,18 @@ export interface ImageReelSliceType {
     alt: string
   }
 }
+
+export interface NewsItem {
+  uid: string
+  title: {
+    text: string
+  }
+  date: string
+  content: {
+    html: string
+  }
+  featuredImage: {
+    alt: string
+    url: string
+  }
+}

@@ -7,7 +7,10 @@ const Banner = () => {
   const { announcement } = useGetAnnouncementBanner()
   return (
     <div className={cn(styles.bannerWrap)}>
-      <h1 className={cn("hdln--1 m-0", styles.marquee)}>{announcement}</h1>
+      <div
+        dangerouslySetInnerHTML={{ __html: announcement }}
+        className={cn("hdln--1", styles.marquee)}
+      />
     </div>
   )
 }

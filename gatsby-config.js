@@ -41,6 +41,8 @@ module.exports = {
         schemas: {
           page: require(`./src/schemas/page.json`),
           menu: require(`./src/schemas/menu.json`),
+          news: require(`./src/schemas/news.json`),
+          announcement_banner: require(`./src/schemas/announcement_banner.json`),
         },
         lang: "*",
         prismicToolbar: true,

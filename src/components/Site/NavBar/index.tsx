@@ -4,9 +4,11 @@ import useMenuQuery from "./useMenuQuery"
 import cn from "classnames"
 import styles from "./Navbar.module.scss"
 import slugify from "slugify"
+import { useLocation } from "@reach/router"
 
 const Menu = () => {
   const { mainMenu } = useMenuQuery()
+  const { pathname } = useLocation()
   return (
     <div>
       {mainMenu.map((item, idx) => {
@@ -24,15 +26,20 @@ const Menu = () => {
             </Link>
           )
         } else if (item.submenu) {
+          const inSlugForm = (name: string) => {
+            return `/${slugify(name, { lower: true })}/`
+          }
           return (
             <Link
-              activeClassName={styles.anchorActive}
-              partiallyActive
-              to={`/${slugify(item.submenu.name, { lower: true })}/${
+              to={`${inSlugForm(item.submenu.name)}${
                 item.submenu.items[0].url // default to first item on list | save last chosen item in context?
               }`}
               key={idx}
-              className={cn("removeGenericButtonStyles pl-0", styles.anchor)}
+              className={cn("removeGenericButtonStyles pl-0", styles.anchor, {
+                [styles.anchorActive]: pathname.includes(
+                  inSlugForm(item.submenu.name)
+                ),
+              })}
             >
               <span />
               <h2 className="hdln--1">{item.submenu.name}</h2>
