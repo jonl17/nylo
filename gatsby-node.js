@@ -57,7 +57,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   news.data.allPrismicNews.nodes.forEach(node => {
     createPage({
-      path: `/frettir/${node.uid}`,
+      path: `um-nylo/frettir/${node.id}`,
       component: newsTemplate,
       context: {
         id: node.id,

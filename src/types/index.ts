@@ -15,6 +15,7 @@ export interface ImageReelSliceType {
 }
 
 export interface NewsItem {
+  id: string
   uid: string
   title: {
     text: string

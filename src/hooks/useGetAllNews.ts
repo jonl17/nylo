@@ -5,6 +5,7 @@ export default () => {
   const data: {
     allPrismicNews: {
       nodes: {
+        id: string
         uid: string
         data: {
           featured_image: {
@@ -25,6 +26,7 @@ export default () => {
     {
       allPrismicNews(sort: { fields: data___date, order: DESC }) {
         nodes {
+          id
           uid
           data {
             featured_image {
@@ -45,6 +47,7 @@ export default () => {
   `)
   const allNews: NewsItem[] = data.allPrismicNews.nodes.map(node => {
     return {
+      id: node.id,
       uid: node.uid,
       title: node.data.title,
       date: node.data.date,
