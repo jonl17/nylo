@@ -1,5 +1,5 @@
 import React from "react"
-import SecondaryNavBar from "~/components/Site/SecondaryNavBar"
+import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
 import "~/styles/components/_pageContainer.scss"
 import cn from "classnames"
 import { PageProps, graphql as gql } from "gatsby"

@@ -9,15 +9,15 @@ import { Button } from "~/components/Site/Button"
 
 const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
   return (
-    <div className="col-6">
+    <div className="col-6 mb-4">
       <div className={cn("mr-1", styles.contentBox)}>
         <img
           className={styles.featuredImage}
           src={news.featuredImage.url}
           alt={news.featuredImage.alt}
         />
-        <p>{news.date}</p>
-        <h1 className="hdln--2">{news.title.text}</h1>
+        <p className="mb-1 mt-2">{news.date}</p>
+        <h1 className="hdln--2 mb-3">{news.title.text}</h1>
         <Button
           label="Lesa meira"
           to={`/um-nylo/frettir/${slugify(news.id, { lower: true })}`}

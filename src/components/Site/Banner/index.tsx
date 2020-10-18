@@ -9,7 +9,7 @@ const Banner = () => {
     <div className={cn(styles.bannerWrap)}>
       <div
         dangerouslySetInnerHTML={{ __html: announcement }}
-        className={cn("hdln--1", styles.marquee)}
+        className={cn("hdln--1 center", styles.marquee)}
       />
     </div>
   )

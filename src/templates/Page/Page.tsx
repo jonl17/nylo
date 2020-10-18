@@ -5,7 +5,7 @@ import "~/styles/components/_image.scss"
 import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
-import SecondaryNavBar from "~/components/Site/SecondaryNavBar"
+import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
 import "~/styles/components/_pageContainer.scss"
 
 interface Props {

@@ -1,9 +1,7 @@
 import React from "react"
 import { NewsItem } from "~/types"
-import RichText from "~/components/Slices/RichText/RichText"
 
 const Content: React.FC<{ news: NewsItem }> = ({ news }) => {
-  console.log(news)
   return (
     <div className="my-3 mr-6">
       <p>{news.date}</p>

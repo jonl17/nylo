@@ -12,7 +12,13 @@ var htmlSerializer = function (element, content) {
 
   // Add a class to hyperlinks
   if (element.type == "hyperlink") {
-    return '<a class="some-link" href="' + element.url + '">' + content + "</a>"
+    return (
+      '<a class="secondaryAnchorActive" href="' +
+      element.url +
+      '">' +
+      content +
+      "</a>"
+    )
   }
 
   // Return null to stick with the default behavior
