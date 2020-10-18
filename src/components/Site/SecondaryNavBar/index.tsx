@@ -35,7 +35,9 @@ const SecondaryNavBar: React.FC<{ parentPageUid: string }> = ({
       {data.allPrismicPage.nodes.map((item, idx) => (
         <Link
           className={cn("parag--2", styles.anchor, {
-            [styles.activeItem]: `/${parentPageUid}/${item.uid}` === pathname,
+            [styles.activeItem]: pathname.includes(
+              `/${parentPageUid}/${item.uid}`
+            ),
           })}
           key={idx}
           to={`/${parentPageUid}/${item.uid}`}

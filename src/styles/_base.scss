@@ -38,4 +38,16 @@ body a {
   text-decoration: underline;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg {
+  &--green {
+    background-color: $green;
+  }
+}
+
 @import "./typo";
