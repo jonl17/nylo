@@ -13,12 +13,16 @@ var htmlSerializer = function (element, content) {
   // Add a class to hyperlinks
   if (element.type == "hyperlink") {
     return (
-      '<a class="secondaryAnchorActive" href="' +
-      element.url +
+      '<a target="_blank" class="secondaryAnchorActive" href="' +
+      element.data.url +
       '">' +
       content +
       "</a>"
     )
+  }
+
+  if (element.type == "heading1") {
+    return '<h1 class="hdln--1">' + element.text + "</h1>"
   }
 
   // Return null to stick with the default behavior

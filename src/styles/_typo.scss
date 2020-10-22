@@ -14,6 +14,10 @@
   font-style: italic;
 }
 
+* {
+  font-size: 100%;
+}
+
 body {
   font-family: Jungka !important;
   font-style: normal;
@@ -29,26 +33,26 @@ h5 {
 
 .hdln {
   &--1 {
-    font-size: 45px;
+    font-size: 3rem;
   }
   &--2 {
-    font-size: 33px;
+    font-size: 2rem;
   }
   &--3 {
-    font-size: 23px;
+    font-size: 1.4rem;
   }
   &--4 {
-    font-size: 15px;
+    font-size: 1rem;
   }
 }
 
 .parag {
   &--1 {
-    font-size: 33px;
-    line-height: 40px;
+    font-size: 2rem;
+    line-height: 1.3;
   }
   &--2 {
-    font-size: 23px;
-    line-height: 30px;
+    font-size: 1.4rem;
+    line-height: 1.3;
   }
 }

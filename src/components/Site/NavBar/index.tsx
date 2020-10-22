@@ -7,46 +7,47 @@ import slugify from "slugify"
 import { useLocation } from "@reach/router"
 
 const Menu = () => {
-  const { mainMenu } = useMenuQuery()
+  const mainMenu = useMenuQuery()
   const { pathname } = useLocation()
   return (
     <div>
-      {mainMenu.map((item, idx) => {
-        if (item.page) {
-          return (
-            <Link
-              activeClassName={styles.anchorActive}
-              partiallyActive
-              key={idx}
-              to={`/${item.page.url}`}
-              className={styles.anchor}
-            >
-              <span />
-              <h2 className="hdln--1">{item.page.name}</h2>
-            </Link>
-          )
-        } else if (item.submenu) {
-          const inSlugForm = (name: string) => {
-            return `/${slugify(name, { lower: true })}/`
+      {mainMenu &&
+        mainMenu.map((item, idx) => {
+          if (item.page) {
+            return (
+              <Link
+                activeClassName={styles.anchorActive}
+                partiallyActive
+                key={idx}
+                to={`/${item.page.url}`}
+                className={styles.anchor}
+              >
+                <span />
+                <h2 className="hdln--1">{item.page.name}</h2>
+              </Link>
+            )
+          } else if (item.submenu) {
+            const inSlugForm = (name: string) => {
+              return `/${slugify(name, { lower: true })}/`
+            }
+            return (
+              <Link
+                to={`${inSlugForm(item.submenu.name)}${
+                  item.submenu.items[0].url // default to first item on list | save last chosen item in context?
+                }`}
+                key={idx}
+                className={cn("removeGenericButtonStyles pl-0", styles.anchor, {
+                  [styles.anchorActive]: pathname.includes(
+                    inSlugForm(item.submenu.name)
+                  ),
+                })}
+              >
+                <span />
+                <h2 className="hdln--1">{item.submenu.name}</h2>
+              </Link>
+            )
           }
-          return (
-            <Link
-              to={`${inSlugForm(item.submenu.name)}${
-                item.submenu.items[0].url // default to first item on list | save last chosen item in context?
-              }`}
-              key={idx}
-              className={cn("removeGenericButtonStyles pl-0", styles.anchor, {
-                [styles.anchorActive]: pathname.includes(
-                  inSlugForm(item.submenu.name)
-                ),
-              })}
-            >
-              <span />
-              <h2 className="hdln--1">{item.submenu.name}</h2>
-            </Link>
-          )
-        }
-      })}
+        })}
     </div>
   )
 }

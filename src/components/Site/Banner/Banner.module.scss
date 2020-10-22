@@ -14,11 +14,17 @@
 
 .marquee {
   position: absolute;
-  width: 100%;
+  width: 125%;
   height: 100%;
   text-align: center;
   transform: translateX(100%);
   animation: scroll-left 17s linear infinite;
+
+  @include media-breakpoint-down("lg") {
+    h1 {
+      font-size: 33px;
+    }
+  }
 }
 
 @keyframes scroll-left {

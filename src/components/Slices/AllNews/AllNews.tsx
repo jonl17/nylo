@@ -9,7 +9,7 @@ import { Button } from "~/components/Site/Button"
 
 const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
   return (
-    <div className="col-6 mb-4">
+    <div className="col-xl-6 mb-4">
       <div className={cn("mr-1", styles.contentBox)}>
         <img
           className={styles.featuredImage}
@@ -30,7 +30,7 @@ const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
 const AllNews = () => {
   const { allNews } = useGetAllNews()
   return (
-    <div className="d-flex flex-wrap mr-6 mt-3">
+    <div className="d-flex flex-wrap mr-6 mr-xl-0 mt-3 mb-3 pr-3">
       {allNews.map((item, idx) => (
         <NewsBox key={idx} news={item} />
       ))}

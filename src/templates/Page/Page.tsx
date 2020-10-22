@@ -1,11 +1,12 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import styles from "./Page.module.scss"
 import "~/styles/components/_image.scss"
 import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
 import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
+import { useLocation } from "@reach/router"
 import "~/styles/components/_pageContainer.scss"
 
 interface Props {
@@ -31,6 +32,11 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ data, pageContext }) => {
+  const { pathname } = useLocation() // todo make this redirect better
+  if (pathname === "/um-nylo" || pathname === "/um-nylo/") {
+    navigate("/um-nylo/um-safnid")
+  }
+
   const { background_color } = data.prismicPage.data
 
   const findColor = (color: BGcolor) => {

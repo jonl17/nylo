@@ -20,6 +20,9 @@ export default () => {
       }
     }
   `)
+  if (!data.prismicAnnouncementBanner) {
+    return null
+  }
   const announcement = data.prismicAnnouncementBanner.data.the_announcement.html
-  return { announcement }
+  return announcement
 }

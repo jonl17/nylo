@@ -34,7 +34,9 @@ const useMenuQuery = () => {
       }
     }
   `)
-
+  if (!menu.prismicMenu) {
+    return null
+  }
   const mainMenu = menu.prismicMenu.data.items.map(item => {
     return {
       page: item.page.document
@@ -53,7 +55,7 @@ const useMenuQuery = () => {
         : null,
     }
   })
-  return { mainMenu }
+  return mainMenu
 }
 
 export default useMenuQuery
