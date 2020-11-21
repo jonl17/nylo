@@ -1,15 +1,3 @@
-@import "./variables";
-
-// overwrite the defaults +++
-body a {
-  text-decoration: none;
-  color: $black;
-
-  &:hover {
-    text-decoration: none;
-    color: $black;
-  }
-}
 // +++++
 
 .anchorActive {
@@ -48,10 +36,12 @@ body a {
   &--green {
     background-color: $green;
   }
+
+  &--white {
+    background-color: $white;
+  }
 }
 
 .secondaryAnchorActive {
   text-decoration: underline !important;
 }
-
-@import "./typo";

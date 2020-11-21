@@ -1,0 +1,10 @@
+.newsbox {
+  height: 518px;
+  min-width: 250px;
+
+  &__featured-image {
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+  }
+}

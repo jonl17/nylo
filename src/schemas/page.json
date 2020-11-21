@@ -36,43 +36,48 @@
         "labels": {
           "image_reel": [],
           "rich_text": [],
-          "all_news": []
+          "all_news": [],
+          "media": [],
+          "richtext": []
         },
         "choices": {
-          "image_reel": {
+          "richtext": {
             "type": "Slice",
-            "fieldset": "Image reel",
-            "description": "Images",
-            "icon": "burst_mode",
-            "display": "list",
-            "non-repeat": {},
-            "repeat": {
-              "image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {
-                    "width": 430,
-                    "height": 304
-                  },
-                  "thumbnails": [],
-                  "label": "Image"
-                }
-              }
-            }
-          },
-          "rich_text": {
-            "type": "Slice",
-            "fieldset": "Rich text",
-            "description": "Add text, with links and more.",
+            "fieldset": "RichText",
+            "description": "Add text, links, buttons, etc... (3 types)",
             "icon": "format_color_text",
             "display": "list",
             "non-repeat": {
-              "content": {
+              "type": {
+                "type": "Select",
+                "config": {
+                  "options": [
+                    "Large",
+                    "Small one column right",
+                    "Small two columns"
+                  ],
+                  "default_value": "Large",
+                  "label": "Type",
+                  "placeholder": "Textbox type"
+                }
+              },
+              "text": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
                   "allowTargetBlank": true,
-                  "label": "Content"
+                  "label": "Text",
+                  "placeholder": "Add text with links, buttons, etc...",
+                  "labels": {
+                    "XX": [
+                      {
+                        "name": "button-primary"
+                      },
+                      {
+                        "name": "inline-link"
+                      }
+                    ]
+                  }
                 }
               }
             },
@@ -86,6 +91,27 @@
             "display": "list",
             "non-repeat": {},
             "repeat": {}
+          },
+          "media": {
+            "type": "Slice",
+            "fieldset": "Media",
+            "description": "Add 1 or 2 images",
+            "icon": "image",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": 755,
+                    "height": 411
+                  },
+                  "thumbnails": [],
+                  "label": "Image"
+                }
+              }
+            }
           }
         }
       }

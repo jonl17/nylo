@@ -21,9 +21,6 @@ export interface NewsItem {
     text: string
   }
   date: string
-  content: {
-    html: string
-  }
   featuredImage: {
     alt: string
     url: string

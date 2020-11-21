@@ -1,14 +1,14 @@
 import React from "react"
-import { ImageReel, RichText, AllNews } from "."
+import { ImageReel as Media, RichText, AllNews } from "."
 
 // todo, convert to typescript
 const SliceMapping = ({ slice }) => {
   const slices = {
-    PrismicPageBodyRichText: RichText,
-    PrismicPageBodyImageReel: ImageReel,
-    PrismicPageBodyAllNews: AllNews,
+    richtext: RichText,
+    media: Media,
+    all_news: AllNews,
   }
-  const Cmp = slices[slice.__typename]
+  const Cmp = slices[slice.slice_type]
   if (!Cmp) {
     return null
   }

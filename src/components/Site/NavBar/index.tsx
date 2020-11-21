@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "gatsby"
 import useMenuQuery from "./useMenuQuery"
 import cn from "classnames"
-import styles from "./Navbar.module.scss"
 import slugify from "slugify"
 import { useLocation } from "@reach/router"
 
@@ -16,14 +15,14 @@ const Menu = () => {
           if (item.page) {
             return (
               <Link
-                activeClassName={styles.anchorActive}
+                activeClassName="navbar__anchor--active"
                 partiallyActive
                 key={idx}
                 to={`/${item.page.url}`}
-                className={styles.anchor}
+                className="navbar__anchor"
               >
                 <span />
-                <h2 className="hdln--1">{item.page.name}</h2>
+                <h1>{item.page.name}</h1>
               </Link>
             )
           } else if (item.submenu) {
@@ -36,14 +35,14 @@ const Menu = () => {
                   item.submenu.items[0].url // default to first item on list | save last chosen item in context?
                 }`}
                 key={idx}
-                className={cn("removeGenericButtonStyles pl-0", styles.anchor, {
-                  [styles.anchorActive]: pathname.includes(
+                className={cn("navbar__anchor removeGenericButtonStyles pl-0", {
+                  "navbar__anchor--active": pathname.includes(
                     inSlugForm(item.submenu.name)
                   ),
                 })}
               >
                 <span />
-                <h2 className="hdln--1">{item.submenu.name}</h2>
+                <h1>{item.submenu.name}</h1>
               </Link>
             )
           }
@@ -54,7 +53,7 @@ const Menu = () => {
 
 export default () => {
   return (
-    <nav className={cn(styles.navbar, "d-flex flex-column pt-3 h-100")}>
+    <nav className="navbar d-flex flex-column pt-3 h-100">
       <Menu />
     </nav>
   )

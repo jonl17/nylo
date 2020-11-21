@@ -1,23 +1,20 @@
 import React from "react"
 import { useGetAllNews } from "~/hooks"
 import { NewsItem } from "~/types"
-import { Link } from "gatsby"
 import slugify from "slugify"
-import cn from "classnames"
-import styles from "./AllNews.module.scss"
 import { Button } from "~/components/Site/Button"
 
 const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
   return (
     <div className="col-xl-6 mb-4">
-      <div className={cn("mr-1", styles.contentBox)}>
+      <div className="newsbox mr-1">
         <img
-          className={styles.featuredImage}
+          className="newsbox__featured-image"
           src={news.featuredImage.url}
           alt={news.featuredImage.alt}
         />
         <p className="mb-1 mt-2">{news.date}</p>
-        <h1 className="hdln--2 mb-3">{news.title.text}</h1>
+        <h2 className="mb-3">{news.title.text}</h2>
         <Button
           label="Lesa meira"
           to={`/um-nylo/frettir/${slugify(news.id, { lower: true })}`}

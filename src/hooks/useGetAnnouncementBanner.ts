@@ -24,5 +24,6 @@ export default () => {
     return null
   }
   const announcement = data.prismicAnnouncementBanner.data.the_announcement.html
+  console.log(announcement)
   return announcement
 }

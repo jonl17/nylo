@@ -1,16 +1,14 @@
 import React from "react"
 import { useGetAnnouncementBanner } from "~/hooks"
-import cn from "classnames"
-import styles from "./Banner.module.scss"
 
 const Banner = () => {
   const announcement = useGetAnnouncementBanner()
   return (
-    <div className={cn(styles.bannerWrap)}>
+    <div className="banner">
       {announcement && (
         <div
           dangerouslySetInnerHTML={{ __html: announcement }}
-          className={cn("center", styles.marquee)}
+          className="banner__marquee center"
         />
       )}
     </div>

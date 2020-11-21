@@ -1,6 +1,6 @@
 import { graphql } from "gatsby"
 
-export const query = graphql`
+export const fragment = graphql`
   fragment fragmentPrismicMenu on PrismicMenu {
     data {
       name

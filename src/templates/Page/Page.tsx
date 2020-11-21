@@ -1,13 +1,11 @@
 import React, { useEffect } from "react"
 import { graphql, navigate } from "gatsby"
-import styles from "./Page.module.scss"
-import "~/styles/components/_image.scss"
 import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
 import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
 import { useLocation } from "@reach/router"
-import "~/styles/components/_pageContainer.scss"
+import "../../fragments/media"
 
 interface Props {
   data: {
@@ -44,13 +42,13 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
 
   const findColor = (color: BGcolor) => {
     if (color === "Green") return "bg--green"
-    else return styles.bgWhite
+    else return "bg--white"
   }
 
   const slices = data.prismicPage.data.body
 
   return (
-    <div className={cn(findColor(background_color), "pageContainer")}>
+    <div className={cn(findColor(background_color), "page")}>
       {pageContext.parentPageUid && (
         <SecondaryNavBar parentPageUid={pageContext.parentPageUid} />
       )}
@@ -74,11 +72,11 @@ export const query = graphql`
         }
         background_color
         body {
-          __typename
           ... on PrismicPageBodyAllNews {
             id
           }
-          ... on PrismicPageBodyImageReel {
+          ... on PrismicPageBodyMedia {
+            slice_type
             items {
               image {
                 url
@@ -86,12 +84,17 @@ export const query = graphql`
               }
             }
           }
-          ... on PrismicPageBodyRichText {
+          ... on PrismicPageBodyRichtext {
+            slice_type
             primary {
-              content {
+              type
+              text {
                 html
               }
             }
+          }
+          ... on PrismicPageBodyAllNews {
+            slice_type
           }
         }
       }

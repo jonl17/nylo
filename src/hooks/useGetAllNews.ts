@@ -16,9 +16,6 @@ export default () => {
             text: string
           }
           date: string
-          content: {
-            html: string
-          }
         }
       }[]
     }
@@ -37,9 +34,6 @@ export default () => {
               text
             }
             date
-            content {
-              html
-            }
           }
         }
       }
@@ -51,7 +45,6 @@ export default () => {
       uid: node.uid,
       title: node.data.title,
       date: node.data.date,
-      content: node.data.content,
       featuredImage: node.data.featured_image,
     }
   })
