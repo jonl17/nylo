@@ -1,0 +1,32 @@
+.rich-text {
+  &--large {
+    @extend .parag--1;
+  }
+
+  &--large--offset-2 {
+    @extend .parag--1;
+    @extend .offset-2;
+  }
+
+  &--small--two-columns {
+    @extend .parag--3;
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      @extend .col-6;
+      padding: 0;
+    }
+
+    p:nth-of-type(odd) {
+      padding-right: $spacer * 2;
+      padding-left: 0;
+    }
+  }
+
+  &--small--one-column-right {
+    @extend .parag--3;
+    @extend .offset-6;
+    padding: 0;
+  }
+}

@@ -1,57 +1,8 @@
 import React from "react"
 import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
 import { PageProps, graphql as gql } from "gatsby"
-import Content from "./Content"
-import { NewsItem } from "~/types"
+import { NewsItem, NewsQuery } from "~/types"
 import SliceMapping from "~/components/Slices/mapping"
-
-interface RichTextQuery {
-  primary: {
-    text: {
-      html: string
-    }
-  }
-}
-
-interface MediaQuery {
-  items: {
-    image: {
-      url: string
-      alt: string
-    }
-  }
-}
-
-interface NewsQuery {
-  prismicNews: {
-    id: string
-    uid: string
-    data: {
-      title: {
-        text: string
-      }
-      date: string
-      featured_image: {
-        alt: string
-        url: string
-      }
-      body: {
-        slice_type: string
-        primary?: {
-          text: {
-            html: string
-          }
-        }
-        items?: {
-          image: {
-            url: string
-            alt: string
-          }
-        }[]
-      }[]
-    }
-  }
-}
 
 const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   data,
@@ -67,11 +18,12 @@ const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   return (
     <div className="page bg--green">
       <SecondaryNavBar parentPageUid="um-nylo" />
-      <Content news={news}>
+      <div className="content">
+        <p>{news.date}</p>
         {data.prismicNews.data.body.map(slice => (
           <SliceMapping slice={slice} />
         ))}
-      </Content>
+      </div>
     </div>
   )
 }

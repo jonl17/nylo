@@ -18,6 +18,7 @@
       "config": {
         "select": "document",
         "customtypes": ["page"],
+        "tags": ["PARENT_PAGE"],
         "label": "Subpage of"
       }
     },
@@ -44,7 +45,7 @@
           "richtext": {
             "type": "Slice",
             "fieldset": "RichText",
-            "description": "Add text, links, buttons, etc... (3 types)",
+            "description": "Add text, links, buttons, etc... (4 types)",
             "icon": "format_color_text",
             "display": "list",
             "non-repeat": {
@@ -52,11 +53,12 @@
                 "type": "Select",
                 "config": {
                   "options": [
-                    "Large",
-                    "Small one column right",
-                    "Small two columns"
+                    "large",
+                    "large--offset-2",
+                    "small--one-column-right",
+                    "small--two-columns"
                   ],
-                  "default_value": "Large",
+                  "default_value": "large",
                   "label": "Type",
                   "placeholder": "Textbox type"
                 }

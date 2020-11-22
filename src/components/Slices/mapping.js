@@ -1,5 +1,5 @@
 import React from "react"
-import { ImageReel as Media, RichText, AllNews } from "."
+import { Media, RichText, AllNews } from "."
 
 // todo, convert to typescript
 const SliceMapping = ({ slice }) => {

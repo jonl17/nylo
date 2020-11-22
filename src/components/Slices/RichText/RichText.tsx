@@ -1,13 +1,12 @@
 import React from "react"
+import { RichTextProps } from "~/types"
 
-const RichText: React.FC<{ primary: { text: { html: string } } }> = ({
-  primary,
-}) => {
+const RichText = ({ primary: { text, type = "large" } }: RichTextProps) => {
   return (
     <div
-      className="parag--1 my-3 mr-6 pr-3 pr-xl-0"
+      className={`rich-text--${type}`}
       dangerouslySetInnerHTML={{
-        __html: primary.text.html,
+        __html: text.html,
       }}
     />
   )

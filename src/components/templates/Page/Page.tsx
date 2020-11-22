@@ -5,7 +5,7 @@ import cn from "classnames"
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
 import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
 import { useLocation } from "@reach/router"
-import "../../fragments/media"
+import "~/fragments/media"
 
 interface Props {
   data: {
@@ -52,8 +52,10 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
       {pageContext.parentPageUid && (
         <SecondaryNavBar parentPageUid={pageContext.parentPageUid} />
       )}
-      {slices &&
-        slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
+      <div className="content">
+        {slices &&
+          slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
+      </div>
     </div>
   )
 }

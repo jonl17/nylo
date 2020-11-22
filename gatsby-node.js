@@ -33,8 +33,14 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const pageTemplate = path.resolve(__dirname, `src/templates/Page/Page.tsx`)
-  const newsTemplate = path.resolve(__dirname, `src/templates/News/News.tsx`)
+  const pageTemplate = path.resolve(
+    __dirname,
+    `src/components/templates/Page/Page.tsx`
+  )
+  const newsTemplate = path.resolve(
+    __dirname,
+    `src/components/templates/News/News.tsx`
+  )
 
   pages.data.allPrismicPage.nodes.forEach(node => {
     let path = `/${node.uid}`
