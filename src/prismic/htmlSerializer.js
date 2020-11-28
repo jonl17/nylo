@@ -21,10 +21,6 @@ var htmlSerializer = function (element, content) {
     )
   }
 
-  if (element.type == "heading1") {
-    return "<h1>" + element.text + "</h1>"
-  }
-
   // Return null to stick with the default behavior
   return null
 }

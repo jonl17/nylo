@@ -1,3 +1,11 @@
 .icon {
-  right: 50px;
+  &__exit {
+    position: fixed;
+    right: calc(#{$spacer} + 310px);
+    top: $spacer * 2;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

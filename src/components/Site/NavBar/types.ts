@@ -31,3 +31,5 @@ export interface Menu {
     uid: string
   }
 }
+
+export type IconType = "Exit"

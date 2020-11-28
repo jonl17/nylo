@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
-import { graphql, navigate } from "gatsby"
+import { graphql, navigate, Link } from "gatsby"
 import SliceMapping from "~/components/Slices/mapping"
 import cn from "classnames"
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from "~/types"
 import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
 import { useLocation } from "@reach/router"
 import "~/fragments/media"
+import Icon from "~/components/Site/Icon"
 
 interface Props {
   data: {
@@ -53,6 +54,12 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
         <SecondaryNavBar parentPageUid={pageContext.parentPageUid} />
       )}
       <div className="content">
+        {pathname.includes("/um-nylo/") && (
+          <Link to="/">
+            <Icon className="icon__exit" type="Exit" />
+          </Link>
+        )}
+
         {slices &&
           slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
       </div>

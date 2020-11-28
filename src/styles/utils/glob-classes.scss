@@ -48,7 +48,8 @@
 
 // my-3 mr-6
 .content {
-  margin-right: $spacer * 9;
+  position: relative;
+  padding-right: $spacer * 9;
   margin-top: $spacer * 2;
   margin-bottom: $spacer * 2;
 }
