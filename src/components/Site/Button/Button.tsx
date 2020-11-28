@@ -1,25 +1,13 @@
 import React from "react"
-import { Link } from "gatsby"
-
-interface CustomProps {
+interface Props {
   label: string
   to?: string
 }
 
-const Button: React.FC<CustomProps> = ({ label, to, ...props }) => {
-  const textClass = "m-0 center"
-  const ButtonClass = "button p-0 center"
-
-  if (to) {
-    return (
-      <Link className={ButtonClass} to={to} {...props}>
-        <h3 className={textClass}> {label} </h3>
-      </Link>
-    )
-  }
+const Button: React.FC<Props> = ({ label, ...props }) => {
   return (
-    <button className={ButtonClass} {...props}>
-      <h3 className={textClass}> {label} </h3>
+    <button className="btn px-2" {...props}>
+      <h3 className="m-0"> {label} </h3>
     </button>
   )
 }

@@ -1,8 +1,11 @@
-.button {
-  width: 100%;
+.btn {
   height: 35px;
   border: 1px solid $black;
   background: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background: $black;

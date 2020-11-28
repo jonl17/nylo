@@ -2,7 +2,7 @@ import React from "react"
 import { useGetAllNews } from "~/hooks"
 import { NewsItem } from "~/types"
 import slugify from "slugify"
-import { Button } from "~/components/Site/Button"
+import ButtonLink from "~/components/Site/ButtonLink"
 
 const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
   return (
@@ -15,10 +15,10 @@ const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
         />
         <p className="mb-1 mt-2">{news.date}</p>
         <h2 className="mb-3">{news.title.text}</h2>
-        <Button
+        <ButtonLink
           label="Lesa meira"
           to={`/um-nylo/frettir/${slugify(news.id, { lower: true })}`}
-        ></Button>
+        ></ButtonLink>
       </div>
     </div>
   )
