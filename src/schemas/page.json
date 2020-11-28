@@ -13,6 +13,15 @@
         "label": "Titill"
       }
     },
+    "has_submenu": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": ["menu"],
+        "tags": ["SUBMENU"],
+        "label": "Has submenu"
+      }
+    },
     "subpage": {
       "type": "Link",
       "config": {

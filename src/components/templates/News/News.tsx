@@ -1,10 +1,10 @@
-import React from "react"
-import { SecondaryNavBar } from "~/components/Site/SecondaryNavBar"
-import { PageProps, graphql as gql, Link } from "gatsby"
-import { NewsItem, NewsQuery } from "~/types"
-import SliceMapping from "~/components/Slices/mapping"
-import { useLocation } from "@reach/router"
-import Icon from "~/components/Site/Icon"
+import React from 'react'
+import SecondaryNavBar from '~/components/Site/SecondaryNavBar'
+import { PageProps, graphql as gql, Link } from 'gatsby'
+import { NewsItem, NewsQuery } from '~/types'
+import SliceMapping from '~/components/Slices/mapping'
+import { useLocation } from '@reach/router'
+import CloseButton from '~/components/Site/CloseButton'
 
 const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   data,
@@ -22,9 +22,9 @@ const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
     <div className="page bg--green">
       <SecondaryNavBar parentPageUid="um-nylo" />
       <div className="content">
-        {pathname.includes("/um-nylo/") && (
-          <Link to="/">
-            <Icon className="icon__exit" type="Exit" />
+        {pathname.includes('/um-nylo/') && (
+          <Link to="/um-nylo/frettir">
+            <CloseButton className="icon__exit" />
           </Link>
         )}
         <p>{news.date}</p>

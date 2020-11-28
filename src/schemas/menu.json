@@ -6,6 +6,12 @@
         "label": "Name"
       }
     },
+    "prefix": {
+      "type": "Text",
+      "config": {
+        "label": "prefix"
+      }
+    },
     "items": {
       "type": "Group",
       "config": {
@@ -16,14 +22,6 @@
               "select": "document",
               "customtypes": ["page"],
               "label": "Page"
-            }
-          },
-          "submenu": {
-            "type": "Link",
-            "config": {
-              "select": "document",
-              "customtypes": ["menu"],
-              "label": "Submenu"
             }
           }
         },

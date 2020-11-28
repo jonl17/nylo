@@ -1,1 +1,1 @@
-export { default as SecondaryNavBar } from "./SecondaryNavBar"
+export { default } from './SecondaryNavBar'

@@ -17,7 +17,7 @@ const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
         <h2 className="mb-3">{news.title.text}</h2>
         <ButtonLink
           label="Lesa meira"
-          to={`/um-nylo/frettir/${slugify(news.id, { lower: true })}`}
+          to={`/um-nylo/frettir/${slugify(news.uid, { lower: true })}`}
         ></ButtonLink>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require('path')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -12,6 +12,16 @@ exports.createPages = async ({ graphql, actions }) => {
           data {
             subpage {
               uid
+            }
+            has_submenu {
+              document {
+                ... on PrismicMenu {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
             }
           }
         }
@@ -45,7 +55,7 @@ exports.createPages = async ({ graphql, actions }) => {
   pages.data.allPrismicPage.nodes.forEach(node => {
     let path = `/${node.uid}`
 
-    if (node.uid === "frontpage") {
+    if (node.uid === 'frontpage') {
       path = `/`
     } else if (node.data.subpage && node.data.subpage.uid) {
       path = `/${node.data.subpage.uid}/${node.uid}`
@@ -56,14 +66,17 @@ exports.createPages = async ({ graphql, actions }) => {
       component: pageTemplate,
       context: {
         id: node.id,
-        parentPageUid: node.data.subpage ? node.data.subpage.uid : null,
+        subpageOf: node.data.subpage.uid,
+        hasSubmenu: node.data.has_submenu.document
+          ? node.data.has_submenu.document.id
+          : null,
       },
     })
   })
 
   news.data.allPrismicNews.nodes.forEach(node => {
     createPage({
-      path: `um-nylo/frettir/${node.id}`,
+      path: `um-nylo/frettir/${node.uid}`,
       component: newsTemplate,
       context: {
         id: node.id,

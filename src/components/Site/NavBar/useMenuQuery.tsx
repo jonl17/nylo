@@ -1,6 +1,6 @@
-import { useStaticQuery, graphql } from "gatsby"
-import { Menu } from "./types"
-import "../../../fragments/menu"
+import { useStaticQuery, graphql } from 'gatsby'
+import { Menu } from './types'
+import '../../../fragments/menu'
 
 const useMenuQuery = () => {
   const menu: Menu = useStaticQuery(graphql`
@@ -22,13 +22,6 @@ const useMenuQuery = () => {
                 }
               }
             }
-            submenu {
-              document {
-                ... on PrismicMenu {
-                  ...fragmentPrismicMenu
-                }
-              }
-            }
           }
         }
       }
@@ -43,14 +36,6 @@ const useMenuQuery = () => {
         ? {
             url: item.page.uid,
             name: item.page.document.data.title.text,
-          }
-        : null,
-      submenu: item.submenu.document
-        ? {
-            name: item.submenu.document.data.name,
-            items: item.submenu.document.data.items.map(i => {
-              return { url: i.page.uid, name: i.page.document.data.title.text }
-            }),
           }
         : null,
     }

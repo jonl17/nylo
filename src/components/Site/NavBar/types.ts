@@ -15,21 +15,10 @@ export interface Menu {
     data: {
       items: {
         page: Page
-        submenu: {
-          __typename: string
-          document: {
-            data: {
-              name: string
-              items: {
-                page: Page
-              }[]
-            }
-          }
-        }
       }[]
     }
     uid: string
   }
 }
 
-export type IconType = "Exit"
+export type IconType = 'Exit'

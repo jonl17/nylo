@@ -1,26 +1,52 @@
-import React from "react"
-import { useStaticQuery, graphql, Link } from "gatsby"
-import { useLocation } from "@reach/router"
-import cn from "classnames"
-import styles from "./SecondaryNavBar.module.scss"
+import React from 'react'
+import { useStaticQuery, graphql, Link } from 'gatsby'
+import { useLocation } from '@reach/router'
+import cn from 'classnames'
 
-const SecondaryNavBar: React.FC<{ parentPageUid: string }> = ({
-  parentPageUid,
-}) => {
+const SecondaryNavBar: React.FC<{ submenuId: string }> = ({ submenuId }) => {
   const data: {
-    allPrismicPage: {
-      nodes: { uid: string; data: { title: { text: string } } }[]
+    allSubmenus: {
+      nodes: {
+        id: string
+        data: {
+          name: string
+          prefix: string
+          items: {
+            page: {
+              uid: string
+              document: {
+                data: {
+                  title: {
+                    text: string
+                  }
+                }
+              }
+            }
+          }[]
+        }
+      }[]
     }
   } = useStaticQuery(graphql`
     {
-      allPrismicPage(
-        filter: { data: { subpage: { uid: { eq: "um-nylo" } } } }
-      ) {
+      allSubmenus: allPrismicMenu(filter: { tags: { in: ["SUBMENU"] } }) {
         nodes {
-          uid
+          id
           data {
-            title {
-              text
+            name
+            prefix
+            items {
+              page {
+                uid
+                document {
+                  ... on PrismicPage {
+                    data {
+                      title {
+                        text
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -28,21 +54,38 @@ const SecondaryNavBar: React.FC<{ parentPageUid: string }> = ({
     }
   `)
 
+  const allSubmenus = data.allSubmenus.nodes.map(x => {
+    return {
+      id: x.id,
+      title: x.data.name,
+      items: x.data.items.map(y => {
+        return {
+          title: y.page.document.data.title,
+          url: `/${x.data.prefix}/${y.page.uid}`,
+        }
+      }),
+    }
+  })
+
+  const submenu = allSubmenus.find(menu => menu.id === submenuId)
+
   const { pathname } = useLocation()
+
+  console.log(submenu)
+
+  if (!submenu) return null
 
   return (
     <div className="secondary-navbar mt-3 ml-2 d-flex flex-column">
-      {data.allPrismicPage.nodes.map((item, idx) => (
+      {submenu.items.map((item, idx) => (
         <Link
-          className={cn("secondary-navbar__anchor parag--2", {
-            ["secondaryAnchorActive"]: pathname.includes(
-              `/${parentPageUid}/${item.uid}`
-            ),
+          className={cn('secondary-navbar__anchor parag--2', {
+            ['secondaryAnchorActive']: pathname.includes(item.url),
           })}
           key={idx}
-          to={`/${parentPageUid}/${item.uid}`}
+          to={item.url}
         >
-          {item.data.title.text}
+          {item.title.text}
         </Link>
       ))}
     </div>
