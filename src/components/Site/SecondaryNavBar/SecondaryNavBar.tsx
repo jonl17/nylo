@@ -3,7 +3,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { useLocation } from '@reach/router'
 import cn from 'classnames'
 
-const SecondaryNavBar: React.FC<{ submenuId: string }> = ({ submenuId }) => {
+const SecondaryNavBar: React.FC<{ submenu: 'um-nylo' }> = ({ submenu }) => {
   const data: {
     allSubmenus: {
       nodes: {
@@ -53,11 +53,11 @@ const SecondaryNavBar: React.FC<{ submenuId: string }> = ({ submenuId }) => {
       }
     }
   `)
-  console.log(submenuId)
   const allSubmenus = data.allSubmenus.nodes.map(x => {
     return {
       id: x.id,
       title: x.data.name,
+      prefix: x.data.prefix,
       items: x.data.items.map(y => {
         return {
           title: y.page.document.data.title,
@@ -67,17 +67,15 @@ const SecondaryNavBar: React.FC<{ submenuId: string }> = ({ submenuId }) => {
     }
   })
 
-  const submenu = allSubmenus.find(menu => menu.id === submenuId)
+  const menu = allSubmenus.find(menu => menu.prefix === submenu)
 
   const { pathname } = useLocation()
 
-  console.log(submenu)
-
-  if (!submenu) return null
+  if (!menu) return null
 
   return (
     <div className="secondary-navbar mt-3 ml-2 d-flex flex-column">
-      {submenu.items.map((item, idx) => (
+      {menu.items.map((item, idx) => (
         <Link
           className={cn('secondary-navbar__anchor parag--2', {
             ['secondaryAnchorActive']: pathname.includes(item.url),

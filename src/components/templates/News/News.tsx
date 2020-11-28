@@ -8,6 +8,7 @@ import CloseButton from '~/components/Site/CloseButton'
 
 const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   data,
+  pageContext,
 }) => {
   const news: NewsItem = {
     id: data.prismicNews.id,
@@ -19,8 +20,7 @@ const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   const { pathname } = useLocation()
 
   return (
-    <div className="page bg--green">
-      <SecondaryNavBar parentPageUid="um-nylo" />
+    <div className={`page bg--${pageContext.bg}`}>
       <div className="content">
         {pathname.includes('/um-nylo/') && (
           <Link to="/um-nylo/frettir">

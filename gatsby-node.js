@@ -105,6 +105,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: node.id,
         date: node.data.date,
+        bg: 'light-gray',
       },
     })
   })
