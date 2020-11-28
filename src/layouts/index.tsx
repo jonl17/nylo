@@ -4,7 +4,13 @@ import Banner from '~/components/Site/Banner'
 import { PageProps } from 'gatsby'
 import SecondaryNavBar from '~/components/Site/SecondaryNavBar'
 
-const Layout: React.FC<PageProps> = ({ children, pageContext }) => {
+interface Props extends PageProps {
+  pageContext: {
+    hasSubmenu: null | string
+  }
+}
+
+const Layout: React.FC<Props> = ({ children, pageContext }) => {
   console.log(pageContext.hasSubmenu)
   return (
     <main>

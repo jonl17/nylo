@@ -53,7 +53,7 @@ const SecondaryNavBar: React.FC<{ submenuId: string }> = ({ submenuId }) => {
       }
     }
   `)
-
+  console.log(submenuId)
   const allSubmenus = data.allSubmenus.nodes.map(x => {
     return {
       id: x.id,

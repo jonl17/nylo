@@ -9,9 +9,23 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           id
           uid
+          tags
           data {
             subpage {
               uid
+              document {
+                ... on PrismicPage {
+                  data {
+                    has_submenu {
+                      document {
+                        ... on PrismicMenu {
+                          id
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
             has_submenu {
               document {
@@ -57,8 +71,20 @@ exports.createPages = async ({ graphql, actions }) => {
 
     if (node.uid === 'frontpage') {
       path = `/`
-    } else if (node.data.subpage && node.data.subpage.uid) {
+    } else if (node.tags.includes('SUB_PAGE') && node.data.subpage.uid) {
       path = `/${node.data.subpage.uid}/${node.uid}`
+    }
+
+    const displaySubmenu = () => {
+      if (node.data.has_submenu.document) {
+        return node.data.has_submenu.document.id
+      } else if (node.tags.includes('SUB_PAGE')) {
+        if (node.data.subpage.document.data.has_submenu.document) {
+          return node.data.subpage.document.data.has_submenu.document.id
+        }
+      } else {
+        return null
+      }
     }
 
     createPage({
@@ -67,9 +93,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: node.id,
         subpageOf: node.data.subpage.uid,
-        hasSubmenu: node.data.has_submenu.document
-          ? node.data.has_submenu.document.id
-          : null,
+        hasSubmenu: displaySubmenu(),
       },
     })
   })
