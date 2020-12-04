@@ -23,8 +23,8 @@
       "type": "Image",
       "config": {
         "constraint": {
-          "width": 367,
-          "height": 300
+          "width": 850,
+          "height": null
         },
         "thumbnails": [],
         "label": "Featured image"

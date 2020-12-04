@@ -8,7 +8,7 @@ const FrontpageObject: React.FC<{
   className?: string
 }> = ({ children, image, className }) => {
   return (
-    <div className={cn('pl-3 pt-3', className)}>
+    <div className={cn('pl-3 mt-3 mb-5', className)}>
       <div className="mb-3">{children}</div>
       <img src={image.url} />
     </div>

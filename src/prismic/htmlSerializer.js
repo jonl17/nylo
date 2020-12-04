@@ -1,6 +1,6 @@
 var htmlSerializer = function (element, content) {
   // Don't wrap images in a <p> tag
-  if (element.type == "image") {
+  if (element.type == 'image') {
     return (
       '<img class="image-class" src="' +
       element.url +
@@ -11,13 +11,14 @@ var htmlSerializer = function (element, content) {
   }
 
   // Add a class to hyperlinks
-  if (element.type == "hyperlink") {
+  if (element.type == 'hyperlink') {
+    console.log(element)
     return (
       '<a target="_blank" class="secondaryAnchorActive" href="' +
       element.data.url +
       '">' +
       content +
-      "</a>"
+      '</a>'
     )
   }
 

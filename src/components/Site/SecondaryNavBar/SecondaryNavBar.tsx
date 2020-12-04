@@ -67,6 +67,8 @@ const SecondaryNavBar: React.FC<{ submenu: 'um-nylo' }> = ({ submenu }) => {
     }
   })
 
+  console.log(allSubmenus)
+
   const menu = allSubmenus.find(menu => menu.prefix === submenu)
 
   const { pathname } = useLocation()

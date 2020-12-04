@@ -12,12 +12,16 @@ export const multipleArtistsHandler = (artist: string) => {
 }
 
 export const formatExhibitionPeriod = (
-  opening: string,
-  closing: string,
-  o = new Date(opening),
-  c = new Date(closing)
+  firstDate: string,
+  secondDate?: string,
+  x = new Date(firstDate)
 ) => {
-  return `${o.getDate()}.${o.getMonth() + 1}${
-    o.getFullYear() === c.getFullYear() ? '' : `.${o.getFullYear()}`
-  }—${c.getDate()}.${c.getMonth()}.${c.getFullYear()}`
+  if (!secondDate) {
+    return `${x.getDate()}.${x.getMonth() + 1}.${x.getFullYear()}`
+  } else {
+    const y = new Date(secondDate)
+    return `${x.getDate()}.${x.getMonth() + 1}${
+      x.getFullYear() === y.getFullYear() ? '' : `.${x.getFullYear()}`
+    }—${y.getDate()}.${y.getMonth()}.${y.getFullYear()}`
+  }
 }
