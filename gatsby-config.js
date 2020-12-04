@@ -1,8 +1,8 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env.development`,
 })
 
-const { htmlSerializer } = require("./src/prismic/htmlSerializer")
+const { htmlSerializer } = require('./src/prismic/htmlSerializer')
 
 module.exports = {
   plugins: [
@@ -13,7 +13,7 @@ module.exports = {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
         alias: {
-          "~": "src",
+          '~': 'src',
         },
         extensions: [`ts`, `tsx`],
       },
@@ -24,7 +24,7 @@ module.exports = {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
         accessToken: process.env.GATSBY_PRISMIC_ACCESS_TOKEN,
         linkResolver: ({ node, key, value }) => doc => {
-          if (doc.type === "page") {
+          if (doc.type === 'page') {
             return `/${doc.id}`
           }
           return `/`
@@ -43,8 +43,9 @@ module.exports = {
           menu: require(`./src/schemas/menu.json`),
           news: require(`./src/schemas/news.json`),
           announcement_banner: require(`./src/schemas/announcement_banner.json`),
+          exhibition: require(`./src/schemas/exhibition.json`),
         },
-        lang: "*",
+        lang: '*',
         prismicToolbar: true,
         shouldDownloadImage: ({ node, key, value }) => {
           // Return true to download the image or false to skip.
