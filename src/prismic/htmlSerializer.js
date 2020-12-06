@@ -12,7 +12,6 @@ var htmlSerializer = function (element, content) {
 
   // Add a class to hyperlinks
   if (element.type == 'hyperlink') {
-    console.log(element)
     return (
       '<a target="_blank" class="secondaryAnchorActive" href="' +
       element.data.url +

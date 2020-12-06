@@ -1,6 +1,7 @@
 .btn {
   height: 35px;
   border: 1px solid $black;
+  border-radius: 0;
   background: transparent;
 
   display: inline-flex;
@@ -10,5 +11,9 @@
   &:hover {
     background: $black;
     color: $white;
+  }
+
+  h4 {
+    padding-bottom: 4px;
   }
 }

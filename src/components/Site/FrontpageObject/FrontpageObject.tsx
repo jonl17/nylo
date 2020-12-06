@@ -1,6 +1,4 @@
 import React from 'react'
-import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
-import { multipleArtistsHandler, formatExhibitionPeriod } from '~/utils'
 import cn from 'classnames'
 
 const FrontpageObject: React.FC<{
@@ -9,7 +7,7 @@ const FrontpageObject: React.FC<{
 }> = ({ children, image, className }) => {
   return (
     <div className={cn('pl-3 mt-3 mb-5', className)}>
-      <div className="mb-3">{children}</div>
+      <div className="mb-3 frontpage-object__children">{children}</div>
       <img src={image.url} />
     </div>
   )

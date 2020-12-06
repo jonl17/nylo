@@ -14,7 +14,7 @@ const NewsBox: React.FC<{ news: NewsItem }> = ({ news }) => {
           alt={news.featuredImage.alt}
         />
         <p className="mb-1 mt-2">{news.date}</p>
-        <h2 className="mb-3">{news.title.text}</h2>
+        <h2 className="mb-2">{news.title.text}</h2>
         <ButtonLink
           label="Lesa meira"
           to={`/um-nylo/frettir/${slugify(news.uid, { lower: true })}`}
