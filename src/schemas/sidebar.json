@@ -1,0 +1,32 @@
+{
+  "Main": {
+    "address": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "label": "Address"
+      }
+    },
+    "social_media_links": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "url": {
+            "type": "Link",
+            "config": {
+              "allowTargetBlank": true,
+              "label": "Url"
+            }
+          },
+          "text": {
+            "type": "Text",
+            "config": {
+              "label": "Text"
+            }
+          }
+        },
+        "label": "Social media links"
+      }
+    }
+  }
+}

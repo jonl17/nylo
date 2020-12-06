@@ -1,21 +1,22 @@
-@import "./config/variables";
-@import "./config/typo";
+@import './config/variables';
+@import './config/typo';
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
-@import "./components/image";
-@import "./components/page";
-@import "./components/banner";
-@import "./components/navbar";
-@import "./components/button";
-@import "./components/icon";
-@import "./components/secondary-navbar";
-@import "./components/newsbox";
-@import "./components/image-reel";
-@import "./components/page";
-@import "./components/rich-text";
+@import './components/image';
+@import './components/page';
+@import './components/banner';
+@import './components/navbar';
+@import './components/button';
+@import './components/icon';
+@import './components/secondary-navbar';
+@import './components/newsbox';
+@import './components/image-reel';
+@import './components/page';
+@import './components/rich-text';
+@import './components/sidebar';
 
-@import "./utils/glob-classes.scss";
+@import './utils/glob-classes.scss';
 
 body a {
   text-decoration: none;
