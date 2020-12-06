@@ -17,7 +17,6 @@ const Layout: React.FC<Props> = ({ children, pageContext }) => {
   return (
     <main>
       <NavBar />
-      {pathname.includes(`/um-nylo`) && <SecondaryNavBar submenu="um-nylo" />}
       {children}
       <Banner />
     </main>

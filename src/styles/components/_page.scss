@@ -1,3 +1,12 @@
+@keyframes fade-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
 .page {
   min-height: 100vh;
   overflow: hidden;
@@ -12,5 +21,12 @@
 
   &__frontpage {
     padding-left: 0;
+  }
+
+  &__animator-enter {
+    animation: fade-in 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &__animator-exit {
+    animation: fade-in 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) reverse;
   }
 }

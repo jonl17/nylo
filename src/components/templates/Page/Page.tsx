@@ -3,9 +3,11 @@ import { graphql, Link } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
 import cn from 'classnames'
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from '~/types'
-import { useLocation, Match } from '@reach/router'
+import { Match } from '@reach/router'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
+import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
+import TransitionLink from 'gatsby-plugin-transition-link'
 
 interface Props {
   data: {
@@ -38,8 +40,6 @@ export const PageCtx = createContext<{ lastVisitedUrl: string }>({
 })
 
 const Page: React.FC<Props> = ({ data, pageContext }) => {
-  const { pathname } = useLocation() // todo make this redirect better
-
   const { background_color } = data.prismicPage.data
 
   const findColor = (color: BGcolor) => {
@@ -50,21 +50,26 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
   const slices = data.prismicPage.data.body
 
   return (
-    <div className={cn(findColor(background_color), 'page')}>
-      <div className="content">
-        <Match path="/um-nylo/*">
-          {props =>
-            props.match && (
-              <Link to="/">
-                <CloseButton className="icon__exit" />
-              </Link>
-            )
-          }
-        </Match>
-        {slices &&
-          slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
-      </div>
-    </div>
+    <Match path='/um-nylo/*'>
+      {props => (
+        <div>
+          {props.match && <SecondaryNavbar submenu='um-nylo' />}
+          <div className={cn(findColor(background_color), 'page')}>
+            <div className='content'>
+              {props.match && (
+                <Link to='/'>
+                  <CloseButton className='icon__exit' />
+                </Link>
+              )}
+              {slices &&
+                slices.map((slice, idx) => (
+                  <SliceMapping key={idx} slice={slice} />
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </Match>
   )
 }
 
