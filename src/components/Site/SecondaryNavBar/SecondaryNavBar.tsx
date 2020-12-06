@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import { useLocation } from '@reach/router'
+import { useLocation, Match } from '@reach/router'
 import cn from 'classnames'
 
 const SecondaryNavBar: React.FC<{ submenu: 'um-nylo' }> = ({ submenu }) => {
@@ -67,8 +67,6 @@ const SecondaryNavBar: React.FC<{ submenu: 'um-nylo' }> = ({ submenu }) => {
     }
   })
 
-  console.log(allSubmenus)
-
   const menu = allSubmenus.find(menu => menu.prefix === submenu)
 
   const { pathname } = useLocation()
@@ -77,6 +75,18 @@ const SecondaryNavBar: React.FC<{ submenu: 'um-nylo' }> = ({ submenu }) => {
 
   return (
     <div className="secondary-navbar mt-3 ml-2 d-flex flex-column">
+      <Match path="/um-nylo">
+        {props => (
+          <Link
+            className={cn('secondary-navbar__anchor parag--2', {
+              ['secondaryAnchorActive']: props.match,
+            })}
+            to="/um-nylo"
+          >
+            Um safnið
+          </Link>
+        )}
+      </Match>
       {menu.items.map((item, idx) => (
         <Link
           className={cn('secondary-navbar__anchor parag--2', {

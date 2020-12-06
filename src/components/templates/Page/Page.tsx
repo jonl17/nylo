@@ -1,9 +1,9 @@
-import React, { useEffect, useState, createContext } from 'react'
-import { graphql, navigate, Link } from 'gatsby'
+import React, { createContext } from 'react'
+import { graphql, Link } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
 import cn from 'classnames'
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from '~/types'
-import { useLocation } from '@reach/router'
+import { useLocation, Match } from '@reach/router'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
 
@@ -52,11 +52,15 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
   return (
     <div className={cn(findColor(background_color), 'page')}>
       <div className="content">
-        {pathname.includes('/um-nylo/') && (
-          <Link to="/">
-            <CloseButton className="icon__exit" />
-          </Link>
-        )}
+        <Match path="/um-nylo/*">
+          {props =>
+            props.match && (
+              <Link to="/">
+                <CloseButton className="icon__exit" />
+              </Link>
+            )
+          }
+        </Match>
         {slices &&
           slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
       </div>

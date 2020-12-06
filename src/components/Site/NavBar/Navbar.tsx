@@ -1,6 +1,6 @@
-import React from "react"
-import { Link } from "gatsby"
-import useMenuQuery from "./useMenuQuery"
+import React from 'react'
+import { Link } from 'gatsby'
+import useMenuQuery from './useMenuQuery'
 
 const Menu = () => {
   const mainMenu = useMenuQuery()

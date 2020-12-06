@@ -1,9 +1,8 @@
 import React from 'react'
-import SecondaryNavBar from '~/components/Site/SecondaryNavBar'
 import { PageProps, graphql as gql, Link } from 'gatsby'
 import { NewsItem, NewsQuery } from '~/types'
 import SliceMapping from '~/components/Slices/mapping'
-import { useLocation } from '@reach/router'
+import { useLocation, Match } from '@reach/router'
 import CloseButton from '~/components/Site/CloseButton'
 
 const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
@@ -22,11 +21,6 @@ const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   return (
     <div className={`page bg--${pageContext.bg}`}>
       <div className="content">
-        {pathname.includes('/um-nylo/') && (
-          <Link to="/um-nylo/frettir">
-            <CloseButton className="icon__exit" />
-          </Link>
-        )}
         <p>{news.date}</p>
         {data.prismicNews.data.body.map(slice => (
           <SliceMapping slice={slice} />

@@ -8,7 +8,7 @@ const Frontpage = () => {
   const exhibition = useGetCurrentExhibition()
   const latestNews = getLatestNews()
   return (
-    <div className="page page__frontpage">
+    <div className="page page__frontpage position-relative">
       {exhibition && (
         <FrontpageObject image={exhibition.data.featured_image}>
           <h1>{multipleArtistsHandler(exhibition.data.artist)}</h1>
