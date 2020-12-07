@@ -13,6 +13,25 @@ export const fragment = graphql`
         text
       }
       date
+      body {
+        ... on PrismicNewsBodyMedia {
+          slice_type
+          items {
+            image {
+              url
+              alt
+            }
+          }
+        }
+        ... on PrismicNewsBodyRichtext {
+          slice_type
+          primary {
+            text {
+              html
+            }
+          }
+        }
+      }
     }
   }
 `

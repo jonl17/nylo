@@ -9,28 +9,34 @@ const Frontpage = () => {
   const exhibition = useGetCurrentExhibition()
   const latestNews = getLatestNews()
   return (
-    <div className="page page__frontpage position-relative">
+    <div className='page page__frontpage position-relative'>
       {exhibition && (
-        <Link to={`/syningar`}>
-          <FrontpageObject image={exhibition.data.featured_image}>
+        <FrontpageObject
+          className='d-flex flex-column'
+          image={exhibition.data.featured_image}
+        >
+          <Link className='d-inline-block' to='/syningar'>
             <h1>{multipleArtistsHandler(exhibition.data.artist)}</h1>
-            <h1 className="font-italic">{exhibition.data.title.text}</h1>
+            <h1 className='font-italic'>{exhibition.data.title.text}</h1>
             <h1>
               {formatExhibitionPeriod(
                 exhibition.data.opening,
                 exhibition.data.closing
               )}
             </h1>
-          </FrontpageObject>
-        </Link>
+          </Link>
+        </FrontpageObject>
       )}
       {latestNews && (
-        <Link to={`um-nylo/frettir/${latestNews.uid}`}>
-          <FrontpageObject image={latestNews.featuredImage}>
+        <FrontpageObject
+          className='d-flex flex-column'
+          image={latestNews.featuredImage}
+        >
+          <Link className='d-inline-block' to={`/frettir/${latestNews.uid}`}>
             <h1>{formatExhibitionPeriod(latestNews.date)}</h1>
-            <h1 className="font-italic">{latestNews.title.text}</h1>
-          </FrontpageObject>
-        </Link>
+            <h1 className='font-italic'>{latestNews.title.text}</h1>
+          </Link>
+        </FrontpageObject>
       )}
     </div>
   )

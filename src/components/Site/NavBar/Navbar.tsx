@@ -31,14 +31,14 @@ const Sidebar = () => {
   const sidebar = useSidebarQuery()
   if (!sidebar) return null
   return (
-    <div className='pt-5'>
+    <div className='pt-5 pb-3'>
       <div
         className='sidebar__address parag--2'
         dangerouslySetInnerHTML={{ __html: sidebar.address.html }}
       />
       <div className='d-flex flex-column pt-3'>
         {sidebar.socialMediaLinks.map(s => (
-          <a target='_blank' key={s.url} href={s.url}>
+          <a className='mb-0' target='_blank' key={s.url} href={s.url}>
             {s.title}
           </a>
         ))}

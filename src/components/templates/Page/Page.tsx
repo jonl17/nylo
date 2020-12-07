@@ -14,6 +14,9 @@ interface Props {
     prismicPage: {
       tags: string[]
       data: {
+        has_submenu: {
+          id?: string
+        }
         title: {
           text: string
         }
@@ -49,27 +52,42 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
 
   const slices = data.prismicPage.data.body
 
-  return (
+  const Wrapper: React.FC = ({ children }) => (
     <Match path='/um-nylo/*'>
       {props => (
         <div>
-          {props.match && <SecondaryNavbar submenu='um-nylo' />}
-          <div className={cn(findColor(background_color), 'page')}>
-            <div className='content'>
-              {props.match && (
-                <Link to='/'>
-                  <CloseButton className='icon__exit' />
-                </Link>
-              )}
-              {slices &&
-                slices.map((slice, idx) => (
-                  <SliceMapping key={idx} slice={slice} />
-                ))}
+          {props.match ? (
+            <>
+              <SecondaryNavbar submenu='um-nylo' />
+              <div
+                className={cn(
+                  findColor(background_color),
+                  'page page__has-submenu'
+                )}
+              >
+                {children}
+              </div>
+            </>
+          ) : (
+            <div className={cn(findColor(background_color), 'page')}>
+              {children}
             </div>
-          </div>
+          )}
         </div>
       )}
     </Match>
+  )
+
+  return (
+    <Wrapper>
+      <div className='content'>
+        <Link to='/'>
+          <CloseButton className='icon__exit' />
+        </Link>
+        {slices &&
+          slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
+      </div>
+    </Wrapper>
   )
 }
 
@@ -80,6 +98,9 @@ export const query = graphql`
     prismicPage(id: { eq: $id }) {
       tags
       data {
+        has_submenu {
+          id
+        }
         subpage {
           uid
         }

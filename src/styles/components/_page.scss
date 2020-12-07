@@ -10,7 +10,7 @@
 .page {
   min-height: 100vh;
   overflow: hidden;
-  padding-left: 250px;
+  padding-left: $spacer * 2;
   margin-right: 300px;
   margin-bottom: 66px;
 
@@ -28,5 +28,9 @@
   }
   &__animator-exit {
     animation: fade-in 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) reverse;
+  }
+
+  &__has-submenu {
+    padding-left: 250px;
   }
 }

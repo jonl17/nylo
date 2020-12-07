@@ -1,7 +1,12 @@
 .frontpage-object {
   &__children {
+    display: inline-block;
     h1 {
       margin-bottom: 0;
     }
+  }
+
+  &__img {
+    width: 75%;
   }
 }

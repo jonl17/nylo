@@ -1,9 +1,9 @@
 import React from 'react'
-import { PageProps, graphql as gql, Link } from 'gatsby'
+import { PageProps, graphql as gql } from 'gatsby'
 import { NewsItem, NewsQuery } from '~/types'
 import SliceMapping from '~/components/Slices/mapping'
-import { useLocation, Match } from '@reach/router'
-import CloseButton from '~/components/Site/CloseButton'
+import { useLocation } from '@reach/router'
+import '~/fragments/news'
 
 const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
   data,
@@ -20,10 +20,10 @@ const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
 
   return (
     <div className={`page bg--${pageContext.bg}`}>
-      <div className="content">
+      <div className='content'>
         <p>{news.date}</p>
-        {data.prismicNews.data.body.map(slice => (
-          <SliceMapping slice={slice} />
+        {data.prismicNews.data.body.map((slice, i) => (
+          <SliceMapping key={i} slice={slice} />
         ))}
       </div>
     </div>
@@ -33,37 +33,7 @@ const News: React.FC<{ pageContext: PageProps; data: NewsQuery }> = ({
 export const query = gql`
   query($id: String!) {
     prismicNews(id: { eq: $id }) {
-      id
-      uid
-      data {
-        title {
-          text
-        }
-        date
-        featured_image {
-          alt
-          url
-        }
-        body {
-          ... on PrismicNewsBodyMedia {
-            slice_type
-            items {
-              image {
-                url
-                alt
-              }
-            }
-          }
-          ... on PrismicNewsBodyRichtext {
-            slice_type
-            primary {
-              text {
-                html
-              }
-            }
-          }
-        }
-      }
+      ...newsFragment
     }
   }
 `
