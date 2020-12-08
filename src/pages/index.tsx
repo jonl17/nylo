@@ -19,13 +19,11 @@ const Frontpage = () => {
             className='d-flex flex-column frontpage-object--exhibition'
             image={exhibition.data.featured_image}
           >
-            <Link className='d-inline-block' to='/syningar'>
-              <h1>{multipleArtistsHandler(exhibition.data.artist)}</h1>
-              <h1 className='font-italic'>{exhibition.data.title.text}</h1>
-              <h1>
-                {formatDate(exhibition.data.opening, exhibition.data.closing)}
-              </h1>
-            </Link>
+            <h1>{multipleArtistsHandler(exhibition.data.artist)}</h1>
+            <h1 className='font-italic'>{exhibition.data.title.text}</h1>
+            <h1>
+              {formatDate(exhibition.data.opening, exhibition.data.closing)}
+            </h1>
           </FrontpageObject>
         </div>
       )}
