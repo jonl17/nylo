@@ -1,4 +1,8 @@
 .image-reel {
-  width: 100%;
   mix-blend-mode: multiply;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+  }
 }

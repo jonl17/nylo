@@ -11,7 +11,7 @@ export const multipleArtistsHandler = (artist: string) => {
   return artist.split(',').length > 1 ? 'Group exhibition' : artist
 }
 
-export const formatExhibitionPeriod = (
+export const formatDate = (
   firstDate: string,
   secondDate?: string,
   x = new Date(firstDate)

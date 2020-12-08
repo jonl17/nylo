@@ -7,7 +7,7 @@ import { Match } from '@reach/router'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
-import TransitionLink from 'gatsby-plugin-transition-link'
+import { Helmet } from 'react-helmet'
 
 interface Props {
   data: {
@@ -42,12 +42,16 @@ export const PageCtx = createContext<{ lastVisitedUrl: string }>({
   lastVisitedUrl: '/',
 })
 
-const Page: React.FC<Props> = ({ data, pageContext }) => {
+const Page: React.FC<Props> = ({ data }) => {
   const { background_color } = data.prismicPage.data
 
   const findColor = (color: BGcolor) => {
-    if (color === 'Green') return 'bg--green'
-    else return 'bg--white'
+    console.log(color)
+    if (color) {
+      return `bg--${color.toLowerCase()}`
+    } else {
+      return `bg--white`
+    }
   }
 
   const slices = data.prismicPage.data.body
@@ -79,15 +83,22 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
   )
 
   return (
-    <Wrapper>
-      <div className='content'>
-        <Link to='/'>
-          <CloseButton className='icon__exit' />
-        </Link>
-        {slices &&
-          slices.map((slice, idx) => <SliceMapping key={idx} slice={slice} />)}
-      </div>
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>{`Living Art Museum—${data.prismicPage.data.title.text}`}</title>
+      </Helmet>
+      <Wrapper>
+        <div className='content'>
+          <Link to='/'>
+            <CloseButton className='icon__exit' />
+          </Link>
+          {slices &&
+            slices.map((slice, idx) => (
+              <SliceMapping key={idx} slice={slice} />
+            ))}
+        </div>
+      </Wrapper>
+    </>
   )
 }
 

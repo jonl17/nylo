@@ -2,6 +2,8 @@ import React from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
 import { PageProps } from 'gatsby'
+import { Helmet } from 'react-helmet'
+import favicon from '../../static/fav.png'
 
 interface Props extends PageProps {
   pageContext: {
@@ -11,11 +13,17 @@ interface Props extends PageProps {
 
 const Layout: React.FC<Props> = ({ children }) => {
   return (
-    <main>
-      <NavBar />
-      {children}
-      <Banner />
-    </main>
+    <>
+      <Helmet>
+        <title>Living Art Museum</title>
+        <link rel='shortcut icon' href={favicon} type='image/png' />
+      </Helmet>
+      <main>
+        <NavBar />
+        {children}
+        <Banner />
+      </main>
+    </>
   )
 }
 

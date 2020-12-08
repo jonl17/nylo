@@ -4,3 +4,4 @@ declare module '*.scss' {
   export default content
 }
 declare module 'gatsby-plugin-transition-link'
+declare module '*.png'

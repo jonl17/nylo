@@ -2,7 +2,7 @@ import React from 'react'
 import FrontpageObject from '~/components/Site/FrontpageObject'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
-import { multipleArtistsHandler, formatExhibitionPeriod } from '~/utils'
+import { multipleArtistsHandler, formatDate } from '~/utils'
 import { Link } from 'gatsby'
 
 const Frontpage = () => {
@@ -19,22 +19,8 @@ const Frontpage = () => {
             <h1>{multipleArtistsHandler(exhibition.data.artist)}</h1>
             <h1 className='font-italic'>{exhibition.data.title.text}</h1>
             <h1>
-              {formatExhibitionPeriod(
-                exhibition.data.opening,
-                exhibition.data.closing
-              )}
+              {formatDate(exhibition.data.opening, exhibition.data.closing)}
             </h1>
-          </Link>
-        </FrontpageObject>
-      )}
-      {latestNews && (
-        <FrontpageObject
-          className='d-flex flex-column'
-          image={latestNews.featuredImage}
-        >
-          <Link className='d-inline-block' to={`/frettir/${latestNews.uid}`}>
-            <h1>{formatExhibitionPeriod(latestNews.date)}</h1>
-            <h1 className='font-italic'>{latestNews.title.text}</h1>
           </Link>
         </FrontpageObject>
       )}
