@@ -39,7 +39,7 @@ const Frontpage = () => {
                 image={x.featuredImage}
                 imageClass='w-100'
               >
-                <p className='mb-0'>{formatDate(x.date)}</p>
+                <p className='mb-1 mt-2'>{formatDate(x.date)}</p>
                 <h1>{x.title.text}</h1>
               </FrontpageObject>
             ))}
