@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { NewsItem } from '~/types'
 import '../fragments/news'
+import slugify from 'slugify'
 
 interface NewsQueryNode {
   id: string
@@ -34,7 +35,7 @@ const getAllNews = () => {
   const allNews: NewsItem[] = data.allPrismicNews.nodes.map(node => {
     return {
       id: node.id,
-      uid: node.uid,
+      uid: slugify(node.uid),
       featuredImage: node.data.featured_image,
       ...node.data,
     }
