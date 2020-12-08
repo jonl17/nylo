@@ -6,6 +6,8 @@ import '~/fragments/news'
 import { Helmet } from 'react-helmet'
 import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
+import CloseButton from '~/components/Site/CloseButton'
+import { Link } from 'gatsby'
 
 interface PageContext {
   bg: string
@@ -30,6 +32,9 @@ const News: React.FC<{
       </Helmet>
       <div className={`page bg--${pageContext.bg}`}>
         <div className='content'>
+          <Link to='/frettir'>
+            <CloseButton className='icon__exit' />
+          </Link>
           <div className='d-flex align-items-center'>
             <p className='pr-3'>{formatDate(news.date)}</p>
             <Breadcrumbs
