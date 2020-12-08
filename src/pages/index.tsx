@@ -3,19 +3,18 @@ import FrontpageObject from '~/components/Site/FrontpageObject'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
-import { Link } from 'gatsby'
 import slugify from 'slugify'
 
 const Frontpage = () => {
   const exhibition = useGetCurrentExhibition()
   const latestNews = getLatestNews()
-  console.log(latestNews)
+
   return (
     <div className='page page__frontpage position-relative'>
       {exhibition && (
         <div className='mt-3 mb-5 pl-3'>
           <FrontpageObject
-            to={`/syningar`}
+            to={`/syningar?eid=${exhibition.id}`}
             className='d-flex flex-column frontpage-object--exhibition'
             image={exhibition.data.featured_image}
           >

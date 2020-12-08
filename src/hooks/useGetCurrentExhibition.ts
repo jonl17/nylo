@@ -5,6 +5,8 @@ export default () => {
   const data: {
     allPrismicExhibition: {
       nodes: {
+        id: string
+        uid: string
         data: {
           title: {
             text: string
@@ -23,6 +25,8 @@ export default () => {
     {
       allPrismicExhibition {
         nodes {
+          id
+          uid
           ...exhibitionExcerpt
         }
       }
@@ -34,6 +38,8 @@ export default () => {
     const closing = new Date(node.data.closing).getTime()
     if (today >= opening && today <= closing) {
       return {
+        id: node.id,
+        uid: node.uid,
         ...node.data,
       }
     }

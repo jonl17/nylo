@@ -4,6 +4,7 @@ import Banner from '~/components/Site/Banner'
 import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
+import Modal from '~/components/Site/Modal'
 
 interface Props extends PageProps {
   pageContext: {
@@ -18,7 +19,8 @@ const Layout: React.FC<Props> = ({ children }) => {
         <title>Living Art Museum</title>
         <link rel='shortcut icon' href={favicon} type='image/png' />
       </Helmet>
-      <main>
+      <main id='main-wrapper'>
+        <Modal />
         <NavBar />
         {children}
         <Banner />

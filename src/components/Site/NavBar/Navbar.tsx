@@ -7,6 +7,15 @@ const Menu = () => {
   const mainMenu = useMenuQuery()
   return (
     <div>
+      <Link
+        activeClassName='navbar__anchor--active'
+        partiallyActive
+        to={`/syningar`}
+        className='navbar__anchor'
+      >
+        <span />
+        <h1>Sýningar</h1>
+      </Link>
       {mainMenu &&
         mainMenu.map(
           (item, idx) =>
