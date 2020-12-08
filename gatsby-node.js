@@ -1,4 +1,5 @@
 const path = require('path')
+const slugify = require('slugify')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -100,7 +101,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   news.data.allPrismicNews.nodes.forEach(node => {
     createPage({
-      path: `/frettir/${node.uid}`,
+      path: `/frettir/${slugify(node.uid)}`,
       component: newsTemplate,
       context: {
         id: node.id,

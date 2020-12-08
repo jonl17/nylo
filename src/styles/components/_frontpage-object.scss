@@ -9,4 +9,20 @@
   &__img {
     width: 75%;
   }
+
+  &__heading {
+    text-decoration: underline;
+  }
+
+  &--news {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    &:not(:last-of-type) {
+      margin-right: $spacer * 3;
+    }
+  }
 }

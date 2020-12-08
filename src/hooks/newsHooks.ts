@@ -42,6 +42,8 @@ const getAllNews = () => {
   return allNews
 }
 
-const getLatestNews = (news: NewsItem[] = getAllNews()) => news[0]
+const getLatestNews = (news: NewsItem[] = getAllNews()) =>
+  // if there are more than 2 available, bring 'em. Otherwise bring 1.
+  news.length > 1 ? news.slice(0, 2) : news.slice(0, 1)
 
 export { getAllNews, getLatestNews }
