@@ -4,10 +4,9 @@
     h1 {
       margin-bottom: 0;
     }
-  }
-
-  &__img {
-    width: 75%;
+    img {
+      width: 100%;
+    }
   }
 
   &__heading {
@@ -24,5 +23,9 @@
     &:not(:last-of-type) {
       margin-right: $spacer * 3;
     }
+  }
+
+  &--exhibition {
+    text-align: left;
   }
 }

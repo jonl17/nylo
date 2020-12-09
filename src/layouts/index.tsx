@@ -20,7 +20,6 @@ const Layout: React.FC<Props> = ({ children }) => {
         <link rel='shortcut icon' href={favicon} type='image/png' />
       </Helmet>
       <main id='main-wrapper'>
-        <Modal />
         <NavBar />
         {children}
         <Banner />
