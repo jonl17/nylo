@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import FrontpageObject from '~/components/Site/FrontpageObject'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
-import cn from 'classnames'
-import CloseButton from '~/components/Site/CloseButton'
+import { ModalContext } from '~/context/ModalContext'
 
 const Frontpage = ({
-  showSneakPeak,
   triggerSneakPeak,
 }: {
-  showSneakPeak: boolean
   triggerSneakPeak: (b: boolean) => void
 }) => {
   const exhibition = useGetCurrentExhibition()
@@ -40,14 +37,11 @@ const Frontpage = ({
           <div className='d-flex'>
             {latestNews.map((x, y) => (
               <Link
+                key={y}
                 to={`/frettir/${slugify(x.uid)}`}
                 className='frontpage-object--news'
               >
-                <FrontpageObject
-                  key={y}
-                  image={x.featuredImage}
-                  imageClass='w-100'
-                >
+                <FrontpageObject image={x.featuredImage} imageClass='w-100'>
                   <p className='mb-1 mt-2'>{formatDate(x.date)}</p>
                   <h1>{x.title.text}</h1>
                 </FrontpageObject>
@@ -60,46 +54,11 @@ const Frontpage = ({
   )
 }
 
-const SneakPeak = ({
-  showSneakPeak,
-  triggerSneakPeak,
-}: {
-  showSneakPeak: boolean
-  triggerSneakPeak: (b: boolean) => void
-}) => {
-  return (
-    <div
-      className={cn('sneak-peak-window d-flex', {
-        'sneak-peak-window--open': showSneakPeak,
-      })}
-    >
-      <div className='sneak-peak-window__content col-8'>
-        <p>it's a wrap</p>
-      </div>
-      <button
-        onClick={() => triggerSneakPeak(false)}
-        className='sneak-peak-window__close-btn col-4'
-      >
-        <CloseButton />
-      </button>
-    </div>
-  )
-}
-
 export default () => {
-  const [showSneakPeak, setShowSneakPeak] = useState(false)
-  const triggerSneakPeak = (b: boolean) => setShowSneakPeak(b)
-
+  const { trigger } = useContext(ModalContext)
   return (
     <div className='page page__frontpage position-relative'>
-      <Frontpage
-        showSneakPeak={showSneakPeak}
-        triggerSneakPeak={triggerSneakPeak}
-      />
-      <SneakPeak
-        showSneakPeak={showSneakPeak}
-        triggerSneakPeak={triggerSneakPeak}
-      />
+      <Frontpage triggerSneakPeak={trigger} />
     </div>
   )
 }

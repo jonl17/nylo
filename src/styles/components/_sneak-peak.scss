@@ -7,9 +7,11 @@
   height: 100vh;
   width: 100%;
   z-index: 400;
+  display: flex;
 
   &__content {
     background: $gray;
+    @extend .col-8;
   }
 
   &--open {
@@ -20,6 +22,7 @@
     outline: 0;
     border: none;
     background: transparent;
+    @extend .col-4;
 
     &:focus {
       outline: 0;

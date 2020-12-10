@@ -25,3 +25,28 @@ export const formatDate = (
     }—${y.getDate()}.${y.getMonth()}.${y.getFullYear()}`
   }
 }
+
+export const lockScroll = (
+  blur?: boolean,
+  blurIntensity: string = '20px',
+  unlock?: boolean
+) => {
+  const lock = () => {
+    document.body.style.overflow = 'hidden'
+    if (blur) {
+      document.getElementById('banner')!.style.filter = `blur(${blurIntensity})`
+      document.getElementById(
+        'main-wrapper'
+      )!.style.filter = `blur(${blurIntensity})`
+    }
+  }
+  const unLock = () => {
+    document.body.style.overflow = 'auto'
+    document.getElementById('banner')!.style.filter = `blur(0px)`
+    document.getElementById('main-wrapper')!.style.filter = `blur(0px)`
+  }
+
+  if (document.querySelector('main')) {
+    unlock ? unLock() : lock()
+  }
+}
