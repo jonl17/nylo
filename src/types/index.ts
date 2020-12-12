@@ -1,4 +1,4 @@
-export type BGcolor = "Green" | "White" | null
+export type BGcolor = 'Green' | 'White' | null
 
 export interface RichTextSliceType {
   content: {
@@ -28,10 +28,10 @@ export interface NewsItem {
 }
 
 export type TextType =
-  | "large"
-  | "small"
-  | "small one column right"
-  | "small two columns"
+  | 'large'
+  | 'small'
+  | 'small one column right'
+  | 'small two columns'
 
 export interface RichTextProps {
   primary: {
@@ -71,4 +71,21 @@ export interface NewsQuery {
       }[]
     }
   }
+}
+
+export interface ExhibitionFull {
+  title: {
+    text: string
+  }
+  artist: string
+  curator: string
+  date: {
+    opening: string
+    closing: string
+  }
+  featuredImage: {
+    url: string
+    alt: string
+  }
+  body: any[]
 }

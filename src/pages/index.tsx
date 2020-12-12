@@ -5,21 +5,16 @@ import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
-import { ModalContext } from '~/context/ModalContext'
 
-const Frontpage = ({
-  triggerSneakPeak,
-}: {
-  triggerSneakPeak: (b: boolean) => void
-}) => {
+const Frontpage = ({}: {}) => {
   const exhibition = useGetCurrentExhibition()
   const latestNews = getLatestNews()
 
   return (
     <>
       {exhibition && (
-        <button
-          onClick={() => triggerSneakPeak(true)}
+        <Link
+          to={`/syningar/${slugify(exhibition.uid)}`}
           className='col-10 w-100 mt-3 mb-5 pl-3 d-flex flex-column frontpage-object--exhibition removeGenericButtonStyles'
         >
           <FrontpageObject image={exhibition.data.featured_image}>
@@ -29,7 +24,7 @@ const Frontpage = ({
               {formatDate(exhibition.data.opening, exhibition.data.closing)}
             </h1>
           </FrontpageObject>
-        </button>
+        </Link>
       )}
       {!!latestNews.length && (
         <div className='mt-3 mb-5 pl-3'>
@@ -55,10 +50,9 @@ const Frontpage = ({
 }
 
 export default () => {
-  const { trigger } = useContext(ModalContext)
   return (
     <div className='page page__frontpage position-relative'>
-      <Frontpage triggerSneakPeak={trigger} />
+      <Frontpage />
     </div>
   )
 }

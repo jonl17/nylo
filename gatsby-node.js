@@ -58,6 +58,17 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const exhibitions = await graphql(`
+    {
+      allPrismicExhibition(sort: { fields: data___opening, order: DESC }) {
+        nodes {
+          id
+          uid
+        }
+      }
+    }
+  `)
+
   const pageTemplate = path.resolve(
     __dirname,
     `src/components/templates/Page/Page.tsx`
@@ -67,6 +78,12 @@ exports.createPages = async ({ graphql, actions }) => {
     `src/components/templates/News/News.tsx`
   )
 
+  const exhibitionTemplate = path.resolve(
+    __dirname,
+    `src/components/templates/Exhibition/Exhibition.tsx`
+  )
+
+  // pages
   pages.data.allPrismicPage.nodes.forEach(node => {
     let path = `/${node.uid}`
 
@@ -99,6 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
+  // news
   news.data.allPrismicNews.nodes.forEach(node => {
     createPage({
       path: `/frettir/${slugify(node.uid)}`,
@@ -107,6 +125,17 @@ exports.createPages = async ({ graphql, actions }) => {
         id: node.id,
         date: node.data.date,
         bg: 'gray',
+      },
+    })
+  })
+
+  // exhibtions
+  exhibitions.data.allPrismicExhibition.nodes.forEach(node => {
+    createPage({
+      path: `/syningar/${slugify(node.uid)}`,
+      component: exhibitionTemplate,
+      context: {
+        id: node.id,
       },
     })
   })

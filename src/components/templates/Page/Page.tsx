@@ -46,7 +46,6 @@ const Page: React.FC<Props> = ({ data }) => {
   const { background_color } = data.prismicPage.data
 
   const findColor = (color: BGcolor) => {
-    console.log(color)
     if (color) {
       return `bg--${color.toLowerCase()}`
     } else {

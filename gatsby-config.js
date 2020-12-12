@@ -10,6 +10,7 @@ module.exports = {
     `gatsby-plugin-typescript`,
     `gatsby-plugin-layout`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-use-query-params`,
     {
       resolve: `gatsby-plugin-alias-imports`,
       options: {

@@ -32,7 +32,7 @@ export const lockScroll = (
   unlock?: boolean
 ) => {
   const lock = () => {
-    document.body.style.overflow = 'hidden'
+    // document.body.style.overflow = 'hidden'
     if (blur) {
       document.getElementById('banner')!.style.filter = `blur(${blurIntensity})`
       document.getElementById(
@@ -41,7 +41,7 @@ export const lockScroll = (
     }
   }
   const unLock = () => {
-    document.body.style.overflow = 'auto'
+    // document.body.style.overflow = 'scroll'
     document.getElementById('banner')!.style.filter = `blur(0px)`
     document.getElementById('main-wrapper')!.style.filter = `blur(0px)`
   }

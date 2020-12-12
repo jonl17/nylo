@@ -4,7 +4,6 @@ import Banner from '~/components/Site/Banner'
 import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
-import { ModalProvider } from '../context/ModalContext'
 
 interface Props extends PageProps {
   pageContext: {
@@ -20,14 +19,12 @@ const Layout: React.FC<Props> = ({ children }) => {
         <link rel='shortcut icon' href={favicon} type='image/png' />
       </Helmet>
 
-      <ModalProvider>
-        <main id='main-wrapper'>
-          <NavBar />
-          {children}
-        </main>
+      <main id='main-wrapper'>
+        <NavBar />
+        {children}
+      </main>
 
-        <Banner />
-      </ModalProvider>
+      <Banner />
     </>
   )
 }

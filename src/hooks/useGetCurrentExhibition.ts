@@ -1,5 +1,6 @@
 import { graphql as gql, useStaticQuery } from 'gatsby'
 import '../fragments/exhibition/excerpt'
+import slugify from 'slugify'
 
 export default () => {
   const data: {
@@ -39,7 +40,7 @@ export default () => {
     if (today >= opening && today <= closing) {
       return {
         id: node.id,
-        uid: node.uid,
+        uid: slugify(node.uid),
         ...node.data,
       }
     }

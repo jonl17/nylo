@@ -31,6 +31,7 @@
     "gatsby-plugin-react-helmet": "^3.6.0",
     "gatsby-plugin-sass": "^2.3.12",
     "gatsby-plugin-typescript": "^2.4.18",
+    "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-source-prismic": "^3.2.1",
     "gsap": "^3.5.1",
     "jquery": "^3.5.1",
@@ -40,8 +41,8 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-html-renderer": "^0.3.2",
-    "react-router": "^5.2.0",
-    "slugify": "^1.4.5"
+    "slugify": "^1.4.5",
+    "use-query-params": "^1.1.9"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.0.1",
