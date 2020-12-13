@@ -74,6 +74,8 @@ export interface NewsQuery {
 }
 
 export interface ExhibitionFull {
+  id: string
+  uid?: string
   title: {
     text: string
   }

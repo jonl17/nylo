@@ -64,6 +64,11 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           id
           uid
+          data {
+            title {
+              text
+            }
+          }
         }
       }
     }
@@ -114,20 +119,19 @@ exports.createPages = async ({ graphql, actions }) => {
         hasSubmenu: displaySubmenu(),
       },
     })
-  })
-
-  // news
-  news.data.allPrismicNews.nodes.forEach(node => {
-    createPage({
-      path: `/frettir/${slugify(node.uid)}`,
-      component: newsTemplate,
-      context: {
-        id: node.id,
-        date: node.data.date,
-        bg: 'gray',
-      },
+  }) +
+    // news
+    news.data.allPrismicNews.nodes.forEach(node => {
+      createPage({
+        path: `/frettir/${slugify(node.uid)}`,
+        component: newsTemplate,
+        context: {
+          id: node.id,
+          date: node.data.date,
+          bg: 'gray',
+        },
+      })
     })
-  })
 
   // exhibtions
   exhibitions.data.allPrismicExhibition.nodes.forEach(node => {
@@ -136,6 +140,9 @@ exports.createPages = async ({ graphql, actions }) => {
       component: exhibitionTemplate,
       context: {
         id: node.id,
+        bg: 'white',
+        title: node.data.title,
+        uid: node.uid,
       },
     })
   })

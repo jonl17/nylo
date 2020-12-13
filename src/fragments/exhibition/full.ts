@@ -16,6 +16,7 @@ export const fragment = graphql`
       }
       body {
         ... on PrismicExhibitionBodyRichtext {
+          slice_type
           primary {
             text {
               html
@@ -23,6 +24,7 @@ export const fragment = graphql`
           }
         }
         ... on PrismicExhibitionBodyMedia {
+          slice_type
           items {
             image {
               url
