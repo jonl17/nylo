@@ -32,6 +32,14 @@ export const fragment = graphql`
             }
           }
         }
+        ... on PrismicExhibitionBodyArtistBio {
+          slice_type
+          primary {
+            text {
+              html
+            }
+          }
+        }
       }
     }
   }

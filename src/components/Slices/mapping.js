@@ -1,5 +1,5 @@
-import React from "react"
-import { Media, RichText, AllNews } from "."
+import React from 'react'
+import { Media, RichText, AllNews, ArtistBio } from '.'
 
 // todo, convert to typescript
 const SliceMapping = ({ slice }) => {
@@ -7,6 +7,7 @@ const SliceMapping = ({ slice }) => {
     richtext: RichText,
     media: Media,
     all_news: AllNews,
+    artist_bio: ArtistBio,
   }
   const Cmp = slices[slice.slice_type]
   if (!Cmp) {
