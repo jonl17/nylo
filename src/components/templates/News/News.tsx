@@ -32,9 +32,7 @@ const News: React.FC<{
       </Helmet>
       <div className={`page bg--${pageContext.bg}`}>
         <div className='content'>
-          <Link to='/frettir'>
-            <CloseButton className='icon__exit' />
-          </Link>
+          <CloseButton className='icon__exit' />
           <div className='d-flex align-items-center'>
             <p className='pr-3'>{formatDate(news.date)}</p>
             <Breadcrumbs

@@ -61,9 +61,7 @@ const Exhibition = ({
       </Helmet>
       <div className={`page bg--${pageContext.bg}`}>
         <div className='content'>
-          <Link to='/syningar'>
-            <CloseButton className='icon__exit' />
-          </Link>
+          <CloseButton className='icon__exit' />
           <div className='d-flex align-items-center'>
             <p className='pr-3'>
               {formatDate(exhibition.date.opening, exhibition.date.closing)}

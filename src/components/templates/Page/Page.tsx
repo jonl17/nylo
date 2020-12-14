@@ -88,9 +88,7 @@ const Page: React.FC<Props> = ({ data }) => {
       </Helmet>
       <Wrapper>
         <div className='content'>
-          <Link to='/'>
-            <CloseButton className='icon__exit' />
-          </Link>
+          <CloseButton className='icon__exit' />
           {slices &&
             slices.map((slice, idx) => (
               <SliceMapping key={idx} slice={slice} />
