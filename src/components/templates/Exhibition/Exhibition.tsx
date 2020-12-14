@@ -39,6 +39,12 @@ const cleanExhibitionData = (
     },
     title: prismicExhibition.data.title,
     body: prismicExhibition.data.body,
+    additionalLinks: prismicExhibition.data.additional_links.map((l: any) => {
+      return {
+        text: l.text,
+        url: l.link.url,
+      }
+    }),
   }
 }
 
@@ -47,6 +53,7 @@ const Exhibition = ({
   data,
   exhibition = cleanExhibitionData(data, pageContext.id, pageContext.uid),
 }: Props) => {
+  console.log(exhibition.additionalLinks)
   return (
     <>
       <Helmet>
@@ -76,6 +83,20 @@ const Exhibition = ({
           {exhibition.body.map((slice, x) => (
             <SliceMapping slice={slice} key={x} />
           ))}
+          <hr />
+          {exhibition.curator && (
+            <div className='parag--1'>
+              <p className='mb-0'>Sýningarstjóri</p>
+              <p>{exhibition.curator}</p>
+            </div>
+          )}
+          <div className='parag--1 d-inline-flex flex-column'>
+            {exhibition.additionalLinks.map(x => (
+              <a target='_blank' href={x.url}>
+                <p className='secondaryAnchorActive'>{x.text}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </>

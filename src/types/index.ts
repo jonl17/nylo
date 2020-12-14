@@ -90,4 +90,8 @@ export interface ExhibitionFull {
     alt: string
   }
   body: any[]
+  additionalLinks: {
+    text: string
+    url: string
+  }[]
 }

@@ -47,6 +47,27 @@
         "label": "Featured image"
       }
     },
+    "additional_links": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "text": {
+            "type": "Text",
+            "config": {
+              "label": "Text"
+            }
+          },
+          "link": {
+            "type": "Link",
+            "config": {
+              "allowTargetBlank": true,
+              "label": "Link"
+            }
+          }
+        },
+        "label": "Additional links"
+      }
+    },
     "body": {
       "type": "Slices",
       "fieldset": "Slice zone",

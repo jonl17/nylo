@@ -14,6 +14,12 @@ export const fragment = graphql`
         url
         alt
       }
+      additional_links {
+        text
+        link {
+          url
+        }
+      }
       body {
         ... on PrismicExhibitionBodyRichtext {
           slice_type
