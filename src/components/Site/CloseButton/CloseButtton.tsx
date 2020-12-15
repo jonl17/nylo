@@ -15,6 +15,7 @@ const handleClick = () => {
     window.history.length > 1 &&
     document.referrer.indexOf(window.location.host) !== -1
   ) {
+    console.log('has history')
     navigate(-1)
   } else {
     navigate('/')
