@@ -10,7 +10,7 @@ interface Props {
 }
 
 const handleClick = () => {
-  console.log(window.history, document.referrer.indexOf(window.location.host))
+  console.log(window.history, document.referrer)
 
   if (
     // has a prev location that is on this domain
