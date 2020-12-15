@@ -10,12 +10,13 @@ interface Props {
 }
 
 const handleClick = () => {
+  console.log(window.history, document.referrer.indexOf(window.location.host))
+
   if (
     // has a prev location that is on this domain
     window.history.length > 1 &&
     document.referrer.indexOf(window.location.host) !== -1
   ) {
-    console.log('has history')
     navigate(-1)
   } else {
     navigate('/')
