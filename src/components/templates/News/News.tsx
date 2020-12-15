@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import CloseButton from '~/components/Site/CloseButton'
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 
 interface PageContext {
   bg: string

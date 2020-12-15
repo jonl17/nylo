@@ -53,7 +53,6 @@ const Exhibition = ({
   data,
   exhibition = cleanExhibitionData(data, pageContext.id, pageContext.uid),
 }: Props) => {
-  console.log(exhibition.additionalLinks)
   return (
     <>
       <Helmet>
@@ -90,7 +89,7 @@ const Exhibition = ({
           )}
           <div className='parag--1 d-inline-flex flex-column'>
             {exhibition.additionalLinks.map(x => (
-              <a target='_blank' href={x.url}>
+              <a key={x.url} target='_blank' href={x.url}>
                 <p className='secondaryAnchorActive'>{x.text}</p>
               </a>
             ))}

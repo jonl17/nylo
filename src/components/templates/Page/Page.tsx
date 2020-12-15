@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
 import cn from 'classnames'
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from '~/types'
@@ -88,7 +88,7 @@ const Page: React.FC<Props> = ({ data }) => {
       </Helmet>
       <Wrapper>
         <div className='content'>
-          <CloseButton className='icon__exit' />
+          <CloseButton goTo={() => navigate('/')} className='icon__exit' />
           {slices &&
             slices.map((slice, idx) => (
               <SliceMapping key={idx} slice={slice} />
