@@ -89,9 +89,23 @@ export interface ExhibitionFull {
     url: string
     alt: string
   }
-  body: any[]
   additionalLinks: {
     text: string
     url: string
+  }[]
+  excerpt?: {
+    html: string
+  }
+  detailedText?: {
+    html: string
+  }
+  artistBiography?: {
+    html: string
+  }
+  exhibitionView: {
+    image: {
+      url: string
+      alt: string
+    }
   }[]
 }

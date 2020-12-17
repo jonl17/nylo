@@ -20,31 +20,19 @@ export const fragment = graphql`
           url
         }
       }
-      body {
-        ... on PrismicExhibitionBodyRichtext {
-          slice_type
-          primary {
-            text {
-              html
-            }
-          }
-        }
-        ... on PrismicExhibitionBodyMedia {
-          slice_type
-          items {
-            image {
-              url
-              alt
-            }
-          }
-        }
-        ... on PrismicExhibitionBodyArtistBio {
-          slice_type
-          primary {
-            text {
-              html
-            }
-          }
+      excerpt {
+        html
+      }
+      detailed_text {
+        html
+      }
+      artist_biography {
+        html
+      }
+      exhibition_view {
+        image {
+          alt
+          url
         }
       }
     }

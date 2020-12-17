@@ -37,6 +37,15 @@
         "label": "Closing"
       }
     },
+    "excerpt": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "allowTargetBlank": true,
+        "label": "Excerpt",
+        "placeholder": "Stuttur texti, helst ekki meira en 1 málsgrein."
+      }
+    },
     "featured_image": {
       "type": "Image",
       "config": {
@@ -45,6 +54,41 @@
         },
         "thumbnails": [],
         "label": "Featured image"
+      }
+    },
+    "detailed_text": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "allowTargetBlank": true,
+        "label": "Detailed text"
+      }
+    },
+    "artist_biography": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "allowTargetBlank": true,
+        "label": "Artist biography"
+      }
+    },
+    "exhibition_view": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "image": {
+            "type": "Image",
+            "config": {
+              "constraint": {
+                "width": null,
+                "height": 750
+              },
+              "thumbnails": [],
+              "label": "Image"
+            }
+          }
+        },
+        "label": "Exhibition view"
       }
     },
     "additional_links": {
@@ -66,87 +110,6 @@
           }
         },
         "label": "Additional links"
-      }
-    },
-    "body": {
-      "type": "Slices",
-      "fieldset": "Slice zone",
-      "config": {
-        "labels": {
-          "richtext": [],
-          "media": [],
-          "artist_biography": [],
-          "artist_bio": []
-        },
-        "choices": {
-          "richtext": {
-            "type": "Slice",
-            "fieldset": "RichText",
-            "description": "Text, with links, buttons, etc...",
-            "icon": "format_color_text",
-            "display": "list",
-            "non-repeat": {
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
-                  "allowTargetBlank": true,
-                  "label": "Text",
-                  "placeholder": "Add text with links, buttons, etc...",
-                  "labels": {
-                    "XX": [
-                      {
-                        "name": "button-primary"
-                      },
-                      {
-                        "name": "inline-link"
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            "repeat": {}
-          },
-          "media": {
-            "type": "Slice",
-            "fieldset": "Media",
-            "description": "Add 1 or 2 images.",
-            "icon": "image",
-            "display": "list",
-            "non-repeat": {},
-            "repeat": {
-              "image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {
-                    "width": 700
-                  },
-                  "thumbnails": [],
-                  "label": "Image"
-                }
-              }
-            }
-          },
-          "artist_bio": {
-            "type": "Slice",
-            "fieldset": "Artist Bio",
-            "description": "Self explanatory",
-            "icon": "accessibility",
-            "display": "list",
-            "non-repeat": {
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
-                  "allowTargetBlank": true,
-                  "label": "Text"
-                }
-              }
-            },
-            "repeat": {}
-          }
-        }
       }
     }
   }

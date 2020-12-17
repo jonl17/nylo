@@ -1,5 +1,6 @@
 .icon {
   &__exit {
+    z-index: 400;
     position: fixed;
     right: calc(#{$spacer} + 310px);
     top: $spacer * 2;
