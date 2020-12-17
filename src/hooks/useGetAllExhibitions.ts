@@ -7,6 +7,7 @@ export default () => {
     allPrismicExhibition: {
       nodes: {
         id: string
+        uid: string
         data: {
           artist: string
           curator: string
@@ -20,6 +21,27 @@ export default () => {
             text: string
           }
           body: any[]
+          additional_links: {
+            text: string
+            link: {
+              url: string
+            }
+          }[]
+          exhibition_view: {
+            image: {
+              alt: string
+              url: string
+            }
+          }[]
+          artist_biography: {
+            html: string
+          }
+          excerpt: {
+            html: string
+          }
+          detailed_text: {
+            html: string
+          }
         }
       }[]
     }
@@ -28,6 +50,7 @@ export default () => {
       allPrismicExhibition {
         nodes {
           id
+          uid
           ...exhibitionFragmentFull
         }
       }
@@ -35,9 +58,10 @@ export default () => {
   `)
   const exhibitions: ExhibitionFull[] = data.allPrismicExhibition.nodes.map(
     node => {
-      const { id, data } = node
+      const { id, uid, data } = node
       return {
         id,
+        uid,
         title: data.title,
         artist: data.artist,
         curator: data.curator,
@@ -47,6 +71,16 @@ export default () => {
         },
         featuredImage: data.featured_image,
         body: data.body,
+        additionalLinks: data.additional_links.map(l => {
+          return {
+            text: l.text,
+            url: l.link.url,
+          }
+        }),
+        excerpt: data.excerpt,
+        detailedText: data.detailed_text,
+        exhibitionView: data.exhibition_view,
+        artistBiography: data.artist_biography,
       }
     }
   )

@@ -117,8 +117,15 @@ export const query = graphql`
         }
         background_color
         body {
-          ... on PrismicPageBodyAllNews {
-            id
+          ... on PrismicPageBodyProgram {
+            slice_type
+            primary {
+              program_name
+            }
+            items {
+              parameter_label
+              parameter_value
+            }
           }
           ... on PrismicPageBodyMedia {
             slice_type

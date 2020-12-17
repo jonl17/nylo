@@ -48,7 +48,8 @@
           "rich_text": [],
           "all_news": [],
           "media": [],
-          "richtext": []
+          "richtext": [],
+          "program": []
         },
         "choices": {
           "richtext": {
@@ -120,6 +121,35 @@
                   },
                   "thumbnails": [],
                   "label": "Image"
+                }
+              }
+            }
+          },
+          "program": {
+            "type": "Slice",
+            "fieldset": "Program",
+            "description": "Dynamic component (programmer)",
+            "icon": "directions_run",
+            "display": "list",
+            "non-repeat": {
+              "program_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Program name"
+                }
+              }
+            },
+            "repeat": {
+              "parameter_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Parameter label"
+                }
+              },
+              "parameter_value": {
+                "type": "Text",
+                "config": {
+                  "label": "Parameter value"
                 }
               }
             }
