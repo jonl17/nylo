@@ -145,9 +145,6 @@ export const query = graphql`
               }
             }
           }
-          ... on PrismicPageBodyAllNews {
-            slice_type
-          }
         }
       }
     }

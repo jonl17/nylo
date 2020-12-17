@@ -95,15 +95,6 @@
             },
             "repeat": {}
           },
-          "all_news": {
-            "type": "Slice",
-            "fieldset": "All news",
-            "description": "Displays news in a grid, ordered by date.",
-            "icon": "grid_on",
-            "display": "list",
-            "non-repeat": {},
-            "repeat": {}
-          },
           "media": {
             "type": "Slice",
             "fieldset": "Media",

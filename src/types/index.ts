@@ -27,6 +27,19 @@ export interface NewsItem {
   }
 }
 
+export interface OverViewItem {
+  id: string
+  uid: string
+  title: {
+    text: string
+  }
+  date: string
+  featuredImage: {
+    alt: string
+    url: string
+  }
+}
+
 export type TextType =
   | 'large'
   | 'small'
