@@ -1,7 +1,8 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import { NewsItem } from '~/types'
+import { OverViewItem } from '~/types'
 import '../fragments/news'
 import slugify from 'slugify'
+import { formatDate } from '~/utils'
 
 interface NewsQueryNode {
   id: string
@@ -32,18 +33,20 @@ const getAllNews = () => {
       }
     }
   `)
-  const allNews: NewsItem[] = data.allPrismicNews.nodes.map(node => {
+  const allNews: OverViewItem[] = data.allPrismicNews.nodes.map(node => {
     return {
       id: node.id,
       uid: slugify(node.uid),
       featuredImage: node.data.featured_image,
-      ...node.data,
+      title: node.data.title,
+      date: formatDate(node.data.date),
+      parentUrl: '/frettir/',
     }
   })
   return allNews
 }
 
-const getLatestNews = (news: NewsItem[] = getAllNews()) =>
+const getLatestNews = (news: OverViewItem[] = getAllNews()) =>
   // if there are more than 2 available, bring 'em. Otherwise bring 1.
   news.length > 1 ? news.slice(0, 2) : news.slice(0, 1)
 

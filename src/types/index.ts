@@ -14,19 +14,6 @@ export interface ImageReelSliceType {
   }
 }
 
-export interface NewsItem {
-  id: string
-  uid: string
-  title: {
-    text: string
-  }
-  date: string
-  featuredImage: {
-    alt: string
-    url: string
-  }
-}
-
 export interface OverViewItem {
   id: string
   uid: string
@@ -38,6 +25,7 @@ export interface OverViewItem {
     alt: string
     url: string
   }
+  parentUrl: string
 }
 
 export type TextType =
