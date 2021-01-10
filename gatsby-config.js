@@ -47,6 +47,7 @@ module.exports = {
           announcement_banner: require(`./src/schemas/announcement_banner.json`),
           exhibition: require(`./src/schemas/exhibition.json`),
           sidebar: require(`./src/schemas/sidebar.json`),
+          footer: require(`./src/schemas/footer.json`),
         },
         lang: '*',
         prismicToolbar: true,

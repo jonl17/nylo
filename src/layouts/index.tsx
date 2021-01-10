@@ -4,6 +4,7 @@ import Banner from '~/components/Site/Banner'
 import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
+import Footer from '~/components/Site/Footer'
 
 interface Props extends PageProps {
   pageContext: {
@@ -22,6 +23,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       <main id='main-wrapper'>
         <NavBar />
         {children}
+        <Footer />
       </main>
 
       <Banner />

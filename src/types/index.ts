@@ -110,3 +110,12 @@ export interface ExhibitionFull {
     }
   }[]
 }
+
+export interface FooterData {
+  openingHours: {
+    html: string
+  }
+  sponsors: {
+    logo: { url: string; alt: string }
+  }[]
+}

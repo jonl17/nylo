@@ -13,7 +13,6 @@
   min-height: calc(100vh - 66px);
   padding-left: $spacer * 2;
   margin-right: 300px;
-  margin-bottom: 66px;
 
   @include media-breakpoint-down('lg') {
     padding-left: 150px;
