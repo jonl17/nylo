@@ -11,8 +11,9 @@
 
   &__sponsors {
     img {
-      height: 100%;
-      padding-right: $spacer * 3;
+      padding-right: 3rem;
+      max-width: 200px;
+      object-fit: contain;
     }
   }
 }
