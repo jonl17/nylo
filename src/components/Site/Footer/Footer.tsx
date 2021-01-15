@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { LanguageContext } from '~/context/LanguageContext'
 import useGetFooter from '~/hooks/useGetFooter'
 
 const Footer = () => {
@@ -6,6 +7,10 @@ const Footer = () => {
   if (!data) return null
 
   const blockClass = 'col-4 p-0'
+
+  const { langSeek } = useContext(LanguageContext)
+
+  langSeek(['footer', 'transportation'])
 
   return (
     <div className='footer'>
@@ -55,9 +60,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='pt-5 footer__sponsors'>
-        {data.sponsors.map(sponsor => (
-          <img src={sponsor.logo.url} alt={sponsor.logo.alt} />
+      <div className='pt-5 footer__sponsors d-flex align-items-center'>
+        {data.sponsors.map((sponsor, x) => (
+          <img key={x} src={sponsor.logo.url} alt={sponsor.logo.alt} />
         ))}
       </div>
     </div>

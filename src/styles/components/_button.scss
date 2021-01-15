@@ -16,4 +16,24 @@
   h3 {
     padding-bottom: 3px;
   }
+
+  &__language {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    z-index: 500;
+    background: $white;
+    border-right: hidden;
+    border-top: hidden;
+    border-bottom: hidden;
+
+    h3 {
+      font-size: 45px;
+    }
+  }
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }

@@ -6,9 +6,6 @@ const Slideshow = ({ images }: { images: { url: string; alt: string }[] }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      document
-        .querySelectorAll('.slideshow-image')
-        .forEach(node => console.log(node.clientWidth))
       const nodes = Array.from(
         document.querySelectorAll('.slideshow-image')
       ).map(node => {
@@ -21,8 +18,6 @@ const Slideshow = ({ images }: { images: { url: string; alt: string }[] }) => {
           nodes.slice(0, i + 1).reduce((a, b) => a + b)
         ),
       ])
-
-      console.log(nodes)
     }, 1500)
   }, [])
 
