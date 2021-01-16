@@ -5,7 +5,8 @@ import '~/fragments/exhibition/full'
 import { ExhibitionFull } from '~/types'
 import CloseButton from '~/components/Site/CloseButton'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
-import { formatDate, multipleArtistsHandler } from '~/utils'
+import Open from '~/components/Site/Open'
+import { formatDate, multipleArtistsHandler, exhibitionIsOpen } from '~/utils'
 import Button from '~/components/Site/Button'
 import Slideshow from '~/components/Site/Slideshow/Slideshow'
 import { LanguageContext } from '~/context/LanguageContext'
@@ -72,6 +73,10 @@ const Exhibition = ({
         <div className='content'>
           <CloseButton className='icon__exit' />
           <div className='d-flex align-items-center'>
+            {exhibitionIsOpen(
+              new Date(exhibition.date.opening),
+              new Date(exhibition.date.closing)
+            ) && <Open className='mr-3' />}
             <p className='pr-3'>
               {formatDate(exhibition.date.opening, exhibition.date.closing)}
             </p>

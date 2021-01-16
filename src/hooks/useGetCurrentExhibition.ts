@@ -1,6 +1,7 @@
 import { graphql as gql, useStaticQuery } from 'gatsby'
 import '../fragments/exhibition/excerpt'
 import slugify from 'slugify'
+import { exhibitionIsOpen } from '~/utils'
 
 export default () => {
   const data: {
@@ -34,10 +35,9 @@ export default () => {
     }
   `)
   return data.allPrismicExhibition.nodes.find(node => {
-    const today = new Date().getTime()
-    const opening = new Date(node.data.opening).getTime()
-    const closing = new Date(node.data.closing).getTime()
-    if (today >= opening && today <= closing) {
+    if (
+      exhibitionIsOpen(new Date(node.data.opening), new Date(node.data.closing))
+    ) {
       return {
         id: node.id,
         uid: slugify(node.uid),

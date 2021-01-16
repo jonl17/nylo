@@ -50,3 +50,9 @@ export const lockScroll = (
     unlock ? unLock() : lock()
   }
 }
+
+export const exhibitionIsOpen = (
+  opening: Date,
+  closing: Date,
+  tday = new Date()
+) => tday >= opening && tday <= closing
