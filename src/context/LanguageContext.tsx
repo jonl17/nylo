@@ -1,32 +1,23 @@
 import React, { createContext, useState } from 'react'
-import { translations } from '~/lang'
+import { Language } from '~/lang'
 
 const LanguageContext = createContext<{
-  lang: string
+  lang: Language
   modify(): void
-  langSeek(s: string[]): string
 }>({
   lang: 'is',
   modify() {},
-  langSeek() {
-    return ''
-  },
 })
 
 const LanguageProvider: React.FC = ({ children }) => {
-  const [lang, setLang] = useState<'is' | 'en-us'>('is')
+  const [lang, setLang] = useState<Language>('is')
 
   const modify = () => {
-    setLang(prev => (prev === 'is' ? 'en-us' : 'is'))
-  }
-
-  const langSeek = (keys: string[]) => {
-    console.log('language')
-    return 'Bob'
+    setLang(prev => (prev === 'is' ? 'en' : 'is'))
   }
 
   return (
-    <LanguageContext.Provider value={{ lang, modify, langSeek }}>
+    <LanguageContext.Provider value={{ lang, modify }}>
       {children}
     </LanguageContext.Provider>
   )

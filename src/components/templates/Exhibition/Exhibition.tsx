@@ -1,5 +1,5 @@
 import { PageProps, graphql } from 'gatsby'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import '~/fragments/exhibition/full'
 import { ExhibitionFull } from '~/types'
@@ -8,6 +8,8 @@ import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import { formatDate, multipleArtistsHandler } from '~/utils'
 import Button from '~/components/Site/Button'
 import Slideshow from '~/components/Site/Slideshow/Slideshow'
+import { LanguageContext } from '~/context/LanguageContext'
+import { langSeek } from '~/lang'
 
 interface Props extends PageProps {
   pageContext: {
@@ -59,6 +61,8 @@ const Exhibition = ({
 }: Props) => {
   const [readMore, setReadMore] = useState(false)
 
+  const { lang } = useContext(LanguageContext)
+
   return (
     <>
       <Helmet>
@@ -84,11 +88,13 @@ const Exhibition = ({
             <h1 className='font-italic'>{exhibition.title.text}</h1>
           </div>
 
-          <img
-            className='mb-3 exhibition__featured_image'
-            src={exhibition.featuredImage.url}
-            alt={exhibition.featuredImage.alt}
-          />
+          {exhibition.featuredImage.url && (
+            <img
+              className='mb-3 exhibition__featured_image'
+              src={exhibition.featuredImage.url}
+              alt={exhibition.featuredImage.alt}
+            />
+          )}
 
           {exhibition.excerpt && (
             <div
@@ -100,7 +106,7 @@ const Exhibition = ({
           {!readMore && (
             <Button
               className='mt-2'
-              label='Lesa meira'
+              label={langSeek('Read more', lang)}
               onClick={() => setReadMore(true)}
             ></Button>
           )}

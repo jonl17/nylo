@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { LanguageContext } from '~/context/LanguageContext'
 import useGetFooter from '~/hooks/useGetFooter'
+import { langSeek } from '~/lang'
 
 const Footer = () => {
   const data = useGetFooter()
@@ -8,9 +9,7 @@ const Footer = () => {
 
   const blockClass = 'col-4 p-0'
 
-  const { langSeek } = useContext(LanguageContext)
-
-  langSeek(['footer', 'transportation'])
+  const { lang } = useContext(LanguageContext)
 
   return (
     <div className='footer'>
@@ -24,7 +23,7 @@ const Footer = () => {
             <h3>101 Reykjavík</h3>
           </div>
           <div>
-            <p className='mb-0'>Almenningssamgöngur</p>
+            <p className='mb-0'>{langSeek('Public transportation', lang)}</p>
             <h3>Strætó: 14</h3>
             <h3>Stöð: Grandi</h3>
           </div>
@@ -33,7 +32,7 @@ const Footer = () => {
         {/* block */}
         <div className={blockClass}>
           <div>
-            <p className='mb-0'>Opnunartímar</p>
+            <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
             <div dangerouslySetInnerHTML={{ __html: data.openingHours.html }} />
           </div>
         </div>

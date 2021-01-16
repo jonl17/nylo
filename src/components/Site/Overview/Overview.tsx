@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { getAllNews } from '~/hooks/newsHooks'
 import { OverViewItem } from '~/types'
 import slugify from 'slugify'
 import ButtonLink from '~/components/Site/ButtonLink'
 import { ProgramProps } from '../NavBar/types'
 import { getAllExhibitions } from '~/hooks/exhibitionHooks'
+import { LanguageContext } from '~/context/LanguageContext'
+import { langSeek } from '~/lang'
 
 const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
+  const { lang } = useContext(LanguageContext)
   return (
     <div className='col-xl-6 mb-4'>
       <div className='overview-box mr-1'>
@@ -20,7 +23,7 @@ const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
         <p className='mb-1 mt-2'>{item.date}</p>
         <h2 className='mb-2'>{item.title.text}</h2>
         <ButtonLink
-          label='Lesa meira'
+          label={langSeek('Read more', lang)}
           to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}
         ></ButtonLink>
       </div>
