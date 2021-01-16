@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { LanguageContext } from '~/context/LanguageContext'
 import useGetFooter from '~/hooks/useGetFooter'
-import { langSeek } from '~/lang'
+import { langSeek } from 'balkan-tungumal'
 
 const Footer = () => {
   const data = useGetFooter()
