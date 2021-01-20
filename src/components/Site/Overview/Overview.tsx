@@ -7,25 +7,28 @@ import { ProgramProps } from '../NavBar/types'
 import { getAllExhibitions } from '~/hooks/exhibitionHooks'
 import { LanguageContext } from '~/context/LanguageContext'
 import { langSeek } from '~/lang'
+import { Link } from 'gatsby'
 
 const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
   const { lang } = useContext(LanguageContext)
   return (
     <div className='col-xl-6 mb-4'>
       <div className='overview-box mr-1'>
-        {item.featuredImage.url && (
-          <img
-            className='overview-box__featured-image'
-            src={item.featuredImage.url}
-            alt={item.featuredImage.alt}
-          />
-        )}
-        <p className='mb-1 mt-2'>{item.date}</p>
-        <h2 className='mb-2'>{item.title.text}</h2>
-        <ButtonLink
-          label={langSeek('Read more', lang)}
-          to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}
-        ></ButtonLink>
+        <Link to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}>
+          {item.featuredImage.url && (
+            <img
+              className='overview-box__featured-image'
+              src={item.featuredImage.url}
+              alt={item.featuredImage.alt}
+            />
+          )}
+          <p className='mb-1 mt-2'>{item.date}</p>
+          <h2 className='mb-2'>{item.title.text}</h2>
+          <ButtonLink
+            label={langSeek('Read more', lang)}
+            to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}
+          ></ButtonLink>
+        </Link>
       </div>
     </div>
   )

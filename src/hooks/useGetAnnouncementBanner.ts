@@ -1,28 +1,41 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from 'gatsby'
 
 export default () => {
   const data: {
-    prismicAnnouncementBanner: {
-      data: {
-        the_announcement: {
-          html: string
+    allPrismicAnnouncementBanner: {
+      nodes: {
+        lang: string
+        data: {
+          the_announcement: {
+            html: string
+          }
         }
-      }
+      }[]
     }
   } = useStaticQuery(graphql`
     {
-      prismicAnnouncementBanner {
-        data {
-          the_announcement {
-            html
+      allPrismicAnnouncementBanner {
+        nodes {
+          lang
+          data {
+            the_announcement {
+              html
+            }
           }
         }
       }
     }
   `)
-  if (!data.prismicAnnouncementBanner) {
+  if (!data.allPrismicAnnouncementBanner) {
     return null
   }
-  const announcement = data.prismicAnnouncementBanner.data.the_announcement.html
+  const announcement: { [key in 'is' | 'en']: any } = {
+    is: data.allPrismicAnnouncementBanner.nodes.find(
+      node => node.lang === 'is'
+    ),
+    en: data.allPrismicAnnouncementBanner.nodes.find(
+      node => node.lang === 'en-us'
+    ),
+  }
   return announcement
 }

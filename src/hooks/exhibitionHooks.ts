@@ -28,6 +28,7 @@ const getAllExhibitions = () => {
         nodes {
           id
           uid
+          lang
           ...exhibitionFragmentFull
         }
       }
