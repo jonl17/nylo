@@ -4,6 +4,8 @@ require('dotenv').config({
 
 const { htmlSerializer } = require('./src/prismic/htmlSerializer')
 
+const DEFAULT_LANG = 'en-us'
+
 module.exports = {
   plugins: [
     `gatsby-plugin-sass`,

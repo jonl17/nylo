@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
+import { Language } from '~/lang'
 
 export default () => {
   const data: {
@@ -29,11 +30,11 @@ export default () => {
   if (!data.allPrismicAnnouncementBanner) {
     return null
   }
-  const announcement: { [key in 'is' | 'en']: any } = {
+  const announcement: { [key in Language]: any } = {
     is: data.allPrismicAnnouncementBanner.nodes.find(
       node => node.lang === 'is'
     ),
-    en: data.allPrismicAnnouncementBanner.nodes.find(
+    'en-us': data.allPrismicAnnouncementBanner.nodes.find(
       node => node.lang === 'en-us'
     ),
   }

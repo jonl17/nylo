@@ -34,13 +34,12 @@ const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
   )
 }
 
-const Overview = ({
-  name,
-  parameters,
-}: ProgramProps & { parentUrl: string }) => {
+const Overview = ({ name }: ProgramProps & { parentUrl: string }) => {
+  const { lang } = useContext(LanguageContext)
+
   const types: { [key: string]: OverViewItem[] } = {
-    AllNews: getAllNews(),
-    AllExhibitions: getAllExhibitions(),
+    AllNews: getAllNews(lang),
+    AllExhibitions: getAllExhibitions(lang),
   }
 
   const items = types[name]

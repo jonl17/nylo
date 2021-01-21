@@ -5,10 +5,12 @@ import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
+import { LanguageContext } from '~/context/LanguageContext'
 
 const Frontpage = ({}: {}) => {
-  const exhibition = useGetCurrentExhibition()
-  const latestNews = getLatestNews()
+  const { lang } = useContext(LanguageContext)
+  const exhibition = useGetCurrentExhibition(lang)
+  const latestNews = getLatestNews(lang)
 
   return (
     <>

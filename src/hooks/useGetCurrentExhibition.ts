@@ -2,13 +2,15 @@ import { graphql as gql, useStaticQuery } from 'gatsby'
 import '../fragments/exhibition/excerpt'
 import slugify from 'slugify'
 import { exhibitionIsOpen } from '~/utils'
+import { Language } from '~/lang'
 
-export default () => {
+export default (lang: Language = 'is') => {
   const data: {
     allPrismicExhibition: {
       nodes: {
         id: string
         uid: string
+        lang: Language
         data: {
           title: {
             text: string
@@ -29,20 +31,26 @@ export default () => {
         nodes {
           id
           uid
+          lang
           ...exhibitionExcerpt
         }
       }
     }
   `)
-  return data.allPrismicExhibition.nodes.find(node => {
-    if (
-      exhibitionIsOpen(new Date(node.data.opening), new Date(node.data.closing))
-    ) {
-      return {
-        id: node.id,
-        uid: slugify(node.uid),
-        ...node.data,
+  return data.allPrismicExhibition.nodes
+    .filter(node => node.lang === lang)
+    .find(node => {
+      if (
+        exhibitionIsOpen(
+          new Date(node.data.opening),
+          new Date(node.data.closing)
+        )
+      ) {
+        return {
+          id: node.id,
+          uid: slugify(node.uid),
+          ...node.data,
+        }
       }
-    }
-  })
+    })
 }

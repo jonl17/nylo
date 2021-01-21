@@ -1,14 +1,16 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import '~/fragments/exhibition/full'
+import { Language } from '~/lang'
 import { OverViewItem } from '~/types'
 import { formatDate } from '~/utils'
 
-const getAllExhibitions = () => {
+const getAllExhibitions = (lang: Language = 'is') => {
   const data: {
     allPrismicExhibition: {
       nodes: {
         id: string
         uid: string
+        lang: Language
         data: {
           opening: string
           closing: string
@@ -34,8 +36,9 @@ const getAllExhibitions = () => {
       }
     }
   `)
-  const exhibitions: OverViewItem[] = data.allPrismicExhibition.nodes.map(
-    node => {
+  const exhibitions: OverViewItem[] = data.allPrismicExhibition.nodes
+    .filter(node => node.lang === lang)
+    .map(node => {
       const { id, uid, data } = node
       return {
         id,
@@ -45,8 +48,7 @@ const getAllExhibitions = () => {
         featuredImage: data.featured_image,
         parentUrl: '/syningar/',
       }
-    }
-  )
+    })
   return exhibitions
 }
 
