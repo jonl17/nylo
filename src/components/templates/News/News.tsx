@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import CloseButton from '~/components/Site/CloseButton'
-import { navigate } from 'gatsby'
+import FeaturedImage from '~/components/Site/FeaturedImage'
 
 interface PageContext {
   bg: string
@@ -40,6 +40,7 @@ const News: React.FC<{
               childLink={{ text: news.title.text, url: `/frettir/${news.uid}` }}
             />
           </div>
+          {news.featuredImage && <FeaturedImage image={news.featuredImage} />}
           {data.prismicNews.data.body.map((slice, i) => (
             <SliceMapping key={i} slice={slice} />
           ))}

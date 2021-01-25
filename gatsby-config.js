@@ -4,8 +4,6 @@ require('dotenv').config({
 
 const { htmlSerializer } = require('./src/prismic/htmlSerializer')
 
-const DEFAULT_LANG = 'en-us'
-
 module.exports = {
   plugins: [
     `gatsby-plugin-sass`,
@@ -29,9 +27,13 @@ module.exports = {
         accessToken: process.env.GATSBY_PRISMIC_ACCESS_TOKEN,
         linkResolver: ({ node, key, value }) => doc => {
           if (doc.type === 'page') {
-            return `/${doc.id}`
+            if (doc.lang === 'en-us') {
+              return `/en-us/${doc.uid}`
+            } else return `/${doc.uid}`
           }
-          return `/`
+          if (doc.lang === 'en-us') {
+            return `/en-us`
+          } else return '/'
         },
         fetchLinks: [
           // Your list of links

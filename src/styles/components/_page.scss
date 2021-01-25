@@ -33,4 +33,9 @@
   &__has-submenu {
     padding-left: 250px;
   }
+
+  &__featured-image {
+    max-height: 500px;
+    width: auto;
+  }
 }
