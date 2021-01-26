@@ -34,7 +34,7 @@
     "background_color": {
       "type": "Select",
       "config": {
-        "options": ["White", "Green", "Gray"],
+        "options": ["White", "Green", "Gray", "Purple", "Pink", "Yellow"],
         "default_value": "White",
         "label": "Bakgrunns litur"
       }

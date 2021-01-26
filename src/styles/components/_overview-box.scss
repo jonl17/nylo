@@ -7,14 +7,15 @@
 
   &__featured-image {
     object-fit: cover;
-    height: 300px;
+    height: 100%;
     width: 100%;
   }
 
   @include media-breakpoint-up('lg') {
     &:hover {
-      background: $gray;
-      cursor: pointer;
+      button {
+        background: $black;
+      }
     }
   }
 }

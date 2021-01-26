@@ -3,7 +3,7 @@ import { graphql, navigate } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
 import cn from 'classnames'
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from '~/types'
-import { Match } from '@reach/router'
+import { Match, useLocation } from '@reach/router'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
@@ -42,7 +42,7 @@ export const PageCtx = createContext<{ lastVisitedUrl: string }>({
   lastVisitedUrl: '/',
 })
 
-const Page: React.FC<Props> = ({ data }) => {
+const Page: React.FC<Props> = ({ data, pageContext }) => {
   const { background_color } = data.prismicPage.data
 
   const findColor = (color: BGcolor) => {
@@ -55,13 +55,33 @@ const Page: React.FC<Props> = ({ data }) => {
 
   const slices = data.prismicPage.data.body
 
+  const { pathname } = useLocation()
+
+  const findSubmenu = (p: string) => {
+    return `${p.replace('/', '')}`
+  }
+
+  const findRightMatch = () => {
+    if (pathname.includes('/heimsokn')) {
+      return '/heimsokn/*'
+    }
+    if (pathname.includes('/um-nylo')) {
+      return '/um-nylo/*'
+    }
+    if (pathname.includes('/safneign')) {
+      return '/safneign/*'
+    } else return ''
+  }
+
   const Wrapper: React.FC = ({ children }) => (
-    <Match path='/um-nylo/*'>
+    <Match path={findRightMatch()}>
       {props => (
         <div>
           {props.match ? (
             <>
-              <SecondaryNavbar submenu='um-nylo' />
+              <SecondaryNavbar
+                submenu={pageContext.subpageOf || findSubmenu(pathname)}
+              />
               <div
                 className={cn(
                   findColor(background_color),

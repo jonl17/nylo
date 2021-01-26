@@ -1,21 +1,24 @@
+$offset: calc(#{$spacer * 2} + #{$banner-height});
+
 .frontpage-object {
-  &__children {
-    display: inline-block;
-    h1 {
-      margin-bottom: 0;
+  &--current-exhibition {
+    height: calc(100vh - #{$offset});
+
+    &__img {
+      height: 100%;
+      position: relative;
+
+      img {
+        position: absolute;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
 
-  &__img {
+  img {
+    max-height: 500px;
     object-fit: contain;
-    max-height: 400px;
-    width: 100%;
-    height: 100%;
-    @extend .fadeIn;
-  }
-
-  &__heading {
-    text-decoration: underline;
   }
 
   &--news {
@@ -28,9 +31,5 @@
     &:not(:last-of-type) {
       margin-right: $spacer * 3;
     }
-  }
-
-  &--exhibition {
-    text-align: left;
   }
 }

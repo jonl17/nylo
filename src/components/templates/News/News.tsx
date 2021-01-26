@@ -40,7 +40,9 @@ const News: React.FC<{
               childLink={{ text: news.title.text, url: `/frettir/${news.uid}` }}
             />
           </div>
-          {news.featuredImage && <FeaturedImage image={news.featuredImage} />}
+          {news.featuredImage.url && (
+            <FeaturedImage image={news.featuredImage} />
+          )}
           {data.prismicNews.data.body.map((slice, i) => (
             <SliceMapping key={i} slice={slice} />
           ))}

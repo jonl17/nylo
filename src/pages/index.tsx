@@ -1,60 +1,49 @@
 import React, { useContext } from 'react'
-import FrontpageObject from '~/components/Site/FrontpageObject'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
 import { LanguageContext } from '~/context/LanguageContext'
+import Overview from '~/components/Site/Overview'
 
 const Frontpage = ({}: {}) => {
   const { lang } = useContext(LanguageContext)
-  const exhibition = useGetCurrentExhibition(lang)
-  const latestNews = getLatestNews(lang)
+  const currentExhibition = useGetCurrentExhibition()
+  const latestNews = getLatestNews()
 
   return (
-    <>
-      {exhibition && (
-        <Link
-          to={`/syningar/${slugify(exhibition.uid)}`}
-          className='col-10 w-100 mt-3 mb-5 pl-3 d-flex flex-column frontpage-object--exhibition removeGenericButtonStyles'
-        >
-          <FrontpageObject image={exhibition.data.featured_image}>
-            <h1>{multipleArtistsHandler(exhibition.data.artist)}</h1>
-            <h1 className='font-italic'>{exhibition.data.title.text}</h1>
-            <h1>
-              {formatDate(exhibition.data.opening, exhibition.data.closing)}
-            </h1>
-          </FrontpageObject>
-        </Link>
-      )}
-      {!!latestNews.length && (
-        <div className='mt-3 mb-5 pl-3'>
-          <h1 className='frontpage-object__heading mb-2'>Fréttir</h1>
-          <div className='d-flex'>
-            {latestNews.map((x, y) => (
-              <Link
-                key={y}
-                to={`/frettir/${slugify(x.uid)}`}
-                className='frontpage-object--news'
-              >
-                <FrontpageObject image={x.featuredImage} imageClass='w-100'>
-                  <p className='mb-1 mt-2'>{x.date}</p>
-                  <h1>{x.title.text}</h1>
-                </FrontpageObject>
-              </Link>
-            ))}
-          </div>
+    <div className='page page__frontpage position-relative p-3'>
+      {currentExhibition && (
+        <div className='col-lg-8 p-0 frontpage-object--current-exhibition'>
+          <Link
+            className='h-100 d-inline-flex flex-column'
+            to={`/syningar/${slugify(currentExhibition.uid)}`}
+          >
+            <div className='frontpage-object__heading mb-3'>
+              <h1>{multipleArtistsHandler(currentExhibition.data.artist)}</h1>
+              <h1 className='font-italic'>
+                {currentExhibition.data.title.text}
+              </h1>
+              <h1>
+                {formatDate(
+                  currentExhibition.data.opening,
+                  currentExhibition.data.closing
+                )}
+              </h1>
+            </div>
+            <div className='frontpage-object--current-exhibition__img'>
+              <img
+                src={currentExhibition.data.featured_image.url}
+                alt={currentExhibition.data.featured_image.alt}
+              />
+            </div>
+          </Link>
         </div>
       )}
-    </>
-  )
-}
-
-export default () => {
-  return (
-    <div className='page page__frontpage position-relative'>
-      <Frontpage />
+      {latestNews && <Overview name='LatestNews' />}
     </div>
   )
 }
+
+export default Frontpage

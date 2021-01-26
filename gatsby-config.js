@@ -4,6 +4,8 @@ require('dotenv').config({
 
 const { htmlSerializer } = require('./src/prismic/htmlSerializer')
 
+const DEFAULT_LANG = 'is'
+
 module.exports = {
   plugins: [
     `gatsby-plugin-sass`,
@@ -27,12 +29,7 @@ module.exports = {
         accessToken: process.env.GATSBY_PRISMIC_ACCESS_TOKEN,
         linkResolver: ({ node, key, value }) => doc => {
           if (doc.type === 'page') {
-            if (doc.lang === 'en-us') {
-              return `/en-us/${doc.uid}`
-            } else return `/${doc.uid}`
-          }
-          if (doc.lang === 'en-us') {
-            return `/en-us`
+            return `/${doc.uid}`
           } else return '/'
         },
         fetchLinks: [
@@ -53,7 +50,7 @@ module.exports = {
           sidebar: require(`./src/schemas/sidebar.json`),
           footer: require(`./src/schemas/footer.json`),
         },
-        lang: '*',
+        lang: DEFAULT_LANG,
         prismicToolbar: true,
         shouldDownloadImage: ({ node, key, value }) => {
           // Return true to download the image or false to skip.

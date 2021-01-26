@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { getAllNews } from '~/hooks/newsHooks'
+import { getAllNews, getLatestNews } from '~/hooks/newsHooks'
 import { OverViewItem } from '~/types'
 import slugify from 'slugify'
 import ButtonLink from '~/components/Site/ButtonLink'
@@ -12,8 +12,8 @@ import { Link } from 'gatsby'
 const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
   const { lang } = useContext(LanguageContext)
   return (
-    <div className='col-xl-6 mb-4'>
-      <div className='overview-box mr-1'>
+    <div className='col-xl-6 p-0'>
+      <div className='overview-box mb-1 mr-1'>
         <Link to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}>
           {item.featuredImage.url && (
             <img
@@ -38,8 +38,9 @@ const Overview = ({ name }: ProgramProps & { parentUrl: string }) => {
   const { lang } = useContext(LanguageContext)
 
   const types: { [key: string]: OverViewItem[] } = {
-    AllNews: getAllNews(lang),
-    AllExhibitions: getAllExhibitions(lang),
+    AllNews: getAllNews(),
+    AllExhibitions: getAllExhibitions(),
+    LatestNews: getAllNews().slice(0, 2),
   }
 
   const items = types[name]
