@@ -36,6 +36,7 @@ interface Props {
   pageContext: {
     id: string
     parentPageUid?: string
+    subpageOf?: string
   }
 }
 

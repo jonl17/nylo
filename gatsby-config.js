@@ -49,6 +49,7 @@ module.exports = {
           exhibition: require(`./src/schemas/exhibition.json`),
           sidebar: require(`./src/schemas/sidebar.json`),
           footer: require(`./src/schemas/footer.json`),
+          opening_hours: require(`./src/schemas/opening_hours.json`),
         },
         lang: DEFAULT_LANG,
         prismicToolbar: true,

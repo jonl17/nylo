@@ -1,0 +1,37 @@
+{
+  "Main": {
+    "main_opening_hours": {
+      "type": "Text",
+      "config": {
+        "label": "Main opening hours"
+      }
+    },
+    "day_from": {
+      "type": "Select",
+      "config": {
+        "options": ["Sun", "Mán", "Þrið", "Mið", "Fimmt", "Föst", "Laug"],
+        "default_value": "Sun",
+        "label": "Day from"
+      }
+    },
+    "day_to": {
+      "type": "Select",
+      "config": {
+        "options": ["Sun", "Mán", "Þrið", "Mið", "Fimmt", "Föst", "Laug"],
+        "label": "Day to"
+      }
+    },
+    "time_from": {
+      "type": "Number",
+      "config": {
+        "label": "Time from"
+      }
+    },
+    "time_to": {
+      "type": "Number",
+      "config": {
+        "label": "Time to"
+      }
+    }
+  }
+}

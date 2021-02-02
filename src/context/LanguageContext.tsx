@@ -13,7 +13,7 @@ const LanguageProvider: React.FC = ({ children }) => {
   const [lang, setLang] = useState<Language>('is')
 
   const modify = () => {
-    setLang(prev => (prev === 'is' ? 'en-us' : 'is'))
+    setLang(prev => (prev === 'is' ? 'en' : 'is'))
   }
 
   return (

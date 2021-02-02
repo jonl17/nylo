@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageProps, graphql as gql } from 'gatsby'
-import { NewsItem, NewsQuery } from '~/types'
+import { NewsQuery } from '~/types'
 import SliceMapping from '~/components/Slices/mapping'
 import '~/fragments/news'
 import { Helmet } from 'react-helmet'
@@ -20,7 +20,7 @@ const News: React.FC<{
   pageContext: PageProps & PageContext
   data: NewsQuery
 }> = ({ data, pageContext }) => {
-  const news: NewsItem = {
+  const news: any = {
     id: data.prismicNews.id,
     uid: data.prismicNews.uid,
     title: data.prismicNews.data.title,

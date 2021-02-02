@@ -31,14 +31,6 @@ const Footer = () => {
 
         {/* block */}
         <div className={blockClass}>
-          <div>
-            <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
-            <div dangerouslySetInnerHTML={{ __html: data.openingHours.html }} />
-          </div>
-        </div>
-
-        {/* block */}
-        <div className={blockClass}>
           <div className='pb-3'>
             <h3>+354 551 4350</h3>
             <h3>nylo(at)nylo.is</h3>
