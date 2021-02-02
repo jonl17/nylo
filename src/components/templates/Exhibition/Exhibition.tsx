@@ -69,7 +69,7 @@ const Exhibition = ({
       <Helmet>
         <title>{`Living Art Museum—Sýningar—${pageContext.title.text}`}</title>
       </Helmet>
-      <div className={`page bg--${pageContext.bg}`}>
+      <div className='page'>
         <div className='content'>
           <CloseButton className='icon__exit' />
           <div className='d-flex align-items-center'>
@@ -111,7 +111,7 @@ const Exhibition = ({
           {!readMore && (
             <Button
               className='mt-2'
-              label={langSeek('Read more', lang)}
+              label={langSeek('Read more', lang) ?? 'is'}
               onClick={() => setReadMore(true)}
             ></Button>
           )}

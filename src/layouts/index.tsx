@@ -5,14 +5,16 @@ import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
 import Footer from '~/components/Site/Footer'
-
+import { bgSetter } from '~/utils'
+import { useLocation } from '@reach/router'
 interface Props extends PageProps {
   pageContext: {
     hasSubmenu: null | string
   }
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children, pageContext }) => {
+  const { pathname } = useLocation()
   return (
     <>
       <Helmet>
@@ -22,7 +24,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 
       <main id='main-wrapper'>
         <NavBar />
-        {children}
+        <div className={bgSetter(pathname)}>{children}</div>
         <Footer />
       </main>
 

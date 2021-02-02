@@ -117,6 +117,7 @@ exports.createPages = async ({ graphql, actions }) => {
         id: node.id,
         subpageOf: node.data.subpage.uid,
         hasSubmenu: displaySubmenu(),
+        uid: node.data.subpage.uid ?? node.uid,
       },
     })
   }) +
@@ -128,7 +129,7 @@ exports.createPages = async ({ graphql, actions }) => {
         context: {
           id: node.id,
           date: node.data.date,
-          bg: 'gray',
+          uid: node.uid,
         },
       })
     })
@@ -140,7 +141,6 @@ exports.createPages = async ({ graphql, actions }) => {
       component: exhibitionTemplate,
       context: {
         id: node.id,
-        bg: 'white',
         title: node.data.title,
         uid: node.uid,
       },

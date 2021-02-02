@@ -1,13 +1,14 @@
 import React, { createContext } from 'react'
 import { graphql, navigate } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
-import cn from 'classnames'
 import { BGcolor, RichTextSliceType, ImageReelSliceType } from '~/types'
 import { Match, useLocation } from '@reach/router'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
 import { Helmet } from 'react-helmet'
+import { cleanPathname } from '~/utils'
+import cn from 'classnames'
 
 interface Props {
   data: {
@@ -43,23 +44,9 @@ export const PageCtx = createContext<{ lastVisitedUrl: string }>({
 })
 
 const Page: React.FC<Props> = ({ data, pageContext }) => {
-  const { background_color } = data.prismicPage.data
-
-  const findColor = (color: BGcolor) => {
-    if (color) {
-      return `bg--${color.toLowerCase()}`
-    } else {
-      return `bg--white`
-    }
-  }
-
   const slices = data.prismicPage.data.body
 
   const { pathname } = useLocation()
-
-  const findSubmenu = (p: string) => {
-    return `${p.replace('/', '')}`
-  }
 
   const findRightMatch = () => {
     if (pathname.includes('/heimsokn')) {
@@ -73,33 +60,26 @@ const Page: React.FC<Props> = ({ data, pageContext }) => {
     } else return ''
   }
 
-  const Wrapper: React.FC = ({ children }) => (
-    <Match path={findRightMatch()}>
-      {props => (
-        <div>
-          {props.match ? (
-            <>
-              <SecondaryNavbar
-                submenu={pageContext.subpageOf || findSubmenu(pathname)}
-              />
-              <div
-                className={cn(
-                  findColor(background_color),
-                  'page page__has-submenu'
-                )}
-              >
-                {children}
-              </div>
-            </>
-          ) : (
-            <div className={cn(findColor(background_color), 'page')}>
-              {children}
-            </div>
-          )}
-        </div>
-      )}
-    </Match>
-  )
+  const Wrapper: React.FC = ({ children }) => {
+    return (
+      <Match path={findRightMatch()}>
+        {props => (
+          <>
+            {props.match ? (
+              <>
+                <SecondaryNavbar
+                  submenu={pageContext.subpageOf || cleanPathname(pathname)}
+                />
+                <div className='page page__has-submenu'>{children}</div>
+              </>
+            ) : (
+              <div className='page'>{children}</div>
+            )}
+          </>
+        )}
+      </Match>
+    )
+  }
 
   return (
     <>

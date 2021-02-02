@@ -56,3 +56,14 @@ export const exhibitionIsOpen = (
   closing: Date,
   tday = new Date()
 ) => tday >= opening && tday <= closing
+
+export const bgSetter = (pathname: string) => {
+  if (pathname.includes('/frettir')) return 'bg--purple'
+  else if (pathname.includes('/syningar')) return 'bg--gray'
+  else if (pathname.includes('/um-nylo')) return 'bg--green'
+  else if (pathname.includes('/heimsokn')) return 'bg--yellow'
+  else if (pathname.includes('/safneign')) return 'bg--pink'
+  else return 'bg--white'
+}
+
+export const cleanPathname = (p: string) => `${p.replace('/', '')}`

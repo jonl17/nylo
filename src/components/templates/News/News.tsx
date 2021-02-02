@@ -8,6 +8,9 @@ import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import CloseButton from '~/components/Site/CloseButton'
 import FeaturedImage from '~/components/Site/FeaturedImage'
+import { bgSetter } from '~/utils'
+import cn from 'classnames'
+import { useLocation } from '@reach/router'
 
 interface PageContext {
   bg: string
@@ -25,12 +28,14 @@ const News: React.FC<{
     featuredImage: data.prismicNews.data.featured_image,
   }
 
+  const { pathname } = useLocation()
+
   return (
     <>
       <Helmet>
         <title>Living Art Museum—Fréttir</title>
       </Helmet>
-      <div className={`page bg--${pageContext.bg}`}>
+      <div className='page'>
         <div className='content'>
           <CloseButton className='icon__exit' />
           <div className='d-flex align-items-center'>
