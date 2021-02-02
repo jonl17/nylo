@@ -24,7 +24,6 @@ interface Props {
         subpage: {
           uid?: string
         }
-        background_color: BGcolor
         body: {
           __typename: string
           primary: RichTextSliceType
@@ -116,7 +115,6 @@ export const query = graphql`
         title {
           text
         }
-        background_color
         body {
           ... on PrismicPageBodyProgram {
             slice_type
