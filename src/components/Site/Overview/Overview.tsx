@@ -39,7 +39,7 @@ const Overview = ({ name }: ProgramProps & { parentUrl: string }) => {
 
   const types: { [key: string]: OverViewItem[] } = {
     AllNews: getAllNews(),
-    AllExhibitions: getAllExhibitions(),
+    AllExhibitions: getAllExhibitions(lang),
     LatestNews: getAllNews().slice(0, 2),
   }
 

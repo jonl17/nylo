@@ -51,7 +51,8 @@ module.exports = {
           footer: require(`./src/schemas/footer.json`),
           opening_hours: require(`./src/schemas/opening_hours.json`),
         },
-        lang: DEFAULT_LANG,
+        lang: '*',
+
         prismicToolbar: true,
         shouldDownloadImage: ({ node, key, value }) => {
           // Return true to download the image or false to skip.
