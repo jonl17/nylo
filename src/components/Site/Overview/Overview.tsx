@@ -38,9 +38,9 @@ const Overview = ({ name }: ProgramProps & { parentUrl: string }) => {
   const { lang } = useContext(LanguageContext)
 
   const types: { [key: string]: OverViewItem[] } = {
-    AllNews: getAllNews(),
+    AllNews: getAllNews(lang),
     AllExhibitions: getAllExhibitions(lang),
-    LatestNews: getAllNews().slice(0, 2),
+    LatestNews: getLatestNews(lang),
   }
 
   const items = types[name]
