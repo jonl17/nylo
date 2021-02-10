@@ -7,6 +7,8 @@ import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
 import { Helmet } from 'react-helmet'
 import '~/fragments/menu'
 import cn from 'classnames'
+import { useLocation } from '@reach/router'
+import Frontpage from '~/components/Site/Frontpage'
 
 import { LanguageContext } from '~/context/LanguageContext'
 
@@ -17,9 +19,8 @@ export const PageCtx = createContext<{ lastVisitedUrl: string }>({
 const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
   const slices = data.prismicPage.data.body
 
-  const { lang } = useContext(LanguageContext)
-
   const { data: pageData } = data.prismicPage
+  console.log(pageContext)
 
   const Wrapper: React.FC = ({ children }) => (
     <Fragment>
@@ -36,6 +37,12 @@ const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
     </Fragment>
   )
 
+  const { pathname } = useLocation()
+
+  const { lang } = pageContext
+
+  const IS_FRONTPAGE = pathname === '/' || pathname === '/en'
+
   return (
     <>
       <Helmet>
@@ -43,14 +50,20 @@ const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
       </Helmet>
       <Wrapper>
         <div className='content'>
-          <CloseButton
-            goTo={() => navigate(lang === 'en-us' ? '/en' : '/')}
-            className='icon__exit'
-          />
-          {slices &&
-            slices.map((slice: any, idx: number) => (
-              <SliceMapping key={idx} slice={slice} />
-            ))}
+          {!IS_FRONTPAGE ? (
+            <>
+              <CloseButton
+                goTo={() => navigate(lang === 'en-us' ? '/en' : '/')}
+                className='icon__exit'
+              />
+              {slices &&
+                slices.map((slice: any, idx: number) => (
+                  <SliceMapping key={idx} slice={slice} />
+                ))}
+            </>
+          ) : (
+            <Frontpage lang={lang} />
+          )}
         </div>
       </Wrapper>
     </>
@@ -62,6 +75,7 @@ export default Page
 export const query = graphql`
   query($id: String!) {
     prismicPage(id: { eq: $id }) {
+      lang
       tags
       data {
         has_submenu {

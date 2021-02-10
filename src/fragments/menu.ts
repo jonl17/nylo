@@ -8,8 +8,16 @@ export const fragment = graphql`
       items {
         page {
           uid
+          url
           document {
             ... on PrismicPage {
+              alternate_languages {
+                document {
+                  ... on PrismicPage {
+                    url
+                  }
+                }
+              }
               data {
                 title {
                   text

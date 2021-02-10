@@ -24,9 +24,4 @@ export interface MenuItem {
 
 export type IconType = 'Exit'
 
-export interface ProgramProps {
-  name: string
-  parameters: { label: string; value: string }[]
-}
-
 export type OverViewType = 'AllNews' | 'AllExhibitions'

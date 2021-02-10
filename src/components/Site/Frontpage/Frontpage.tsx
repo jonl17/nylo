@@ -1,19 +1,22 @@
-import React, { useContext } from 'react'
+import React, { Fragment } from 'react'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
-import { LanguageContext } from '~/context/LanguageContext'
 import Overview from '~/components/Site/Overview'
+import { Language } from '~/lang'
 
-const Frontpage = ({}: {}) => {
-  const { lang } = useContext(LanguageContext)
+interface Props {
+  lang: Language
+}
+
+export default ({ lang = 'is' }: Props) => {
   const currentExhibition = useGetCurrentExhibition(lang)
   const latestNews = getLatestNews(lang)
 
   return (
-    <div className='page page__frontpage position-relative p-3'>
+    <Fragment>
       {currentExhibition && (
         <div className='col-lg-8 p-0 frontpage-object--current-exhibition'>
           <Link
@@ -41,9 +44,7 @@ const Frontpage = ({}: {}) => {
           </Link>
         </div>
       )}
-      {latestNews && <Overview name='LatestNews' />}
-    </div>
+      {/* {latestNews && <Overview name='LatestNews' />} */}
+    </Fragment>
   )
 }
-
-export default Frontpage

@@ -21,6 +21,13 @@ const useMenuQuery = (lang: Language = 'is') => {
                 document {
                   __typename
                   ... on PrismicPage {
+                    alternate_languages {
+                      document {
+                        ... on PrismicPage {
+                          url
+                        }
+                      }
+                    }
                     uid
                     url
                     data {
@@ -52,6 +59,7 @@ const useMenuQuery = (lang: Language = 'is') => {
         ? {
             url: item.page.url,
             name: item.page.document.data.title.text,
+            altLangs: item.page.document.alternate_languages,
           }
         : null,
     }

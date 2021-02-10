@@ -3,11 +3,11 @@ import { getAllNews, getLatestNews } from '~/hooks/newsHooks'
 import { OverViewItem } from '~/types'
 import slugify from 'slugify'
 import ButtonLink from '~/components/Site/ButtonLink'
-import { ProgramProps } from '../NavBar/types'
 import { getAllExhibitions } from '~/hooks/exhibitionHooks'
 import { LanguageContext } from '~/context/LanguageContext'
 import { langSeek } from '~/lang'
 import { Link } from 'gatsby'
+import { ProgramProps } from '~/components/Slices/Program/Program'
 
 const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
   const { lang } = useContext(LanguageContext)
@@ -38,7 +38,7 @@ const Overview = ({ name }: ProgramProps & { parentUrl: string }) => {
   const { lang } = useContext(LanguageContext)
 
   const types: { [key: string]: OverViewItem[] } = {
-    AllNews: getAllNews(lang),
+    AllNews: getAllNews(),
     AllExhibitions: getAllExhibitions(lang),
     LatestNews: getLatestNews(lang),
   }

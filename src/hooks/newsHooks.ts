@@ -21,7 +21,7 @@ interface NewsQueryNode {
   }
 }
 
-const getAllNews = (lang: Language = 'is') => {
+const getAllNews = () => {
   const data: {
     allPrismicNews: {
       nodes: NewsQueryNode[]
@@ -35,19 +35,17 @@ const getAllNews = (lang: Language = 'is') => {
       }
     }
   `)
-  const allNews: OverViewItem[] = data.allPrismicNews.nodes
-    .filter(node => node.lang === lang)
-    .map(node => {
-      return {
-        id: node.id,
-        uid: slugify(node.uid),
-        lang: node.lang,
-        featuredImage: node.data.featured_image,
-        title: node.data.title,
-        date: formatDate(node.data.date),
-        parentUrl: '/frettir/',
-      }
-    })
+  const allNews: OverViewItem[] = data.allPrismicNews.nodes.map(node => {
+    return {
+      id: node.id,
+      uid: slugify(node.uid),
+      lang: node.lang,
+      featuredImage: node.data.featured_image,
+      title: node.data.title,
+      date: formatDate(node.data.date),
+      parentUrl: '/frettir/',
+    }
+  })
   return allNews
 }
 

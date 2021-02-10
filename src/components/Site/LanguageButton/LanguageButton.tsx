@@ -12,7 +12,7 @@ const LanguageButton = () => {
       className='btn__language'
       label={lang === 'is' ? 'ENG' : 'ÍSL'}
       onClick={() => {
-        navigate(lang === 'is' ? '/en/' : '/')
+        navigate(lang === 'is' ? '/en' : '/')
         modify()
       }}
     ></Button>

@@ -41,6 +41,13 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
+          alternate_languages {
+            document {
+              ... on PrismicPage {
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -110,6 +117,7 @@ exports.createPages = async ({ graphql, actions }) => {
         uid: node.uid,
         lang: node.lang,
         url: node.url,
+        alternateLanguages: node.alternate_languages,
       },
     })
   })
