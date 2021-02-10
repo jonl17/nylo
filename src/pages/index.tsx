@@ -9,8 +9,8 @@ import Overview from '~/components/Site/Overview'
 
 const Frontpage = ({}: {}) => {
   const { lang } = useContext(LanguageContext)
-  const currentExhibition = useGetCurrentExhibition()
-  const latestNews = getLatestNews()
+  const currentExhibition = useGetCurrentExhibition(lang)
+  const latestNews = getLatestNews(lang)
 
   return (
     <div className='page page__frontpage position-relative p-3'>
@@ -18,7 +18,7 @@ const Frontpage = ({}: {}) => {
         <div className='col-lg-8 p-0 frontpage-object--current-exhibition'>
           <Link
             className='h-100 d-inline-flex flex-column'
-            to={`/syningar/${slugify(currentExhibition.uid)}`}
+            to={`/syningar${slugify(currentExhibition.url)}`}
           >
             <div className='frontpage-object__heading mb-3'>
               <h1>{multipleArtistsHandler(currentExhibition.data.artist)}</h1>

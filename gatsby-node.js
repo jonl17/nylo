@@ -11,6 +11,8 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           uid
           tags
+          lang
+          url
           data {
             subpage {
               uid
@@ -50,6 +52,7 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           id
           uid
+          lang
           data {
             date
           }
@@ -64,6 +67,7 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           id
           uid
+          lang
           data {
             title {
               text
@@ -90,49 +94,38 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // pages
   pages.data.allPrismicPage.nodes.forEach(node => {
-    let path = `/${node.uid}`
-
-    if (node.uid === 'frontpage') {
-      path = `/`
-    } else if (node.tags.includes('SUB_PAGE') && node.data.subpage.uid) {
-      path = `/${node.data.subpage.uid}/${node.uid}`
-    }
-
     const displaySubmenu = () => {
       if (node.data.has_submenu.document) {
         return node.data.has_submenu.document.id
-      } else if (node.tags.includes('SUB_PAGE')) {
-        if (node.data.subpage.document.data.has_submenu.document) {
-          return node.data.subpage.document.data.has_submenu.document.id
-        }
-      } else {
-        return null
-      }
+      } else return null
     }
 
     createPage({
-      path: path,
+      path: node.url,
       component: pageTemplate,
       context: {
         id: node.id,
         subpageOf: node.data.subpage.uid,
         hasSubmenu: displaySubmenu(),
-        uid: node.data.subpage.uid ?? node.uid,
+        uid: node.uid,
+        lang: node.lang,
+        url: node.url,
       },
     })
-  }) +
-    // news
-    news.data.allPrismicNews.nodes.forEach(node => {
-      createPage({
-        path: `/frettir/${slugify(node.uid)}`,
-        component: newsTemplate,
-        context: {
-          id: node.id,
-          date: node.data.date,
-          uid: node.uid,
-        },
-      })
+  })
+  // news
+  news.data.allPrismicNews.nodes.forEach(node => {
+    createPage({
+      path: `/frettir/${slugify(node.uid)}`,
+      component: newsTemplate,
+      context: {
+        id: node.id,
+        date: node.data.date,
+        uid: node.uid,
+        lang: node.lang,
+      },
     })
+  })
 
   // exhibtions
   exhibitions.data.allPrismicExhibition.nodes.forEach(node => {
@@ -143,6 +136,7 @@ exports.createPages = async ({ graphql, actions }) => {
         id: node.id,
         title: node.data.title,
         uid: node.uid,
+        lang: node.lang,
       },
     })
   })

@@ -1,5 +1,5 @@
 export const linkResolver = doc => {
-  if (doc.type === "page") {
+  if (doc.type === 'page') {
     return `/${doc.id}`
   }
 

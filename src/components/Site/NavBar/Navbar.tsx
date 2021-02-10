@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import useMenuQuery from './useMenuQuery'
 import useSidebarQuery from './useSidebarQuery'
-import { langSeek } from 'balkan-tungumal'
 import { LanguageContext } from '~/context/LanguageContext'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
 
 const Menu = () => {
-  const mainMenu = useMenuQuery()
+  const { lang } = useContext(LanguageContext)
+  const mainMenu = useMenuQuery(lang)
   return (
     <div>
       {mainMenu &&
@@ -18,7 +18,7 @@ const Menu = () => {
                 activeClassName='navbar__anchor--active'
                 partiallyActive
                 key={idx}
-                to={`/${item.page.url}`}
+                to={item.page.url}
                 className='navbar__anchor'
               >
                 <span />

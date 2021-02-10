@@ -1,92 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { useLocation, Match } from '@reach/router'
 import cn from 'classnames'
+import { LanguageContext } from '~/context/LanguageContext'
+import { MenuItem } from '../NavBar/types'
+import useGetSecondaryNavbars from './useGetSecondaryNavbars'
 
-const SecondaryNavBar: React.FC<{ submenu: string }> = ({ submenu }) => {
-  const data: {
-    allSubmenus: {
-      nodes: {
-        id: string
-        data: {
-          name: string
-          prefix: string
-          items: {
-            page: {
-              uid: string
-              document: {
-                data: {
-                  title: {
-                    text: string
-                  }
-                }
-              }
-            }
-          }[]
-        }
-      }[]
-    }
-  } = useStaticQuery(graphql`
-    {
-      allSubmenus: allPrismicMenu(filter: { tags: { in: ["SUBMENU"] } }) {
-        nodes {
-          id
-          data {
-            name
-            prefix
-            items {
-              page {
-                uid
-                document {
-                  ... on PrismicPage {
-                    data {
-                      title {
-                        text
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  const allSubmenus = data.allSubmenus.nodes.map(x => {
-    return {
-      id: x.id,
-      title: x.data.name,
-      prefix: x.data.prefix,
-      items: x.data.items.map(y => {
-        return {
-          title: y.page.document.data.title,
-          url: `/${x.data.prefix}/${y.page.uid}`,
-        }
-      }),
-    }
-  })
-
-  const menu = allSubmenus.find(menu => menu.prefix === submenu)
+const SecondaryNavBar: React.FC<{
+  submenu: { id: string; data: { name: string; items: any[] } }
+}> = ({ submenu }) => {
+  const menu = useGetSecondaryNavbars(submenu.id)
 
   const { pathname } = useLocation()
+
+  const { lang } = useContext(LanguageContext)
+
+  console.log(menu)
 
   if (!menu) return null
 
   return (
     <div className='secondary-navbar mt-3 ml-2 d-flex flex-column'>
-      <Match path={`/${submenu}`}>
-        {props => (
-          <Link
-            className={cn('secondary-navbar__anchor parag--2', {
-              ['secondaryAnchorActive']: props.match,
-            })}
-            to={`/${submenu}`}
-          >
-            {menu.title}
-          </Link>
-        )}
-      </Match>
       {menu.items.map((item, idx) => (
         <Link
           className={cn('secondary-navbar__anchor parag--2', {

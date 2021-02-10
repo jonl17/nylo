@@ -1,96 +1,54 @@
-import React, { createContext } from 'react'
+import React, { createContext, useContext, Fragment } from 'react'
 import { graphql, navigate } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
-import { BGcolor, RichTextSliceType, ImageReelSliceType } from '~/types'
-import { Match, useLocation } from '@reach/router'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
 import { Helmet } from 'react-helmet'
-import { cleanPathname } from '~/utils'
+import '~/fragments/menu'
 import cn from 'classnames'
 
-interface Props {
-  data: {
-    prismicPage: {
-      tags: string[]
-      data: {
-        has_submenu: {
-          id?: string
-        }
-        title: {
-          text: string
-        }
-        subpage: {
-          uid?: string
-        }
-        body: {
-          __typename: string
-          primary: RichTextSliceType
-          items: ImageReelSliceType[]
-        }[]
-      }
-    }
-  }
-  pageContext: {
-    id: string
-    parentPageUid?: string
-    subpageOf?: string
-  }
-}
+import { LanguageContext } from '~/context/LanguageContext'
 
 export const PageCtx = createContext<{ lastVisitedUrl: string }>({
   lastVisitedUrl: '/',
 })
 
-const Page: React.FC<Props> = ({ data, pageContext }) => {
+const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
   const slices = data.prismicPage.data.body
 
-  const { pathname } = useLocation()
+  const { lang } = useContext(LanguageContext)
 
-  const findRightMatch = () => {
-    if (pathname.includes('/heimsokn')) {
-      return '/heimsokn/*'
-    }
-    if (pathname.includes('/um-nylo')) {
-      return '/um-nylo/*'
-    }
-    if (pathname.includes('/safneign')) {
-      return '/safneign/*'
-    } else return ''
-  }
+  const { data: pageData } = data.prismicPage
 
-  const Wrapper: React.FC = ({ children }) => {
-    return (
-      <Match path={findRightMatch()}>
-        {props => (
-          <>
-            {props.match ? (
-              <>
-                <SecondaryNavbar
-                  submenu={pageContext.subpageOf || cleanPathname(pathname)}
-                />
-                <div className='page page__has-submenu'>{children}</div>
-              </>
-            ) : (
-              <div className='page'>{children}</div>
-            )}
-          </>
-        )}
-      </Match>
-    )
-  }
+  const Wrapper: React.FC = ({ children }) => (
+    <Fragment>
+      {pageData.has_submenu.document && (
+        <SecondaryNavbar submenu={pageData.has_submenu.document} />
+      )}
+      <div
+        className={cn('page', {
+          'page__has-submenu': pageData.has_submenu.document,
+        })}
+      >
+        {children}
+      </div>
+    </Fragment>
+  )
 
   return (
     <>
       <Helmet>
-        <title>{`Living Art Museum—${data.prismicPage.data.title.text}`}</title>
+        <title>{`Living Art Museum—${pageData.title.text}`}</title>
       </Helmet>
       <Wrapper>
         <div className='content'>
-          <CloseButton goTo={() => navigate('/')} className='icon__exit' />
+          <CloseButton
+            goTo={() => navigate(lang === 'en-us' ? '/en' : '/')}
+            className='icon__exit'
+          />
           {slices &&
-            slices.map((slice, idx) => (
+            slices.map((slice: any, idx: number) => (
               <SliceMapping key={idx} slice={slice} />
             ))}
         </div>
@@ -107,7 +65,9 @@ export const query = graphql`
       tags
       data {
         has_submenu {
-          id
+          document {
+            ...fragmentPrismicMenu
+          }
         }
         subpage {
           uid

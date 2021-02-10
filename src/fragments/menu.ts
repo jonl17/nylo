@@ -1,7 +1,8 @@
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby'
 
 export const fragment = graphql`
   fragment fragmentPrismicMenu on PrismicMenu {
+    id
     data {
       name
       items {
