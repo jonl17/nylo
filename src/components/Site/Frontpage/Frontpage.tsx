@@ -21,7 +21,7 @@ export default ({ lang = 'is' }: Props) => {
         <div className='col-lg-8 p-0 frontpage-object--current-exhibition'>
           <Link
             className='h-100 d-inline-flex flex-column'
-            to={`/syningar${slugify(currentExhibition.url)}`}
+            to={currentExhibition.url}
           >
             <div className='frontpage-object__heading mb-3'>
               <h1>{multipleArtistsHandler(currentExhibition.data.artist)}</h1>

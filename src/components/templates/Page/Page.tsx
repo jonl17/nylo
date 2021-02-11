@@ -1,4 +1,4 @@
-import React, { createContext, useContext, Fragment } from 'react'
+import React, { createContext, Fragment } from 'react'
 import { graphql, navigate } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
 import '~/fragments/media'
@@ -10,8 +10,6 @@ import cn from 'classnames'
 import { useLocation } from '@reach/router'
 import Frontpage from '~/components/Site/Frontpage'
 
-import { LanguageContext } from '~/context/LanguageContext'
-
 export const PageCtx = createContext<{ lastVisitedUrl: string }>({
   lastVisitedUrl: '/',
 })
@@ -20,7 +18,6 @@ const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
   const slices = data.prismicPage.data.body
 
   const { data: pageData } = data.prismicPage
-  console.log(pageContext)
 
   const Wrapper: React.FC = ({ children }) => (
     <Fragment>

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
 import { Helmet } from 'react-helmet'
@@ -13,18 +13,20 @@ const Layout: React.FC<{
     url: string
     alternateLanguage: string | null
     hasSubmenu: string
+    type?: 'news' | 'exhibition'
   }
 }> = ({ children, pageContext }) => {
   const { modify } = useContext(LanguageContext)
 
-  useMemo(() => {
+  useEffect(() => {
     if (pageContext.url.includes('/en/')) {
       modify('en-us')
     } else {
       modify('is')
     }
   }, [pageContext.url])
-  console.log(pageContext.url)
+
+  console.log(pageContext)
 
   return (
     <>
@@ -34,7 +36,7 @@ const Layout: React.FC<{
       </Helmet>
 
       <main id='main-wrapper'>
-        <NavBar />
+        <NavBar customPostType={pageContext.type} />
         <div className={bgSetter(pageContext)}>{children}</div>
         <Footer />
       </main>

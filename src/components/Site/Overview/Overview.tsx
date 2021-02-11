@@ -14,21 +14,19 @@ const Box: React.FC<{ item: OverViewItem }> = ({ item }) => {
   return (
     <div className='col-xl-6 p-0'>
       <div className='overview-box mb-1 mr-1'>
-        <Link to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}>
-          {item.featuredImage.url && (
-            <img
-              className='overview-box__featured-image'
-              src={item.featuredImage.url}
-              alt={item.featuredImage.alt}
-            />
-          )}
-          <p className='mb-1 mt-2'>{item.date}</p>
-          <h2 className='mb-2'>{item.title.text}</h2>
-          <ButtonLink
-            label={langSeek('Read more', lang)}
-            to={`${item.parentUrl}${slugify(item.uid, { lower: true })}`}
-          ></ButtonLink>
-        </Link>
+        {item.featuredImage.url && (
+          <img
+            className='overview-box__featured-image'
+            src={item.featuredImage.url}
+            alt={item.featuredImage.alt}
+          />
+        )}
+        <p className='mb-1 mt-2'>{item.date}</p>
+        <h2 className='mb-2'>{item.title.text}</h2>
+        <ButtonLink
+          label={langSeek('Read more', lang)}
+          to={item.url}
+        ></ButtonLink>
       </div>
     </div>
   )
@@ -38,7 +36,7 @@ const Overview = ({ name }: ProgramProps & { parentUrl: string }) => {
   const { lang } = useContext(LanguageContext)
 
   const types: { [key: string]: OverViewItem[] } = {
-    AllNews: getAllNews(),
+    AllNews: getAllNews(lang),
     AllExhibitions: getAllExhibitions(lang),
     LatestNews: getLatestNews(lang),
   }

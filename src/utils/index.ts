@@ -65,14 +65,19 @@ export const bgSetter = ({
   url,
   hasSubmenu,
   alternateLanguage,
+  type,
 }: {
   url: string
   hasSubmenu: string
   alternateLanguage: string | null
+  type?: 'news' | 'exhibition'
 }) => {
-  if (compareUrls(url, alternateLanguage, '/frettir')) {
+  if (compareUrls(url, alternateLanguage, '/frettir') || type === 'news') {
     return 'bg--purple'
-  } else if (compareUrls(url, alternateLanguage, '/syningar')) {
+  } else if (
+    compareUrls(url, alternateLanguage, '/syningar') ||
+    type === 'exhibition'
+  ) {
     return 'bg--gray'
   } else if (
     compareUrls(url, alternateLanguage, '/um-nylo') ||
@@ -80,9 +85,15 @@ export const bgSetter = ({
     hasSubmenu === 'About'
   ) {
     return 'bg--green'
-  } else if (url.includes('/heimsokn') || hasSubmenu === 'Heimsókn') {
+  } else if (
+    compareUrls(url, alternateLanguage, '/heimsokn') ||
+    hasSubmenu === 'Heimsókn'
+  ) {
     return 'bg--yellow'
-  } else if (url.includes('/safneign') || hasSubmenu === 'Safneign') {
+  } else if (
+    compareUrls(url, alternateLanguage, '/safneign') ||
+    hasSubmenu === 'Safneign'
+  ) {
     return 'bg--pink'
   } else {
     return 'bg--white'

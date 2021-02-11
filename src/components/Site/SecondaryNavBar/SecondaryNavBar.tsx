@@ -13,10 +13,6 @@ const SecondaryNavBar: React.FC<{
 
   const { pathname } = useLocation()
 
-  const { lang } = useContext(LanguageContext)
-
-  console.log(menu)
-
   if (!menu) return null
 
   return (

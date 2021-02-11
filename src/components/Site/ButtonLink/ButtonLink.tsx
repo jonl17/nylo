@@ -5,7 +5,7 @@ import cn from 'classnames'
 interface Props {
   to: string
   label?: string
-  className: string
+  className?: string
 }
 
 const ButtonLink = ({ to, label = '', className = '' }: Props) => {

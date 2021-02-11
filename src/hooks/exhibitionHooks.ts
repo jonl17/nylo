@@ -11,6 +11,7 @@ const getAllExhibitions = (lang: Language = 'is') => {
         id: string
         uid: string
         lang: string
+        url: string
         data: {
           opening: string
           closing: string
@@ -30,6 +31,7 @@ const getAllExhibitions = (lang: Language = 'is') => {
         nodes {
           id
           uid
+          url
           lang
           ...exhibitionFragmentFull
         }
@@ -39,10 +41,11 @@ const getAllExhibitions = (lang: Language = 'is') => {
   const exhibitions: OverViewItem[] = data.allPrismicExhibition.nodes
     .filter(node => node.lang === lang)
     .map(node => {
-      const { id, uid, data, lang } = node
+      const { id, uid, url, data, lang } = node
       return {
         id,
         uid,
+        url,
         lang,
         title: data.title,
         date: formatDate(data.opening, data.closing),

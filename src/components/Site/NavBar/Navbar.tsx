@@ -4,8 +4,13 @@ import useMenuQuery from './useMenuQuery'
 import useSidebarQuery from './useSidebarQuery'
 import { LanguageContext } from '~/context/LanguageContext'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
+import cn from 'classnames'
 
-const Menu = () => {
+const Menu = ({
+  customPostType,
+}: {
+  customPostType?: 'news' | 'exhibition'
+}) => {
   const { lang } = useContext(LanguageContext)
   const mainMenu = useMenuQuery(lang)
   return (
@@ -16,10 +21,13 @@ const Menu = () => {
             item.page && (
               <Link
                 activeClassName='navbar__anchor--active'
-                partiallyActive
                 key={idx}
                 to={item.page.url}
-                className='navbar__anchor'
+                className={cn('navbar__anchor', {
+                  'navbar__anchor--active':
+                    customPostType === 'news' &&
+                    item.page.name.toLowerCase() === 'news',
+                })}
               >
                 <span />
                 <h1>{item.page.name}</h1>
@@ -61,10 +69,14 @@ const Sidebar = () => {
   )
 }
 
-export default () => {
+export default ({
+  customPostType,
+}: {
+  customPostType?: 'news' | 'exhibition'
+}) => {
   return (
     <nav className='navbar d-flex flex-column pt-3 h-100' id='navbar'>
-      <Menu />
+      <Menu customPostType={customPostType} />
       <Sidebar />
     </nav>
   )

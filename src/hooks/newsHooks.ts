@@ -9,6 +9,7 @@ interface NewsQueryNode {
   id: string
   uid: string
   lang: string
+  url: string
   data: {
     featured_image: {
       alt: string
@@ -21,7 +22,7 @@ interface NewsQueryNode {
   }
 }
 
-const getAllNews = () => {
+const getAllNews = (lang: Language = 'is') => {
   const data: {
     allPrismicNews: {
       nodes: NewsQueryNode[]
@@ -35,17 +36,20 @@ const getAllNews = () => {
       }
     }
   `)
-  const allNews: OverViewItem[] = data.allPrismicNews.nodes.map(node => {
-    return {
-      id: node.id,
-      uid: slugify(node.uid),
-      lang: node.lang,
-      featuredImage: node.data.featured_image,
-      title: node.data.title,
-      date: formatDate(node.data.date),
-      parentUrl: '/frettir/',
-    }
-  })
+  const allNews: OverViewItem[] = data.allPrismicNews.nodes
+    .filter(node => node.lang === lang)
+    .map(node => {
+      return {
+        id: node.id,
+        uid: slugify(node.uid),
+        url: node.url,
+        lang: node.lang,
+        featuredImage: node.data.featured_image,
+        title: node.data.title,
+        date: formatDate(node.data.date),
+        parentUrl: '/frettir/',
+      }
+    })
   return allNews
 }
 

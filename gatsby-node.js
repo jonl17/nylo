@@ -60,6 +60,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           uid
           lang
+          url
           data {
             date
           }
@@ -75,6 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           uid
           lang
+          url
           data {
             title {
               text
@@ -127,13 +129,15 @@ exports.createPages = async ({ graphql, actions }) => {
   // news
   news.data.allPrismicNews.nodes.forEach(node => {
     createPage({
-      path: `/frettir/${slugify(node.uid)}`,
+      path: node.url,
       component: newsTemplate,
       context: {
         id: node.id,
         date: node.data.date,
         uid: node.uid,
         lang: node.lang,
+        url: node.url,
+        type: 'news',
       },
     })
   })
@@ -141,13 +145,15 @@ exports.createPages = async ({ graphql, actions }) => {
   // exhibtions
   exhibitions.data.allPrismicExhibition.nodes.forEach(node => {
     createPage({
-      path: `/syningar/${slugify(node.uid)}`,
+      path: node.url,
       component: exhibitionTemplate,
       context: {
         id: node.id,
         title: node.data.title,
         uid: node.uid,
         lang: node.lang,
+        url: node.url,
+        type: 'exhibition',
       },
     })
   })
