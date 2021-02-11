@@ -103,7 +103,7 @@ exports.createPages = async ({ graphql, actions }) => {
   pages.data.allPrismicPage.nodes.forEach(node => {
     const displaySubmenu = () => {
       if (node.data.has_submenu.document) {
-        return node.data.has_submenu.document.id
+        return node.data.has_submenu.document.data.name
       } else return null
     }
 
@@ -117,7 +117,10 @@ exports.createPages = async ({ graphql, actions }) => {
         uid: node.uid,
         lang: node.lang,
         url: node.url,
-        alternateLanguages: node.alternate_languages,
+        alternateLanguage:
+          node.alternate_languages.length > 0
+            ? node.alternate_languages[0].document.url
+            : null,
       },
     })
   })

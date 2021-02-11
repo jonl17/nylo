@@ -3,7 +3,7 @@ import { Language } from '~/lang'
 
 const LanguageContext = createContext<{
   lang: Language
-  modify(): void
+  modify(lang: Language): void
 }>({
   lang: 'is',
   modify() {},
@@ -12,8 +12,8 @@ const LanguageContext = createContext<{
 const LanguageProvider: React.FC = ({ children }) => {
   const [lang, setLang] = useState<Language>('is')
 
-  const modify = () => {
-    setLang(prev => (prev === 'is' ? 'en-us' : 'is'))
+  const modify = (lang: Language) => {
+    setLang(lang)
   }
 
   return (

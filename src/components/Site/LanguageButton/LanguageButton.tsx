@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Button from '~/components/Site/Button'
+import ButtonLink from '~/components/Site/ButtonLink'
 import { LanguageContext } from '~/context/LanguageContext'
 import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
@@ -8,14 +8,11 @@ const LanguageButton = () => {
   const { modify, lang } = useContext(LanguageContext)
   const { pathname } = useLocation()
   return (
-    <Button
+    <ButtonLink
       className='btn__language'
       label={lang === 'is' ? 'ENG' : 'ÍSL'}
-      onClick={() => {
-        navigate(lang === 'is' ? '/en' : '/')
-        modify()
-      }}
-    ></Button>
+      to={lang === 'is' ? '/en/' : '/'}
+    ></ButtonLink>
   )
 }
 

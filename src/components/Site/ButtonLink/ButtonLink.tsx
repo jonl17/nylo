@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import cn from 'classnames'
 
 interface Props {
   to: string
   label?: string
+  className: string
 }
 
-const ButtonLink = ({ to, label = '', ...props }: Props) => {
+const ButtonLink = ({ to, label = '', className = '' }: Props) => {
   const internal = /^\/(?!\/)/.test(to)
 
   const LinkWrap: React.FC<{ className?: string }> = ({
@@ -23,7 +25,7 @@ const ButtonLink = ({ to, label = '', ...props }: Props) => {
       </a>
     )
   return (
-    <LinkWrap className='btn px-2'>
+    <LinkWrap className={cn(className, 'btn px-2')}>
       <h3 className='m-0'>{label}</h3>
     </LinkWrap>
   )
