@@ -5,6 +5,7 @@ import useSidebarQuery from './useSidebarQuery'
 import { LanguageContext } from '~/context/LanguageContext'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
 import cn from 'classnames'
+import { langSeek } from 'balkan-tungumal'
 
 const Menu = ({
   customPostType,
@@ -55,7 +56,7 @@ const Sidebar = () => {
         dangerouslySetInnerHTML={{ __html: sidebar.address.html }}
       />
       <div className='parag--2 pt-3'>
-        <p className='mb-0'>Opnunartími</p>
+        <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
         <p>{`${day.from} til ${day.to} ${time.from}-${time.to}`}</p>
       </div>
       <div className='d-flex flex-column pt-3'>

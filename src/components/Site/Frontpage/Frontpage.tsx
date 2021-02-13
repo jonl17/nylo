@@ -2,10 +2,9 @@ import React, { Fragment } from 'react'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
-import slugify from 'slugify'
 import { Link } from 'gatsby'
-import Overview from '~/components/Site/Overview'
 import { Language } from '~/lang'
+import { langSeek } from 'balkan-tungumal'
 
 interface Props {
   lang: Language
@@ -24,7 +23,12 @@ export default ({ lang = 'is' }: Props) => {
             to={currentExhibition.url}
           >
             <div className='frontpage-object__heading mb-3'>
-              <h1>{multipleArtistsHandler(currentExhibition.data.artist)}</h1>
+              <h1>
+                {multipleArtistsHandler(
+                  currentExhibition.data.artist,
+                  langSeek('Group exhibition', lang)
+                )}
+              </h1>
               <h1 className='font-italic'>
                 {currentExhibition.data.title.text}
               </h1>

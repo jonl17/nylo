@@ -7,8 +7,8 @@ export const generateURLfromWords = (strings: string[]) => {
     .replace(',', '/')
 }
 
-export const multipleArtistsHandler = (artist: string) => {
-  return artist.split(',').length > 1 ? 'Group exhibition' : artist
+export const multipleArtistsHandler = (artist: string, text: string = '') => {
+  return artist.split(',').length > 1 ? text : artist
 }
 
 export const formatDate = (

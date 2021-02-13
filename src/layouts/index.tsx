@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useContext, useEffect, Fragment } from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
 import { Helmet } from 'react-helmet'
@@ -19,17 +19,17 @@ const Layout: React.FC<{
   const { modify } = useContext(LanguageContext)
 
   useEffect(() => {
-    if (pageContext.url.includes('/en/')) {
-      modify('en-us')
-    } else {
-      modify('is')
+    if (pageContext.url) {
+      if (pageContext.url.includes('/en/')) {
+        modify('en-us')
+      } else {
+        modify('is')
+      }
     }
   }, [pageContext.url])
 
-  console.log(pageContext)
-
   return (
-    <>
+    <Fragment>
       <Helmet>
         <title>Living Art Museum</title>
         <link rel='shortcut icon' href={favicon} type='image/png' />
@@ -42,7 +42,7 @@ const Layout: React.FC<{
       </main>
 
       <Banner />
-    </>
+    </Fragment>
   )
 }
 
