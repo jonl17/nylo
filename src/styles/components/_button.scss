@@ -28,7 +28,9 @@
     border-bottom: hidden;
 
     h3 {
-      font-size: 45px;
+      @include media-breakpoint-up('lg') {
+        font-size: 45px;
+      }
     }
   }
 

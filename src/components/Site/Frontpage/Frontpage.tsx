@@ -39,12 +39,10 @@ export default ({ lang = 'is' }: Props) => {
                 )}
               </h1>
             </div>
-            <div className='frontpage-object--current-exhibition__img'>
-              <img
-                src={currentExhibition.data.featured_image.url}
-                alt={currentExhibition.data.featured_image.alt}
-              />
-            </div>
+            <img
+              src={currentExhibition.data.featured_image.url}
+              alt={currentExhibition.data.featured_image.alt}
+            />
           </Link>
         </div>
       )}
