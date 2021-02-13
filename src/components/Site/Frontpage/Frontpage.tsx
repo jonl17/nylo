@@ -1,24 +1,27 @@
-import React, { useContext } from 'react'
+import React, { Fragment } from 'react'
 import { getLatestNews } from '~/hooks/newsHooks'
 import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
-import { LanguageContext } from '~/context/LanguageContext'
 import Overview from '~/components/Site/Overview'
+import { Language } from '~/lang'
 
-const Frontpage = ({}: {}) => {
-  const { lang } = useContext(LanguageContext)
-  const currentExhibition = useGetCurrentExhibition()
-  const latestNews = getLatestNews()
+interface Props {
+  lang: Language
+}
+
+export default ({ lang = 'is' }: Props) => {
+  const currentExhibition = useGetCurrentExhibition(lang)
+  const latestNews = getLatestNews(lang)
 
   return (
-    <div className='page page__frontpage position-relative p-3'>
+    <Fragment>
       {currentExhibition && (
         <div className='col-lg-8 p-0 frontpage-object--current-exhibition'>
           <Link
             className='h-100 d-inline-flex flex-column'
-            to={`/syningar/${slugify(currentExhibition.uid)}`}
+            to={currentExhibition.url}
           >
             <div className='frontpage-object__heading mb-3'>
               <h1>{multipleArtistsHandler(currentExhibition.data.artist)}</h1>
@@ -41,9 +44,7 @@ const Frontpage = ({}: {}) => {
           </Link>
         </div>
       )}
-      {latestNews && <Overview name='LatestNews' />}
-    </div>
+      {/* {latestNews && <Overview name='LatestNews' />} */}
+    </Fragment>
   )
 }
-
-export default Frontpage

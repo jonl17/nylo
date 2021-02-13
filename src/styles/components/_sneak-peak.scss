@@ -1,5 +1,6 @@
 .sneak-peak-window {
   transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
   transition: 0.3s transform cubic-bezier(0.19, 1, 0.22, 1);
   position: fixed;
   top: 0;
@@ -16,6 +17,7 @@
 
   &--open {
     transform: translateX(0%);
+    -webkit-transform: translateX(0%);
   }
 
   &__close-btn {

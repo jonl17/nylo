@@ -1,6 +1,10 @@
 import React from 'react'
-import { ProgramProps } from '~/components/Site/NavBar/types'
 import Overview from '~/components/Site/Overview'
+
+export interface ProgramProps {
+  name: string
+  parameters: { label?: string; value?: string }[]
+}
 
 const Program = ({
   primary,

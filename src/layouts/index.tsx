@@ -1,20 +1,33 @@
-import React from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
-import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
 import Footer from '~/components/Site/Footer'
 import { bgSetter } from '~/utils'
 import { useLocation } from '@reach/router'
-interface Props extends PageProps {
-  pageContext: {
-    hasSubmenu: null | string
-  }
-}
+import { LanguageContext } from '~/context/LanguageContext'
 
-const Layout: React.FC<Props> = ({ children, pageContext }) => {
-  const { pathname } = useLocation()
+const Layout: React.FC<{
+  pageContext: {
+    url: string
+    alternateLanguage: string | null
+    hasSubmenu: string
+    type?: 'news' | 'exhibition'
+  }
+}> = ({ children, pageContext }) => {
+  const { modify } = useContext(LanguageContext)
+
+  useEffect(() => {
+    if (pageContext.url.includes('/en/')) {
+      modify('en-us')
+    } else {
+      modify('is')
+    }
+  }, [pageContext.url])
+
+  console.log(pageContext)
+
   return (
     <>
       <Helmet>
@@ -23,8 +36,8 @@ const Layout: React.FC<Props> = ({ children, pageContext }) => {
       </Helmet>
 
       <main id='main-wrapper'>
-        <NavBar />
-        <div className={bgSetter(pathname)}>{children}</div>
+        <NavBar customPostType={pageContext.type} />
+        <div className={bgSetter(pageContext)}>{children}</div>
         <Footer />
       </main>
 

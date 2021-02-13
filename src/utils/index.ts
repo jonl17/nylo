@@ -57,13 +57,47 @@ export const exhibitionIsOpen = (
   tday = new Date()
 ) => tday >= opening && tday <= closing
 
-export const bgSetter = (pathname: string) => {
-  if (pathname.includes('/frettir')) return 'bg--purple'
-  else if (pathname.includes('/syningar')) return 'bg--gray'
-  else if (pathname.includes('/um-nylo')) return 'bg--green'
-  else if (pathname.includes('/heimsokn')) return 'bg--yellow'
-  else if (pathname.includes('/safneign')) return 'bg--pink'
-  else return 'bg--white'
+const compareUrls = (url: string, altUrl: string | null, compare: string) =>
+  url === compare || altUrl === compare
+
+// this has to be reworked to be more ... flexible?
+export const bgSetter = ({
+  url,
+  hasSubmenu,
+  alternateLanguage,
+  type,
+}: {
+  url: string
+  hasSubmenu: string
+  alternateLanguage: string | null
+  type?: 'news' | 'exhibition'
+}) => {
+  if (compareUrls(url, alternateLanguage, '/frettir') || type === 'news') {
+    return 'bg--purple'
+  } else if (
+    compareUrls(url, alternateLanguage, '/syningar') ||
+    type === 'exhibition'
+  ) {
+    return 'bg--gray'
+  } else if (
+    compareUrls(url, alternateLanguage, '/um-nylo') ||
+    hasSubmenu === 'Um Nýló' ||
+    hasSubmenu === 'About'
+  ) {
+    return 'bg--green'
+  } else if (
+    compareUrls(url, alternateLanguage, '/heimsokn') ||
+    hasSubmenu === 'Heimsókn'
+  ) {
+    return 'bg--yellow'
+  } else if (
+    compareUrls(url, alternateLanguage, '/safneign') ||
+    hasSubmenu === 'Safneign'
+  ) {
+    return 'bg--pink'
+  } else {
+    return 'bg--white'
+  }
 }
 
 export const cleanPathname = (p: string) => `${p.replace('/', '')}`

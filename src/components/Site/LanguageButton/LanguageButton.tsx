@@ -1,15 +1,16 @@
 import React, { useContext } from 'react'
-import Button from '~/components/Site/Button'
+import ButtonLink from '~/components/Site/ButtonLink'
 import { LanguageContext } from '~/context/LanguageContext'
+import { useLocation } from '@reach/router'
 
 const LanguageButton = () => {
-  const { modify, lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext)
   return (
-    <Button
+    <ButtonLink
       className='btn__language'
       label={lang === 'is' ? 'ENG' : 'ÍSL'}
-      onClick={() => modify()}
-    ></Button>
+      to={lang === 'is' ? '/en' : '/'}
+    ></ButtonLink>
   )
 }
 

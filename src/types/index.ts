@@ -17,6 +17,7 @@ export interface ImageReelSliceType {
 export interface OverViewItem {
   id: string
   uid: string
+  url: string
   title: {
     text: string
   }

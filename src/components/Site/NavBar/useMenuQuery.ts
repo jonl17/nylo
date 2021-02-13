@@ -1,22 +1,39 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { Menu } from './types'
+import { MenuItem } from './types'
 import '../../../fragments/menu'
+import { Language } from '~/lang'
 
-const useMenuQuery = () => {
-  const menu: Menu = useStaticQuery(graphql`
+const useMenuQuery = (lang: Language = 'is') => {
+  const menu: {
+    allPrismicMenu: {
+      nodes: MenuItem[]
+    }
+  } = useStaticQuery(graphql`
     {
-      prismicMenu(data: { name: { eq: "MAIN_MENU" } }) {
-        data {
-          items {
-            page {
-              uid
-              document {
-                __typename
-                ... on PrismicPage {
-                  uid
-                  data {
-                    title {
-                      text
+      allPrismicMenu(filter: { data: { name: { eq: "MAIN_MENU" } } }) {
+        nodes {
+          lang
+          data {
+            items {
+              page {
+                uid
+                url
+                document {
+                  __typename
+                  ... on PrismicPage {
+                    alternate_languages {
+                      document {
+                        ... on PrismicPage {
+                          url
+                        }
+                      }
+                    }
+                    uid
+                    url
+                    data {
+                      title {
+                        text
+                      }
                     }
                   }
                 }
@@ -27,15 +44,22 @@ const useMenuQuery = () => {
       }
     }
   `)
-  if (!menu.prismicMenu) {
+
+  if (!!!menu.allPrismicMenu.nodes.length) {
     return null
   }
-  const mainMenu = menu.prismicMenu.data.items.map(item => {
+
+  const translatedMainMenu = menu.allPrismicMenu.nodes.find(
+    node => node.lang === lang
+  )
+
+  const mainMenu = translatedMainMenu?.data.items.map(item => {
     return {
       page: item.page.document
         ? {
-            url: item.page.uid,
+            url: item.page.url,
             name: item.page.document.data.title.text,
+            altLangs: item.page.document.alternate_languages,
           }
         : null,
     }

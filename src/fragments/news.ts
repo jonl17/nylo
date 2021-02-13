@@ -4,6 +4,8 @@ export const fragment = graphql`
   fragment newsFragment on PrismicNews {
     id
     uid
+    lang
+    url
     data {
       featured_image {
         alt

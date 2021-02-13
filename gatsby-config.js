@@ -3,8 +3,11 @@ require('dotenv').config({
 })
 
 const { htmlSerializer } = require('./src/prismic/htmlSerializer')
+const getLinkResolver = require('./src/utils/getLinkResolver')
 
 const DEFAULT_LANG = 'is'
+
+const linkResolver = getLinkResolver(DEFAULT_LANG, 'FRONTPAGE')
 
 module.exports = {
   plugins: [
@@ -27,11 +30,7 @@ module.exports = {
       options: {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
         accessToken: process.env.GATSBY_PRISMIC_ACCESS_TOKEN,
-        linkResolver: ({ node, key, value }) => doc => {
-          if (doc.type === 'page') {
-            return `/${doc.uid}`
-          } else return '/'
-        },
+        linkResolver: () => linkResolver,
         fetchLinks: [
           // Your list of links
         ],
@@ -51,7 +50,8 @@ module.exports = {
           footer: require(`./src/schemas/footer.json`),
           opening_hours: require(`./src/schemas/opening_hours.json`),
         },
-        lang: DEFAULT_LANG,
+        lang: '*',
+
         prismicToolbar: true,
         shouldDownloadImage: ({ node, key, value }) => {
           // Return true to download the image or false to skip.
