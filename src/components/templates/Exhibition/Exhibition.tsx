@@ -10,7 +10,7 @@ import { formatDate, multipleArtistsHandler, exhibitionIsOpen } from '~/utils'
 import Button from '~/components/Site/Button'
 import Slideshow from '~/components/Site/Slideshow/Slideshow'
 import { LanguageContext } from '~/context/LanguageContext'
-import { langSeek } from '~/lang'
+import { langSeek } from 'balkan-tungumal'
 
 interface Props extends PageProps {
   pageContext: {
@@ -34,6 +34,7 @@ const cleanExhibitionData = (
   return {
     id,
     uid,
+    url: prismicExhibition.url,
     artist: prismicExhibition.data.artist,
     curator: prismicExhibition.data.curator,
     featuredImage: prismicExhibition.data.featured_image,
@@ -81,15 +82,23 @@ const Exhibition = ({
               {formatDate(exhibition.date.opening, exhibition.date.closing)}
             </p>
             <Breadcrumbs
-              parentLink={{ text: 'Sýningar', url: '/syningar' }}
+              parentLink={{
+                text: langSeek('Exhibitions', lang) ?? '',
+                url: lang === 'en-us' ? 'en/exhibitions' : '/syningar',
+              }}
               childLink={{
                 text: exhibition.title.text,
-                url: `/syningar/${exhibition.uid}`,
+                url: exhibition.url,
               }}
             />
           </div>
           <div className='pb-2'>
-            <h1>{multipleArtistsHandler(exhibition.artist)}</h1>
+            <h1>
+              {multipleArtistsHandler(
+                exhibition.artist,
+                langSeek('Group exhibition', lang)
+              )}
+            </h1>
             <h1 className='font-italic'>{exhibition.title.text}</h1>
           </div>
 
@@ -111,7 +120,7 @@ const Exhibition = ({
           {!readMore && (
             <Button
               className='mt-2'
-              label={langSeek('Read more', lang) ?? 'is'}
+              label={langSeek('Read more', lang) ?? ''}
               onClick={() => setReadMore(true)}
             ></Button>
           )}

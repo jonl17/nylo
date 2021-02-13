@@ -1,8 +1,15 @@
-import React, { MutableRefObject, RefObject, useEffect, useRef } from 'react'
+import React, { useContext } from 'react'
 import cn from 'classnames'
+import { langSeek } from 'balkan-tungumal'
+import { LanguageContext } from '~/context/LanguageContext'
 
 const Open = ({ className = '' }) => {
-  return <p className={cn(className, 'open')}>OPEN</p>
+  const { lang } = useContext(LanguageContext)
+  return (
+    <p className={cn(className, 'open')}>
+      {langSeek('Open', lang)?.toUpperCase()}
+    </p>
+  )
 }
 
 export default Open
