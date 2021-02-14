@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import ButtonLink from '~/components/Site/ButtonLink'
 import { LanguageContext } from '~/context/LanguageContext'
-import { useLocation } from '@reach/router'
 
 const LanguageButton = () => {
   const { lang } = useContext(LanguageContext)

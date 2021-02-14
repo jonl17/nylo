@@ -8,9 +8,11 @@
   align-items: center;
   justify-content: center;
 
-  &:hover {
-    background: $black;
-    color: $white;
+  @include media-breakpoint-up('lg') {
+    &:hover {
+      background: $black;
+      color: $white;
+    }
   }
 
   h3 {
