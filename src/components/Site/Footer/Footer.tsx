@@ -7,13 +7,13 @@ const Footer = () => {
   const data = useGetFooter()
   if (!data) return null
 
-  const blockClass = 'col-4 p-0'
+  const blockClass = 'col-lg-4 p-0'
 
   const { lang } = useContext(LanguageContext)
 
   return (
     <div className='footer'>
-      <div className='d-flex'>
+      <div className='d-flex flex-column flex-lg-row'>
         {/* block */}
         <div className={blockClass}>
           <div className='pb-3'>
@@ -22,7 +22,7 @@ const Footer = () => {
             <h3>Grandagarður 20</h3>
             <h3>101 Reykjavík</h3>
           </div>
-          <div>
+          <div className='pb-3'>
             <p className='mb-0'>{langSeek('Public transportation', lang)}</p>
             <h3>Strætó: 14</h3>
             <h3>Stöð: Grandi</h3>
@@ -51,9 +51,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='pt-5 footer__sponsors d-flex align-items-center'>
+      <div className='pt-lg-5 footer__sponsors d-flex flex-column flex-lg-row align-items-lg-center'>
         {data.sponsors.map((sponsor, x) => (
-          <img key={x} src={sponsor.logo.url} alt={sponsor.logo.alt} />
+          <img
+            className='mb-4 mb-lg-0'
+            key={x}
+            src={sponsor.logo.url}
+            alt={sponsor.logo.alt}
+          />
         ))}
       </div>
     </div>

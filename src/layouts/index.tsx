@@ -26,7 +26,7 @@ const Layout: React.FC<{
         modify('is')
       }
     }
-  }, [pageContext.url])
+  }, [pageContext])
 
   return (
     <Fragment>

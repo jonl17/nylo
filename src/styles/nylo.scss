@@ -1,7 +1,8 @@
 @import './config/variables';
-@import './config/typo';
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import './config/typo';
 
 @import './components/image';
 @import './components/page';

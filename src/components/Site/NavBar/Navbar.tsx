@@ -76,7 +76,7 @@ export default ({
   customPostType?: 'news' | 'exhibition'
 }) => {
   return (
-    <nav className='navbar d-flex flex-column pt-3 h-100' id='navbar'>
+    <nav className='navbar d-none d-lg-flex flex-column pt-3 h-100' id='navbar'>
       <Menu customPostType={customPostType} />
       <Sidebar />
     </nav>

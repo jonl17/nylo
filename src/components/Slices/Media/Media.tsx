@@ -9,7 +9,7 @@ const Media: React.FC<{
       {items.map((item, idx) => (
         <img
           className={cn(
-            items.length > 1 ? 'col-6' : 'col-12',
+            items.length > 1 ? 'col-lg-6' : 'col-lg-12',
             idx === items.length - 1 ? 'px-0' : 'pl-0'
           )}
           key={idx}

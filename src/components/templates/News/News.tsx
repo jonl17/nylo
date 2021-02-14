@@ -8,9 +8,6 @@ import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import CloseButton from '~/components/Site/CloseButton'
 import FeaturedImage from '~/components/Site/FeaturedImage'
-import { bgSetter } from '~/utils'
-import cn from 'classnames'
-import { useLocation } from '@reach/router'
 
 interface PageContext {
   bg: string
@@ -28,7 +25,7 @@ const News: React.FC<{
     featuredImage: data.prismicNews.data.featured_image,
   }
 
-  const { pathname } = useLocation()
+  console.log(pageContext)
 
   return (
     <>

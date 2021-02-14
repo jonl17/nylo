@@ -12,7 +12,7 @@
 
   &__content {
     background: $gray;
-    @extend .col-6;
+    @extend .col-lg-6;
   }
 
   &--open {
@@ -24,7 +24,7 @@
     outline: 0;
     border: none;
     background: transparent;
-    @extend .col-6;
+    @extend .col-lg-6;
 
     &:focus {
       outline: 0;

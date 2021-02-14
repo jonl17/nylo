@@ -68,7 +68,7 @@ const Exhibition = ({
   return (
     <>
       <Helmet>
-        <title>{`Living Art Museum—Sýningar—${pageContext.title.text}`}</title>
+        <title>{`Living Art Museum—${pageContext.title.text}`}</title>
       </Helmet>
       <div className='page'>
         <div className='content'>
