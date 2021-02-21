@@ -1,19 +1,9 @@
 import React, { Fragment } from 'react'
-import { getLatestNews } from '~/hooks/newsHooks'
-import useGetCurrentExhibition from '~/hooks/useGetCurrentExhibition'
 import { multipleArtistsHandler, formatDate } from '~/utils'
 import { Link } from 'gatsby'
-import { Language } from '~/lang'
 import { langSeek } from 'balkan-tungumal'
 
-interface Props {
-  lang: Language
-}
-
-export default ({ lang = 'is' }: Props) => {
-  const currentExhibition = useGetCurrentExhibition(lang)
-  const latestNews = getLatestNews(lang)
-
+export default ({ currentExhibition }: { currentExhibition: any }) => {
   return (
     <Fragment>
       {currentExhibition && (

@@ -1,5 +1,5 @@
-import React, { createContext, Fragment } from 'react'
-import { graphql, navigate } from 'gatsby'
+import React, { Fragment } from 'react'
+import { graphql } from 'gatsby'
 import SliceMapping from '~/components/Slices/mapping'
 import '~/fragments/media'
 import CloseButton from '~/components/Site/CloseButton'
@@ -7,26 +7,22 @@ import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
 import { Helmet } from 'react-helmet'
 import '~/fragments/menu'
 import cn from 'classnames'
-import { useLocation } from '@reach/router'
 import Frontpage from '~/components/Site/Frontpage'
-
-export const PageCtx = createContext<{ lastVisitedUrl: string }>({
-  lastVisitedUrl: '/',
-})
+import Layout from '~/layouts'
 
 const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
   const slices = data.prismicPage.data.body
 
-  const { data: pageData } = data.prismicPage
+  const IS_FRONTPAGE = data.prismicPage.tags.includes('FRONTPAGE')
 
   const Wrapper: React.FC = ({ children }) => (
     <Fragment>
-      {pageData.has_submenu.document && (
-        <SecondaryNavbar submenu={pageData.has_submenu.document} />
+      {data.prismicPage.data.has_submenu.document && (
+        <SecondaryNavbar submenu={data.prismicPage.data.has_submenu.document} />
       )}
       <div
         className={cn('page', {
-          'page__has-submenu': pageData.has_submenu.document,
+          'page__has-submenu': data.prismicPage.data.has_submenu.document,
         })}
       >
         {children}
@@ -34,46 +30,42 @@ const Page = ({ data, pageContext }: { data: any; pageContext: any }) => {
     </Fragment>
   )
 
-  const { pathname } = useLocation()
-
-  const { lang } = pageContext
-
-  const IS_FRONTPAGE = pathname === '/' || pathname === '/en'
-
   return (
-    <>
-      <Helmet>
-        <title>{`Living Art Museum—${pageData.title.text}`}</title>
-      </Helmet>
+    <Layout pageContext={data.prismicPage} mainMenu={data.prismicMenu}>
       <Wrapper>
         <div className='content'>
           {!IS_FRONTPAGE ? (
             <>
-              <CloseButton
-                goTo={() => navigate(lang === 'en-us' ? '/en' : '/')}
-                className='icon__exit'
-              />
+              <CloseButton className='icon__exit' />
               {slices &&
                 slices.map((slice: any, idx: number) => (
                   <SliceMapping key={idx} slice={slice} />
                 ))}
             </>
           ) : (
-            <Frontpage lang={lang} />
+            <Frontpage currentExhibition={null} />
           )}
         </div>
       </Wrapper>
-    </>
+    </Layout>
   )
 }
 
 export default Page
 
 export const query = graphql`
-  query($id: String!) {
-    prismicPage(id: { eq: $id }) {
+  query($id: String, $lang: String) {
+    prismicPage(id: { eq: $id }, lang: { eq: $lang }) {
       lang
       tags
+      uid
+      alternate_languages {
+        id
+        type
+        lang
+        uid
+        url
+      }
       data {
         has_submenu {
           document {
@@ -117,6 +109,9 @@ export const query = graphql`
           }
         }
       }
+    }
+    prismicMenu(lang: { eq: $lang }, tags: { in: "MAIN_MENU" }) {
+      ...fragmentPrismicMenu
     }
   }
 `

@@ -1,0 +1,12 @@
+.burger {
+  height: 28px;
+  width: 43px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__line {
+    border-bottom: 2px solid $black;
+    height: 2px;
+  }
+}

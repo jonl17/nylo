@@ -1,33 +1,16 @@
-import React, { useContext, useEffect, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
 import Footer from '~/components/Site/Footer'
 import { bgSetter } from '~/utils'
-import { useLocation } from '@reach/router'
-import { LanguageContext } from '~/context/LanguageContext'
+import MobileHeader from '~/components/Site/MobileHeader'
 
 const Layout: React.FC<{
-  pageContext: {
-    url: string
-    alternateLanguage: string | null
-    hasSubmenu: string
-    type?: 'news' | 'exhibition'
-  }
-}> = ({ children, pageContext }) => {
-  const { modify } = useContext(LanguageContext)
-
-  useEffect(() => {
-    if (pageContext.url) {
-      if (pageContext.url.includes('/en/')) {
-        modify('en-us')
-      } else {
-        modify('is')
-      }
-    }
-  }, [pageContext])
-
+  pageContext: any
+  mainMenu: any[]
+}> = ({ children, pageContext, mainMenu }) => {
   return (
     <Fragment>
       <Helmet>
@@ -36,12 +19,13 @@ const Layout: React.FC<{
       </Helmet>
 
       <main id='main-wrapper'>
-        <NavBar customPostType={pageContext.type} />
+        <NavBar customPostType={pageContext.type} mainMenu={mainMenu} />
+        <MobileHeader />
         <div className={bgSetter(pageContext)}>{children}</div>
         <Footer />
       </main>
 
-      <Banner />
+      <Banner page={pageContext} />
     </Fragment>
   )
 }

@@ -1,29 +1,31 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-import useMenuQuery from './useMenuQuery'
 import useSidebarQuery from './useSidebarQuery'
 import { LanguageContext } from '~/context/LanguageContext'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
 import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
+import linkResolver from '../../../utils/linkResolver'
 
 const Menu = ({
   customPostType,
+  mainMenu,
 }: {
   customPostType?: 'news' | 'exhibition'
+  mainMenu: any[]
 }) => {
-  const { lang } = useContext(LanguageContext)
-  const mainMenu = useMenuQuery(lang)
+  const menu = mainMenu.data.items
+  console.log(linkResolver(menu[0].page))
   return (
     <div>
-      {mainMenu &&
-        mainMenu.map(
+      {menu &&
+        menu.map(
           (item, idx) =>
             item.page && (
               <Link
                 activeClassName='navbar__anchor--active'
                 key={idx}
-                to={item.page.url}
+                to={linkResolver(item.page)}
                 className={cn('navbar__anchor', {
                   'navbar__anchor--active':
                     customPostType === 'news' &&
@@ -31,7 +33,7 @@ const Menu = ({
                 })}
               >
                 <span />
-                <h1>{item.page.name}</h1>
+                <h1>{item.page.document.data.title.text}</h1>
               </Link>
             )
         )}
@@ -72,12 +74,14 @@ const Sidebar = () => {
 
 export default ({
   customPostType,
+  mainMenu,
 }: {
   customPostType?: 'news' | 'exhibition'
+  mainMenu: any[]
 }) => {
   return (
     <nav className='navbar d-none d-lg-flex flex-column pt-3 h-100' id='navbar'>
-      <Menu customPostType={customPostType} />
+      <Menu customPostType={customPostType} mainMenu={mainMenu} />
       <Sidebar />
     </nav>
   )

@@ -1,6 +1,14 @@
 const path = require('path')
 const slugify = require('slugify')
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    node: {
+      fs: 'empty',
+    },
+  })
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -14,22 +22,6 @@ exports.createPages = async ({ graphql, actions }) => {
           lang
           url
           data {
-            subpage {
-              uid
-              document {
-                ... on PrismicPage {
-                  data {
-                    has_submenu {
-                      document {
-                        ... on PrismicMenu {
-                          id
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
             has_submenu {
               document {
                 ... on PrismicMenu {
@@ -44,6 +36,10 @@ exports.createPages = async ({ graphql, actions }) => {
           alternate_languages {
             document {
               ... on PrismicPage {
+                id
+                uid
+                tags
+                lang
                 url
               }
             }
@@ -114,7 +110,6 @@ exports.createPages = async ({ graphql, actions }) => {
       component: pageTemplate,
       context: {
         id: node.id,
-        subpageOf: node.data.subpage.uid,
         hasSubmenu: displaySubmenu(),
         uid: node.uid,
         lang: node.lang,

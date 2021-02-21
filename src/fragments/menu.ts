@@ -9,6 +9,7 @@ export const fragment = graphql`
         page {
           uid
           url
+          lang
           document {
             ... on PrismicPage {
               alternate_languages {

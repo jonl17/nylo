@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useCallback } from 'react'
 import { Language } from '~/lang'
 
 const LanguageContext = createContext<{
@@ -14,9 +14,7 @@ const useLanguage = () => useContext(LanguageContext)
 const LanguageProvider: React.FC = ({ children }) => {
   const [lang, setLang] = useState<Language>('is')
 
-  const modify = (lang: Language) => {
-    setLang(lang)
-  }
+  const modify = (lang: Language) => setLang(lang)
 
   return (
     <LanguageContext.Provider value={{ lang, modify }}>

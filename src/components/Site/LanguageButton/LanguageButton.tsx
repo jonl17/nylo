@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import ButtonLink from '~/components/Site/ButtonLink'
-import { LanguageContext } from '~/context/LanguageContext'
+import linkResolver from '~/utils/linkResolver'
 
-const LanguageButton = () => {
-  const { lang } = useContext(LanguageContext)
+const LanguageButton = ({ page }: { page: any }) => {
+  const altPage = page.alternate_languages[0]
   return (
     <ButtonLink
+      label={page.lang.slice(0, 2).toUpperCase()}
       className='btn__language'
-      label={lang === 'is' ? 'ENG' : 'ÍSL'}
-      to={lang === 'is' ? '/en' : '/'}
+      to={linkResolver(altPage)}
     ></ButtonLink>
   )
 }
