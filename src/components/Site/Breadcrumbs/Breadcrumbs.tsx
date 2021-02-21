@@ -12,23 +12,16 @@ interface Props {
 }
 
 const Breadcrumbs = ({ parentLink, childLink }: Props) => {
+  console.log(parentLink.url)
   return (
     <div className='d-flex'>
-      <Link
-        partiallyActive
-        activeClassName='secondaryAnchorActive'
-        to={parentLink.url}
-      >
+      <Link to={parentLink.url}>
         <p>{parentLink.text}</p>
       </Link>
       <span className='breadcrumbs__separator' />
-      <Link
-        activeClassName='secondaryAnchorActive'
-        className='navbar__anchor--active'
-        to={childLink.url}
-      >
+      <div className='navbar__anchor--active breadcrumbs__p--special'>
         <p>{childLink.text}</p>
-      </Link>
+      </div>
     </div>
   )
 }

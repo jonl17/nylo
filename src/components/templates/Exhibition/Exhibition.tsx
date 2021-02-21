@@ -84,7 +84,7 @@ const Exhibition = ({
             <Breadcrumbs
               parentLink={{
                 text: langSeek('Exhibitions', lang) ?? '',
-                url: lang === 'en-us' ? 'en/exhibitions' : '/syningar',
+                url: lang === 'en-us' ? '/en/exhibitions' : '/syningar',
               }}
               childLink={{
                 text: exhibition.title.text,

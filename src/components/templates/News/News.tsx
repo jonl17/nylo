@@ -8,6 +8,7 @@ import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import CloseButton from '~/components/Site/CloseButton'
 import FeaturedImage from '~/components/Site/FeaturedImage'
+import { useLanguage } from '~/context/LanguageContext'
 
 interface PageContext {
   bg: string
@@ -25,7 +26,7 @@ const News: React.FC<{
     featuredImage: data.prismicNews.data.featured_image,
   }
 
-  console.log(pageContext)
+  const { lang } = useLanguage()
 
   return (
     <>
@@ -38,7 +39,10 @@ const News: React.FC<{
           <div className='d-flex align-items-center'>
             <p className='pr-3'>{formatDate(news.date)}</p>
             <Breadcrumbs
-              parentLink={{ text: 'Fréttir', url: '/frettir' }}
+              parentLink={{
+                text: 'Fréttir',
+                url: lang === 'en-us' ? '/en/news' : '/frettir',
+              }}
               childLink={{ text: news.title.text, url: `/frettir/${news.uid}` }}
             />
           </div>

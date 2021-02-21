@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import { Language } from '~/lang'
 
 const LanguageContext = createContext<{
@@ -8,6 +8,8 @@ const LanguageContext = createContext<{
   lang: 'is',
   modify() {},
 })
+
+const useLanguage = () => useContext(LanguageContext)
 
 const LanguageProvider: React.FC = ({ children }) => {
   const [lang, setLang] = useState<Language>('is')
@@ -23,4 +25,4 @@ const LanguageProvider: React.FC = ({ children }) => {
   )
 }
 
-export { LanguageContext, LanguageProvider }
+export { LanguageContext, LanguageProvider, useLanguage }

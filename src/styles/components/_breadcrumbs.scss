@@ -6,4 +6,10 @@
     transform: rotate(-3deg);
     margin: 5px 5px 0 5px;
   }
+
+  &__p {
+    &--special {
+      margin-top: -3px;
+    }
+  }
 }
