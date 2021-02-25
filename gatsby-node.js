@@ -16,32 +16,27 @@ exports.createPages = async ({ graphql, actions }) => {
     {
       allPrismicPage {
         nodes {
-          id
-          uid
-          tags
-          lang
           url
-          data {
-            has_submenu {
-              document {
-                ... on PrismicMenu {
-                  id
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-          }
+          id
+          prismicId
+          uid
+          lang
+          tags
           alternate_languages {
             document {
               ... on PrismicPage {
                 id
                 uid
                 tags
-                lang
                 url
+                lang
               }
+            }
+          }
+          data {
+            title {
+              html
+              text
             }
           }
         }
@@ -56,6 +51,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           uid
           lang
+          tags
           url
           data {
             date
@@ -83,7 +79,9 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           uid
           lang
+          prismicId
           url
+          tags
           alternate_languages {
             document {
               ... on PrismicExhibition {
@@ -121,17 +119,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // pages
   pages.data.allPrismicPage.nodes.forEach(node => {
-    const displaySubmenu = () => {
-      if (node.data.has_submenu.document) {
-        return node.data.has_submenu.document.data.name
-      } else return null
-    }
-
     createPage({
       path: node.url,
       component: pageTemplate,
       context: {
-        hasSubmenu: displaySubmenu(),
         ...node,
       },
     })
@@ -144,7 +135,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         ...node,
         date: node.data.date,
-        type: 'news',
       },
     })
   })
@@ -156,7 +146,6 @@ exports.createPages = async ({ graphql, actions }) => {
       component: exhibitionTemplate,
       context: {
         ...node,
-        type: 'exhibition',
       },
     })
   })

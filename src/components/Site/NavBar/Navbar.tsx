@@ -1,54 +1,42 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import useSidebarQuery from './useSidebarQuery'
-import { LanguageContext } from '~/context/LanguageContext'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
+import useMenuQuery from './useMenuQuery'
 import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
 import linkResolver from '../../../utils/linkResolver'
+import { Language } from '~/lang'
 
-const Menu = ({
-  customPostType,
-  mainMenu,
-}: {
-  customPostType?: 'news' | 'exhibition'
-  mainMenu: any[]
-}) => {
-  const menu = mainMenu.data.items
+const Menu = ({ lang }: { lang: Language }) => {
+  const menu = useMenuQuery().find(m => m.lang === lang)
   return (
     <div>
       {menu &&
-        menu.map(
-          (item, idx) =>
-            item.page && (
-              <Link
-                activeClassName='navbar__anchor--active'
-                key={idx}
-                to={linkResolver(item.page)}
-                className={cn('navbar__anchor', {
-                  'navbar__anchor--active':
-                    customPostType === 'news' &&
-                    item.page.name.toLowerCase() === 'news',
-                })}
-              >
-                <span />
-                <h1>{item.page.document.data.title.text}</h1>
-              </Link>
-            )
-        )}
+        menu.items
+          .filter(node => node.page)
+          .map((node, idx) => (
+            <Link
+              activeClassName='navbar__anchor--active'
+              key={idx}
+              to={linkResolver(node.page)}
+              className={cn('navbar__anchor')}
+            >
+              <span />
+              <h1>{node.page.title.text}</h1>
+            </Link>
+          ))}
     </div>
   )
 }
 
-const Sidebar = () => {
+const Sidebar = ({ lang }: { lang: Language }) => {
   const sidebar = useSidebarQuery()
   if (!sidebar) return null
 
   const openingHours = useOpeningHoursQuery()
 
   const { day, time } = openingHours
-
-  const { lang } = useContext(LanguageContext)
 
   return (
     <div className='pt-5 pb-3'>
@@ -71,17 +59,11 @@ const Sidebar = () => {
   )
 }
 
-export default ({
-  customPostType,
-  mainMenu,
-}: {
-  customPostType?: 'news' | 'exhibition'
-  mainMenu: any[]
-}) => {
+export default ({ lang }: { lang: Language }) => {
   return (
     <nav className='navbar d-none d-lg-flex flex-column pt-3 h-100' id='navbar'>
-      <Menu customPostType={customPostType} mainMenu={mainMenu} />
-      <Sidebar />
+      <Menu lang={lang} />
+      <Sidebar lang={lang} />
     </nav>
   )
 }

@@ -5,7 +5,7 @@ const Slideshow = ({ images }: { images: { url: string; alt: string }[] }) => {
   const [positions, setPositions] = useState([0])
 
   useEffect(() => {
-    setTimeout(() => {
+    const t = setTimeout(() => {
       const nodes = Array.from(
         document.querySelectorAll('.slideshow-image')
       ).map(node => {
@@ -19,6 +19,8 @@ const Slideshow = ({ images }: { images: { url: string; alt: string }[] }) => {
         ),
       ])
     }, 1500)
+
+    return () => clearTimeout(t)
   }, [])
 
   return (

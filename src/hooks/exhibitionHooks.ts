@@ -1,10 +1,9 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import '~/fragments/exhibition/full'
 import { Language } from '~/lang'
-import { OverViewItem } from '~/types'
-import { formatDate } from '~/utils'
+import { ExhibitionInterface, exhibitionResolver } from '~/utils/resolvers'
 
-const getAllExhibitions = (lang: Language = 'is') => {
+const getAllExhibitions = () => {
   const data: {
     allPrismicExhibition: {
       nodes: {
@@ -29,31 +28,15 @@ const getAllExhibitions = (lang: Language = 'is') => {
     {
       allPrismicExhibition(sort: { fields: data___opening, order: DESC }) {
         nodes {
-          id
-          uid
-          url
-          lang
           ...exhibitionFragmentFull
         }
       }
     }
   `)
-  const exhibitions: OverViewItem[] = data.allPrismicExhibition.nodes
-    .filter(node => node.lang === lang)
-    .map(node => {
-      const { id, uid, url, data, lang } = node
-      return {
-        id,
-        uid,
-        url,
-        lang,
-        title: data.title,
-        date: formatDate(data.opening, data.closing),
-        featuredImage: data.featured_image,
-        parentUrl: '/syningar/',
-      }
-    })
+  const exhibitions: ExhibitionInterface[] = data.allPrismicExhibition.nodes.map(
+    node => exhibitionResolver(node)
+  )
+
   return exhibitions
 }
-
 export { getAllExhibitions }

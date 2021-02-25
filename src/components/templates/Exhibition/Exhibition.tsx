@@ -1,5 +1,5 @@
 import { PageProps, graphql } from 'gatsby'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import '~/fragments/exhibition/full'
 import { ExhibitionFull } from '~/types'
@@ -9,8 +9,10 @@ import Open from '~/components/Site/Open'
 import { formatDate, multipleArtistsHandler, exhibitionIsOpen } from '~/utils'
 import Button from '~/components/Site/Button'
 import Slideshow from '~/components/Site/Slideshow/Slideshow'
-import { LanguageContext } from '~/context/LanguageContext'
 import { langSeek } from 'balkan-tungumal'
+import { exhibitionResolver } from '~/utils/resolvers'
+import useGetPage from '~/hooks/useGetPage'
+import linkResolver from '~/utils/linkResolver'
 
 interface Props extends PageProps {
   pageContext: {
@@ -25,78 +27,49 @@ interface Props extends PageProps {
   exhibition: ExhibitionFull
 }
 
-const cleanExhibitionData = (
-  data: any,
-  id: string,
-  uid: string
-): ExhibitionFull => {
-  const { prismicExhibition } = data
-  return {
-    id,
-    uid,
-    url: prismicExhibition.url,
-    artist: prismicExhibition.data.artist,
-    curator: prismicExhibition.data.curator,
-    featuredImage: prismicExhibition.data.featured_image,
-    date: {
-      opening: prismicExhibition.data.opening,
-      closing: prismicExhibition.data.closing,
-    },
-    title: prismicExhibition.data.title,
-    additionalLinks: prismicExhibition.data.additional_links.map((l: any) => {
-      return {
-        text: l.text,
-        url: l.link.url,
-      }
-    }),
-    excerpt: prismicExhibition.data.excerpt,
-    detailedText: prismicExhibition.data.detailed_text,
-    artistBiography: prismicExhibition.data.artist_biography,
-    exhibitionView: prismicExhibition.data.exhibition_view,
-  }
-}
-
-const Exhibition = ({
-  pageContext,
-  data,
-  exhibition = cleanExhibitionData(data, pageContext.id, pageContext.uid),
-}: Props) => {
+const Exhibition = ({ data }: Props) => {
   const [readMore, setReadMore] = useState(false)
 
-  const { lang } = useContext(LanguageContext)
+  const exhibition = exhibitionResolver(data.prismicExhibition)
+
+  const homepage = useGetPage(
+    exhibition.lang === 'is' ? 'syningar' : 'exhibitions'
+  )
 
   return (
     <>
       <Helmet>
-        <title>{`Living Art Museum—${pageContext.title.text}`}</title>
+        <title>{`Living Art Museum—${exhibition.title.text}`}</title>
       </Helmet>
       <div className='page'>
         <div className='content'>
           <CloseButton className='icon__exit' />
           <div className='d-flex align-items-center'>
             {exhibitionIsOpen(
-              new Date(exhibition.date.opening),
-              new Date(exhibition.date.closing)
+              new Date(exhibition.opening),
+              new Date(exhibition.closing)
             ) && <Open className='mr-3' />}
             <p className='pr-3'>
-              {formatDate(exhibition.date.opening, exhibition.date.closing)}
+              {formatDate(exhibition.opening, exhibition.closing)}
             </p>
-            <Breadcrumbs
-              parentLink={{
-                text: langSeek('Exhibitions', lang) ?? '',
-                url: lang === 'en-us' ? '/en/exhibitions' : '/syningar',
-              }}
-              childLink={{
-                text: exhibition.title.text,
-                url: exhibition.url,
-              }}
-            />
+            {homepage && (
+              <Breadcrumbs
+                parentLink={{
+                  text: homepage.title.text,
+                  url: linkResolver(homepage),
+                }}
+                childLink={{
+                  text: exhibition.title.text,
+                  url: '#',
+                }}
+              />
+            )}
           </div>
           <div className='pb-2'>
             <h1>
               {multipleArtistsHandler(
                 exhibition.artist,
-                langSeek('Group exhibition', lang)
+                langSeek('Group exhibition', exhibition.lang)
               )}
             </h1>
             <h1 className='font-italic'>{exhibition.title.text}</h1>
@@ -120,7 +93,7 @@ const Exhibition = ({
           {!readMore && (
             <Button
               className='mt-2'
-              label={langSeek('Read more', lang) ?? ''}
+              label={langSeek('Read more', exhibition.lang) ?? ''}
               onClick={() => setReadMore(true)}
             ></Button>
           )}
@@ -133,11 +106,8 @@ const Exhibition = ({
           )}
 
           <Slideshow
-            images={exhibition.exhibitionView.map(it => {
-              return {
-                url: it.image.url,
-                alt: it.image.alt,
-              }
+            images={exhibition.exhibitionView.map(image => {
+              return { ...image }
             })}
           />
 
@@ -173,8 +143,8 @@ const Exhibition = ({
 }
 
 export const query = graphql`
-  query($id: String!) {
-    prismicExhibition(id: { eq: $id }) {
+  query($id: String, $lang: String) {
+    prismicExhibition(id: { eq: $id }, lang: { eq: $lang }) {
       ...exhibitionFragmentFull
     }
   }

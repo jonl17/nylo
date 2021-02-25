@@ -1,15 +1,13 @@
-import React, { useContext } from 'react'
-import { LanguageContext } from '~/context/LanguageContext'
+import React from 'react'
 import useGetFooter from '~/hooks/useGetFooter'
 import { langSeek } from 'balkan-tungumal'
+import { Language } from '~/lang'
 
-const Footer = () => {
+const Footer = ({ lang }: { lang: Language }) => {
   const data = useGetFooter()
   if (!data) return null
 
   const blockClass = 'col-lg-4 p-0'
-
-  const { lang } = useContext(LanguageContext)
 
   return (
     <div className='footer'>

@@ -3,12 +3,19 @@ import ButtonLink from '~/components/Site/ButtonLink'
 import linkResolver from '~/utils/linkResolver'
 
 const LanguageButton = ({ page }: { page: any }) => {
-  const altPage = page.alternate_languages[0]
+  const altPage = page.alternate_languages ? page.alternate_languages[0] : null
+
   return (
     <ButtonLink
-      label={altPage.document.lang.slice(0, 2).toUpperCase()}
+      label={page.lang === 'is' ? 'EN' : 'IS'}
       className='btn__language'
-      to={linkResolver(altPage.document)}
+      to={
+        altPage
+          ? linkResolver(altPage.document)
+          : page.lang === 'is'
+          ? '/en-us'
+          : '/'
+      }
     ></ButtonLink>
   )
 }

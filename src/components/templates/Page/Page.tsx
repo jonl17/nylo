@@ -20,8 +20,6 @@ const Page = ({ data }: { data: any }) => {
 
   const IS_FRONTPAGE = page.tags.includes(defaultFrontpageTag)
 
-  console.log(menuResolver(data.prismicMenu))
-
   const Wrapper: React.FC = ({ children }) => (
     <Fragment>
       {data.prismicPage.data.has_submenu.document && (
@@ -45,7 +43,7 @@ const Page = ({ data }: { data: any }) => {
             <CloseButton className='icon__exit' />
             {slices &&
               slices.map((slice: any, idx: number) => (
-                <SliceMapping key={idx} slice={slice} />
+                <SliceMapping key={idx} slice={slice} lang={page.lang} />
               ))}
           </>
         ) : (

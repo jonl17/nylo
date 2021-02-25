@@ -2,7 +2,7 @@ import React from 'react'
 import { Media, RichText, ArtistBio, Program } from '.'
 
 // todo, convert to typescript
-const SliceMapping = ({ slice }) => {
+const SliceMapping = ({ slice, lang }) => {
   const slices = {
     richtext: RichText,
     media: Media,
@@ -16,7 +16,7 @@ const SliceMapping = ({ slice }) => {
     return null
   }
 
-  return <Cmp {...slice} />
+  return <Cmp lang={lang} {...slice} />
 }
 
 export default SliceMapping

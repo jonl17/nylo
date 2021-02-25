@@ -24,7 +24,7 @@ export const fragment = graphql`
   fragment pageProgramFragment on PrismicPageBodyProgram {
     slice_type
     primary {
-      program_name
+      programName: program_name
     }
     items {
       parameter_label

@@ -7,11 +7,15 @@ export const fragment = graphql`
     lang
     url
     alternate_languages {
-      id
-      type
-      lang
-      uid
-      url
+      document {
+        ... on PrismicNews {
+          id
+          uid
+          tags
+          url
+          lang
+        }
+      }
     }
     data {
       featured_image {

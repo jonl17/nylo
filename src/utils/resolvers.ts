@@ -48,7 +48,10 @@ export interface MenuInterface {
       url: string
       lang: 'is' | 'en-us'
       tags: string[]
-      title: string
+      title: {
+        text: string
+        html: string
+      }
     }
     submenu: MenuInterface
   }[]
@@ -86,5 +89,104 @@ export const menuResolver = (node: any): MenuInterface => {
           : null,
       }
     }),
+  }
+}
+
+export interface NewsInterface {
+  url: string
+  prismicId: string
+  uid: string
+  lang: 'is' | 'en-us'
+  tags: string[]
+  date: string
+  title: {
+    html: string
+    text: string
+  }
+  featuredImage: {
+    url: string
+    alt: string
+  }
+  body: any[]
+}
+
+export const newsResolver = (node: any): NewsInterface => {
+  return {
+    url: node.url,
+    prismicId: node.prismicId,
+    uid: node.uid,
+    lang: node.lang,
+    tags: node.tags,
+    date: node.data.date,
+    title: node.data.title,
+    featuredImage: node.data.featured_image,
+    body: node.data.body,
+  }
+}
+
+export interface ExhibitionInterface {
+  url: string
+  prismicId: string
+  uid: string
+  lang: 'is' | 'en-us'
+  tags: string[]
+  title: {
+    html: string
+    text: string
+  }
+  featuredImage: {
+    url: string
+    alt: string
+  }
+  artist: string
+  curator: string
+  opening: string
+  closing: string
+  excerpt: {
+    html: string
+  }
+  detailedText: {
+    html: string
+  }
+  artistBiography: {
+    html: string
+  }
+  exhibitionView: {
+    url: string
+    alt: string
+  }[]
+  additionalLinks: {
+    text: string
+    url: string
+  }[]
+}
+
+export const exhibitionResolver = (node: any): ExhibitionInterface => {
+  return {
+    url: node.url,
+    prismicId: node.prismicId,
+    uid: node.uid,
+    lang: node.lang,
+    tags: node.tags,
+    additionalLinks: node.data.additional_links.map((x: any) => {
+      return {
+        title: x.title,
+        url: x.link.url,
+      }
+    }),
+    artist: node.data.artist,
+    artistBiography: node.data.artist_biography,
+    closing: node.data.closing,
+    opening: node.data.opening,
+    curator: node.data.curator,
+    detailedText: node.data.detailed_text,
+    excerpt: node.data.excerpt,
+    exhibitionView: node.data.exhibition_view.map((y: any) => {
+      return {
+        ...y.image,
+      }
+    }),
+    featuredImage: node.data.featured_image,
+    title: node.data.title,
   }
 }
