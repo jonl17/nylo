@@ -6,26 +6,30 @@ import favicon from '../../static/fav.png'
 import Footer from '~/components/Site/Footer'
 import { bgSetter } from '~/utils'
 import MobileHeader from '~/components/Site/MobileHeader'
+import useGetAnnouncement from '~/hooks/useGetAnnouncement'
 
 const Layout: React.FC<{
-  pageContext: any
+  page: any
   mainMenu: any[]
-}> = ({ children, pageContext, mainMenu }) => {
+  pageContext: any
+}> = ({ children, page, mainMenu, pageContext: pCtx }) => {
+  console.log(pCtx)
+
   return (
     <Fragment>
       <Helmet>
         <title>Living Art Museum</title>
         <link rel='shortcut icon' href={favicon} type='image/png' />
       </Helmet>
-
+      {/* 
       <main id='main-wrapper'>
-        <NavBar customPostType={pageContext.type} mainMenu={mainMenu} />
+        <NavBar customPostType={page.type} mainMenu={mainMenu} />
         <MobileHeader />
-        <div className={bgSetter(pageContext)}>{children}</div>
+        <div className={bgSetter(page)}>{children}</div>
         <Footer />
       </main>
-
-      <Banner page={pageContext} />
+      */}
+      <Banner ctx={pCtx} />
     </Fragment>
   )
 }

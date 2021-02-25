@@ -15,7 +15,6 @@ const Menu = ({
   mainMenu: any[]
 }) => {
   const menu = mainMenu.data.items
-  console.log(linkResolver(menu[0].page))
   return (
     <div>
       {menu &&

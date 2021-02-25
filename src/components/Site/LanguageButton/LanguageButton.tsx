@@ -6,9 +6,9 @@ const LanguageButton = ({ page }: { page: any }) => {
   const altPage = page.alternate_languages[0]
   return (
     <ButtonLink
-      label={page.lang.slice(0, 2).toUpperCase()}
+      label={altPage.document.lang.slice(0, 2).toUpperCase()}
       className='btn__language'
-      to={linkResolver(altPage)}
+      to={linkResolver(altPage.document)}
     ></ButtonLink>
   )
 }

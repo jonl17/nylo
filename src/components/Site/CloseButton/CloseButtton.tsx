@@ -18,8 +18,6 @@ const CloseButton = ({ className = '', goTo }: Props) => {
     }
   }
 
-  console.log(state)
-
   const { lang } = useLanguage()
 
   const handleClick = () => {

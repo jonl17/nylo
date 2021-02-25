@@ -1,22 +1,11 @@
-export type Page = {
-  uid: string
-  url: string
-  document: {
-    __typename: string
-    data: {
-      title: {
-        text: string
-      }
-    }
-  }
-}
+import { PageInterface } from '~/utils/resolvers'
 
 export interface MenuItem {
   lang: string
   url: string
   data: {
     items: {
-      page: Page
+      page: PageInterface
     }[]
   }
   uid: string

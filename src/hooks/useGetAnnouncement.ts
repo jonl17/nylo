@@ -27,16 +27,10 @@ export default () => {
       }
     }
   `)
-  if (!data.allPrismicAnnouncementBanner) {
-    return null
-  }
-  const announcement: { [key in Language]: any } = {
-    is: data.allPrismicAnnouncementBanner.nodes.find(
-      node => node.lang === 'is'
-    ),
-    'en-us': data.allPrismicAnnouncementBanner.nodes.find(
-      node => node.lang === 'en-us'
-    ),
-  }
-  return announcement
+  return data.allPrismicAnnouncementBanner.nodes.map(node => {
+    return {
+      lang: node.lang,
+      announcement: node.data.the_announcement,
+    }
+  })
 }

@@ -60,6 +60,17 @@ exports.createPages = async ({ graphql, actions }) => {
           data {
             date
           }
+          alternate_languages {
+            document {
+              ... on PrismicNews {
+                id
+                uid
+                tags
+                lang
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -73,6 +84,17 @@ exports.createPages = async ({ graphql, actions }) => {
           uid
           lang
           url
+          alternate_languages {
+            document {
+              ... on PrismicExhibition {
+                id
+                uid
+                tags
+                lang
+                url
+              }
+            }
+          }
           data {
             title {
               text
@@ -109,15 +131,8 @@ exports.createPages = async ({ graphql, actions }) => {
       path: node.url,
       component: pageTemplate,
       context: {
-        id: node.id,
         hasSubmenu: displaySubmenu(),
-        uid: node.uid,
-        lang: node.lang,
-        url: node.url,
-        alternateLanguage:
-          node.alternate_languages.length > 0
-            ? node.alternate_languages[0].document.url
-            : null,
+        ...node,
       },
     })
   })
@@ -127,11 +142,8 @@ exports.createPages = async ({ graphql, actions }) => {
       path: node.url,
       component: newsTemplate,
       context: {
-        id: node.id,
+        ...node,
         date: node.data.date,
-        uid: node.uid,
-        lang: node.lang,
-        url: node.url,
         type: 'news',
       },
     })
@@ -143,11 +155,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: node.url,
       component: exhibitionTemplate,
       context: {
-        id: node.id,
-        title: node.data.title,
-        uid: node.uid,
-        lang: node.lang,
-        url: node.url,
+        ...node,
         type: 'exhibition',
       },
     })

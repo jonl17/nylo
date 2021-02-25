@@ -1,23 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useGetAnnouncementBanner } from '~/hooks'
+import React from 'react'
+import useGetAnnouncement from '~/hooks/useGetAnnouncement'
 import LanguageButton from '~/components/Site/LanguageButton'
-import { LanguageContext } from '~/context/LanguageContext'
+import { Language } from '~/lang'
 
-const Banner = ({ page }: { page: any }) => {
-  const announcement = useGetAnnouncementBanner()
-  const [theAnnouncement, setTheAnnouncement] = useState('')
+const Banner = ({ ctx }: { ctx: { lang: Language; page: any } }) => {
+  const data = useGetAnnouncement().find(node => node.lang === ctx.lang)
 
   return (
     <div className='banner' id='banner'>
-      {announcement && (
+      {data && (
         <div
           dangerouslySetInnerHTML={{
-            __html: theAnnouncement,
+            __html: data.announcement.html,
           }}
           className='banner__marquee center'
         />
       )}
-      <LanguageButton page={page} />
+      <LanguageButton page={ctx} />
     </div>
   )
 }

@@ -6,6 +6,13 @@ export const fragment = graphql`
     uid
     lang
     url
+    alternate_languages {
+      id
+      type
+      lang
+      uid
+      url
+    }
     data {
       featured_image {
         alt

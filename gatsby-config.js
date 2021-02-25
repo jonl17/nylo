@@ -48,6 +48,7 @@ module.exports = {
   },
   plugins: [
     gatsbySourcePrismicConfig,
+    'gatsby-plugin-layout',
     `gatsby-plugin-sass`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,

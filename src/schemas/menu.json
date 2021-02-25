@@ -23,6 +23,14 @@
               "customtypes": ["page"],
               "label": "Page"
             }
+          },
+          "submenu": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "label": "Submenu",
+              "customtypes": ["menu"]
+            }
           }
         },
         "label": "Items"

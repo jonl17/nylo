@@ -1,1 +1,1 @@
-export { default as useGetAnnouncementBanner } from './useGetAnnouncementBanner'
+export { default as useGetAnnouncement } from './useGetAnnouncement'

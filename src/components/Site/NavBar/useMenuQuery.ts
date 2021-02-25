@@ -2,6 +2,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { MenuItem } from './types'
 import '../../../fragments/menu'
 import { Language } from '~/lang'
+import { pageResolver } from '~/utils/resolvers'
 
 const useMenuQuery = (lang: Language = 'is') => {
   const menu: {
@@ -55,13 +56,7 @@ const useMenuQuery = (lang: Language = 'is') => {
 
   const mainMenu = translatedMainMenu?.data.items.map(item => {
     return {
-      page: item.page.document
-        ? {
-            url: item.page.url,
-            name: item.page.document.data.title.text,
-            altLangs: item.page.document.alternate_languages,
-          }
-        : null,
+      page: item.page.document && pageResolver(item.page.document),
     }
   })
   return mainMenu
