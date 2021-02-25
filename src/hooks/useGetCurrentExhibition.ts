@@ -3,6 +3,7 @@ import '../fragments/exhibition/excerpt'
 import slugify from 'slugify'
 import { exhibitionIsOpen } from '~/utils'
 import { Language } from '~/lang'
+import { ExhibitionInterface, exhibitionResolver } from '~/utils/resolvers'
 
 export default (lang: Language = 'is') => {
   const data: {
@@ -39,21 +40,10 @@ export default (lang: Language = 'is') => {
       }
     }
   `)
-  return data.allPrismicExhibition.nodes
-    .filter(node => node.lang === lang)
-    .find(node => {
-      if (
-        exhibitionIsOpen(
-          new Date(node.data.opening),
-          new Date(node.data.closing)
-        )
-      ) {
-        return {
-          id: node.id,
-          uid: slugify(node.uid),
-          url: node.url,
-          ...node.data,
-        }
-      }
-    })
+
+  const current = data.allPrismicExhibition.nodes.filter(node =>
+    exhibitionIsOpen(new Date(node.data.opening), new Date(node.data.closing))
+  )
+  if (!current) return null
+  return exhibitionResolver(current)
 }

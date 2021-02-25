@@ -6,8 +6,6 @@ import '~/fragments/page'
 import SliceMapping from '~/components/Slices/mapping'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
-import Frontpage from '~/components/Site/Frontpage'
-import Layout from '~/layouts'
 import { pageResolver, menuResolver } from '~/utils/resolvers'
 import cn from 'classnames'
 
@@ -38,17 +36,11 @@ const Page = ({ data }: { data: any }) => {
   return (
     <Wrapper>
       <div className='content'>
-        {!IS_FRONTPAGE ? (
-          <>
-            <CloseButton className='icon__exit' />
-            {slices &&
-              slices.map((slice: any, idx: number) => (
-                <SliceMapping key={idx} slice={slice} lang={page.lang} />
-              ))}
-          </>
-        ) : (
-          <Frontpage currentExhibition={null} />
-        )}
+        {!IS_FRONTPAGE && <CloseButton className='icon__exit' />}
+        {slices &&
+          slices.map((slice: any, idx: number) => (
+            <SliceMapping key={idx} slice={slice} lang={page.lang} />
+          ))}
       </div>
     </Wrapper>
   )

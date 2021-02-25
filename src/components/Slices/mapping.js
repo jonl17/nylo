@@ -1,5 +1,5 @@
 import React from 'react'
-import { Media, RichText, ArtistBio, Program } from '.'
+import { Media, RichText, ArtistBio, Program, CurrentExhibition } from '.'
 
 // todo, convert to typescript
 const SliceMapping = ({ slice, lang }) => {
@@ -8,6 +8,7 @@ const SliceMapping = ({ slice, lang }) => {
     media: Media,
     artist_bio: ArtistBio,
     program: Program,
+    current_exhibition: CurrentExhibition,
   }
 
   const Cmp = slices[slice.slice_type]

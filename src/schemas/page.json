@@ -41,7 +41,8 @@
           "all_news": [],
           "media": [],
           "richtext": [],
-          "program": []
+          "program": [],
+          "current_exhibition": []
         },
         "choices": {
           "richtext": {
@@ -136,6 +137,25 @@
                 }
               }
             }
+          },
+          "current_exhibition": {
+            "type": "Slice",
+            "fieldset": "Current Exhibition",
+            "description": "Displays an exhibition and links to it's detail page.",
+            "icon": "brush",
+            "display": "list",
+            "non-repeat": {
+              "exhibition": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["exhibition"],
+                  "label": "Exhibition",
+                  "placeholder": "Choose it wisely!"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

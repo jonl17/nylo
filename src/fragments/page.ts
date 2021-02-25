@@ -41,6 +41,9 @@ export const fragment = graphql`
         ... on PrismicPageBodyRichtext {
           ...pageRichTextFragment
         }
+        ... on PrismicPageBodyCurrentExhibition {
+          ...pageCurrentExhibitionFragment
+        }
       }
     }
   }

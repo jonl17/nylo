@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby'
+import './exhibition/full'
 
 export const fragment = graphql`
   fragment pageRichTextFragment on PrismicPageBodyRichtext {
@@ -29,6 +30,17 @@ export const fragment = graphql`
     items {
       parameter_label
       parameter_value
+    }
+  }
+
+  fragment pageCurrentExhibitionFragment on PrismicPageBodyCurrentExhibition {
+    slice_type
+    primary {
+      exhibition {
+        document {
+          ...exhibitionFragmentFull
+        }
+      }
     }
   }
 `
