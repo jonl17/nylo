@@ -22,6 +22,7 @@ exports.createPages = async ({ graphql, actions }) => {
           uid
           lang
           tags
+          type
           alternate_languages {
             document {
               ... on PrismicPage {
@@ -60,6 +61,7 @@ exports.createPages = async ({ graphql, actions }) => {
           lang
           tags
           url
+          type
           data {
             date
           }
@@ -71,6 +73,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 tags
                 lang
                 url
+                type
               }
             }
           }
@@ -88,6 +91,7 @@ exports.createPages = async ({ graphql, actions }) => {
           lang
           prismicId
           url
+          type
           tags
           alternate_languages {
             document {
@@ -131,6 +135,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: pageTemplate,
       context: {
         ...node,
+        bg: node.tags.find(tag => tag.includes('bg-')),
       },
     })
   })

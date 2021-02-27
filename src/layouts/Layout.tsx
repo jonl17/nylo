@@ -7,6 +7,7 @@ import Footer from '~/components/Site/Footer'
 import { bgSetter } from '~/utils'
 import MobileHeader from '~/components/Site/MobileHeader'
 import useGetAnnouncement from '~/hooks/useGetAnnouncement'
+import { useBackground } from '~/context/backgroundContext'
 
 const Layout: React.FC<{
   page: any
@@ -25,7 +26,7 @@ const Layout: React.FC<{
       <main id='main-wrapper'>
         <NavBar lang={pCtx.lang} />
         <MobileHeader lang={pCtx.lang} />
-        <div className={bgSetter(pCtx)}>{children}</div>
+        <div className={pCtx.bg}>{children}</div>
         <Footer lang={pCtx.lang} />
       </main>
 

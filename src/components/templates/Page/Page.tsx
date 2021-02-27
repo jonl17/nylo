@@ -6,12 +6,14 @@ import '~/fragments/page'
 import SliceMapping from '~/components/Slices/mapping'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
-import { pageResolver, menuResolver, MenuInterface } from '~/utils/resolvers'
+import { pageResolver } from '~/utils/resolvers'
 import cn from 'classnames'
 
 import { defaultFrontpageTag } from '../../../../prismic.config'
 import useGetPage from '~/hooks/useGetPage'
 import { useSecondaryNavbar } from '~/context/secNavContext'
+import { useBackground } from '~/context/backgroundContext'
+import { BGcolor } from '~/types'
 
 const Page = ({ data }: { data: any }) => {
   const page = pageResolver(data.prismicPage)

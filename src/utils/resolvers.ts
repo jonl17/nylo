@@ -113,6 +113,7 @@ export interface NewsInterface {
   lang: 'is' | 'en-us'
   tags: string[]
   date: string
+  type: string
   title: {
     html: string
     text: string
@@ -130,6 +131,7 @@ export const newsResolver = (node: any): NewsInterface => {
     prismicId: node.prismicId,
     uid: node.uid,
     lang: node.lang,
+    type: node.type,
     tags: node.tags,
     date: node.data.date,
     title: node.data.title,
@@ -144,6 +146,7 @@ export interface ExhibitionInterface {
   uid: string
   lang: 'is' | 'en-us'
   tags: string[]
+  type: string
   title: {
     html: string
     text: string
@@ -181,6 +184,7 @@ export const exhibitionResolver = (node: any): ExhibitionInterface => {
     prismicId: node.prismicId,
     uid: node.uid,
     lang: node.lang,
+    type: node.type,
     tags: node.tags,
     additionalLinks: node.data.additional_links.map((x: any) => {
       return {

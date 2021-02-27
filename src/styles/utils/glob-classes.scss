@@ -33,27 +33,27 @@
 }
 
 .bg {
-  &--green {
+  &-green {
     background-color: $green;
   }
 
-  &--white {
+  &-white {
     background-color: $white;
   }
 
-  &--gray {
+  &-gray {
     background-color: #dedcdc;
   }
 
-  &--yellow {
+  &-yellow {
     background-color: $yellow;
   }
 
-  &--pink {
+  &-pink {
     background-color: $pink;
   }
 
-  &--purple {
+  &-purple {
     background-color: $purple;
   }
 }
