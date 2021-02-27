@@ -43,7 +43,13 @@ const Exhibition = ({ data }: Props) => {
       </Helmet>
       <div className='page'>
         <div className='content'>
-          <CloseButton className='icon__exit' />
+          <CloseButton
+            className='icon__exit'
+            lang={exhibition.lang}
+            isSubpageOf={
+              homepage ? { url: homepage.url, uid: homepage.uid } : undefined
+            }
+          />
           <div className='d-flex align-items-center'>
             {exhibitionIsOpen(
               new Date(exhibition.opening),

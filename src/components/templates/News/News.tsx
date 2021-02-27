@@ -20,7 +20,13 @@ const News: React.FC<{
   return (
     <div className='page'>
       <div className='content'>
-        <CloseButton className='icon__exit' />
+        <CloseButton
+          className='icon__exit'
+          lang={news.lang}
+          isSubpageOf={
+            homepage ? { url: homepage.url, uid: homepage.uid } : undefined
+          }
+        />
         <div className='d-flex align-items-center'>
           <p className='pr-3'>{formatDate(news.date)}</p>
           {homepage && (

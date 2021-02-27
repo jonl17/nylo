@@ -25,7 +25,7 @@ const Layout: React.FC<{
       </Helmet>
 
       <main id='main-wrapper'>
-        <NavBar lang={pCtx.lang} />
+        <NavBar lang={pCtx.lang} type={pCtx.type} />
         <MobileHeader lang={pCtx.lang} />
         <div className={pCtx.bg}>{children}</div>
         <Footer lang={pCtx.lang} />

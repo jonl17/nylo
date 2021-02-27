@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import useSidebarQuery from './useSidebarQuery'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
@@ -7,12 +7,10 @@ import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
 import linkResolver from '../../../utils/linkResolver'
 import { Language } from '~/lang'
-import { useSecondaryNavbar } from '~/context/secNavContext'
-import { hasSubmenu } from './methods'
+import { hasSubmenu, isCustomType } from './methods'
 import { useLocation } from '@reach/router'
-import { MenuInterface, menuResolver, PageInterface } from '~/utils/resolvers'
 
-const Menu = ({ lang }: { lang: Language }) => {
+const Menu = ({ lang, type }: { lang: Language; type: string }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
   const { pathname } = useLocation()
   return (
@@ -27,7 +25,9 @@ const Menu = ({ lang }: { lang: Language }) => {
                 key={idx}
                 to={linkResolver(node.page)}
                 className={cn('navbar__anchor', {
-                  'navbar__anchor--active': hasSubmenu(node.submenu, pathname),
+                  'navbar__anchor--active':
+                    hasSubmenu(node.submenu, pathname) ||
+                    isCustomType(node.page.uid, type),
                 })}
               >
                 <span />
@@ -68,10 +68,10 @@ const Sidebar = ({ lang }: { lang: Language }) => {
   )
 }
 
-export default ({ lang }: { lang: Language }) => {
+export default ({ lang, type }: { lang: Language; type: string }) => {
   return (
     <nav className='navbar d-none d-lg-flex flex-column pt-3 h-100' id='navbar'>
-      <Menu lang={lang} />
+      <Menu lang={lang} type={type} />
       <Sidebar lang={lang} />
     </nav>
   )
