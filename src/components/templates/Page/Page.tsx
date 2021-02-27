@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { graphql } from 'gatsby'
 import '~/fragments/menu'
 import '~/fragments/page'
@@ -6,7 +6,7 @@ import '~/fragments/page'
 import SliceMapping from '~/components/Slices/mapping'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
-import { pageResolver, menuResolver } from '~/utils/resolvers'
+import { pageResolver, menuResolver, MenuInterface } from '~/utils/resolvers'
 import cn from 'classnames'
 
 import { defaultFrontpageTag } from '../../../../prismic.config'
@@ -20,7 +20,7 @@ const Page = ({ data }: { data: any }) => {
 
   const IS_FRONTPAGE = page.tags.includes(defaultFrontpageTag)
 
-  const { modify } = useSecondaryNavbar()
+  const { modify, menu } = useSecondaryNavbar()
 
   const parentPage = page.isSubpageOf ? useGetPage(page.isSubpageOf.uid) : null
 
@@ -35,7 +35,7 @@ const Page = ({ data }: { data: any }) => {
       <SecondaryNavbar />
       <div
         className={cn('page', {
-          'page__has-submenu': data.prismicPage.data.has_submenu.document,
+          'page__has-submenu': menu,
         })}
       >
         {children}

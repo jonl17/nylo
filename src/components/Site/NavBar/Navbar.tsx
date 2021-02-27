@@ -22,7 +22,7 @@ const useIsParentPageActive = (
   useEffect(() => {
     if (submenu && path === page.url) {
       modify(submenu)
-    } else {
+    } else if (!submenu) {
       modify()
     }
   }, [path])
