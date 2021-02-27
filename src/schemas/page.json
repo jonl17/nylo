@@ -22,13 +22,13 @@
         "label": "Has submenu"
       }
     },
-    "subpage": {
+    "is_subpage_of": {
       "type": "Link",
       "config": {
         "select": "document",
         "customtypes": ["page"],
         "tags": ["PARENT_PAGE"],
-        "label": "Subpage of"
+        "label": "Is subpage of"
       }
     },
     "body": {

@@ -10,6 +10,11 @@ export interface PageInterface {
   }
   alternateLanguages: PageInterface[]
   body: any[]
+  isSubpageOf?: {
+    url: string
+    uid: string
+  }
+  hasSubmenu?: MenuInterface
 }
 
 export const altLanguageResolver = (node: any) => {
@@ -33,6 +38,15 @@ export const pageResolver = (node: any): PageInterface => {
       p.document ? altLanguageResolver(p.document) : []
     ),
     body: node.data.body,
+    isSubpageOf: node.data.is_subpage_of.document
+      ? {
+          url: node.data.is_subpage_of.document.url,
+          uid: node.data.is_subpage_of.document.uid,
+        }
+      : node.data.is_subpage_of.document,
+    hasSubmenu: node.data.has_submenu.document
+      ? submenuResolver(node.data.has_submenu.document)
+      : undefined,
   }
 }
 

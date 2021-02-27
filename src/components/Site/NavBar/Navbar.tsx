@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'gatsby'
 import useSidebarQuery from './useSidebarQuery'
 import useOpeningHoursQuery from './useOpeningHoursQuery'
@@ -7,25 +7,52 @@ import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
 import linkResolver from '../../../utils/linkResolver'
 import { Language } from '~/lang'
+import { useSecondaryNavbar } from '~/context/secNavContext'
+import { hasSubmenu } from './methods'
+import { useLocation } from '@reach/router'
+import { MenuInterface, menuResolver, PageInterface } from '~/utils/resolvers'
+
+const useIsParentPageActive = (
+  submenu: MenuInterface,
+  page: { url: string },
+  path: string
+) => {
+  const { modify } = useSecondaryNavbar()
+
+  useEffect(() => {
+    if (submenu && path === page.url) {
+      modify(submenu)
+    } else {
+      modify()
+    }
+  }, [path])
+}
 
 const Menu = ({ lang }: { lang: Language }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
+  const { pathname } = useLocation()
   return (
     <div>
       {menu &&
         menu.items
           .filter(node => node.page)
-          .map((node, idx) => (
-            <Link
-              activeClassName='navbar__anchor--active'
-              key={idx}
-              to={linkResolver(node.page)}
-              className={cn('navbar__anchor')}
-            >
-              <span />
-              <h1>{node.page.title.text}</h1>
-            </Link>
-          ))}
+          .map((node, idx) => {
+            useIsParentPageActive(node.submenu, node.page, pathname)
+
+            return (
+              <Link
+                activeClassName='navbar__anchor--active'
+                key={idx}
+                to={linkResolver(node.page)}
+                className={cn('navbar__anchor', {
+                  'navbar__anchor--active': hasSubmenu(node.submenu, pathname),
+                })}
+              >
+                <span />
+                <h1>{node.page.title.text}</h1>
+              </Link>
+            )
+          })}
     </div>
   )
 }

@@ -76,7 +76,31 @@ export const fragment = graphql`
       }
       has_submenu {
         document {
-          __typename
+          ... on PrismicMenu {
+            id
+            prismicId
+            lang
+            tags
+            data {
+              name
+              items {
+                page {
+                  uid
+                  url
+                  lang
+                  tags
+                }
+              }
+            }
+          }
+        }
+      }
+      is_subpage_of {
+        document {
+          ... on PrismicPage {
+            url
+            uid
+          }
         }
       }
     }

@@ -1,33 +1,30 @@
-import React, { useContext, useEffect } from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
-import { useLocation, Match } from '@reach/router'
+import React from 'react'
+import { Link } from 'gatsby'
 import cn from 'classnames'
-import { LanguageContext } from '~/context/LanguageContext'
-import { MenuItem } from '../NavBar/types'
-import useGetSecondaryNavbars from './useGetSecondaryNavbars'
+import { useSecondaryNavbar } from '~/context/secNavContext'
+import linkResolver from '~/utils/linkResolver'
 
-const SecondaryNavBar: React.FC<{
-  submenu: { id: string; data: { name: string; items: any[] } }
-}> = ({ submenu }) => {
-  const menu = useGetSecondaryNavbars(submenu.id)
+const SecondaryNavBar = () => {
+  const { menu } = useSecondaryNavbar()
 
-  const { pathname } = useLocation()
-
-  if (!menu) return null
+  if (!menu) {
+    return null
+  }
 
   return (
     <div className='secondary-navbar mt-3 ml-2 d-flex flex-column'>
-      {menu.items.map((item, idx) => (
-        <Link
-          className={cn('secondary-navbar__anchor parag--2', {
-            ['secondaryAnchorActive']: pathname.includes(item.url),
-          })}
-          key={idx}
-          to={item.url}
-        >
-          {item.title.text}
-        </Link>
-      ))}
+      {menu.items.map((item, i) => {
+        return (
+          <Link
+            className={cn('secondary-navbar__anchor parag--2')}
+            activeClassName='secondaryAnchorActive'
+            key={i}
+            to={linkResolver(item.page)}
+          >
+            {item.page.title.text}
+          </Link>
+        )
+      })}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import '~/fragments/menu'
 import '~/fragments/page'
@@ -10,6 +10,8 @@ import { pageResolver, menuResolver } from '~/utils/resolvers'
 import cn from 'classnames'
 
 import { defaultFrontpageTag } from '../../../../prismic.config'
+import useGetPage from '~/hooks/useGetPage'
+import { useSecondaryNavbar } from '~/context/secNavContext'
 
 const Page = ({ data }: { data: any }) => {
   const page = pageResolver(data.prismicPage)
@@ -18,11 +20,19 @@ const Page = ({ data }: { data: any }) => {
 
   const IS_FRONTPAGE = page.tags.includes(defaultFrontpageTag)
 
+  const { modify } = useSecondaryNavbar()
+
+  const parentPage = page.isSubpageOf ? useGetPage(page.isSubpageOf.uid) : null
+
+  useEffect(() => {
+    if (parentPage && parentPage.hasSubmenu) {
+      modify(parentPage.hasSubmenu)
+    }
+  }, [])
+
   const Wrapper: React.FC = ({ children }) => (
     <Fragment>
-      {data.prismicPage.data.has_submenu.document && (
-        <SecondaryNavbar submenu={data.prismicPage.data.has_submenu.document} />
-      )}
+      <SecondaryNavbar />
       <div
         className={cn('page', {
           'page__has-submenu': data.prismicPage.data.has_submenu.document,

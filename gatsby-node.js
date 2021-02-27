@@ -38,6 +38,13 @@ exports.createPages = async ({ graphql, actions }) => {
               html
               text
             }
+            is_subpage_of {
+              document {
+                ... on PrismicPage {
+                  uid
+                }
+              }
+            }
           }
         }
       }
