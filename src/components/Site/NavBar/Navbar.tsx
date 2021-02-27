@@ -12,22 +12,6 @@ import { hasSubmenu } from './methods'
 import { useLocation } from '@reach/router'
 import { MenuInterface, menuResolver, PageInterface } from '~/utils/resolvers'
 
-const useIsParentPageActive = (
-  submenu: MenuInterface,
-  page: { url: string },
-  path: string
-) => {
-  const { modify } = useSecondaryNavbar()
-
-  useEffect(() => {
-    if (submenu && path === page.url) {
-      modify(submenu)
-    } else if (!submenu) {
-      modify()
-    }
-  }, [path])
-}
-
 const Menu = ({ lang }: { lang: Language }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
   const { pathname } = useLocation()
@@ -37,8 +21,6 @@ const Menu = ({ lang }: { lang: Language }) => {
         menu.items
           .filter(node => node.page)
           .map((node, idx) => {
-            useIsParentPageActive(node.submenu, node.page, pathname)
-
             return (
               <Link
                 activeClassName='navbar__anchor--active'

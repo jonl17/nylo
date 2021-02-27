@@ -27,6 +27,8 @@ const Page = ({ data }: { data: any }) => {
   const parentPage = page.isSubpageOf ? useGetPage(page.isSubpageOf.uid) : null
 
   useEffect(() => {
+    modify(page.hasSubmenu)
+
     if (parentPage && parentPage.hasSubmenu) {
       modify(parentPage.hasSubmenu)
     }

@@ -8,6 +8,7 @@ import { bgSetter } from '~/utils'
 import MobileHeader from '~/components/Site/MobileHeader'
 import useGetAnnouncement from '~/hooks/useGetAnnouncement'
 import { useBackground } from '~/context/backgroundContext'
+import { pageResolver } from '~/utils/resolvers'
 
 const Layout: React.FC<{
   page: any
