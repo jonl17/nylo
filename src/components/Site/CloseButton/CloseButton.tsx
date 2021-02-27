@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { Link } from 'gatsby'
 import useGetPage from '~/hooks/useGetPage'
 import linkResolver from '~/utils/linkResolver'
+import { Language } from 'balkan-tungumal/lib/dict'
 
 interface Props {
   className?: string
@@ -11,19 +12,19 @@ interface Props {
     url: string
     uid: string
   }
+  lang: Language
 }
 
-const CloseButton = ({ className = '', isSubpageOf }: Props) => {
+const CloseButton = ({ className = '', isSubpageOf, lang }: Props) => {
   const [backTo, setBackTo] = useState('/')
 
-  const frontpage = useGetPage('frontpage')
   const parentpage = isSubpageOf ? useGetPage(isSubpageOf.uid) : null
 
   useEffect(() => {
     if (parentpage) {
       setBackTo(linkResolver(parentpage))
     } else {
-      setBackTo(linkResolver(frontpage))
+      setBackTo(lang === 'is' ? '/' : '/en-us')
     }
   }, [])
 

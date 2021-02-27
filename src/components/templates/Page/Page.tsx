@@ -49,7 +49,11 @@ const Page = ({ data }: { data: any }) => {
     <Wrapper>
       <div className='content'>
         {!IS_FRONTPAGE && (
-          <CloseButton className='icon__exit' isSubpageOf={page.isSubpageOf} />
+          <CloseButton
+            className='icon__exit'
+            isSubpageOf={page.isSubpageOf}
+            lang={page.lang}
+          />
         )}
         {slices &&
           slices.map((slice: any, idx: number) => (
