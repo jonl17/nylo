@@ -147,6 +147,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         ...node,
         date: node.data.date,
+        bg: 'bg-purple',
       },
     })
   })
@@ -158,6 +159,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: exhibitionTemplate,
       context: {
         ...node,
+        bg: 'bg-gray',
       },
     })
   })

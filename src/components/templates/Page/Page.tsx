@@ -12,8 +12,6 @@ import cn from 'classnames'
 import { defaultFrontpageTag } from '../../../../prismic.config'
 import useGetPage from '~/hooks/useGetPage'
 import { useSecondaryNavbar } from '~/context/secNavContext'
-import { useBackground } from '~/context/backgroundContext'
-import { BGcolor } from '~/types'
 
 const Page = ({ data }: { data: any }) => {
   const page = pageResolver(data.prismicPage)
@@ -50,7 +48,9 @@ const Page = ({ data }: { data: any }) => {
   return (
     <Wrapper>
       <div className='content'>
-        {!IS_FRONTPAGE && <CloseButton className='icon__exit' />}
+        {!IS_FRONTPAGE && (
+          <CloseButton className='icon__exit' isSubpageOf={page.isSubpageOf} />
+        )}
         {slices &&
           slices.map((slice: any, idx: number) => (
             <SliceMapping key={idx} slice={slice} lang={page.lang} />
