@@ -19,12 +19,11 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
   const [expand, setExpand] = useState(false)
   return (
     <div
-      className={cn(
-        'mobile-header px-2 d-flex align-items-center justify-content-between d-lg-none',
-        bg
-      )}
+      className={cn('mobile-header d-flex d-lg-none', bg, {
+        'mobile-header--expanded': expand,
+      })}
     >
-      <Burger onClick={() => console.log('hey joe, open up em burg')} />
+      <Burger onClick={() => setExpand(!expand)} expand={expand} />
       <Title lang={lang} />
     </div>
   )
