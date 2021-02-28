@@ -29,7 +29,7 @@ const CloseButton = ({ className = '', isSubpageOf, lang }: Props) => {
   }, [])
 
   return (
-    <Link to={backTo} className='icon__exit'>
+    <Link to={backTo} className='icon__exit d-none d-lg-block'>
       <Exit className={cn('icon', className)} />
     </Link>
   )

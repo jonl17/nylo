@@ -12,7 +12,7 @@ const SecondaryNavBar = () => {
   }
 
   return (
-    <div className='secondary-navbar mt-3 ml-2 d-flex flex-column'>
+    <div className='secondary-navbar mt-3 ml-2 d-none d-lg-flex flex-column'>
       {menu.items.map((item, i) => {
         return (
           <Link

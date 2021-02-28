@@ -13,7 +13,7 @@ interface Props {
 
 const Breadcrumbs = ({ parentLink, childLink }: Props) => {
   return (
-    <div className='d-flex'>
+    <div className='d-none d-lg-flex'>
       <Link to={parentLink.url}>
         <p>{parentLink.text}</p>
       </Link>
