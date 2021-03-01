@@ -1,9 +1,18 @@
 .mobile-header {
   height: 150px;
-  justify-content: space-between;
-  padding: $spacer * 3 $spacer;
+  padding: 0 $spacer;
+  overflow: hidden;
 
   &--expanded {
     min-height: calc(100vh - #{$banner-height});
+  }
+
+  &__head {
+    padding: $spacer * 3 0 $spacer * 3 0;
+    height: 150px;
+    align-items: center;
+  }
+
+  &__mainmenu {
   }
 }
