@@ -1,17 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import '~/fragments/menu'
 import '~/fragments/page'
-
 import SliceMapping from '~/components/Slices/mapping'
 import CloseButton from '~/components/Site/CloseButton'
 import SecondaryNavbar from '~/components/Site/SecondaryNavBar'
 import { pageResolver } from '~/utils/resolvers'
 import cn from 'classnames'
-
 import { defaultFrontpageTag } from '../../../../prismic.config'
 import useGetPage from '~/hooks/useGetPage'
 import { useSecondaryNavbar } from '~/context/secNavContext'
+import { useMobileMenu } from '~/context/mobileMenuContext'
 
 const Page = ({ data }: { data: any }) => {
   const page = pageResolver(data.prismicPage)
@@ -24,7 +23,11 @@ const Page = ({ data }: { data: any }) => {
 
   const parentPage = page.isSubpageOf ? useGetPage(page.isSubpageOf.uid) : null
 
+  const { triggerMobileMenu } = useMobileMenu()
+
   useEffect(() => {
+    triggerMobileMenu(false) // close the mobile menu when a page loads
+
     modify(page.hasSubmenu)
 
     if (parentPage && parentPage.hasSubmenu) {

@@ -32,7 +32,9 @@
   }
 
   &__has-submenu {
-    padding-left: 250px;
+    @include media-breakpoint-up('lg') {
+      padding-left: 250px;
+    }
   }
 
   &__featured-image {

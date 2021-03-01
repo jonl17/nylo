@@ -4,11 +4,7 @@ import Banner from '~/components/Site/Banner'
 import { Helmet } from 'react-helmet'
 import favicon from '../../static/fav.png'
 import Footer from '~/components/Site/Footer'
-import { bgSetter } from '~/utils'
 import MobileHeader from '~/components/Site/MobileHeader'
-import useGetAnnouncement from '~/hooks/useGetAnnouncement'
-import { useBackground } from '~/context/backgroundContext'
-import { pageResolver } from '~/utils/resolvers'
 
 const Layout: React.FC<{
   page: any

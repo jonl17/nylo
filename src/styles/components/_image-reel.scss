@@ -1,8 +1,16 @@
 .image-reel {
   mix-blend-mode: multiply;
 
+  @include media-breakpoint-down('md') {
+    overflow-x: auto;
+  }
+
   img {
     object-fit: cover;
     height: 100%;
+
+    @include media-breakpoint-down('md') {
+      max-width: 75vw;
+    }
   }
 }

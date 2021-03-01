@@ -48,7 +48,7 @@ const Sidebar = ({ lang }: { lang: Language }) => {
   const { day, time } = openingHours
 
   return (
-    <div className='pt-5 pb-3'>
+    <div className='pb-3'>
       <div
         className='sidebar__address parag--2'
         dangerouslySetInnerHTML={{ __html: sidebar.address.html }}
