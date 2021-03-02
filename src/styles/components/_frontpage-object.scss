@@ -11,7 +11,6 @@ $offset: calc(#{$spacer * 2} + #{$banner-height});
 
       img {
         position: relative;
-        max-height: 50vh;
         width: auto;
         object-fit: contain;
       }
