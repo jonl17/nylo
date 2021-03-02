@@ -1,14 +1,3 @@
-@keyframes fade-in {
-  from {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(0%);
-  }
-}
-
 .page {
   overflow: hidden;
   height: 100%;
@@ -17,18 +6,10 @@
 
   @include media-breakpoint-up('lg') {
     padding: $spacer * 2;
-    margin-right: 300px;
   }
 
   &__frontpage {
     padding-left: 0;
-  }
-
-  &__animator-enter {
-    animation: fade-in 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
-  &__animator-exit {
-    animation: fade-in 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) reverse;
   }
 
   &__has-submenu {

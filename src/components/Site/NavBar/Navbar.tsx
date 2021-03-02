@@ -21,6 +21,9 @@ const Menu = ({ lang, type }: { lang: Language; type: string }) => {
           .map((node, idx) => {
             return (
               <Link
+                state={{
+                  animate: true,
+                }}
                 activeClassName='navbar__anchor--active'
                 key={idx}
                 to={linkResolver(node.page)}

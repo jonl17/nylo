@@ -2,7 +2,7 @@
   &__exit {
     z-index: 400;
     position: fixed;
-    right: calc(#{$spacer} + 310px);
+    right: $spacer * 2;
     top: $spacer * 2;
 
     &:hover {

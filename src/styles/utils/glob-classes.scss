@@ -1,4 +1,11 @@
-// +++++
+@keyframes fade-in {
+  from {
+    transform: translateX(-50px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
 
 .anchorActive {
   span {
@@ -33,6 +40,10 @@
 }
 
 .bg {
+  @include media-breakpoint-up('lg') {
+    width: calc(100vw - 300px);
+  }
+
   &-green {
     background-color: $green;
   }

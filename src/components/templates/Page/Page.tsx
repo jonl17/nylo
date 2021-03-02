@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, GatsbyLinkProps } from 'gatsby'
 import '~/fragments/menu'
 import '~/fragments/page'
 import SliceMapping from '~/components/Slices/mapping'

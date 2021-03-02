@@ -12,7 +12,11 @@ export default ({ primary }: { primary: any }) => {
   return (
     <Fragment>
       <div className='col-lg-8 p-0 frontpage-object--current-exhibition'>
-        <Link className='h-100 d-inline-flex flex-column' to={exhibition.url}>
+        <Link
+          state={{ animate: true }}
+          className='h-100 d-inline-flex flex-column'
+          to={exhibition.url}
+        >
           <div className='frontpage-object__heading mb-3'>
             <h1>
               {multipleArtistsHandler(
@@ -23,10 +27,12 @@ export default ({ primary }: { primary: any }) => {
             <h1 className='font-italic'>{exhibition.title.text}</h1>
             <h1>{formatDate(exhibition.opening, exhibition.closing)}</h1>
           </div>
-          <img
-            src={exhibition.featuredImage.url}
-            alt={exhibition.featuredImage.alt}
-          />
+          <div className='frontpage-object__image-wrapper'>
+            <img
+              src={exhibition.featuredImage.url}
+              alt={exhibition.featuredImage.alt}
+            />
+          </div>
         </Link>
       </div>
     </Fragment>

@@ -2,30 +2,23 @@ $offset: calc(#{$spacer * 2} + #{$banner-height});
 
 .frontpage-object {
   &--current-exhibition {
+    height: 100vh;
+    position: relative;
+  }
+
+  &__image-wrapper {
     img {
       width: 100%;
     }
 
     @include media-breakpoint-up('lg') {
-      min-height: calc(100vh - #{$offset});
-
+      position: relative;
+      height: 500px;
       img {
-        position: relative;
-        width: auto;
+        position: absolute;
+        left: 0;
         object-fit: contain;
       }
-    }
-  }
-
-  &--news {
-    display: flex;
-    flex-direction: column-reverse;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-
-    &:not(:last-of-type) {
-      margin-right: $spacer * 3;
     }
   }
 }
