@@ -1,6 +1,5 @@
 import React from 'react'
 import cn from 'classnames'
-import FeaturedImage from '~/components/Site/FeaturedImage'
 
 const FrontpageObject: React.FC<{
   image: { alt: string; url: string }
