@@ -91,7 +91,7 @@ const Exhibition = ({ data }: Props) => {
 
           {exhibition.excerpt && (
             <div
-              className='parag--1'
+              className='parag parag--1'
               dangerouslySetInnerHTML={{ __html: exhibition.excerpt.html }}
             ></div>
           )}
@@ -106,7 +106,7 @@ const Exhibition = ({ data }: Props) => {
 
           {readMore && exhibition.detailedText && (
             <div
-              className='parag--1'
+              className='parag parag--2'
               dangerouslySetInnerHTML={{ __html: exhibition.detailedText.html }}
             />
           )}

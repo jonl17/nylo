@@ -5,7 +5,6 @@ import { Language } from '~/lang'
 import cn from 'classnames'
 import useGetMainMenu from '~/hooks/useGetMainMenu'
 import { useMobileMenu } from '~/context/mobileMenuContext'
-import { PageInterface } from '~/utils/resolvers'
 
 const Title = ({ lang }: { lang: Language }) => {
   return (
@@ -25,7 +24,7 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
   return (
     <div
       className={cn('mobile-header d-block d-lg-none', {
-        'mobile-header--expanded': open,
+        'mobile-header--expanded border-bottom': open,
         [`${bg}`]: !open,
       })}
     >

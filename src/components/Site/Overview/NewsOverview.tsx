@@ -1,9 +1,8 @@
 import React from 'react'
-import ButtonLink from '~/components/Site/ButtonLink'
 import { langSeek, Language } from '~/lang'
 import { NewsInterface } from '~/utils/resolvers'
-import linkResolver from '~/utils/linkResolver'
 import useGetNews from '~/hooks/useGetNews'
+import { Link } from 'gatsby'
 
 type BoxProps = {
   item: NewsInterface
@@ -11,7 +10,7 @@ type BoxProps = {
 
 const Box = ({ item }: BoxProps) => {
   return (
-    <div className='col-xl-6 p-0'>
+    <Link to={item.url} className='col-xl-6 p-0 pr-lg-2'>
       <div className='overview-box mb-1 mr-1'>
         {item.featuredImage.url && (
           <img
@@ -22,12 +21,8 @@ const Box = ({ item }: BoxProps) => {
         )}
         <p className='mb-1 mt-2'>{item.date}</p>
         <h2 className='mb-2'>{item.title.text}</h2>
-        <ButtonLink
-          label={langSeek('Read more', item.lang)}
-          to={linkResolver(item)}
-        ></ButtonLink>
       </div>
-    </div>
+    </Link>
   )
 }
 

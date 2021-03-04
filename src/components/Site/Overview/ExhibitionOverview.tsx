@@ -1,10 +1,10 @@
 import React from 'react'
-import ButtonLink from '~/components/Site/ButtonLink'
 import { getAllExhibitions } from '~/hooks/exhibitionHooks'
 import { langSeek, Language } from '~/lang'
 import { ExhibitionInterface } from '~/utils/resolvers'
 import linkResolver from '~/utils/linkResolver'
 import { formatDate } from '~/utils'
+import { Link } from 'gatsby'
 
 type BoxProps = {
   item: ExhibitionInterface
@@ -12,7 +12,7 @@ type BoxProps = {
 
 const Box = ({ item }: BoxProps) => {
   return (
-    <div className='col-xl-6 p-0'>
+    <Link className='col-xl-6 p-0 pr-lg-2' to={item.url}>
       <div className='overview-box mb-1 mr-1'>
         {item.featuredImage.url && (
           <img
@@ -23,12 +23,8 @@ const Box = ({ item }: BoxProps) => {
         )}
         <p className='mb-1 mt-2'>{formatDate(item.opening, item.closing)}</p>
         <h2 className='mb-2'>{item.title.text}</h2>
-        <ButtonLink
-          label={langSeek('Read more', item.lang)}
-          to={linkResolver(item)}
-        ></ButtonLink>
       </div>
-    </div>
+    </Link>
   )
 }
 
