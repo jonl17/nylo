@@ -21,8 +21,7 @@ const Layout: React.FC<{
       if (typeof window !== undefined && window.innerWidth > 650) {
         gsap.from(el, {
           x: -200,
-          duration: 0.2,
-          ease: 'power3',
+          duration: 0.4,
         })
       }
     }

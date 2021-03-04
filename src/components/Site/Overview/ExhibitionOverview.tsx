@@ -35,7 +35,7 @@ const Box = ({ item }: BoxProps) => {
 export default ({ lang }: { lang: Language }) => {
   const exhibitions = getAllExhibitions().filter(node => node.lang === lang)
   return (
-    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mt-lg-3 mb-3 pr-lg-3'>
+    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
       {exhibitions.map((item, idx) => (
         <Box key={idx} item={item} />
       ))}

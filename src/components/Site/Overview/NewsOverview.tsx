@@ -37,7 +37,7 @@ export default ({ lang }: { lang: Language }) => {
   if (!news) return null
 
   return (
-    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mt-lg-3 mb-3 pr-lg-3'>
+    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
       {news.map((item, idx) => (
         <Box key={idx} item={item} />
       ))}
