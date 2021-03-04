@@ -19,5 +19,16 @@
         transform: rotate(-3deg);
       }
     }
+
+    @include media-breakpoint-up('lg') {
+      &:hover {
+        span {
+          height: 15px;
+          width: 33px;
+          background: $black;
+          transform: rotate(3deg);
+        }
+      }
+    }
   }
 }
