@@ -1,7 +1,3 @@
-require('dotenv').config({
-  path: `.env.development`,
-})
-
 const { PRISMIC_REPO_NAME, PRISMIC_ACCESS_TOKEN } = process.env
 
 module.exports = {

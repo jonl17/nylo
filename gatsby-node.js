@@ -3,8 +3,10 @@ const slugify = require('slugify')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-    node: {
-      fs: 'empty',
+    resolve: {
+      fallback: {
+        fs: false,
+      },
     },
   })
 }
