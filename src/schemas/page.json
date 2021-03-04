@@ -42,7 +42,8 @@
           "media": [],
           "richtext": [],
           "program": [],
-          "current_exhibition": []
+          "current_exhibition": [],
+          "upcoming_exhibition": []
         },
         "choices": {
           "richtext": {
@@ -152,6 +153,24 @@
                   "customtypes": ["exhibition"],
                   "label": "Exhibition",
                   "placeholder": "Choose it wisely!"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "upcoming_exhibition": {
+            "type": "Slice",
+            "fieldset": "Upcoming exhibition",
+            "description": "Links to an exhibition",
+            "icon": "assignment_ind",
+            "display": "list",
+            "non-repeat": {
+              "upcoming_exhibition": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["exhibition"],
+                  "label": "Upcoming exhibition"
                 }
               }
             },

@@ -78,6 +78,11 @@
   position: relative;
   margin-bottom: $spacer * 2;
 
+  &--page {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   @include media-breakpoint-up('lg') {
     padding-right: $spacer * 9;
   }

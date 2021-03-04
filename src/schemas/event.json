@@ -19,16 +19,16 @@
         "label": "Date"
       }
     },
-    "to": {
-      "type": "Number",
-      "config": {
-        "label": "To"
-      }
-    },
     "from": {
       "type": "Number",
       "config": {
         "label": "From"
+      }
+    },
+    "to": {
+      "type": "Number",
+      "config": {
+        "label": "To"
       }
     },
     "text": {

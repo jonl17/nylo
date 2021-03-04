@@ -208,3 +208,41 @@ export const exhibitionResolver = (node: any): ExhibitionInterface => {
     title: node.data.title,
   }
 }
+
+export interface EventInterface {
+  url: string
+  prismicId: string
+  uid: string
+  lang: 'is' | 'en-us'
+  tags: string[]
+  type: string
+  name: {
+    html: string
+    text: string
+  }
+  image: {
+    alt: string
+    url: string
+  }
+  text: {
+    html: string
+  }
+  date: string
+  time: string
+}
+
+export const eventResolver = (node: any): EventInterface => {
+  return {
+    uid: node.uid,
+    prismicId: node.uid,
+    url: node.url,
+    type: node.type,
+    lang: node.lang,
+    tags: node.tags,
+    name: node.data.name,
+    image: node.data.image,
+    text: node.data.text,
+    date: node.data.date,
+    time: `${node.data.from}—${node.data.to}`,
+  }
+}

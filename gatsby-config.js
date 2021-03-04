@@ -37,6 +37,7 @@ const gatsbySourcePrismicConfig = {
       sidebar: require(`./src/schemas/sidebar.json`),
       footer: require(`./src/schemas/footer.json`),
       opening_hours: require(`./src/schemas/opening_hours.json`),
+      event: require('./src/schemas/event.json'),
     },
     lang: '*',
   },

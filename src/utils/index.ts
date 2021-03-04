@@ -8,21 +8,27 @@ export const generateURLfromWords = (strings: string[]) => {
 }
 
 export const multipleArtistsHandler = (artist: string, text: string = '') => {
-  return artist.split(',').length > 1 ? text : artist
+  return artist.split(/,| og /).length > 3 ? text : artist
 }
 
 export const formatDate = (
   firstDate: string,
   secondDate?: string,
-  x = new Date(firstDate)
+  excludeYear?: boolean
 ) => {
+  const x = new Date(firstDate)
+
   if (!secondDate) {
-    return `${x.getDate()}.${x.getMonth() + 1}.${x.getFullYear()}`
+    return `${x.getDate()}.${x.getMonth() + 1}.${
+      !excludeYear ? x.getFullYear() : ''
+    }`
   } else {
     const y = new Date(secondDate)
     return `${x.getDate()}.${x.getMonth() + 1}${
-      x.getFullYear() === y.getFullYear() ? '' : `.${x.getFullYear()}`
-    }—${y.getDate()}.${y.getMonth()}.${y.getFullYear()}`
+      x.getFullYear() === y.getFullYear()
+        ? ''
+        : `.${!excludeYear ? x.getFullYear() : ''}`
+    }—${y.getDate()}.${y.getMonth()}.${!excludeYear ? y.getFullYear() : ''}`
   }
 }
 

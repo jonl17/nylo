@@ -14,9 +14,9 @@ $offset: calc(#{$spacer * 2} + #{$banner-height});
       position: relative;
       height: 500px;
       img {
-        position: absolute;
-        left: 0;
+        height: 100%;
         object-fit: contain;
+        width: auto;
       }
     }
   }

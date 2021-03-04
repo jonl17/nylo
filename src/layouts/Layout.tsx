@@ -22,6 +22,7 @@ const Layout: React.FC<{
         gsap.from(el, {
           x: -200,
           duration: 0.4,
+          ease: 'power2',
         })
       }
     }

@@ -50,7 +50,7 @@ const Page = ({ data }: { data: any }) => {
 
   return (
     <Wrapper>
-      <div className='content'>
+      <div className='content content--page'>
         {!IS_FRONTPAGE && (
           <CloseButton
             className='icon__exit'

@@ -43,4 +43,15 @@ export const fragment = graphql`
       }
     }
   }
+
+  fragment pageUpcomingExhibitionFragment on PrismicPageBodyUpcomingExhibition {
+    slice_type
+    primary {
+      upcoming_exhibition {
+        document {
+          ...exhibitionFragmentFull
+        }
+      }
+    }
+  }
 `

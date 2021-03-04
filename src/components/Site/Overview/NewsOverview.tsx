@@ -1,9 +1,9 @@
 import React from 'react'
-import { getAllNews } from '~/hooks/newsHooks'
 import ButtonLink from '~/components/Site/ButtonLink'
 import { langSeek, Language } from '~/lang'
 import { NewsInterface } from '~/utils/resolvers'
 import linkResolver from '~/utils/linkResolver'
+import useGetNews from '~/hooks/useGetNews'
 
 type BoxProps = {
   item: NewsInterface
@@ -32,7 +32,7 @@ const Box = ({ item }: BoxProps) => {
 }
 
 export default ({ lang }: { lang: Language }) => {
-  const news = getAllNews().filter(node => node.lang === lang)
+  const news = useGetNews().filter(node => node.lang === lang)
 
   if (!news) return null
 

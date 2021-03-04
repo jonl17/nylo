@@ -1,9 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import { OverViewItem } from '~/types'
 import '../fragments/news'
-import slugify from 'slugify'
-import { formatDate } from '~/utils'
-import { Language } from '~/lang'
 import { NewsInterface, newsResolver } from '~/utils/resolvers'
 
 interface NewsQueryNode {
@@ -23,7 +19,7 @@ interface NewsQueryNode {
   }
 }
 
-const getAllNews = () => {
+export default (): NewsInterface[] => {
   const data: {
     allPrismicNews: {
       nodes: NewsQueryNode[]
@@ -42,12 +38,3 @@ const getAllNews = () => {
 
   return allNews
 }
-
-const getLatestNews = (
-  lang: Language = 'is',
-  news: NewsInterface[] = getAllNews()
-) =>
-  // if there are more than 2 available, bring 'em. Otherwise bring 1.
-  news.length > 1 ? news.slice(0, 2) : news.slice(0, 1)
-
-export { getAllNews, getLatestNews }

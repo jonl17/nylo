@@ -1,0 +1,12 @@
+.upcoming-exhibition {
+  &__heading {
+    text-decoration: underline;
+  }
+
+  &__content {
+    img {
+      height: 500px;
+      object-fit: contain;
+    }
+  }
+}

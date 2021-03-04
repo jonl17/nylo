@@ -53,6 +53,9 @@ export const fragment = graphql`
         ... on PrismicPageBodyCurrentExhibition {
           ...pageCurrentExhibitionFragment
         }
+        ... on PrismicPageBodyUpcomingExhibition {
+          ...pageUpcomingExhibitionFragment
+        }
       }
     }
   }
