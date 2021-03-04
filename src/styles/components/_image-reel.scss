@@ -6,11 +6,6 @@
   }
 
   img {
-    object-fit: cover;
-    height: 100%;
-
-    @include media-breakpoint-down('md') {
-      max-width: 75vw;
-    }
+    object-fit: contain;
   }
 }

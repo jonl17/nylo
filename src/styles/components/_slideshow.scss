@@ -4,26 +4,44 @@
   position: relative;
 
   img {
-    margin-right: $spacer * 2;
+    margin-right: $spacer;
+    object-fit: contain;
     width: 100%;
+
+    @include media-breakpoint-up('lg') {
+      width: auto;
+      height: 100%;
+    }
   }
 
   &__clickzone {
-    position: absolute;
     background: lightgray;
     height: 100%;
-    width: 25%;
     top: 0;
+    width: 50%;
+
+    @include media-breakpoint-up('lg') {
+      position: absolute;
+      width: 25%;
+    }
+
+    span {
+      font-size: 35px;
+    }
 
     &--left {
       left: 0;
+
       &:hover {
         cursor: w-resize;
       }
     }
 
     &--right {
-      right: -150px;
+      @include media-breakpoint-up('lg') {
+        right: -150px;
+      }
+
       &:hover {
         cursor: e-resize;
       }

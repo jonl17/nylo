@@ -1,14 +1,22 @@
 .featured-image {
-  height: 500px;
   width: 100%;
   position: relative;
   margin: 0 0 calc(#{$spacer} * 2) 0;
 
   img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
     object-fit: contain;
+    width: 100%;
+  }
+
+  @include media-breakpoint-up('lg') {
+    height: 500px;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+    }
   }
 }

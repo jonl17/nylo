@@ -1,5 +1,11 @@
 .exhibition {
   &__featured_image {
-    max-height: 500px;
+    object-fit: contain;
+    width: 100%;
+
+    @include media-breakpoint-up('lg') {
+      width: auto;
+      max-height: 500px;
+    }
   }
 }

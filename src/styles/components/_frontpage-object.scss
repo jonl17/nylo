@@ -2,7 +2,6 @@ $offset: calc(#{$spacer * 2} + #{$banner-height});
 
 .frontpage-object {
   &--current-exhibition {
-    height: 100vh;
     position: relative;
   }
 
