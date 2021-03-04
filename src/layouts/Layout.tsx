@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useMemo } from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
 import { Helmet } from 'react-helmet'

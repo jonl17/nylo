@@ -11,12 +11,13 @@ $offset: calc(#{$spacer * 2} + #{$banner-height});
     }
 
     @include media-breakpoint-up('lg') {
-      position: relative;
-      height: 500px;
       img {
-        height: 100%;
+        width: 100%;
+        @include media-breakpoint-up('lg') {
+          height: 500px;
+          width: auto;
+        }
         object-fit: contain;
-        width: auto;
       }
     }
   }

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
-import { LanguageContext } from '~/context/LanguageContext'
+import { LanguageContext } from '~/context/languageContext'
 
 const Open = ({ className = '' }) => {
   const { lang } = useContext(LanguageContext)

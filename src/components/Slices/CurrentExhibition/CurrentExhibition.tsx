@@ -11,7 +11,7 @@ export default ({ primary }: { primary: any }) => {
 
   return (
     <Fragment>
-      <div className='col-lg-8 pl-0 pb-3 pb-lg-5 frontpage-object--current-exhibition'>
+      <div className='col-lg-8 px-0 pb-3 pb-lg-5 frontpage-object--current-exhibition'>
         <Link
           state={{ animate: true }}
           className='h-100 d-inline-flex flex-column'
