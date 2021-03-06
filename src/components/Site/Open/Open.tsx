@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
-import { LanguageContext } from '~/context/languageContext'
+import { useLanguage } from '~/context/langContext'
 
 const Open = ({ className = '' }) => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useLanguage()
   return (
     <p className={cn(className, 'open')}>
       {langSeek('Open', lang)?.toUpperCase()}

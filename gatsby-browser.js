@@ -1,5 +1,5 @@
 import './src/styles/nylo.scss'
-import { LanguageProvider } from '~/context/LanguageContext'
+import { LanguageProvider } from '~/context/langContext'
 import React from 'react'
 import { SecondaryNavbarContextProvider } from '~/context/secNavContext'
 import { BackgroundContextProvider } from '~/context/backgroundContext'
