@@ -1,4 +1,5 @@
 import slugify from 'slugify'
+import { ExhibitionInterface } from './resolvers'
 
 export const generateURLfromWords = (strings: string[]) => {
   return strings
@@ -107,3 +108,32 @@ export const bgSetter = ({
 }
 
 export const cleanPathname = (p: string) => `${p.replace('/', '')}`
+
+export interface ExhibitionGroup {
+  status: string
+  exhibitions: ExhibitionInterface[]
+}
+
+export const groupExhibitionsByDate = (exhibitions: ExhibitionInterface[]) => {
+  // framundan, í gangi, afstaðnar
+  // upcoming, ongoing, past
+
+  // Liðnar / Past yfirstandandi / Current og Framundan / upcoming
+
+  let open: ExhibitionGroup = { status: 'Current', exhibitions: [] }
+  let upcoming: ExhibitionGroup = { status: 'Upcoming', exhibitions: [] }
+  let past: ExhibitionGroup = { status: 'Past', exhibitions: [] }
+
+  exhibitions.map(node => {
+    // if it's open
+    if (exhibitionIsOpen(new Date(node.opening), new Date(node.closing))) {
+      open.exhibitions.push(node)
+    } else if (new Date(node.opening) > new Date()) {
+      upcoming.exhibitions.push(node)
+    } else {
+      past.exhibitions.push(node)
+    }
+  })
+
+  return { upcoming, open, past }
+}

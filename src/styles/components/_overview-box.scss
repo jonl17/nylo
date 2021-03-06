@@ -11,6 +11,10 @@
     width: 100%;
   }
 
+  &__title {
+    font-style: italic;
+  }
+
   @include media-breakpoint-up('lg') {
     &:hover {
       button {

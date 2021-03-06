@@ -1,11 +1,11 @@
 @keyframes scroll-left {
   0% {
-    transform: translate(100%, 0%);
-    -webkit-transform: -webkit-translate(100%, 0%);
+    transform: translate(165%, 0%);
+    -webkit-transform: -webkit-translate(165%, 0%);
   }
   100% {
-    -webkit-transform: -webkit-translate(-100%, 0%);
-    transform: translate(-100%, 0%);
+    -webkit-transform: -webkit-translate(-150%, 0%);
+    transform: translate(-150%, 0%);
   }
 }
 
@@ -25,7 +25,7 @@
     height: 100%;
     text-align: center;
     transform: translate(100%, 0%);
-    animation: scroll-left 20s linear infinite;
+    animation: scroll-left 15s linear infinite;
 
     * {
       white-space: nowrap;

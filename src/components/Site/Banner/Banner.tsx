@@ -1,10 +1,11 @@
-import React, { memo } from 'react'
+import React, { useEffect, useState } from 'react'
 import useGetAnnouncement from '~/hooks/useGetAnnouncement'
 import LanguageButton from '~/components/Site/LanguageButton'
 import { Language } from '~/lang'
 
 const Banner = ({ ctx }: { ctx: { lang: Language; page: any } }) => {
   const data = useGetAnnouncement().find(node => node.lang === ctx.lang)
+
   return (
     <div className='banner' id='banner'>
       {data && (
