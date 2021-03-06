@@ -23,9 +23,10 @@
   &__marquee {
     position: absolute;
     height: 100%;
+    width: 100%;
     text-align: center;
     transform: translate(100%, 0%);
-    animation: scroll-left 15s linear infinite;
+    animation: scroll-left 17s linear infinite;
 
     * {
       white-space: nowrap;

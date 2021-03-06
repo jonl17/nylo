@@ -1,0 +1,21 @@
+.input {
+  input {
+    height: 50px;
+    font-size: 23px;
+    border: none;
+    outline: 0;
+    width: 100%;
+    border: 2px solid transparent;
+
+    &:active {
+      border: 2px solid $black;
+    }
+    &:focus {
+      border: 2px solid $black;
+    }
+  }
+
+  @include media-breakpoint-up('lg') {
+    width: 350px;
+  }
+}

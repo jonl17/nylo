@@ -10,7 +10,7 @@ type BoxProps = {
 
 const Box = ({ item }: BoxProps) => {
   return (
-    <Link to={item.url} className='col-xl-6 p-0 pr-lg-2'>
+    <Link to={item.url} className='col-lg-6 p-lg-0 pr-lg-2'>
       <div className='overview-box mb-1 mr-1'>
         {item.featuredImage.url && (
           <img
@@ -32,7 +32,7 @@ export default ({ lang }: { lang: Language }) => {
   if (!news) return null
 
   return (
-    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
+    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3 w-100'>
       {news.map((item, idx) => (
         <Box key={idx} item={item} />
       ))}
