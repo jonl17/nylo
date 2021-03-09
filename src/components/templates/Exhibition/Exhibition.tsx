@@ -39,7 +39,9 @@ const Exhibition = ({ data }: Props) => {
   return (
     <>
       <Helmet>
-        <title>{`Living Art Museum—${exhibition.title.text}`}</title>
+        <title>{`${
+          exhibition.lang === 'is' ? 'Nýlistasafnið' : 'Living Art Museum'
+        }—${exhibition.title.text}`}</title>
       </Helmet>
       <div className='page'>
         <div className='content'>
