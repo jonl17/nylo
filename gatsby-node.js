@@ -116,6 +116,32 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const events = await graphql(`
+    {
+      allPrismicEvent(sort: { fields: data___date, order: DESC }) {
+        nodes {
+          id
+          uid
+          url
+          lang
+          prismicId
+          tags
+          alternate_languages {
+            document {
+              ... on PrismicExhibition {
+                id
+                uid
+                tags
+                lang
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
   const pageTemplate = path.resolve(
     __dirname,
     `src/components/templates/Page/Page.tsx`
@@ -128,6 +154,11 @@ exports.createPages = async ({ graphql, actions }) => {
   const exhibitionTemplate = path.resolve(
     __dirname,
     `src/components/templates/Exhibition/Exhibition.tsx`
+  )
+
+  const eventTemplate = path.resolve(
+    __dirname,
+    'src/components/templates/Event/Event.tsx'
   )
 
   // pages
@@ -162,6 +193,17 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         ...node,
         bg: 'bg-gray',
+      },
+    })
+  })
+
+  // events
+  events.data.allPrismicEvent.nodes.forEach(node => {
+    createPage({
+      path: node.url,
+      component: eventTemplate,
+      context: {
+        ...node,
       },
     })
   })
