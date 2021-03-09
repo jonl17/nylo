@@ -5,9 +5,9 @@ import { langSeek } from 'balkan-tungumal'
 import { exhibitionResolver } from '~/utils/resolvers'
 
 export default ({ primary }: { primary: any }) => {
-  const exhibition = exhibitionResolver(primary.exhibition.document)
+  if (!primary.exhibition.document) return null
 
-  if (!exhibition) return null
+  const exhibition = exhibitionResolver(primary.exhibition.document)
 
   return (
     <Fragment>

@@ -98,7 +98,7 @@ const Exhibition = ({ data }: Props) => {
             ></div>
           )}
 
-          {!readMore && (
+          {!readMore && exhibition.detailedText && (
             <Button
               className='mt-2'
               label={langSeek('Read more', exhibition.lang) ?? ''}
@@ -120,7 +120,7 @@ const Exhibition = ({ data }: Props) => {
           />
 
           {exhibition.artistBiography && (
-            <div className='parag--2'>
+            <div className='parag parag--2'>
               <p className='m-0'>Bio</p>
               <div
                 dangerouslySetInnerHTML={{

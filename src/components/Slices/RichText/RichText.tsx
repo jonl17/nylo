@@ -5,11 +5,11 @@ const RichText = ({ primary: { text, type = 'large' } }: RichTextProps) => {
   return (
     <>
       <div
-        className='rich-text d-block d-lg-none'
+        className='rich-text d-block d-lg-none parag'
         dangerouslySetInnerHTML={{ __html: text.html }}
       />
       <div
-        className={`d-none d-lg-block rich-text--${type}`}
+        className={`d-none d-lg-block rich-text--${type} parag`}
         dangerouslySetInnerHTML={{
           __html: text.html,
         }}

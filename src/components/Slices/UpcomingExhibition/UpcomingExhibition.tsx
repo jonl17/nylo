@@ -5,6 +5,8 @@ import { Link } from 'gatsby'
 import { langSeek } from 'balkan-tungumal'
 
 const UpcomingExhibition = ({ primary }: { primary: any }) => {
+  if (!primary.upcoming_exhibition.document) return null
+
   const exhibition = exhibitionResolver(primary.upcoming_exhibition.document)
 
   return (
