@@ -33,7 +33,7 @@ export const formatDate = (
       x.getFullYear() === y.getFullYear()
         ? ''
         : `.${!excludeYear ? x.getFullYear() : ''}`
-    }—${y.getDate()}.${y.getMonth()}.${!excludeYear ? y.getFullYear() : ''}`
+    }—${y.getDate()}.${y.getMonth() + 1}.${!excludeYear ? y.getFullYear() : ''}`
   }
 }
 

@@ -1,14 +1,18 @@
 .overview-box {
   min-width: 250px;
-  text-align: center;
   border: 1px solid transparent;
   transition: background 0.2s;
   padding: 0 0 25px 0;
 
   &__featured-image {
-    object-fit: cover;
-    height: 100%;
     width: 100%;
+
+    @include media-breakpoint-up('lg') {
+      object-fit: contain;
+      max-height: 500px;
+      max-width: 100%;
+      width: auto;
+    }
   }
 
   @include media-breakpoint-up('lg') {

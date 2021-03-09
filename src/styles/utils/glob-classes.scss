@@ -79,8 +79,10 @@
   margin-bottom: $spacer * 2;
 
   &--page {
-    display: flex;
-    flex-wrap: wrap;
+    @include media-breakpoint-up('lg') {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 
   @include media-breakpoint-up('lg') {

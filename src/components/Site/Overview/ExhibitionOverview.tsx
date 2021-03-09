@@ -18,7 +18,7 @@ type BoxProps = {
 const Box = ({ item }: BoxProps) => {
   return (
     <Link className='col-xl-6 p-0 pr-lg-2 ' to={item.url}>
-      <div className='overview-box mb-1 mr-1'>
+      <div className='overview-box mb-1 mr-lg-1'>
         {item.featuredImage.url && (
           <img
             className='overview-box__featured-image'

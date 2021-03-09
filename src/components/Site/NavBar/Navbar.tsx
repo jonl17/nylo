@@ -58,7 +58,7 @@ const Sidebar = ({ lang }: { lang: Language }) => {
       />
       <div className='parag--2 pt-3'>
         <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
-        <p>{`${day.from} til ${day.to} ${time.from}-${time.to}`}</p>
+        <p>{`${day.from} til ${day.to} ${time.from}—${time.to}`}</p>
       </div>
       <div className='d-flex flex-column pt-3'>
         {sidebar.socialMediaLinks.map((s: { url: string; title: string }) => (
