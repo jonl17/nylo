@@ -1,0 +1,44 @@
+{
+  "Main": {
+    "title": {
+      "type": "Text",
+      "config": {
+        "label": "Title"
+      }
+    },
+    "description": {
+      "type": "Text",
+      "config": {
+        "label": "Description"
+      }
+    },
+    "keywords": {
+      "type": "Text",
+      "config": {
+        "label": "Keywords"
+      }
+    },
+    "favicon": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 144,
+          "height": 144
+        },
+        "thumbnails": [],
+        "label": "Favicon"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 1200,
+          "height": 630
+        },
+        "thumbnails": [],
+        "label": "Image"
+      }
+    }
+  }
+}

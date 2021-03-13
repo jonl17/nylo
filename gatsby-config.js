@@ -14,8 +14,6 @@ const { htmlSerializer } = require('./src/prismic/htmlSerializer')
 const reponame = process.env.PRISMIC_REPO_NAME || prismicRepo
 const apiKey = process.env.PRISMIC_API_KEY || accessToken
 
-// const { htmlSerializer } = require('./src/prismic/htmlSerializer')
-
 const gatsbySourcePrismicConfig = {
   resolve: `gatsby-source-prismic`,
   options: {
@@ -38,15 +36,13 @@ const gatsbySourcePrismicConfig = {
       footer: require(`./src/schemas/footer.json`),
       opening_hours: require(`./src/schemas/opening_hours.json`),
       event: require('./src/schemas/event.json'),
+      seo: require('./src/schemas/seo.json'),
     },
     lang: '*',
   },
 }
 
 module.exports = {
-  siteMetadata: {
-    title: 'Living Art Museum',
-  },
   plugins: [
     gatsbySourcePrismicConfig,
     'gatsby-plugin-layout',
