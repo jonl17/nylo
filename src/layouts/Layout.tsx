@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useMemo } from 'react'
 import NavBar from '~/components/Site/NavBar'
 import Banner from '~/components/Site/Banner'
-import { Helmet } from 'react-helmet'
 import Footer from '~/components/Site/Footer'
 import MobileHeader from '~/components/Site/MobileHeader'
 import { GatsbyLinkProps } from 'gatsby'

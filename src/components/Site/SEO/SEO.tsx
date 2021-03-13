@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Language } from '~/lang'
 import { Helmet } from 'react-helmet'
@@ -29,7 +29,9 @@ const SEO = ({ lang }: { lang: Language }) => {
     (node: any) => node.lang === lang
   )
 
-  const { title, description, keywords, favicon, image } = metadata.data
+  if (!metadata) return null
+
+  const { title, favicon, description, keywords, image } = metadata.data
 
   return (
     <Helmet>
