@@ -50,7 +50,7 @@ const Layout: React.FC<{
           {pCtx.lang === 'en-us' ? 'Living Art Musem' : 'Nýlistasafnið'}
         </title>
 
-        <link rel='shortcut icon' href='fav.png' type='image/png' />
+        <link rel='shortcut icon' href='./fav.png' type='image/png' />
         <meta charSet='utf-8' />
 
         <meta name='description' content={META.description[pCtx.lang]} />
@@ -59,7 +59,7 @@ const Layout: React.FC<{
           content='Fine arts, art, Icelandic art, Nýlistasafnið, Living Art Museum'
         />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta property='og:image' content='fb-share.png' />
+        <meta property='og:image' content='./fb-share.png' />
         <html lang={pCtx.lang} />
       </Helmet>
 
