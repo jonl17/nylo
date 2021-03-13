@@ -44,6 +44,9 @@ const SEO = ({ lang }: { lang: Language }) => {
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta property='og:image' content={image.url} />
       <meta property='og:description' content={description} />
+      <meta name='twitter:description' content={description} />
+      <meta name='twitter:image' content={image} />
+      <meta name='twitter:card' content='summary' />
     </Helmet>
   )
 }
