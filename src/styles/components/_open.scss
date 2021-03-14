@@ -1,3 +1,13 @@
+@keyframes glow {
+  from {
+    color: $black;
+  }
+  to {
+    color: $green;
+  }
+}
+
 .open {
-  color: $green;
+  text-transform: uppercase;
+  animation: glow 1s 0s infinite alternate-reverse;
 }

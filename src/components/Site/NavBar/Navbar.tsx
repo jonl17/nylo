@@ -59,14 +59,17 @@ const Sidebar = ({ lang }: { lang: Language }) => {
         className='sidebar__address parag--2'
         dangerouslySetInnerHTML={{ __html: sidebar.address.html }}
       />
+
       <div className='parag--2 pt-3'>
-        {isOpen && (
-          <p className='open'>{lang === 'is' ? 'Opið núna' : 'Open now'}</p>
-        )}
         <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
         <p>{`${day.from} til ${day.to} ${time.from}—${time.to}`}</p>
       </div>
-      <div className='d-flex flex-column pt-3'>
+      {isOpen && (
+        <p className='open parag--3'>
+          {lang === 'is' ? 'Opið núna' : 'Open now'}
+        </p>
+      )}
+      <div className='d-flex flex-column'>
         {sidebar.socialMediaLinks.map((s: { url: string; title: string }) => (
           <a className='mb-0' target='_blank' key={s.url} href={s.url}>
             {s.title}
