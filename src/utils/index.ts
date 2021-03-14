@@ -119,9 +119,6 @@ export interface ExhibitionGroup {
 }
 
 export const groupExhibitionsByDate = (exhibitions: ExhibitionInterface[]) => {
-  // framundan, í gangi, afstaðnar
-  // upcoming, ongoing, past
-
   // Liðnar / Past yfirstandandi / Current og Framundan / upcoming
 
   let open: ExhibitionGroup = { status: 'Current', exhibitions: [] }
@@ -140,4 +137,44 @@ export const groupExhibitionsByDate = (exhibitions: ExhibitionInterface[]) => {
   })
 
   return { upcoming, open, past }
+}
+
+const daysoftheweek = ['Sun', 'Mán', 'Þrið', 'Mið', 'Fimt', 'Föst', 'Laug']
+
+export const openNow = (
+  day: { from: string; to: string },
+  time: { from: number; to: number }
+): boolean => {
+  const d = new Date()
+  const weekdayIdx = d.getDay()
+  const hour = d.getHours()
+
+  const firstDayIdx = daysoftheweek.indexOf(day.from)
+  const lastdayIdx = daysoftheweek.indexOf(day.to)
+
+  let openDays = []
+  if (firstDayIdx > lastdayIdx) {
+    for (let i = firstDayIdx; i < daysoftheweek.length; i++) {
+      openDays.push(daysoftheweek[i])
+    }
+    for (let i = lastdayIdx; i >= 0; i--) {
+      openDays.push(daysoftheweek[i])
+    }
+  } else if (lastdayIdx > firstDayIdx) {
+    for (let i = firstDayIdx; i < lastdayIdx; i++) {
+      openDays.push(daysoftheweek[i])
+    }
+    for (let i = lastdayIdx; i > firstDayIdx; i--) {
+      openDays.push(daysoftheweek[i])
+    }
+  } else {
+    openDays.push(daysoftheweek[firstDayIdx])
+  }
+  if (
+    openDays.includes(daysoftheweek[weekdayIdx]) &&
+    hour >= time.from &&
+    hour < time.to
+  )
+    return true
+  else return false
 }

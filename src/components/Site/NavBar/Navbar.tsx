@@ -9,6 +9,7 @@ import linkResolver from '../../../utils/linkResolver'
 import { Language } from '~/lang'
 import { hasSubmenu, isCustomType } from './methods'
 import { useLocation } from '@reach/router'
+import { openNow } from '~/utils'
 
 const Menu = ({ lang, type }: { lang: Language; type: string }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
@@ -50,6 +51,8 @@ const Sidebar = ({ lang }: { lang: Language }) => {
 
   const { day, time } = openingHours
 
+  const isOpen = openNow(day, time)
+
   return (
     <div className='pb-3'>
       <div
@@ -57,6 +60,9 @@ const Sidebar = ({ lang }: { lang: Language }) => {
         dangerouslySetInnerHTML={{ __html: sidebar.address.html }}
       />
       <div className='parag--2 pt-3'>
+        {isOpen && (
+          <p className='open'>{lang === 'is' ? 'Opið núna' : 'Open now'}</p>
+        )}
         <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
         <p>{`${day.from} til ${day.to} ${time.from}—${time.to}`}</p>
       </div>
