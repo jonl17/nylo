@@ -13,6 +13,7 @@ import { langSeek } from 'balkan-tungumal'
 import { exhibitionResolver } from '~/utils/resolvers'
 import useGetPage from '~/hooks/useGetPage'
 import linkResolver from '~/utils/linkResolver'
+import { useLanguage } from '~/context/langContext'
 
 interface Props extends PageProps {
   pageContext: {
@@ -35,6 +36,10 @@ const Exhibition = ({ data }: Props) => {
   const homepage = useGetPage(
     exhibition.lang === 'is' ? 'syningar' : 'exhibitions'
   )
+
+  const { modify } = useLanguage()
+
+  modify(exhibition.lang)
 
   return (
     <>

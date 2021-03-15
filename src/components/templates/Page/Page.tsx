@@ -11,6 +11,7 @@ import { defaultFrontpageTag } from '../../../../prismic.config'
 import useGetPage from '~/hooks/useGetPage'
 import { useSecondaryNavbar } from '~/context/secNavContext'
 import { useMobileMenu } from '~/context/mobileMenuContext'
+import { useLanguage } from '~/context/langContext'
 
 const Page = ({ data }: { data: any }) => {
   const page = pageResolver(data.prismicPage)
@@ -19,19 +20,23 @@ const Page = ({ data }: { data: any }) => {
 
   const IS_FRONTPAGE = page.tags.includes(defaultFrontpageTag)
 
-  const { modify, menu } = useSecondaryNavbar()
+  const { modify: modifySubmenu, menu } = useSecondaryNavbar()
 
   const parentPage = page.isSubpageOf ? useGetPage(page.isSubpageOf.uid) : null
 
   const { triggerMobileMenu } = useMobileMenu()
 
+  const { modify: modifyLanguage } = useLanguage()
+
   useEffect(() => {
     triggerMobileMenu(false) // close the mobile menu when a page loads
 
-    modify(page.hasSubmenu)
+    modifySubmenu(page.hasSubmenu)
+
+    modifyLanguage(page.lang)
 
     if (parentPage && parentPage.hasSubmenu) {
-      modify(parentPage.hasSubmenu)
+      modifySubmenu(parentPage.hasSubmenu)
     }
   }, [])
 
