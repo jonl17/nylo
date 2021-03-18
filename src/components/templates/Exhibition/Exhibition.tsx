@@ -41,8 +41,6 @@ const Exhibition = ({ data }: Props) => {
 
   modify(exhibition.lang)
 
-  console.log(exhibition.additionalLinks)
-
   return (
     <>
       <Helmet>

@@ -21,19 +21,33 @@ export const formatDate = (
   secondDate?: string,
   excludeYear?: boolean
 ) => {
-  const x = new Date(firstDate)
+  const firstD = new Date(firstDate)
+
+  const firstFormattedDateFull = Intl.DateTimeFormat('en-US')
+    .format(firstD)
+    .replace(/\//g, '.')
+  const firstFormattedDateShort = firstFormattedDateFull.replace(
+    `.${firstD.getFullYear()}`,
+    ''
+  )
+
+  if (excludeYear) {
+    return firstFormattedDateShort
+  }
 
   if (!secondDate) {
-    return `${x.getDate()}.${x.getMonth() + 1}.${
-      !excludeYear ? x.getFullYear() : ''
-    }`
+    return firstFormattedDateFull
   } else {
-    const y = new Date(secondDate)
-    return `${x.getDate()}.${x.getMonth() + 1}${
-      x.getFullYear() === y.getFullYear()
-        ? ''
-        : `.${!excludeYear ? x.getFullYear() : ''}`
-    }—${y.getDate()}.${y.getMonth() + 1}.${!excludeYear ? y.getFullYear() : ''}`
+    const secondD = new Date(secondDate)
+    const secondFormattedDateFull = Intl.DateTimeFormat('en-US')
+      .format(secondD)
+      .replace(/\//g, '.')
+
+    if (secondD.getFullYear() === firstD.getFullYear()) {
+      return firstFormattedDateShort + '—' + secondFormattedDateFull
+    } else {
+      return firstFormattedDateFull + '—' + secondFormattedDateFull
+    }
   }
 }
 

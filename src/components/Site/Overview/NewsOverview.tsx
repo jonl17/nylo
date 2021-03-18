@@ -1,8 +1,9 @@
 import React from 'react'
-import { langSeek, Language } from '~/lang'
+import { Language } from '~/lang'
 import { NewsInterface } from '~/utils/resolvers'
 import useGetNews from '~/hooks/useGetNews'
 import { Link } from 'gatsby'
+import { formatDate } from '~/utils'
 
 type BoxProps = {
   item: NewsInterface
@@ -19,7 +20,7 @@ const Box = ({ item }: BoxProps) => {
             alt={item.featuredImage.alt}
           />
         )}
-        <p className='mb-1 mt-2'>{item.date}</p>
+        <p className='mb-1 mt-2'>{formatDate(item.date)}</p>
         <h2 className='mb-2'>{item.title.text}</h2>
       </div>
     </Link>
