@@ -2413,10 +2413,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-balkan-tungumal@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/balkan-tungumal/-/balkan-tungumal-1.0.7.tgz#aedbd7be04735636027ab93adda084fcbf65028c"
-  integrity sha512-rEgvuEoIpfBzfNg5ymIOKtsS62WnAb8LClMuOQb27UYSMeBRp7Z7oK3POt8Zk07401u/1Du5Av3XRIWxD2Sfog==
+balkan-tungumal@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/balkan-tungumal/-/balkan-tungumal-1.0.8.tgz#44beef26eb6a63b1476cb2f9021dc27e62aa2da5"
+  integrity sha512-MFterJtrhjadd8ZvPl7xS0zc3TALtuik0kJybTTkNlHQaTQOhch5Psx6MTKUCHRHYQHEDt39vf/HKkcEAekgWQ==
 
 base64-arraybuffer@0.1.4:
   version "0.1.4"

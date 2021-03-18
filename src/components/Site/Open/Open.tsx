@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
 import { useLanguage } from '~/context/langContext'

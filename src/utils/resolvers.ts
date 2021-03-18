@@ -188,7 +188,7 @@ export const exhibitionResolver = (node: any): ExhibitionInterface => {
     tags: node.tags,
     additionalLinks: node.data.additional_links.map((x: any) => {
       return {
-        title: x.title,
+        text: x.text,
         url: x.link.url,
       }
     }),

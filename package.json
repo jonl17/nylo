@@ -21,7 +21,7 @@
     "@types/react-dom": "^17.0.1",
     "@types/react-helmet": "^6.1.0",
     "@types/react-router": "^5.1.12",
-    "balkan-tungumal": "^1.0.7",
+    "balkan-tungumal": "^1.0.8",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
