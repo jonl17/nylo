@@ -15,6 +15,7 @@ export interface PageInterface {
     uid: string
   }
   hasSubmenu?: MenuInterface
+  metatitle: string
 }
 
 export const altLanguageResolver = (node: any) => {
@@ -47,6 +48,14 @@ export const pageResolver = (node: any): PageInterface => {
     hasSubmenu: node.data.has_submenu.document
       ? submenuResolver(node.data.has_submenu.document)
       : undefined,
+    metatitle:
+      node.data.title.text !== 'Frontpage'
+        ? node.lang === 'is'
+          ? 'Nýlistasafnið' + '—' + node.data.title.text
+          : 'Living Art Musem' + '—' + node.data.title.text
+        : node.lang === 'is'
+        ? 'Nýlistasafnið'
+        : 'Living Art Musem',
   }
 }
 

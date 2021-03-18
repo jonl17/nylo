@@ -12,6 +12,7 @@ import useGetPage from '~/hooks/useGetPage'
 import { useSecondaryNavbar } from '~/context/secNavContext'
 import { useMobileMenu } from '~/context/mobileMenuContext'
 import { useLanguage } from '~/context/langContext'
+import { Helmet } from 'react-helmet'
 
 const Page = ({ data }: { data: any }) => {
   const page = pageResolver(data.prismicPage)
@@ -42,6 +43,9 @@ const Page = ({ data }: { data: any }) => {
 
   const Wrapper: React.FC = ({ children }) => (
     <Fragment>
+      <Helmet>
+        <title>{page.metatitle}</title>
+      </Helmet>
       <SecondaryNavbar />
       <div
         className={cn('page', {
