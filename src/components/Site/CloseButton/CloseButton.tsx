@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Exit } from './SVG'
+import { Exit, Back } from './SVG'
 import cn from 'classnames'
 import { Link } from 'gatsby'
 import useGetPage from '~/hooks/useGetPage'
@@ -30,7 +30,11 @@ const CloseButton = ({ className = '', isSubpageOf, lang }: Props) => {
 
   return (
     <Link to={backTo} className='icon__exit d-none d-lg-block'>
-      <Exit className={cn('icon', className)} />
+      {parentpage ? (
+        <Back className={cn('icon', className)} />
+      ) : (
+        <Exit className={cn('icon', className)} />
+      )}
     </Link>
   )
 }
