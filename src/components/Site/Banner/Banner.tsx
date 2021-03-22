@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useGetAnnouncement from '~/hooks/useGetAnnouncement'
 import LanguageButton from '~/components/Site/LanguageButton'
+import SearchButton from '~/components/Site/SearchButton'
 import { Language } from '~/lang'
+import { PageInterface } from '~/utils/resolvers'
 
-const Banner = ({ ctx }: { ctx: { lang: Language; page: any } }) => {
+const Banner = ({ ctx }: { ctx: { lang: Language; page: PageInterface } }) => {
   const data = useGetAnnouncement().find(node => node.lang === ctx.lang)
 
   return (
@@ -16,7 +18,10 @@ const Banner = ({ ctx }: { ctx: { lang: Language; page: any } }) => {
           className='banner__marquee center'
         />
       )}
-      <LanguageButton page={ctx} />
+      <div className='d-flex justify-content-end '>
+        <SearchButton lang={ctx.lang} />
+        <LanguageButton page={ctx} />
+      </div>
     </div>
   )
 }

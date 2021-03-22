@@ -8,7 +8,12 @@ interface Props {
   className?: string
 }
 
-const ButtonLink = ({ to, label = '', className = '' }: Props) => {
+const ButtonLink: React.FC<Props> = ({
+  to,
+  label = '',
+  className = '',
+  children,
+}) => {
   const internal = /^\/(?!\/)/.test(to)
 
   const LinkWrap: React.FC<{ className?: string }> = ({
@@ -26,7 +31,7 @@ const ButtonLink = ({ to, label = '', className = '' }: Props) => {
     )
   return (
     <LinkWrap className={cn(className, 'btn px-2')}>
-      <h3 className='m-0'>{label}</h3>
+      <h3 className='m-0'>{label || children}</h3>
     </LinkWrap>
   )
 }

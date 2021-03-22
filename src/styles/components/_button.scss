@@ -19,9 +19,26 @@
     padding-bottom: 3px;
   }
 
+  &__search {
+    height: 66px;
+    border-bottom: hidden;
+    border-top: hidden;
+    border-right: hidden;
+    z-index: 500;
+    background: $white;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    &:hover {
+      svg {
+        path {
+          stroke: $white;
+        }
+      }
+    }
+  }
+
   &__language {
-    position: absolute;
-    right: 0;
     height: 100%;
     z-index: 500;
     background: $white;

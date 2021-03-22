@@ -1,5 +1,5 @@
 require('dotenv').config({
-  path: `.env`,
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
 const {
@@ -10,6 +10,8 @@ const {
 
 const linkResolver = require('./src/utils/linkResolver')
 const { htmlSerializer } = require('./src/prismic/htmlSerializer')
+
+const { queries } = require('./src/algolia/query')
 
 const reponame = process.env.PRISMIC_REPO_NAME || prismicRepo
 const apiKey = process.env.PRISMIC_API_KEY || accessToken
@@ -56,6 +58,16 @@ module.exports = {
           '~': 'src',
         },
         extensions: [`ts`, `tsx`],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia-search`,
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        indexName: 'exhibition', // for all queries
+        queries,
+        chunkSize: 10000, // default: 1000
       },
     },
   ],
