@@ -20,11 +20,29 @@ const exhibtionQuery = `{
   }
 }`
 
+const pageQuery = `{
+  allPrismicPage {
+    nodes {
+      objectID: url
+      data {
+        title {
+          text
+        }
+      }
+    }
+  }
+}`
+
 const queries = [
   {
     query: exhibtionQuery,
     transformer: ({ data }) => data.allPrismicExhibition.nodes, // optional
-    indexName: process.env.ALGOLIA_INDEX_NAME, // overrides main index name, optional
+    indexName: 'exhibition', // overrides main index name, optional
+  },
+  {
+    query: pageQuery,
+    transformer: ({ data }) => data.allPrismicPage.nodes,
+    indexName: 'page',
   },
 ]
 

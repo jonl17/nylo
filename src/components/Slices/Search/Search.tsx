@@ -13,6 +13,7 @@ const searchClient = algoliaSearch(appId, apiKey)
 const SearchInput = connectSearchBox(CustomInput)
 
 const Search = () => {
+  console.log('appID:', appId)
   return (
     <InstantSearch searchClient={searchClient} indexName='exhibition'>
       <div className='search col-lg-8'>
