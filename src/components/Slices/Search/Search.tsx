@@ -7,6 +7,7 @@ import { CustomInput, CustomResult } from './CustomComponents'
 
 const appId = process.env.GATSBY_ALGOLIA_APP_ID || ''
 const apiKey = process.env.GATSBY_ALGOLIA_API_KEY || ''
+const indexName = process.env.GATSBY_ALGOLIA_INDEX_NAME || ''
 
 const searchClient = algoliaSearch(appId, apiKey)
 
@@ -15,7 +16,7 @@ const SearchInput = connectSearchBox(CustomInput)
 const Search = () => {
   console.log('appID:', appId)
   return (
-    <InstantSearch searchClient={searchClient} indexName='exhibition'>
+    <InstantSearch searchClient={searchClient} indexName={indexName}>
       <div className='search col-lg-8'>
         <SearchInput />
         <Hits hitComponent={CustomResult} />

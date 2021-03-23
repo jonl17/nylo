@@ -3,27 +3,26 @@ require('dotenv').config({
 })
 
 const exhibtionQuery = `{
-  allPrismicExhibition {
+  ex: allPrismicExhibition {
     nodes {
-      objectID: url
+      objectID: id
+      url
       data {
         title {
           text
         }
         excerpt {
-          html
+          text
         }
         artist
         curator
       }
     }
   }
-}`
-
-const pageQuery = `{
-  allPrismicPage {
+  pages: allPrismicPage {
     nodes {
-      objectID: url
+      objectID: id
+      url
       data {
         title {
           text
@@ -36,13 +35,27 @@ const pageQuery = `{
 const queries = [
   {
     query: exhibtionQuery,
-    transformer: ({ data }) => data.allPrismicExhibition.nodes, // optional
-    indexName: 'exhibition', // overrides main index name, optional
-  },
-  {
-    query: pageQuery,
-    transformer: ({ data }) => data.allPrismicPage.nodes,
-    indexName: 'page',
+    transformer: ({ data }) => {
+      const exhibitions = data.ex.nodes.map(node => {
+        return {
+          objectID: node.objectID,
+          url: node.url,
+          title: node.data.title.text,
+          artist: node.data.artist,
+          curator: node.data.curator,
+        }
+      })
+      const pages = data.pages.nodes.map(node => {
+        return {
+          objectID: node.objectID,
+          url: node.url,
+          title: node.data.title.text,
+        }
+      })
+
+      return [...exhibitions, ...pages]
+    }, // optional
+    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME, // overrides main index name, optional
   },
 ]
 
