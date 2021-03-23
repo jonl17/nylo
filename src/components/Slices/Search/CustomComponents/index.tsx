@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { Highlight } from 'react-instantsearch-dom'
 
 const CustomInput = ({
   currentRefinement,
@@ -48,11 +49,12 @@ const CustomResult = ({ hit }: ResultProps) => {
     objectID,
   } = hit
   return (
-    <div className='my-4'>
+    <div className='my-4 search-results'>
       <Link to={objectID}>
         <h3>{title.text}</h3>
-        <p>Listamenn: {artist}</p>
+        {artist && <p>Listamenn: {artist}</p>}
         {curator && <p>Sýningastjóri: {curator}</p>}
+        {/* <Highlight attribute='data.excerpt.text' hit={hit} /> */}
         <div dangerouslySetInnerHTML={{ __html: excerpt.html }} />
       </Link>
     </div>
