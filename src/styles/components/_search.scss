@@ -1,0 +1,32 @@
+.search {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
+.search-results {
+  .ais-Highlight-highlighted {
+    background: $pink;
+  }
+}
+
+.search-input {
+  height: $banner-height;
+  border: 0;
+  width: 100%;
+
+  border-radius: 0;
+  z-index: 400;
+
+  &:focus {
+    outline: 0;
+  }
+
+  padding: 0 $spacer;
+
+  @include media-breakpoint-up('lg') {
+    font-size: 30px;
+    padding: 0 $spacer * 2;
+  }
+}

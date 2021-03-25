@@ -5,6 +5,7 @@ import {
 } from '~/components/Site/Overview/Overview'
 import LatestEvents from '~/components/Slices/LatestEvents'
 import LatestNews from '~/components/Slices/LatestNews'
+import Search from '~/components/Slices/Search'
 
 const Program = ({ primary: { programName }, ...props }) => {
   const programs = {
@@ -12,6 +13,7 @@ const Program = ({ primary: { programName }, ...props }) => {
     AllExhibitions: ExhibitionOverview,
     LatestEvents,
     LatestNews,
+    Search,
   }
   if (programs[programName]) {
     const Cmp = programs[programName]

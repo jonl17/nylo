@@ -1,14 +1,16 @@
 import React from 'react'
+import { Language } from '~/lang'
 
-const ArtistBio = ({
-  primary: { text },
-}: {
+interface Props {
   primary: { text: { html: string } }
-}) => {
+  lang: Language
+}
+
+const ArtistBio = ({ primary, lang }: Props) => {
   return (
     <div className='rich-text--large'>
-      <p className='m-0'>Bio</p>
-      <div dangerouslySetInnerHTML={{ __html: text.html }} />
+      <p className='m-0'>{lang === 'is' ? 'Ágrip' : 'Biography'}</p>
+      <div dangerouslySetInnerHTML={{ __html: primary.text.html }} />
     </div>
   )
 }
