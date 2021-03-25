@@ -16,7 +16,7 @@ const SearchInput = connectSearchBox(CustomInput)
 const Search = () => {
   return (
     <InstantSearch searchClient={searchClient} indexName={indexName}>
-      <div className='search col-lg-8'>
+      <div className='search col-lg-8 pl-0'>
         <SearchInput />
         <Hits hitComponent={CustomResult} />
       </div>

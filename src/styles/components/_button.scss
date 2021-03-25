@@ -29,17 +29,19 @@
     padding-top: 0;
     padding-bottom: 0;
 
-    &:hover {
-      svg {
-        path {
-          stroke: $white;
+    @include media-breakpoint-up('lg') {
+      &:hover {
+        svg {
+          path {
+            stroke: $white;
+          }
         }
       }
     }
   }
 
   &__language {
-    height: 100%;
+    height: $banner-height;
     z-index: 500;
     background: $white;
     border-right: hidden;

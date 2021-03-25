@@ -4,12 +4,15 @@ import React from 'react'
 import { SecondaryNavbarContextProvider } from '~/context/secNavContext'
 import { BackgroundContextProvider } from '~/context/backgroundContext'
 import { MobileMenuContextProvider } from '~/context/mobileMenuContext'
+import { SearchProvider } from '~/context/searchContext'
 
 export const wrapRootElement = ({ element }) => (
   <MobileMenuContextProvider>
     <BackgroundContextProvider>
       <SecondaryNavbarContextProvider>
-        <LanguageProvider>{element}</LanguageProvider>
+        <LanguageProvider>
+          <SearchProvider>{element}</SearchProvider>
+        </LanguageProvider>
       </SecondaryNavbarContextProvider>
     </BackgroundContextProvider>
   </MobileMenuContextProvider>

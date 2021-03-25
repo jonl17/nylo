@@ -7,7 +7,6 @@ interface Props {
 }
 
 const ArtistBio = ({ primary, lang }: Props) => {
-  console.log('language: ', lang)
   return (
     <div className='rich-text--large'>
       <p className='m-0'>{lang === 'is' ? 'Ágrip' : 'Biography'}</p>

@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
 import { Highlight } from 'react-instantsearch-dom'
 import { Language } from '~/lang'
+import { useSearch } from '~/context/searchContext'
 
-const CustomInput = ({
-  currentRefinement,
-  refine,
-}: {
-  currentRefinement: string
-  refine: (s: string) => void
-}) => {
+const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
+  const { searchQuery } = useSearch()
+
+  useEffect(() => {
+    refine(searchQuery)
+  }, [searchQuery])
+
   return (
     <form
       onSubmit={e => {
@@ -17,12 +18,11 @@ const CustomInput = ({
       }}
     >
       <input
+        hidden
         autoFocus
         placeholder='Search me'
         type='text'
         className='input'
-        value={currentRefinement}
-        onChange={event => refine(event.currentTarget.value)}
       />
     </form>
   )
@@ -42,7 +42,7 @@ interface ResultProps {
 const CustomResult = ({ hit }: ResultProps) => {
   const { artist, curator, url, lang } = hit
   return (
-    <div className='my-4 search-results'>
+    <div className='search-results mb-4'>
       <Link to={url}>
         <h3>
           <Highlight attribute='title' hit={hit} />
