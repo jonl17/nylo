@@ -4,6 +4,7 @@ import algoliaSearch from 'algoliasearch/lite'
 
 // custom components
 import { CustomInput, CustomResult } from './CustomComponents'
+import { Language } from '~/lang'
 
 const appId = process.env.GATSBY_ALGOLIA_APP_ID || ''
 const apiKey = process.env.GATSBY_ALGOLIA_API_KEY || ''

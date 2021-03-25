@@ -27,7 +27,7 @@
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
-    "gatsby": "^3.0.0",
+    "gatsby": "^3.3.0-next.0",
     "gatsby-plugin-algolia-search": "^0.5.7",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-layout": "^2.0.0",
