@@ -1,6 +1,4 @@
 .image-reel {
-  mix-blend-mode: multiply;
-
   @include media-breakpoint-down('md') {
     overflow-x: auto;
   }

@@ -7,6 +7,7 @@ const exhibtionQuery = `{
     nodes {
       objectID: id
       url
+      lang
       data {
         title {
           text
@@ -23,6 +24,7 @@ const exhibtionQuery = `{
     nodes {
       objectID: id
       url
+      lang
       data {
         title {
           text
@@ -43,6 +45,7 @@ const queries = [
           title: node.data.title.text,
           artist: node.data.artist,
           curator: node.data.curator,
+          lang: node.lang,
         }
       })
       const pages = data.pages.nodes.map(node => {
@@ -50,6 +53,7 @@ const queries = [
           objectID: node.objectID,
           url: node.url,
           title: node.data.title.text,
+          lang: node.lang,
         }
       })
 

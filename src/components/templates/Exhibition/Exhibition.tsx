@@ -6,14 +6,13 @@ import { ExhibitionFull } from '~/types'
 import CloseButton from '~/components/Site/CloseButton'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import Open from '~/components/Site/Open'
-import { formatDate, multipleArtistsHandler, exhibitionIsOpen } from '~/utils'
+import { formatDate, exhibitionIsOpen } from '~/utils'
 import Button from '~/components/Site/Button'
 import Slideshow from '~/components/Site/Slideshow/Slideshow'
 import { langSeek } from 'balkan-tungumal'
 import { exhibitionResolver } from '~/utils/resolvers'
 import useGetPage from '~/hooks/useGetPage'
 import linkResolver from '~/utils/linkResolver'
-import { useLanguage } from '~/context/langContext'
 
 interface Props extends PageProps {
   pageContext: {
@@ -36,10 +35,6 @@ const Exhibition = ({ data }: Props) => {
   const homepage = useGetPage(
     exhibition.lang === 'is' ? 'syningar' : 'exhibitions'
   )
-
-  const { modify } = useLanguage()
-
-  modify(exhibition.lang)
 
   return (
     <>
@@ -79,12 +74,7 @@ const Exhibition = ({ data }: Props) => {
             )}
           </div>
           <div className='pb-2'>
-            <h1>
-              {multipleArtistsHandler(
-                exhibition.artist,
-                langSeek('Group exhibition', exhibition.lang)
-              )}
-            </h1>
+            <h1>{exhibition.artist}</h1>
             <h1 className='font-italic'>{exhibition.title.text}</h1>
           </div>
 
@@ -103,7 +93,7 @@ const Exhibition = ({ data }: Props) => {
             ></div>
           )}
 
-          {!readMore && exhibition.detailedText && (
+          {!readMore && exhibition.detailedText.html && (
             <Button
               className='mt-2'
               label={langSeek('Read more', exhibition.lang) ?? ''}
@@ -111,7 +101,7 @@ const Exhibition = ({ data }: Props) => {
             ></Button>
           )}
 
-          {readMore && exhibition.detailedText && (
+          {readMore && exhibition.detailedText.html && (
             <div
               className='parag parag--2'
               dangerouslySetInnerHTML={{ __html: exhibition.detailedText.html }}
@@ -124,9 +114,11 @@ const Exhibition = ({ data }: Props) => {
             })}
           />
 
-          {exhibition.artistBiography && (
+          {exhibition.artistBiography.html && (
             <div className='parag parag--2'>
-              <p className='m-0'>Bio</p>
+              <p className='m-0'>
+                {exhibition.lang === 'is' ? 'Ágrip' : 'Biography'}
+              </p>
               <div
                 dangerouslySetInnerHTML={{
                   __html: exhibition.artistBiography.html,

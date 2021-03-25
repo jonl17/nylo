@@ -9,7 +9,6 @@ import {
 } from '~/utils'
 import { Link } from 'gatsby'
 import { langSeek } from 'balkan-tungumal'
-import FilterByText from '../FilterByText/FilterByText'
 
 type BoxProps = {
   item: ExhibitionInterface
@@ -28,13 +27,10 @@ const Box = ({ item }: BoxProps) => {
         )}
         <div className='overview-box__text'>
           <p className='mb-1 mt-2'>{formatDate(item.opening, item.closing)}</p>
-          <h2 className='mb-0'>
-            {multipleArtistsHandler(
-              item.artist,
-              langSeek('Group exhibition', item.lang)
-            )}
+          <h2 className='mb-0'>{multipleArtistsHandler(item.artist, '')}</h2>
+          <h2 className='mb-2 overview-box__title font-italic'>
+            {item.title.text}
           </h2>
-          <h2 className='mb-2 overview-box__title'>{item.title.text}</h2>
         </div>
       </div>
     </Link>

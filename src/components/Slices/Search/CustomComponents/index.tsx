@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { Highlight } from 'react-instantsearch-dom'
+import { Language } from '~/lang'
 
 const CustomInput = ({
   currentRefinement,
@@ -34,11 +35,12 @@ interface ResultProps {
     artist: string
     curator: string
     url: string
+    lang: Language
   }
 }
 
 const CustomResult = ({ hit }: ResultProps) => {
-  const { title, artist, curator, objectID, url } = hit
+  const { artist, curator, url, lang } = hit
   return (
     <div className='my-4 search-results'>
       <Link to={url}>
