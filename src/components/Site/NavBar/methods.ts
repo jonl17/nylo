@@ -6,12 +6,14 @@ export const hasSubmenu = (menu: MenuInterface, currentPath: string) => {
 }
 
 export const isCustomType = (uid: string, type: string) => {
-  if ((uid === 'news' || uid === 'frettir') && type === 'news') {
-    return true
-  } else if (
-    (uid === 'exhibitions' || uid === 'syningar') &&
-    type === 'exhibition'
-  ) {
-    return true
+  switch (type) {
+    case 'news':
+      return uid === 'news' || uid === 'frettir'
+    case 'exhibition':
+      return uid === 'exhibitions' || uid === 'syningar'
+    case 'event':
+      return uid === 'events' || uid === 'vidburdir'
+    default:
+      return false
   }
 }

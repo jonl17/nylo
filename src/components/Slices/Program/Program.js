@@ -2,6 +2,7 @@ import React from 'react'
 import {
   NewsOverview,
   ExhibitionOverview,
+  EventOverview,
 } from '~/components/Site/Overview/Overview'
 import LatestEvents from '~/components/Slices/LatestEvents'
 import LatestNews from '~/components/Slices/LatestNews'
@@ -14,6 +15,7 @@ const Program = ({ primary: { programName }, ...props }) => {
     LatestEvents,
     LatestNews,
     Search,
+    EventOverview,
   }
   if (programs[programName]) {
     const Cmp = programs[programName]

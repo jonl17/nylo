@@ -21,6 +21,9 @@ export const fragment = graphql`
       featured_image {
         alt
         url
+        fluid {
+          ...GatsbyPrismicImageFluid
+        }
       }
       title {
         text

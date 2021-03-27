@@ -12,16 +12,20 @@ const LatestNews = ({ lang }: { lang: Language }) => {
 
   return (
     <div className='mt-4 latest-news'>
-      <h1 className='latest-news__heading'>{langSeek('News', lang)}</h1>
+      <h1 className='latest-news__heading mb-2'>{langSeek('News', lang)}</h1>
       <div className='d-flex flex-wrap'>
         {news.map(node => (
           <Link
             to={node.url}
             key={node.url}
-            className='latest-news__content col-lg-6 pl-0'
+            className='latest-news__content col-lg-6 pl-0 mb-3 mb-lg-0'
           >
             {node.featuredImage && (
-              <img src={node.featuredImage.url} alt={node.featuredImage.alt} />
+              <img
+                className='mb-2'
+                src={node.featuredImage.url}
+                alt={node.featuredImage.alt}
+              />
             )}
             <p className='parag--2 mb-0'>{formatDate(node.date)}</p>
             <h1>{node.title.text}</h1>

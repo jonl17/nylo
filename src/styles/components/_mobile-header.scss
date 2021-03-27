@@ -4,7 +4,8 @@
   overflow: hidden;
 
   &--expanded {
-    min-height: calc(100vh - #{$banner-height});
+    height: 100%;
+    margin-bottom: $spacer * 3;
   }
 
   &__head {
