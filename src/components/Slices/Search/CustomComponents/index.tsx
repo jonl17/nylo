@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 import { Highlight } from 'react-instantsearch-dom'
 import { Language } from '~/lang'
 import { useSearch } from '~/context/searchContext'
-import { useLanguage } from '~/context/langContext'
+import { useLocation } from '@reach/router'
+import cn from 'classnames'
+import { langSeek } from 'balkan-tungumal'
+import { PageHit, ExhibitionHit } from './Types'
 
 const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
   const { searchQuery } = useSearch()
@@ -37,33 +40,22 @@ interface ResultProps {
     curator: string
     url: string
     lang: Language
+    type: string
+    date: string
   }
 }
 
 const CustomResult = ({ hit }: ResultProps) => {
-  const { artist, curator, url, lang } = hit
+  const { artist, curator, url, date, type, lang } = hit
+  const { pathname } = useLocation()
 
-  return (
-    <div className='search-results mb-4'>
-      <Link to={url}>
-        <h3>
-          <Highlight attribute='title' hit={hit} />
-        </h3>
-        {artist && (
-          <p>
-            <span className='pr-1'>Listamenn:</span>
-            <Highlight attribute='artist' hit={hit} />
-          </p>
-        )}
-        {curator && (
-          <p>
-            <span className='pr-1'>Sýningastjóri:</span>
-            <Highlight attribute='curator' hit={hit} />
-          </p>
-        )}
-      </Link>
-    </div>
-  )
+  const language: Language = pathname.includes('/' + lang) ? 'en-us' : 'is'
+
+  if (type === 'page') {
+    return <PageHit hit={hit} lang={language} />
+  } else if (type === 'exhibition') {
+    return <ExhibitionHit hit={hit} lang={language} />
+  } else return null
 }
 
 export { CustomInput, CustomResult }
