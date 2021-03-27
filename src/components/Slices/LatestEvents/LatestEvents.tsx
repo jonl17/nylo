@@ -3,7 +3,7 @@ import useGetEvents from '~/hooks/useGetEvents'
 import { Language } from '~/lang'
 import { formatDate } from '~/utils'
 import { langSeek } from 'balkan-tungumal'
-import { langs } from 'prismic.config'
+import { Link } from 'gatsby'
 
 const LatestEvents = ({ lang }: { lang: Language }) => {
   const tdy = new Date()
@@ -13,7 +13,7 @@ const LatestEvents = ({ lang }: { lang: Language }) => {
     }
   })
 
-  if (!events) {
+  if (!events.length) {
     return null
   }
 
@@ -23,13 +23,13 @@ const LatestEvents = ({ lang }: { lang: Language }) => {
       {events.map(
         (ev, ent) =>
           ent < 2 && (
-            <div key={ent} className='mb-4'>
+            <Link key={ent} className='mb-4' to={ev.url}>
               <div className='d-flex mb-0'>
                 <h1 className='mr-3'>{formatDate(ev.date, undefined, true)}</h1>
                 <h1>{ev.time}</h1>
               </div>
               <h1>{ev.name.text}</h1>
-            </div>
+            </Link>
           )
       )}
     </div>

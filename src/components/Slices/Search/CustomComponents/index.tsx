@@ -6,7 +6,7 @@ import { useSearch } from '~/context/searchContext'
 import { useLocation } from '@reach/router'
 import cn from 'classnames'
 import { langSeek } from 'balkan-tungumal'
-import { PageHit, ExhibitionHit } from './Types'
+import { PageHit, ExhibitionHit, EventHit } from './Types'
 
 const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
   const { searchQuery } = useSearch()
@@ -55,7 +55,7 @@ const CustomResult = ({ hit }: ResultProps) => {
     return <PageHit hit={hit} lang={language} />
   } else if (type === 'exhibition') {
     return <ExhibitionHit hit={hit} lang={language} />
-  } else return null
+  } else return <EventHit hit={hit} />
 }
 
 export { CustomInput, CustomResult }

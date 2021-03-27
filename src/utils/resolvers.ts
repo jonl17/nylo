@@ -1,3 +1,5 @@
+import { FluidObject } from 'gatsby-image'
+
 export interface PageInterface {
   url: string
   prismicId: string
@@ -232,6 +234,7 @@ export interface EventInterface {
   image: {
     alt: string
     url: string
+    fluid: FluidObject
   }
   text: {
     html: string

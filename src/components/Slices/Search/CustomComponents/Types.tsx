@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import cn from 'classnames'
 import { Language } from '~/lang'
 import { langSeek } from 'balkan-tungumal'
+import { formatDate } from '~/utils'
 
 type PageHitProps = {
   hit: {
@@ -61,4 +62,26 @@ const ExhibitionHit = ({ hit, lang }: ExhibitionHitProps) => {
   )
 }
 
-export { PageHit, ExhibitionHit }
+type EventHitProps = {
+  hit: {
+    url: string
+    title: string
+    date: string
+  }
+}
+
+const EventHit = ({ hit }: EventHitProps) => {
+  return (
+    <div className={cn('search-results mb-4')}>
+      {/* <p>{langSeek('exhibition', lang)}</p> */}
+      <p>{formatDate(hit.date)}</p>
+      <Link to={hit.url}>
+        <h3>
+          <Highlight attribute='title' hit={hit} />
+        </h3>
+      </Link>
+    </div>
+  )
+}
+
+export { PageHit, ExhibitionHit, EventHit }

@@ -1,40 +1,41 @@
 import React from 'react'
 import { Language } from '~/lang'
-import { NewsInterface } from '~/utils/resolvers'
-import useGetNews from '~/hooks/useGetNews'
+import { EventInterface } from '~/utils/resolvers'
 import { Link } from 'gatsby'
 import { formatDate } from '~/utils'
+import useGetEvents from '~/hooks/useGetEvents'
 
 type BoxProps = {
-  item: NewsInterface
+  item: EventInterface
 }
 
 const Box = ({ item }: BoxProps) => {
   return (
     <Link to={item.url} className='col-lg-6 p-0 pr-lg-2'>
       <div className='overview-box mb-1 mr-1'>
-        {item.featuredImage.url && (
+        {item.image.url && (
           <img
             className='overview-box__featured-image'
-            src={item.featuredImage.url}
-            alt={item.featuredImage.alt}
+            src={item.image.url}
+            alt={item.image.alt}
           />
         )}
         <p className='mb-1 mt-2'>{formatDate(item.date)}</p>
-        <h2 className='mb-2'>{item.title.text}</h2>
+        <p>{item.time}</p>
+        <h2 className='mb-2'>{item.name.text}</h2>
       </div>
     </Link>
   )
 }
 
 export default ({ lang }: { lang: Language }) => {
-  const news = useGetNews().filter(node => node.lang === lang)
+  const events = useGetEvents().filter(node => node.lang === lang)
 
-  if (!news) return null
+  if (!events.length) return null
 
   return (
     <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3 w-100'>
-      {news.map((item, idx) => (
+      {events.map((item, idx) => (
         <Box key={idx} item={item} />
       ))}
     </div>

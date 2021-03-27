@@ -14,6 +14,7 @@ import { openNow } from '~/utils'
 const Menu = ({ lang, type }: { lang: Language; type: string }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
   const { pathname } = useLocation()
+  console.log(type)
   return (
     <div>
       {menu &&

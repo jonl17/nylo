@@ -126,9 +126,10 @@ exports.createPages = async ({ graphql, actions }) => {
           lang
           prismicId
           tags
+          type
           alternate_languages {
             document {
-              ... on PrismicExhibition {
+              ... on PrismicEvent {
                 id
                 uid
                 tags
