@@ -9,7 +9,7 @@ const RichText = ({ primary: { text, type = 'large' } }: RichTextProps) => {
         dangerouslySetInnerHTML={{ __html: text.html }}
       />
       <div
-        className={`d-none d-lg-block rich-text--${type} parag`}
+        className={`d-none d-lg-block rich-text rich-text--${type} parag`}
         dangerouslySetInnerHTML={{
           __html: text.html,
         }}

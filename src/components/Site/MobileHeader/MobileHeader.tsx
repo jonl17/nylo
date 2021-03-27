@@ -24,7 +24,7 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
   return (
     <div
       className={cn('mobile-header d-block d-lg-none', {
-        'mobile-header--expanded border-bottom': open,
+        'mobile-header--expanded': open,
         [`${bg}`]: !open,
       })}
     >
@@ -47,16 +47,20 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
               </Link>
               {item.submenu && (
                 <div>
-                  {item.submenu.items.map(item => (
-                    <Link
-                      key={item.page.url}
-                      to={item.page.url}
-                      activeClassName='navbar__anchor navbar__anchor--active'
-                    >
-                      <span className='mb-2' />
-                      <p className='ml-1'>{item.page.title.text}</p>
-                    </Link>
-                  ))}
+                  {item.submenu.items.map(
+                    (item, i) =>
+                      // we hide the first in submenu on mobile
+                      i !== 0 && (
+                        <Link
+                          key={item.page.url}
+                          to={item.page.url}
+                          activeClassName='navbar__anchor navbar__anchor--active'
+                        >
+                          <span className='mb-2' />
+                          <p className='ml-1'>{item.page.title.text}</p>
+                        </Link>
+                      )
+                  )}
                 </div>
               )}
             </div>
