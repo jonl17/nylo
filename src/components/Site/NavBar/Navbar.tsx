@@ -14,7 +14,6 @@ import { openNow } from '~/utils'
 const Menu = ({ lang, type }: { lang: Language; type: string }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
   const { pathname } = useLocation()
-  console.log(type)
   return (
     <div>
       {menu &&
@@ -63,7 +62,11 @@ const Sidebar = ({ lang }: { lang: Language }) => {
 
       <div className='parag--2 pt-3'>
         <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
-        <p>{`${day.from} til ${day.to} ${time.from}—${time.to}`}</p>
+        {day.from === day.to ? (
+          <p>{`${day.from} ${time.from}—${time.to}`}</p>
+        ) : (
+          <p>{`${day.from} til ${day.to} ${time.from}—${time.to}`}</p>
+        )}
       </div>
       {isOpen && (
         <p className='open parag--3'>

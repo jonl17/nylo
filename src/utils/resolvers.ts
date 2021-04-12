@@ -258,3 +258,25 @@ export const eventResolver = (node: any): EventInterface => {
     time: `${node.data.from}—${node.data.to}`,
   }
 }
+
+export interface OpeningHourInterface {
+  day: {
+    from: string
+    to: string
+  }
+  time: {
+    from: number
+    to: number
+  }
+}
+
+export const openingHourResolver = (node: any): OpeningHourInterface => ({
+  day: {
+    from: node.data.active_opening_hours.document.data.day_from,
+    to: node.data.active_opening_hours.document.data.day_to,
+  },
+  time: {
+    from: node.data.active_opening_hours.document.data.time_from,
+    to: node.data.active_opening_hours.document.data.time_to,
+  },
+})

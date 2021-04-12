@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'gatsby'
-import { Highlight } from 'react-instantsearch-dom'
+import React, { useEffect } from 'react'
 import { Language } from '~/lang'
 import { useSearch } from '~/context/searchContext'
 import { useLocation } from '@reach/router'
-import cn from 'classnames'
-import { langSeek } from 'balkan-tungumal'
 import { PageHit, ExhibitionHit, EventHit } from './Types'
+import { useLanguage } from '~/context/langContext'
 
 const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
   const { searchQuery } = useSearch()
+
+  const { lang } = useLanguage()
+
+  console.log(lang)
 
   useEffect(() => {
     refine(searchQuery)
@@ -21,13 +22,7 @@ const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
         e.preventDefault()
       }}
     >
-      <input
-        hidden
-        autoFocus
-        placeholder='Search me'
-        type='text'
-        className='input'
-      />
+      <input hidden autoFocus type='text' className='input' />
     </form>
   )
 }

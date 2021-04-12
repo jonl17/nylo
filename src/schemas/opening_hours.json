@@ -1,9 +1,9 @@
 {
   "Main": {
-    "main_opening_hours": {
+    "name": {
       "type": "Text",
       "config": {
-        "label": "Main opening hours"
+        "label": "Name"
       }
     },
     "day_from": {
