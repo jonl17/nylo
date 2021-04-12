@@ -1,28 +1,27 @@
 import { graphql, useStaticQuery } from 'gatsby'
+import { openingHourResolver } from '~/utils/resolvers'
 
 export default () => {
   const data = useStaticQuery(graphql`
     {
-      prismicOpeningHours {
+      prismicSeo {
         data {
-          day_from
-          day_to
-          time_from
-          time_to
+          active_opening_hours {
+            document {
+              ... on PrismicOpeningHours {
+                data {
+                  day_from
+                  day_to
+                  time_from
+                  time_to
+                }
+              }
+            }
+          }
         }
       }
     }
   `)
 
-  const { data: op } = data.prismicOpeningHours
-  return {
-    day: {
-      from: op.day_from,
-      to: op.day_to,
-    },
-    time: {
-      from: op.time_from,
-      to: op.time_to,
-    },
-  }
+  return openingHourResolver(data.prismicSeo)
 }
