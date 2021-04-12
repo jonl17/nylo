@@ -35,8 +35,8 @@ const Banner = ({ ctx }: { ctx: { lang: Language; page: PageInterface } }) => {
             autoFocus
             placeholder={
               ctx.lang === 'is'
-                ? 'Sláðu inn leitarstreng...'
-                : 'Type in keywords...'
+                ? 'Sláðu inn leitartexta ( t.d. nafn á sýningu eða listamanni) '
+                : 'Type in keyword (title/artist etc.)'
             }
           />
         )}
