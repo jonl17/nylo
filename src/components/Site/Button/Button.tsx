@@ -19,7 +19,10 @@ const Button: React.FC<Props> = ({
   return (
     <button
       onClick={onClick}
-      className={cn('btn px-2', className, `btn--${type}`)}
+      className={cn('btn', className, `btn--${type}`, {
+        'px-2': type === 'primary',
+        'px-0': type === 'secondary',
+      })}
       {...props}
     >
       <h3 className='m-0'> {label} </h3>

@@ -6,7 +6,7 @@ import ButtonLink from '../ButtonLink'
 const SearchButton = ({ lang }: { lang: Language }) => {
   return (
     <Link
-      className='btn btn__search'
+      className='btn btn__search btn--primary'
       to={lang === 'is' ? '/leit' : '/en-us/search'}
     >
       <svg

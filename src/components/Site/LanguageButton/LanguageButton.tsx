@@ -8,7 +8,7 @@ const LanguageButton = ({ page }: { page: any }) => {
   return (
     <ButtonLink
       label={page.lang === 'is' ? 'EN' : 'IS'}
-      className='btn__language'
+      className='btn__language btn--primary'
       to={
         altPage
           ? linkResolver(altPage.document)

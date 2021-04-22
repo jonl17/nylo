@@ -9,6 +9,10 @@ import {
 } from '~/utils'
 import { Link } from 'gatsby'
 import Button from '~/components/Site/Button'
+import { Fade } from 'react-reveal'
+import LoadMoreButton from './LoadMoreButton'
+import cn from 'classnames'
+import { useExhibitionFilter } from '~/context/exhibitionFilter'
 
 type BoxProps = {
   item: ExhibitionInterface
@@ -16,24 +20,28 @@ type BoxProps = {
 
 const Box = ({ item }: BoxProps) => {
   return (
-    <Link className='col-xl-6 p-0 pr-lg-2 flex-1' to={item.url}>
-      <div className='overview-box mb-1 mr-lg-1'>
-        {item.featuredImage.url && (
-          <img
-            className='overview-box__featured-image'
-            src={item.featuredImage.url}
-            alt={item.featuredImage.alt}
-          />
-        )}
-        <div className='overview-box__text'>
-          <p className='mb-1 mt-2'>{formatDate(item.opening, item.closing)}</p>
-          <h2 className='mb-0'>{multipleArtistsHandler(item.artist, '')}</h2>
-          <h2 className='mb-2 overview-box__title font-italic'>
-            {item.title.text}
-          </h2>
-        </div>
-      </div>
-    </Link>
+    <div className='mb-lg-3 overview__grid__item'>
+      <Fade>
+        <Link to={item.url}>
+          {item.featuredImage.url && (
+            <img
+              className='overview-box__featured-image'
+              src={item.featuredImage.url}
+              alt={item.featuredImage.alt}
+            />
+          )}
+          <div className='overview-box__text'>
+            <p className='mb-1 mt-2'>
+              {formatDate(item.opening, item.closing)}
+            </p>
+            <h2 className='mb-0'>{multipleArtistsHandler(item.artist, '')}</h2>
+            <h2 className='mb-2 overview-box__title font-italic'>
+              {item.title.text}
+            </h2>
+          </div>
+        </Link>
+      </Fade>
+    </div>
   )
 }
 
@@ -42,12 +50,18 @@ const Exhibitions = ({
 }: {
   exhibitions: ExhibitionInterface[]
 }) => {
-  console.log(exhibitions)
+  const { loadMore, updateLoadMore } = useExhibitionFilter()
+
   return (
-    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
-      {exhibitions.map((item, idx) => (
-        <Box key={idx} item={item} />
-      ))}
+    <div>
+      <div className='overview__grid mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
+        {exhibitions.slice(0, loadMore).map((item, idx) => (
+          <Box key={idx} item={item} />
+        ))}
+      </div>
+      {loadMore < exhibitions.length && (
+        <LoadMoreButton onClick={() => updateLoadMore()} />
+      )}
     </div>
   )
 }
@@ -57,53 +71,43 @@ export default ({ lang }: { lang: Language }) => {
 
   const { past, open, upcoming } = groupExhibitionsByDate(exhibitions)
 
-  const [filter, setFilter] = useState('open')
+  const { filter, updateFilter } = useExhibitionFilter()
 
-  const types: { [key: string]: { exhibitions: ExhibitionInterface } } = {
-    open: open,
-    past: past,
-    upcoming: upcoming,
+  const exhibitionArray = [open, past, upcoming]
+
+  const labels: { [key: string]: string } = {
+    Current: lang === 'is' ? 'Í gangi' : 'Current',
+    Past: lang === 'is' ? 'Liðnar' : 'Past',
+    Upcoming: lang === 'is' ? 'Framundan' : 'Upcoming',
   }
 
   return (
     <div>
       <div className='mb-3'>
-        <Button label='Í gangi' onClick={() => setFilter('open')} />
-        <Button label='Liðnar' onClick={() => setFilter('past')} />
-        <Button label='Framundan' onClick={() => setFilter('upcoming')} />
+        {exhibitionArray.map(
+          (node, idx) =>
+            !!node.exhibitions.length && (
+              <Button
+                key={idx}
+                label={labels[node.status]}
+                onClick={() => updateFilter(node.status)}
+                type='secondary'
+                className={cn(
+                  filter === node.status ? 'btn--secondary--active' : '',
+                  'pr-2'
+                )}
+              />
+            )
+        )}
       </div>
-      <Exhibitions exhibitions={types[filter].exhibitions} />
-      {/* {!!open.exhibitions.length && (
-        <div>
-          <h2 className='overview__heading mb-3'>Yfirstandandi</h2>
-          <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
-            {open.exhibitions.map((item, idx) => (
-              <Box key={idx} item={item} />
-            ))}
-          </div>
-        </div>
-      )}
-      {!!upcoming.exhibitions.length && (
-        <div>
-          <h2 className='overview__heading mb-3'>Framundan</h2>
-          <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
-            {upcoming.exhibitions.map((item, idx) => (
-              <Box key={idx} item={item} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {!!past.exhibitions.length && (
-        <div>
-          <h2 className='overview__heading mb-3'>Liðnar</h2>
-          <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
-            {past.exhibitions.map((item, idx) => (
-              <Box key={idx} item={item} />
-            ))}
-          </div>
-        </div>
-      )} */}
+      <div>
+        {exhibitionArray.map(
+          (node, idx) =>
+            filter === node.status && (
+              <Exhibitions key={idx} exhibitions={node.exhibitions} />
+            )
+        )}
+      </div>
     </div>
   )
 }

@@ -1,0 +1,9 @@
+.overview__grid {
+  display: grid;
+
+  gap: 1rem;
+
+  @include media-breakpoint-up('lg') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
