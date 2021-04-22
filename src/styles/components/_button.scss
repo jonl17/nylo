@@ -1,6 +1,6 @@
 .btn {
   height: 35px;
-  border: 1px solid $black;
+
   border-radius: 0;
   background: transparent;
 
@@ -8,10 +8,23 @@
   align-items: center;
   justify-content: center;
 
-  @include media-breakpoint-up('lg') {
+  &--primary {
+    border: 1px solid $black;
+    @include media-breakpoint-up('lg') {
+      &:hover {
+        background: $black;
+        color: $white;
+      }
+    }
+  }
+
+  &--secondary {
     &:hover {
-      background: $black;
-      color: $white;
+      text-decoration: underline;
+    }
+
+    &--active {
+      text-decoration: underline;
     }
   }
 

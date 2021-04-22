@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Exit, Back } from './SVG'
 import cn from 'classnames'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import useGetPage from '~/hooks/useGetPage'
 import linkResolver from '~/utils/linkResolver'
 import { Language } from 'balkan-tungumal/lib/dict'
@@ -13,12 +13,19 @@ interface Props {
     uid: string
   }
   lang: Language
+  forceGoBack?: boolean
 }
 
-const CloseButton = ({ className = '', isSubpageOf, lang }: Props) => {
+const CloseButton = ({
+  className = '',
+  isSubpageOf,
+  lang,
+  forceGoBack,
+}: Props) => {
   const [backTo, setBackTo] = useState('/')
 
-  const parentpage = isSubpageOf ? useGetPage(isSubpageOf.uid) : null
+  const parentpage =
+    isSubpageOf && !forceGoBack ? useGetPage(isSubpageOf.uid) : null
 
   useEffect(() => {
     if (parentpage) {
@@ -27,6 +34,17 @@ const CloseButton = ({ className = '', isSubpageOf, lang }: Props) => {
       setBackTo(lang === 'is' ? '/' : '/en-us')
     }
   }, [])
+
+  if (forceGoBack) {
+    return (
+      <button
+        className='removeGenericButtonStyles'
+        onClick={() => navigate(-1)}
+      >
+        <Back className={cn('icon', className)} />
+      </button>
+    )
+  }
 
   return (
     <Link to={backTo} className='icon__exit d-none d-lg-block'>

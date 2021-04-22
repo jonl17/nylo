@@ -46,6 +46,7 @@ const Exhibition = ({ data }: Props) => {
       <div className='page'>
         <div className='content'>
           <CloseButton
+            forceGoBack
             className='icon__exit'
             lang={exhibition.lang}
             isSubpageOf={

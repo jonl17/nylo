@@ -5,3 +5,4 @@ declare module '*.scss' {
 }
 declare module 'gatsby-plugin-transition-link'
 declare module '*.png'
+declare module 'react-reveal'
