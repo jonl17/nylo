@@ -13,7 +13,7 @@ export const fragment = graphql`
         html
         text
       }
-      date
+      date(formatString: "YYYY-MM-DD")
       from
       to
       text {

@@ -28,7 +28,7 @@ export const fragment = graphql`
       title {
         text
       }
-      date
+      date(formatString: "YYYY-MM-DD")
       body {
         ... on PrismicNewsBodyMedia {
           slice_type

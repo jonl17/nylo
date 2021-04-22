@@ -1,8 +1,15 @@
 .secondary-navbar {
   position: fixed;
   left: 0;
+  max-width: 275px;
 
   &__anchor {
     color: $black;
+
+    @include media-breakpoint-up('lg') {
+      &:hover {
+        color: rgba($black, 0.65);
+      }
+    }
   }
 }

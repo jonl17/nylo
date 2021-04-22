@@ -44,7 +44,8 @@
 
   &--small--one-column-right {
     @extend .parag--3;
-    @extend .offset-6;
+    @extend .offset-2;
+    @extend .col-9;
     padding: 0;
   }
 }
