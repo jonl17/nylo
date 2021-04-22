@@ -8,7 +8,7 @@ import {
   multipleArtistsHandler,
 } from '~/utils'
 import { Link } from 'gatsby'
-import { langSeek } from 'balkan-tungumal'
+import Button from '~/components/Site/Button'
 
 type BoxProps = {
   item: ExhibitionInterface
@@ -16,7 +16,7 @@ type BoxProps = {
 
 const Box = ({ item }: BoxProps) => {
   return (
-    <Link className='col-xl-6 p-0 pr-lg-2 ' to={item.url}>
+    <Link className='col-xl-6 p-0 pr-lg-2 flex-1' to={item.url}>
       <div className='overview-box mb-1 mr-lg-1'>
         {item.featuredImage.url && (
           <img
@@ -37,14 +37,43 @@ const Box = ({ item }: BoxProps) => {
   )
 }
 
+const Exhibitions = ({
+  exhibitions,
+}: {
+  exhibitions: ExhibitionInterface[]
+}) => {
+  console.log(exhibitions)
+  return (
+    <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
+      {exhibitions.map((item, idx) => (
+        <Box key={idx} item={item} />
+      ))}
+    </div>
+  )
+}
+
 export default ({ lang }: { lang: Language }) => {
   const exhibitions = getAllExhibitions().filter(node => node.lang === lang)
 
   const { past, open, upcoming } = groupExhibitionsByDate(exhibitions)
 
+  const [filter, setFilter] = useState('open')
+
+  const types: { [key: string]: { exhibitions: ExhibitionInterface } } = {
+    open: open,
+    past: past,
+    upcoming: upcoming,
+  }
+
   return (
     <div>
-      {!!open.exhibitions.length && (
+      <div className='mb-3'>
+        <Button label='Í gangi' onClick={() => setFilter('open')} />
+        <Button label='Liðnar' onClick={() => setFilter('past')} />
+        <Button label='Framundan' onClick={() => setFilter('upcoming')} />
+      </div>
+      <Exhibitions exhibitions={types[filter].exhibitions} />
+      {/* {!!open.exhibitions.length && (
         <div>
           <h2 className='overview__heading mb-3'>Yfirstandandi</h2>
           <div className='d-flex flex-wrap mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
@@ -74,7 +103,7 @@ export default ({ lang }: { lang: Language }) => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   )
 }
