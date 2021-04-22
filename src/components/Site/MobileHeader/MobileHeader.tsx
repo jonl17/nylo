@@ -25,7 +25,7 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
     <div
       className={cn('mobile-header d-block d-lg-none', {
         'mobile-header--expanded': open,
-        [`${bg}`]: !open,
+        bg: !open,
       })}
     >
       <div className={cn('d-flex justify-content-between mobile-header__head')}>
