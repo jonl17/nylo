@@ -25,8 +25,8 @@ export const fragment = graphql`
       }
       artist
       curator
-      opening
-      closing
+      opening(formatString: "YYYY-MM-DD")
+      closing(formatString: "YYYY-MM-DD")
       featured_image {
         url
         alt
