@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getAllExhibitions } from '~/hooks/exhibitionHooks'
 import { Language } from '~/lang'
 import { ExhibitionInterface } from '~/utils/resolvers'
@@ -72,6 +72,12 @@ export default ({ lang }: { lang: Language }) => {
   const { past, open, upcoming } = groupExhibitionsByDate(exhibitions)
 
   const { filter, updateFilter } = useExhibitionFilter()
+
+  useEffect(() => {
+    if (open.exhibitions.length === 0) {
+      updateFilter('Past')
+    }
+  }, [])
 
   const exhibitionArray = [open, past, upcoming]
 
