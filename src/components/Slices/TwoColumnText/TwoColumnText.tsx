@@ -11,7 +11,7 @@ type Props = {
 
 const TwoColumnText = ({ firstColumn, secondColumn }: Props) => {
   return (
-    <div className='d-xl-flex'>
+    <div className='d-xl-flex rich-text'>
       <div
         className='col-lg-6 pl-0'
         dangerouslySetInnerHTML={{ __html: firstColumn.html }}
