@@ -43,7 +43,8 @@
           "richtext": [],
           "program": [],
           "current_exhibition": [],
-          "upcoming_exhibition": []
+          "upcoming_exhibition": [],
+          "two_column_text": []
         },
         "choices": {
           "richtext": {
@@ -171,6 +172,34 @@
                   "select": "document",
                   "customtypes": ["exhibition"],
                   "label": "Upcoming exhibition"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "two_column_text": {
+            "type": "Slice",
+            "fieldset": "Two Column Text",
+            "description": "Use two text boxes that appear in a two col. layout.",
+            "icon": "looks_two",
+            "display": "list",
+            "non-repeat": {
+              "first_column": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "allowTargetBlank": true,
+                  "label": "First column",
+                  "placeholder": "This text appears on the left side."
+                }
+              },
+              "second_column": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "allowTargetBlank": true,
+                  "label": "Second column",
+                  "placeholder": "This text appears on the right side."
                 }
               }
             },
