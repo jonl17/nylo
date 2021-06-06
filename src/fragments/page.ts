@@ -56,9 +56,26 @@ export const fragment = graphql`
         ... on PrismicPageBodyUpcomingExhibition {
           ...pageUpcomingExhibitionFragment
         }
+        ... on PrismicPageBodyTwoColumnText {
+          ...twoColumnTextSliceFragment
+        }
       }
     }
   }
+
+  fragment twoColumnTextSliceFragment on PrismicPageBodyTwoColumnText {
+    slice_type
+    id
+    primary {
+      first_column {
+        html
+      }
+      second_column {
+        html
+      }
+    }
+  }
+
   fragment parentPageFragment on PrismicPage {
     url
     id

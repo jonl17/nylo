@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql as gql } from 'gatsby'
-import SliceMapping from '~/components/Slices/mapping'
 import '~/fragments/event'
 import { formatDate } from '~/utils'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
