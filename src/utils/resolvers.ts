@@ -255,7 +255,8 @@ export const eventResolver = (node: any): EventInterface => {
     image: node.data.image,
     text: node.data.text,
     date: node.data.date,
-    time: `${node.data.from}—${node.data.to}`,
+    time:
+      node.data.from && node.data.to ? `${node.data.from}—${node.data.to}` : '',
   }
 }
 

@@ -20,15 +20,17 @@
       }
     },
     "from": {
-      "type": "Number",
+      "type": "Text",
       "config": {
-        "label": "From"
+        "label": "From",
+        "placeholder": "18:30"
       }
     },
     "to": {
-      "type": "Number",
+      "type": "Text",
       "config": {
-        "label": "To"
+        "label": "To",
+        "placeholder": "21:25"
       }
     },
     "text": {

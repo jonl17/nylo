@@ -23,7 +23,9 @@ export const formatDate = (
 ) => {
   const firstD = new Date(firstDate)
 
-  const firstFormattedDateFull = Intl.DateTimeFormat('en-US')
+  const locale = 'en-GB'
+
+  const firstFormattedDateFull = Intl.DateTimeFormat(locale)
     .format(firstD)
     .replace(/\//g, '.')
   const firstFormattedDateShort = firstFormattedDateFull.replace(
@@ -39,7 +41,7 @@ export const formatDate = (
     return firstFormattedDateFull
   } else {
     const secondD = new Date(secondDate)
-    const secondFormattedDateFull = Intl.DateTimeFormat('en-US')
+    const secondFormattedDateFull = Intl.DateTimeFormat(locale)
       .format(secondD)
       .replace(/\//g, '.')
 
