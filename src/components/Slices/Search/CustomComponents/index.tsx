@@ -4,13 +4,12 @@ import { useSearch } from '~/context/searchContext'
 import { useLocation } from '@reach/router'
 import { PageHit, ExhibitionHit, EventHit } from './Types'
 import { useLanguage } from '~/context/langContext'
+import useGetCurrentLanguage from '~/hooks/useGetCurrentLanguage'
 
 const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
   const { searchQuery } = useSearch()
 
   const { lang } = useLanguage()
-
-  console.log(lang)
 
   useEffect(() => {
     refine(searchQuery)
@@ -41,16 +40,14 @@ interface ResultProps {
 }
 
 const CustomResult = ({ hit }: ResultProps) => {
-  const { artist, curator, url, date, type, lang } = hit
-  const { pathname } = useLocation()
-
-  const language: Language = pathname.includes('/' + lang) ? 'en-us' : 'is'
+  const { type, lang } = hit
+  const l = useGetCurrentLanguage()
 
   if (type === 'page') {
-    return <PageHit hit={hit} lang={language} />
+    return l === lang && <PageHit hit={hit} />
   } else if (type === 'exhibition') {
-    return <ExhibitionHit hit={hit} lang={language} />
-  } else return <EventHit hit={hit} />
+    return l === lang && <ExhibitionHit hit={hit} />
+  } else return l === lang && <EventHit hit={hit} />
 }
 
 export { CustomInput, CustomResult }
