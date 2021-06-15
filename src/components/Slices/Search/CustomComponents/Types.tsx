@@ -3,7 +3,6 @@ import { Highlight } from 'react-instantsearch-dom'
 import { Link } from 'gatsby'
 import cn from 'classnames'
 import { Language } from '~/lang'
-import { langSeek } from 'balkan-tungumal'
 import { formatDate } from '~/utils'
 
 type PageHitProps = {
@@ -11,13 +10,11 @@ type PageHitProps = {
     url: string
     lang: Language
   }
-  lang: Language
 }
 
-const PageHit = ({ hit, lang }: PageHitProps) => {
+const PageHit = ({ hit }: PageHitProps) => {
   return (
     <div className={cn('search-results mb-4')}>
-      {/* <p>{langSeek('page', lang)}</p> */}
       <Link to={hit.url}>
         <h3>
           <Highlight attribute='title' hit={hit} />
@@ -34,10 +31,9 @@ type ExhibitionHitProps = {
     curator: string
     lang: Language
   }
-  lang: Language
 }
 
-const ExhibitionHit = ({ hit, lang }: ExhibitionHitProps) => {
+const ExhibitionHit = ({ hit }: ExhibitionHitProps) => {
   return (
     <div className={cn('search-results mb-4')}>
       {/* <p>{langSeek('exhibition', lang)}</p> */}

@@ -9,13 +9,7 @@ const LanguageButton = ({ page }: { page: any }) => {
     <ButtonLink
       label={page.lang === 'is' ? 'EN' : 'IS'}
       className='btn__language btn--primary'
-      to={
-        altPage
-          ? linkResolver(altPage.document)
-          : page.lang === 'is'
-          ? '/en-us'
-          : '/'
-      }
+      to={altPage ? altPage.document.url : page.lang === 'is' ? '/en-us' : '/'}
     ></ButtonLink>
   )
 }

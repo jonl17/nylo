@@ -11,6 +11,18 @@ const linkResolver = doc => {
 
   if (isFrontpage) {
     return properties.lang === defaultLanguage ? '/' : `/${properties.lang}`
+  } else if (doc.type === 'exhibition') {
+    return properties.lang === defaultLanguage
+      ? `/syningar/${properties.uid}`
+      : `/${properties.lang}/exhibitions/${properties.uid}`
+  } else if (doc.type === 'event') {
+    return properties.lang === defaultLanguage
+      ? `/vidburdir/${properties.uid}`
+      : `/${properties.lang}/events/${properties.uid}`
+  } else if (doc.type === 'news') {
+    return properties.lang === defaultLanguage
+      ? `/frettir/${properties.uid}`
+      : `/${properties.lang}/news/${properties.uid}`
   } else {
     return properties.lang === defaultLanguage
       ? `/${properties.uid}`
