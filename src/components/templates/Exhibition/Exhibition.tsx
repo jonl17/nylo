@@ -53,7 +53,7 @@ const Exhibition = ({ data }: Props) => {
               homepage ? { url: homepage.url, uid: homepage.uid } : undefined
             }
           />
-          <div className='d-flex align-items-center'>
+          <div className='d-flex align-items-center mt-4 mt-lg-0'>
             {exhibitionIsOpen(
               new Date(exhibition.opening),
               new Date(exhibition.closing)
