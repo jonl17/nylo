@@ -2,6 +2,7 @@ import React from 'react'
 import useGetFooter from '~/hooks/useGetFooter'
 import { langSeek } from 'balkan-tungumal'
 import { Language } from '~/lang'
+import PostlistSignup from '~/components/Site/PostlistSignup'
 
 const Footer = ({ lang }: { lang: Language }) => {
   const data = useGetFooter()
@@ -46,6 +47,10 @@ const Footer = ({ lang }: { lang: Language }) => {
             >
               <h3>Instagram</h3>
             </a>
+          </div>
+
+          <div className='py-3'>
+            <PostlistSignup />
           </div>
         </div>
       </div>

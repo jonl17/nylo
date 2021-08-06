@@ -10,11 +10,19 @@
 
   &--primary {
     border: 1px solid $black;
+
     @include media-breakpoint-up('lg') {
       &:hover {
         background: $black;
-        color: $white;
+        * {
+          color: $white !important;
+        }
       }
+    }
+
+    background: $white;
+    * {
+      color: $black !important;
     }
   }
 
