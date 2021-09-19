@@ -188,6 +188,7 @@ export interface ExhibitionInterface {
     url: string
   }[]
   year: number
+  body: any[]
 }
 
 export const exhibitionResolver = (node: any): ExhibitionInterface => {
@@ -219,6 +220,7 @@ export const exhibitionResolver = (node: any): ExhibitionInterface => {
     featuredImage: node.data.featured_image,
     title: node.data.title,
     year: new Date(node.data.opening).getFullYear(),
+    body: node.data.body,
   }
 }
 

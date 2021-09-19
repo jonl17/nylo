@@ -40,7 +40,7 @@
     "excerpt": {
       "type": "StructuredText",
       "config": {
-        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl",
         "allowTargetBlank": true,
         "label": "Excerpt",
         "placeholder": "Stuttur texti, helst ekki meira en 1 málsgrein."
@@ -59,7 +59,7 @@
     "detailed_text": {
       "type": "StructuredText",
       "config": {
-        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl",
         "allowTargetBlank": true,
         "label": "Detailed text"
       }
@@ -67,7 +67,7 @@
     "artist_biography": {
       "type": "StructuredText",
       "config": {
-        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl",
         "allowTargetBlank": true,
         "label": "Artist biography"
       }
@@ -105,11 +105,60 @@
             "type": "Link",
             "config": {
               "allowTargetBlank": true,
-              "label": "Link"
+              "label": "Link",
+              "select": null
             }
           }
         },
         "label": "Additional links"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": null,
+        "choices": {
+          "seo": {
+            "type": "Slice",
+            "fieldset": "SEO",
+            "description": "Override default SEO here",
+            "icon": "airport_shuttle",
+            "display": "list",
+            "non-repeat": {
+              "override_title": {
+                "type": "Text",
+                "config": {
+                  "label": "override title"
+                }
+              },
+              "override_description": {
+                "type": "Text",
+                "config": {
+                  "label": "override description"
+                }
+              },
+              "override_keywords": {
+                "type": "Text",
+                "config": {
+                  "label": "override keywords"
+                }
+              },
+              "override_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "thumbnails": [],
+                  "label": "override image"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
       }
     }
   }

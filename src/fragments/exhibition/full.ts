@@ -52,6 +52,24 @@ export const fragment = graphql`
           url
         }
       }
+      body {
+        ... on PrismicExhibitionBodySeo {
+          ...seoFragment
+        }
+      }
+    }
+  }
+
+  fragment seoFragment on PrismicExhibitionBodySeo {
+    slice_type
+    id
+    primary {
+      override_title
+      override_description
+      override_keywords
+      override_image {
+        url
+      }
     }
   }
 `
