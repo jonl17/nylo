@@ -5,9 +5,10 @@ import cn from 'classnames'
 
 type Props = {
   filteringItems: string[]
+  lang: string
 }
 
-const Filter = ({ filteringItems }: Props) => {
+const Filter = ({ filteringItems, lang }: Props) => {
   if (filteringItems.length === 0) return null
   const qs = useQueryParams()
   return (
@@ -23,8 +24,10 @@ const Filter = ({ filteringItems }: Props) => {
         />
       ))}
       <Button
-        className='mb-3 mb-lg-0'
-        label='Reset'
+        className={cn('mb-3 mb-lg-0', {
+          'btn--primary--active': !qs.decade,
+        })}
+        label={lang === 'is' ? 'Sjá allt' : 'See all'}
         onClick={() => mergeQueryParams({ decade: undefined })}
       />
     </div>

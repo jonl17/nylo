@@ -100,6 +100,7 @@ const Exhibitions = ({
       <div className='mt-2 mb-3'>
         <Filter
           filteringItems={decades.map(item => `${item.from}-${item.to}`)}
+          lang={exhibitions[0].lang}
         />
       </div>
       <div>
