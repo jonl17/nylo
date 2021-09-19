@@ -13,6 +13,7 @@ import { langSeek } from 'balkan-tungumal'
 import { exhibitionResolver } from '~/utils/resolvers'
 import useGetPage from '~/hooks/useGetPage'
 import linkResolver from '~/utils/linkResolver'
+import SliceZone from '~/components/Slices/mapping'
 
 interface Props extends PageProps {
   pageContext: {
@@ -35,6 +36,8 @@ const Exhibition = ({ data }: Props) => {
   const homepage = useGetPage(
     exhibition.lang === 'is' ? 'syningar' : 'exhibitions'
   )
+
+  const slices = exhibition.body
 
   return (
     <>
@@ -144,6 +147,10 @@ const Exhibition = ({ data }: Props) => {
           </div>
         </div>
       </div>
+      {slices &&
+        slices.map((slice: any, idx: number) => (
+          <SliceZone key={idx} slice={slice} lang={exhibition.lang} />
+        ))}
     </>
   )
 }

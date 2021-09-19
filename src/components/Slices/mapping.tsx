@@ -7,6 +7,7 @@ import {
   CurrentExhibition,
   UpcomingExhibition,
   TwoColumnText,
+  OverrideSeo,
 } from '.'
 
 // todo, convert to typescript
@@ -19,12 +20,13 @@ const SliceMapping = ({ slice, lang }: { slice: any; lang: string }) => {
     current_exhibition: CurrentExhibition,
     upcoming_exhibition: UpcomingExhibition,
     two_column_text: TwoColumnText,
+    seo: OverrideSeo,
   }
 
   const Cmp = slices[slice.slice_type]
 
   if (!Cmp) {
-    return `Error loading slice named ${slice.slice_type}`
+    return <> `Error loading slice named ${slice.slice_type}` </>
   }
 
   let props = {}
@@ -34,6 +36,8 @@ const SliceMapping = ({ slice, lang }: { slice: any; lang: string }) => {
       firstColumn: slice.primary.first_column,
       secondColumn: slice.primary.second_column,
     }
+  } else if (slice.slice_type === 'seo') {
+    props = slice.primary
   }
 
   return <Cmp lang={lang} {...slice} {...props} />

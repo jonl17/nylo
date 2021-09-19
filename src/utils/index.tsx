@@ -1,5 +1,6 @@
 import slugify from 'slugify'
 import { ExhibitionInterface } from './resolvers'
+import { useLayoutEffect } from 'react'
 
 export const generateURLfromWords = (strings: string[]) => {
   return strings
@@ -197,4 +198,17 @@ export const openNow = (
 
 export const onlyUnique = (value: number, index: number, self: number[]) => {
   return self.indexOf(value) === index
+}
+
+export const useLockBody = (condition: boolean) => {
+  useLayoutEffect(() => {
+    if (condition) {
+      // Prevent scrolling on mount
+      document.body.style.overflow = 'hidden'
+      // Re-enable scrolling when component unmounts
+      return () => {
+        document.body.style.overflow = 'visible'
+      }
+    }
+  }, [condition]) // Empty array ensures effect is only run on mount and unmount
 }
