@@ -24,6 +24,10 @@
     * {
       color: $black !important;
     }
+
+    &--active {
+      background: $gray;
+    }
   }
 
   &--secondary {

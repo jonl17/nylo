@@ -194,3 +194,7 @@ export const openNow = (
     return true
   else return false
 }
+
+export const onlyUnique = (value: number, index: number, self: number[]) => {
+  return self.indexOf(value) === index
+}
