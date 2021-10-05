@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getAllExhibitions } from '~/hooks/exhibitionHooks'
 import { Language } from '~/lang'
 import { ExhibitionInterface } from '~/utils/resolvers'
@@ -81,7 +81,9 @@ const Exhibitions = ({
     return result
   }
 
-  const decades = findDecades()
+  const [decades, setDecades] = useState<{ from: number; to: number }[]>([])
+
+  useEffect(() => setDecades(findDecades()), [])
 
   const yearInRange = (year: number) => {
     if (qs.decade) {
@@ -98,10 +100,12 @@ const Exhibitions = ({
   return (
     <div>
       <div className='mt-2 mb-3'>
-        <Filter
-          filteringItems={decades.map(item => `${item.from}-${item.to}`)}
-          lang={exhibitions[0].lang}
-        />
+        {decades.length > 0 && (
+          <Filter
+            filteringItems={decades.map(item => `${item.from}-${item.to}`)}
+            lang={exhibitions[0].lang}
+          />
+        )}
       </div>
       <div>
         <div className='overview__grid mr-lg-6 mr-xl-0 mb-3 pr-lg-3'>
@@ -125,12 +129,15 @@ export default ({ lang }: { lang: Language }) => {
 
   const qs = useQueryParams()
 
+  const noCurrrentExhibition = open.exhibitions.length === 0
+
   useEffect(() => {
     if (!qs.status) {
-      mergeQueryParams({ status: 'Current' })
-    }
-    if (open.exhibitions.length === 0) {
-      mergeQueryParams({ status: 'Past' })
+      if (noCurrrentExhibition) {
+        mergeQueryParams({ status: 'Past' })
+      } else {
+        mergeQueryParams({ status: 'Current' })
+      }
     }
   }, [])
 
