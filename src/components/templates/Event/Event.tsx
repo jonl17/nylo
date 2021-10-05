@@ -9,6 +9,7 @@ import { eventResolver } from '~/utils/resolvers'
 import useGetPage from '~/hooks/useGetPage'
 import linkResolver from '~/utils/linkResolver'
 import RichText from '~/components/Slices/RichText'
+import SliceMapping from '~/components/Slices/mapping'
 
 const Event: React.FC<{
   data: any
@@ -43,6 +44,9 @@ const Event: React.FC<{
         <h1 className='mb-2'>{event.name.text}</h1>
         {event.image.url && <FeaturedImage image={event.image} />}
         <RichText primary={{ text: event.text, type: 'large' }} />
+        {event.body.map((slice, i) => (
+          <SliceMapping key={i} slice={slice} lang={event.lang} />
+        ))}
       </div>
     </div>
   )

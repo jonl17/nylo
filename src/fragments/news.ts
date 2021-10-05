@@ -47,6 +47,22 @@ export const fragment = graphql`
             }
           }
         }
+        ... on PrismicNewsBodySeo {
+          ...seoFragmentNews
+        }
+      }
+    }
+  }
+
+  fragment seoFragmentNews on PrismicNewsBodySeo {
+    slice_type
+    id
+    primary {
+      override_title
+      override_description
+      override_keywords
+      override_image {
+        url
       }
     }
   }

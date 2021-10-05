@@ -132,6 +132,7 @@ export interface NewsInterface {
   featuredImage: {
     url: string
     alt: string
+    fluid: FluidObject
   }
   body: any[]
 }
@@ -245,6 +246,7 @@ export interface EventInterface {
   }
   date: string
   time: string
+  body: any[]
 }
 
 export const eventResolver = (node: any): EventInterface => {
@@ -261,6 +263,7 @@ export const eventResolver = (node: any): EventInterface => {
     date: node.data.date,
     time:
       node.data.from && node.data.to ? `${node.data.from}—${node.data.to}` : '',
+    body: node.data.body,
   }
 }
 

@@ -26,6 +26,24 @@ export const fragment = graphql`
           ...GatsbyPrismicImageFluid
         }
       }
+      body {
+        ... on PrismicEventBodySeo {
+          ...seoFragmentEvents
+        }
+      }
+    }
+  }
+
+  fragment seoFragmentEvents on PrismicEventBodySeo {
+    slice_type
+    id
+    primary {
+      override_title
+      override_description
+      override_keywords
+      override_image {
+        url
+      }
     }
   }
 `

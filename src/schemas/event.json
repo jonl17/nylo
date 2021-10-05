@@ -9,7 +9,7 @@
     "name": {
       "type": "StructuredText",
       "config": {
-        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "single": "heading1,heading2,heading3,heading4,heading5,heading6",
         "label": "Name"
       }
     },
@@ -36,7 +36,7 @@
     "text": {
       "type": "StructuredText",
       "config": {
-        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl",
         "allowTargetBlank": true,
         "label": "Text"
       }
@@ -49,6 +49,54 @@
         },
         "thumbnails": [],
         "label": "Image"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "seo": {
+            "type": "Slice",
+            "fieldset": "SEO",
+            "description": "Override default SEO here",
+            "icon": "airport_shuttle",
+            "display": "list",
+            "non-repeat": {
+              "override_title": {
+                "type": "Text",
+                "config": {
+                  "label": "override title"
+                }
+              },
+              "override_description": {
+                "type": "Text",
+                "config": {
+                  "label": "override description"
+                }
+              },
+              "override_keywords": {
+                "type": "Text",
+                "config": {
+                  "label": "override keywords"
+                }
+              },
+              "override_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "thumbnails": [],
+                  "label": "override image"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
       }
     }
   }

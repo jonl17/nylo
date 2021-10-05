@@ -4,7 +4,7 @@ import Img, { FluidObject } from 'gatsby-image'
 const FeaturedImage = ({
   image,
 }: {
-  image: { alt: string; fluid: FluidObject }
+  image: { alt: string; url: string; fluid: FluidObject }
 }) => {
   return (
     <div className='featured-image'>
