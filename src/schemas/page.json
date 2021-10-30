@@ -75,16 +75,7 @@
                   "allowTargetBlank": true,
                   "label": "Text",
                   "placeholder": "Add text with links, buttons, etc...",
-                  "labels": {
-                    "XX": [
-                      {
-                        "name": "button-primary"
-                      },
-                      {
-                        "name": "inline-link"
-                      }
-                    ]
-                  }
+                  "labels": ["button-primary", "inline-link", "green"]
                 }
               }
             },

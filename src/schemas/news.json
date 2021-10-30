@@ -54,7 +54,7 @@
                   "allowTargetBlank": true,
                   "label": "Text",
                   "placeholder": "Add text with links, buttons, etc...",
-                  "labels": ["button-primary", "inline-link"]
+                  "labels": ["button-primary", "inline-link", "green"]
                 }
               }
             },
