@@ -1,16 +1,7 @@
 .mobile-header {
-  height: 150px;
-  padding: 0 $spacer;
+  height: $mobile-header;
   overflow: hidden;
-
-  &--expanded {
-    height: 100%;
-    margin-bottom: $spacer * 3;
-  }
-
-  &__head {
-    padding: $spacer * 3 0 $spacer * 3 0;
-    height: 150px;
-    align-items: center;
-  }
+  position: absolute;
+  top: 0;
+  z-index: 99;
 }
