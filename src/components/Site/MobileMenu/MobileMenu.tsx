@@ -44,7 +44,7 @@ const Item = ({ submenu, page }: ItemProps) => {
         </Link>
       </div>
       {submenu && openSubmenu && (
-        <div className='py-2 px-4'>
+        <div className='py-2 pl-5'>
           {submenu.items.map((item, key) => (
             <Link
               key={key}
