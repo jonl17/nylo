@@ -1,0 +1,32 @@
+.mobile-menu {
+  position: fixed;
+  height: 100vh;
+  z-index: 999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: $white;
+  overflow-y: auto;
+
+  &__head {
+    height: $mobile-header;
+  }
+
+  &__menu {
+    padding-top: $mobile-header;
+
+    &__submenu-button {
+      background: transparent;
+      border: none;
+      font-size: 50px;
+      padding: 0;
+    }
+
+    &__item {
+      &--active {
+        text-decoration: underline;
+      }
+    }
+  }
+}

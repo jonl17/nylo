@@ -8,6 +8,7 @@ import { gsap } from 'gsap'
 import cn from 'classnames'
 import { Language } from 'balkan-tungumal/lib/dict'
 import SEO from '~/components/Site/SEO'
+import MobileMenu from '~/components/Site/MobileMenu'
 
 const Layout: React.FC<{
   page: any
@@ -47,6 +48,7 @@ const Layout: React.FC<{
       <main id='main-wrapper'>
         <NavBar lang={lang} type={pCtx.type} />
         <MobileHeader lang={lang} bg={pCtx.bg} />
+        <MobileMenu lang={lang} />
         <div id='bg__animate' className={cn('bg children-wrap', pCtx.bg)}>
           {children}
         </div>

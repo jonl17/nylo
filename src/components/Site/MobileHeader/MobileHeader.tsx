@@ -1,9 +1,8 @@
 import { Link } from 'gatsby'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Burger from '~/components/Site/Burger'
 import { Language } from '~/lang'
 import cn from 'classnames'
-import useGetMainMenu from '~/hooks/useGetMainMenu'
 import { useMobileMenu } from '~/context/mobileMenuContext'
 
 const Title = ({ lang }: { lang: Language }) => {
@@ -19,10 +18,6 @@ const Title = ({ lang }: { lang: Language }) => {
 const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
   const { open, triggerMobileMenu } = useMobileMenu()
 
-  const mainmenu = useGetMainMenu().find(node => node.lang === lang)
-
-  console.log(bg)
-
   return (
     <div
       className={cn(
@@ -32,42 +27,6 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
     >
       <Burger onClick={() => triggerMobileMenu(!open)} expand={open} />
       <Title lang={lang} />
-
-      {/* {mainmenu && (
-        <div className='mobile-header__mainmenu'>
-          {mainmenu.items.map((item, i) => (
-            <div key={i}>
-              <Link
-                activeClassName='navbar__anchor navbar__anchor--active'
-                to={item.page.url}
-              >
-                <span className='mb-1' />
-                <h1 className='ml-1 mb-2 d-flex justify-content-between'>
-                  {item.page.title.text}
-                </h1>
-              </Link>
-              {item.submenu && (
-                <div>
-                  {item.submenu.items.map(
-                    (item, i) =>
-                      // we hide the first in submenu on mobile
-                      i !== 0 && (
-                        <Link
-                          key={item.page.url}
-                          to={item.page.url}
-                          activeClassName='navbar__anchor navbar__anchor--active'
-                        >
-                          <span className='mb-2' />
-                          <p className='ml-1'>{item.page.title.text}</p>
-                        </Link>
-                      )
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )} */}
     </div>
   )
 }
