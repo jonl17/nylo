@@ -21,18 +21,19 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
 
   const mainmenu = useGetMainMenu().find(node => node.lang === lang)
 
+  console.log(bg)
+
   return (
     <div
-      className={cn('mobile-header d-block d-lg-none', {
-        'mobile-header--expanded': open,
-        bg: !open,
-      })}
+      className={cn(
+        'mobile-header d-flex justify-content-between w-100 align-items-center d-lg-none p-2',
+        bg
+      )}
     >
-      <div className={cn('d-flex justify-content-between mobile-header__head')}>
-        <Burger onClick={() => triggerMobileMenu(!open)} expand={open} />
-        <Title lang={lang} />
-      </div>
-      {mainmenu && (
+      <Burger onClick={() => triggerMobileMenu(!open)} expand={open} />
+      <Title lang={lang} />
+
+      {/* {mainmenu && (
         <div className='mobile-header__mainmenu'>
           {mainmenu.items.map((item, i) => (
             <div key={i}>
@@ -66,7 +67,7 @@ const MobileHeader = ({ lang, bg }: { lang: Language; bg: string }) => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   )
 }

@@ -47,7 +47,7 @@ const Layout: React.FC<{
       <main id='main-wrapper'>
         <NavBar lang={lang} type={pCtx.type} />
         <MobileHeader lang={lang} bg={pCtx.bg} />
-        <div id='bg__animate' className={cn('bg', pCtx.bg)}>
+        <div id='bg__animate' className={cn('bg children-wrap', pCtx.bg)}>
           {children}
         </div>
 
