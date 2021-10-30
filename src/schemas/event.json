@@ -95,6 +95,26 @@
               }
             },
             "repeat": {}
+          },
+          "richtext": {
+            "type": "Slice",
+            "fieldset": "RichText",
+            "description": "Add text, links, buttons, etc... (1 type) ",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Add text with links, buttons, etc...",
+                  "labels": ["button-primary", "inline-link", "green"]
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

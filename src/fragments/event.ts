@@ -30,6 +30,19 @@ export const fragment = graphql`
         ... on PrismicEventBodySeo {
           ...seoFragmentEvents
         }
+        ... on PrismicEventBodyRichtext {
+          ...richTextFragmentEvents
+        }
+      }
+    }
+  }
+
+  fragment richTextFragmentEvents on PrismicEventBodyRichtext {
+    slice_type
+    id
+    primary {
+      text {
+        html
       }
     }
   }
