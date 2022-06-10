@@ -8,6 +8,7 @@ import {
   UpcomingExhibition,
   TwoColumnText,
   OverrideSeo,
+  Redirect,
 } from '.'
 
 // todo, convert to typescript
@@ -21,6 +22,7 @@ const SliceMapping = ({ slice, lang }: { slice: any; lang: string }) => {
     upcoming_exhibition: UpcomingExhibition,
     two_column_text: TwoColumnText,
     seo: OverrideSeo,
+    redirect: Redirect,
   }
 
   const Cmp = slices[slice.slice_type]
@@ -38,6 +40,10 @@ const SliceMapping = ({ slice, lang }: { slice: any; lang: string }) => {
     }
   } else if (slice.slice_type === 'seo') {
     props = slice.primary
+  } else if (slice.slice_type === 'redirect') {
+    props = {
+      redirectUrl: slice.primary.url.url,
+    }
   }
 
   return <Cmp lang={lang} {...slice} {...props} />

@@ -9,7 +9,7 @@
     "title": {
       "type": "StructuredText",
       "config": {
-        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "single": "heading1,heading2,heading3,heading4,heading5,heading6",
         "label": "Titill"
       }
     },
@@ -35,17 +35,7 @@
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
-        "labels": {
-          "image_reel": [],
-          "rich_text": [],
-          "all_news": [],
-          "media": [],
-          "richtext": [],
-          "program": [],
-          "current_exhibition": [],
-          "upcoming_exhibition": [],
-          "two_column_text": []
-        },
+        "labels": null,
         "choices": {
           "richtext": {
             "type": "Slice",
@@ -71,7 +61,7 @@
               "text": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, rtl",
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl",
                   "allowTargetBlank": true,
                   "label": "Text",
                   "placeholder": "Add text with links, buttons, etc...",
@@ -178,7 +168,7 @@
               "first_column": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
                   "allowTargetBlank": true,
                   "label": "First column",
                   "placeholder": "This text appears on the left side."
@@ -187,10 +177,26 @@
               "second_column": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
                   "allowTargetBlank": true,
                   "label": "Second column",
                   "placeholder": "This text appears on the right side."
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "redirect": {
+            "type": "Slice",
+            "fieldset": "Redirect",
+            "description": "Redirect this page to some other page",
+            "icon": "people_outline",
+            "display": "list",
+            "non-repeat": {
+              "url": {
+                "type": "Link",
+                "config": {
+                  "label": "URL"
                 }
               }
             },

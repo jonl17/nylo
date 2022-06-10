@@ -59,6 +59,19 @@ export const fragment = graphql`
         ... on PrismicPageBodyTwoColumnText {
           ...twoColumnTextSliceFragment
         }
+        ... on PrismicPageBodyRedirect {
+          ...redirectSliceFragment
+        }
+      }
+    }
+  }
+
+  fragment redirectSliceFragment on PrismicPageBodyRedirect {
+    slice_type
+    id
+    primary {
+      url {
+        url
       }
     }
   }
