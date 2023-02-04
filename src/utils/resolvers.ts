@@ -280,19 +280,19 @@ export interface OpeningHourInterface {
 
 export const openingHourResolver = (node: any): OpeningHourInterface => ({
   day: {
-    from: node.data.active_opening_hours.document
-      ? node.data.active_opening_hours.document.data.day_from
+    from: node.data.opening_hours.document
+      ? node.data.opening_hours.document.data.day_from
       : '',
-    to: node.data.active_opening_hours.document
-      ? node.data.active_opening_hours.document.data.day_to
+    to: node.data.opening_hours.document
+      ? node.data.opening_hours.document.data.day_to
       : '',
   },
   time: {
-    from: node.data.active_opening_hours.document
-      ? node.data.active_opening_hours.document.data.time_from
+    from: node.data.opening_hours.document
+      ? node.data.opening_hours.document.data.time_from
       : '',
-    to: node.data.active_opening_hours.document
-      ? node.data.active_opening_hours.document.data.time_to
+    to: node.data.opening_hours.document
+      ? node.data.opening_hours.document.data.time_to
       : '',
   },
 })

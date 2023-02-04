@@ -22,12 +22,8 @@ const gatsbySourcePrismicConfig = {
     repositoryName: reponame,
     accessToken: apiKey,
     linkResolver: () => doc => linkResolver(doc),
-    htmlSerializer: ({ node, key, value }) => (
-      type,
-      element,
-      content,
-      children
-    ) => htmlSerializer(element, content),
+    htmlSerializer: () => (element, content) =>
+      htmlSerializer(element, content),
     schemas: {
       page: require(`./src/schemas/page.json`),
       menu: require(`./src/schemas/menu.json`),

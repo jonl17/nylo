@@ -40,12 +40,13 @@
         "label": "Image"
       }
     },
-    "active_opening_hours": {
+    "opening_hours": {
       "type": "Link",
       "config": {
         "select": "document",
         "customtypes": ["opening_hours"],
-        "label": "Active opening hours"
+        "label": "opening hours",
+        "placeholder": "will appear in the sidebar"
       }
     }
   }

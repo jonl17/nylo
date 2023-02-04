@@ -6,10 +6,11 @@ export default () => {
     {
       prismicSeo {
         data {
-          active_opening_hours {
+          opening_hours {
             document {
               ... on PrismicOpeningHours {
                 data {
+                  name
                   day_from
                   day_to
                   time_from
