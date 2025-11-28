@@ -7,7 +7,10 @@ As your project grows, you should update this function according to your routes 
 const linkResolver = doc => {
   const properties = doc._meta || doc
 
-  const isFrontpage = doc.tags && doc.tags.indexOf(defaultFrontpageTag) !== -1
+  const isFrontpage =
+    doc.type === 'page' &&
+    doc.tags &&
+    doc.tags.indexOf(defaultFrontpageTag) !== -1
 
   if (isFrontpage) {
     return properties.lang === defaultLanguage ? '/' : `/${properties.lang}`
