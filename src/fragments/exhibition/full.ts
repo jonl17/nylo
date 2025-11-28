@@ -53,14 +53,14 @@ export const fragment = graphql`
         }
       }
       body {
-        ... on PrismicExhibitionBodySeo {
+        ... on PrismicExhibitionDataBodySeo {
           ...seoFragment
         }
       }
     }
   }
 
-  fragment seoFragment on PrismicExhibitionBodySeo {
+  fragment seoFragment on PrismicExhibitionDataBodySeo {
     slice_type
     id
     primary {

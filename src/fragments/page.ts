@@ -41,32 +41,32 @@ export const fragment = graphql`
         }
       }
       body {
-        ... on PrismicPageBodyProgram {
+        ... on PrismicPageDataBodyProgram {
           ...pageProgramFragment
         }
-        ... on PrismicPageBodyMedia {
+        ... on PrismicPageDataBodyMedia {
           ...pageMediaFragment
         }
-        ... on PrismicPageBodyRichtext {
+        ... on PrismicPageDataBodyRichtext {
           ...pageRichTextFragment
         }
-        ... on PrismicPageBodyCurrentExhibition {
+        ... on PrismicPageDataBodyCurrentExhibition {
           ...pageCurrentExhibitionFragment
         }
-        ... on PrismicPageBodyUpcomingExhibition {
+        ... on PrismicPageDataBodyUpcomingExhibition {
           ...pageUpcomingExhibitionFragment
         }
-        ... on PrismicPageBodyTwoColumnText {
+        ... on PrismicPageDataBodyTwoColumnText {
           ...twoColumnTextSliceFragment
         }
-        ... on PrismicPageBodyRedirect {
+        ... on PrismicPageDataBodyRedirect {
           ...redirectSliceFragment
         }
       }
     }
   }
 
-  fragment redirectSliceFragment on PrismicPageBodyRedirect {
+  fragment redirectSliceFragment on PrismicPageDataBodyRedirect {
     slice_type
     id
     primary {
@@ -76,7 +76,7 @@ export const fragment = graphql`
     }
   }
 
-  fragment twoColumnTextSliceFragment on PrismicPageBodyTwoColumnText {
+  fragment twoColumnTextSliceFragment on PrismicPageDataBodyTwoColumnText {
     slice_type
     id
     primary {

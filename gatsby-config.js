@@ -19,11 +19,10 @@ const apiKey = process.env.PRISMIC_API_KEY || accessToken
 const gatsbySourcePrismicConfig = {
   resolve: `gatsby-source-prismic`,
   options: {
-    repositoryName: reponame,
-    accessToken: apiKey,
-    linkResolver: () => doc => linkResolver(doc),
-    htmlSerializer: () => (element, content) =>
-      htmlSerializer(element, content),
+    repositoryName: reponame ?? '',
+    accessToken: apiKey ?? '',
+    linkResolver: linkResolver,
+    htmlSerializer: htmlSerializer,
     schemas: {
       page: require(`./src/schemas/page.json`),
       menu: require(`./src/schemas/menu.json`),
@@ -35,6 +34,8 @@ const gatsbySourcePrismicConfig = {
       opening_hours: require(`./src/schemas/opening_hours.json`),
       event: require('./src/schemas/event.json'),
       seo: require('./src/schemas/seo.json'),
+      '505020dansparty': {},
+      form: {},
     },
     lang: '*',
   },
@@ -44,6 +45,9 @@ module.exports = {
   plugins: [
     gatsbySourcePrismicConfig,
     'gatsby-plugin-layout',
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
@@ -66,8 +70,6 @@ module.exports = {
         chunkSize: 10000, // default: 1000
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-plugin-mailchimp',
       options: {

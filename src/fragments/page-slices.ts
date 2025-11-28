@@ -2,7 +2,7 @@ import { graphql } from 'gatsby'
 import './exhibition/full'
 
 export const fragment = graphql`
-  fragment pageRichTextFragment on PrismicPageBodyRichtext {
+  fragment pageRichTextFragment on PrismicPageDataBodyRichtext {
     slice_type
     primary {
       type
@@ -12,7 +12,7 @@ export const fragment = graphql`
     }
   }
 
-  fragment pageMediaFragment on PrismicPageBodyMedia {
+  fragment pageMediaFragment on PrismicPageDataBodyMedia {
     slice_type
     items {
       image {
@@ -22,7 +22,7 @@ export const fragment = graphql`
     }
   }
 
-  fragment pageProgramFragment on PrismicPageBodyProgram {
+  fragment pageProgramFragment on PrismicPageDataBodyProgram {
     slice_type
     primary {
       programName: program_name
@@ -33,7 +33,7 @@ export const fragment = graphql`
     }
   }
 
-  fragment pageCurrentExhibitionFragment on PrismicPageBodyCurrentExhibition {
+  fragment pageCurrentExhibitionFragment on PrismicPageDataBodyCurrentExhibition {
     slice_type
     primary {
       exhibition {
@@ -44,7 +44,7 @@ export const fragment = graphql`
     }
   }
 
-  fragment pageUpcomingExhibitionFragment on PrismicPageBodyUpcomingExhibition {
+  fragment pageUpcomingExhibitionFragment on PrismicPageDataBodyUpcomingExhibition {
     slice_type
     primary {
       upcoming_exhibition {

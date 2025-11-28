@@ -21,16 +21,14 @@ export const fragment = graphql`
       featured_image {
         alt
         url
-        fluid {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData
       }
       title {
         text
       }
       date(formatString: "YYYY-MM-DD")
       body {
-        ... on PrismicNewsBodyMedia {
+        ... on PrismicNewsDataBodyMedia {
           slice_type
           items {
             image {
@@ -39,7 +37,7 @@ export const fragment = graphql`
             }
           }
         }
-        ... on PrismicNewsBodyRichtext {
+        ... on PrismicNewsDataBodyRichtext {
           slice_type
           primary {
             text {
@@ -47,14 +45,14 @@ export const fragment = graphql`
             }
           }
         }
-        ... on PrismicNewsBodySeo {
+        ... on PrismicNewsDataBodySeo {
           ...seoFragmentNews
         }
       }
     }
   }
 
-  fragment seoFragmentNews on PrismicNewsBodySeo {
+  fragment seoFragmentNews on PrismicNewsDataBodySeo {
     slice_type
     id
     primary {

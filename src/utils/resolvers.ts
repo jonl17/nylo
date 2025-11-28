@@ -1,4 +1,4 @@
-import { FluidObject } from 'gatsby-image'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export interface PageInterface {
   url: string
@@ -132,7 +132,7 @@ export interface NewsInterface {
   featuredImage: {
     url: string
     alt: string
-    fluid: FluidObject
+    gatsbyImageData: IGatsbyImageData
   }
   body: any[]
 }
@@ -239,7 +239,7 @@ export interface EventInterface {
   image: {
     alt: string
     url: string
-    fluid: FluidObject
+    gatsbyImageData: IGatsbyImageData
   }
   text: {
     html: string

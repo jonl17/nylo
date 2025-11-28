@@ -1,14 +1,14 @@
 import React from 'react'
-import Img, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 const FeaturedImage = ({
   image,
 }: {
-  image: { alt: string; url: string; fluid: FluidObject }
+  image: { alt: string; url: string; gatsbyImageData: IGatsbyImageData }
 }) => {
   return (
     <div className='featured-image'>
-      <Img fluid={image.fluid} alt={image.alt} />
+      <GatsbyImage image={image.gatsbyImageData} alt={image.alt} />
     </div>
   )
 }

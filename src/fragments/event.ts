@@ -22,22 +22,20 @@ export const fragment = graphql`
       image {
         alt
         url
-        fluid {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData
       }
       body {
-        ... on PrismicEventBodySeo {
+        ... on PrismicEventDataBodySeo {
           ...seoFragmentEvents
         }
-        ... on PrismicEventBodyRichtext {
+        ... on PrismicEventDataBodyRichtext {
           ...richTextFragmentEvents
         }
       }
     }
   }
 
-  fragment richTextFragmentEvents on PrismicEventBodyRichtext {
+  fragment richTextFragmentEvents on PrismicEventDataBodyRichtext {
     slice_type
     id
     primary {
@@ -47,7 +45,7 @@ export const fragment = graphql`
     }
   }
 
-  fragment seoFragmentEvents on PrismicEventBodySeo {
+  fragment seoFragmentEvents on PrismicEventDataBodySeo {
     slice_type
     id
     primary {
