@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const news = await graphql(`
     {
-      allPrismicNews(sort: { fields: data___date, order: DESC }) {
+      allPrismicNews(sort: {data: {date: DESC}}) {
         nodes {
           id
           uid
@@ -86,7 +86,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const exhibitions = await graphql(`
     {
-      allPrismicExhibition(sort: { fields: data___opening, order: DESC }) {
+      allPrismicExhibition(sort: {data: {opening: DESC}}) {
         nodes {
           id
           uid
@@ -118,7 +118,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const events = await graphql(`
     {
-      allPrismicEvent(sort: { fields: data___date, order: DESC }) {
+      allPrismicEvent(sort: {data: {date: DESC}}) {
         nodes {
           id
           uid

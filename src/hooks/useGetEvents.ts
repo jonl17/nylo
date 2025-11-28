@@ -5,7 +5,7 @@ import { EventInterface, eventResolver } from '~/utils/resolvers'
 export default (): EventInterface[] => {
   const data = useStaticQuery(graphql`
     {
-      allPrismicEvent(sort: { fields: data___date, order: DESC }) {
+      allPrismicEvent(sort: {data: {date: DESC}}) {
         nodes {
           ...eventFragmentFull
         }

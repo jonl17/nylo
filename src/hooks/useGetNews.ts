@@ -26,7 +26,7 @@ export default (): NewsInterface[] => {
     }
   } = useStaticQuery(graphql`
     {
-      allPrismicNews(sort: { fields: data___date, order: DESC }) {
+      allPrismicNews(sort: {data: {date: DESC}}) {
         nodes {
           ...newsFragment
         }

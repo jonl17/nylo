@@ -26,7 +26,7 @@ const getAllExhibitions = () => {
     }
   } = useStaticQuery(graphql`
     {
-      allPrismicExhibition(sort: { fields: data___opening, order: DESC }) {
+      allPrismicExhibition(sort: {data: {opening: DESC}}) {
         nodes {
           ...exhibitionFragmentFull
         }
