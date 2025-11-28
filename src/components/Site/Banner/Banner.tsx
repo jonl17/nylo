@@ -18,7 +18,7 @@ const Banner = ({ ctx }: { ctx: { lang: Language; page: PageInterface } }) => {
 
   return (
     <div className='banner' id='banner'>
-      {data && (
+      {data?.announcement?.html && (
         <div
           dangerouslySetInnerHTML={{
             __html: data.announcement.html,
