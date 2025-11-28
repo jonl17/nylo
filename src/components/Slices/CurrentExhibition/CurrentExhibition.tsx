@@ -5,7 +5,7 @@ import { langSeek } from 'balkan-tungumal'
 import { exhibitionResolver } from '~/utils/resolvers'
 
 export default ({ primary }: { primary: any }) => {
-  if (!primary.exhibition.document) return null
+  if (!primary?.exhibition?.document) return null
 
   const exhibition = exhibitionResolver(primary.exhibition.document)
 

@@ -59,12 +59,14 @@ export default (id: string) => {
       id: x.id,
       title: x.data.name,
       prefix: x.data.prefix,
-      items: x.data.items.map(y => {
-        return {
-          title: y.page.document.data.title,
-          url: y.page.url,
-        }
-      }),
+      items: x.data.items
+        .filter(y => y?.page?.document?.data?.title)
+        .map(y => {
+          return {
+            title: y.page.document.data.title,
+            url: y.page.url,
+          }
+        }),
     }
   })
 

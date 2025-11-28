@@ -21,41 +21,47 @@ export interface PageInterface {
 }
 
 export const altLanguageResolver = (node: any) => {
+  if (!node) return null
   return {
-    url: node.url,
-    lang: node.lang,
-    uid: node.uid,
-    tags: node.tags,
+    url: node.url || '',
+    lang: node.lang || 'is',
+    uid: node.uid || '',
+    tags: node.tags || [],
   }
 }
 
 export const pageResolver = (node: any): PageInterface => {
+  if (!node) return null as any
+
+  const title = node.data?.title || { html: '', text: '' }
+  const lang = node.lang || 'is'
+
   return {
-    url: node.url,
-    prismicId: node.prismicId,
-    uid: node.uid,
-    lang: node.lang,
-    title: node.data.title,
-    tags: node.tags,
-    alternateLanguages: node.alternate_languages.map((p: any) =>
-      p.document ? altLanguageResolver(p.document) : []
-    ),
-    body: node.data.body,
-    isSubpageOf: node.data.is_subpage_of.document
+    url: node.url || '',
+    prismicId: node.prismicId || '',
+    uid: node.uid || '',
+    lang,
+    title,
+    tags: node.tags || [],
+    alternateLanguages: (node.alternate_languages || [])
+      .map((p: any) => p?.document ? altLanguageResolver(p.document) : null)
+      .filter((x: any) => x !== null),
+    body: node.data?.body || [],
+    isSubpageOf: node.data?.is_subpage_of?.document
       ? {
-          url: node.data.is_subpage_of.document.url,
-          uid: node.data.is_subpage_of.document.uid,
+          url: node.data.is_subpage_of.document.url || '',
+          uid: node.data.is_subpage_of.document.uid || '',
         }
-      : node.data.is_subpage_of.document,
-    hasSubmenu: node.data.has_submenu.document
+      : undefined,
+    hasSubmenu: node.data?.has_submenu?.document
       ? submenuResolver(node.data.has_submenu.document)
       : undefined,
     metatitle:
-      node.data.title.text !== 'Frontpage'
-        ? node.lang === 'is'
-          ? 'Nýlistasafnið' + '—' + node.data.title.text
-          : 'Living Art Musem' + '—' + node.data.title.text
-        : node.lang === 'is'
+      title.text !== 'Frontpage'
+        ? lang === 'is'
+          ? 'Nýlistasafnið' + '—' + title.text
+          : 'Living Art Musem' + '—' + title.text
+        : lang === 'is'
         ? 'Nýlistasafnið'
         : 'Living Art Musem',
   }
@@ -83,15 +89,17 @@ export interface MenuInterface {
 }
 
 export const submenuResolver = (node: any): MenuInterface => {
+  if (!node) return null as any
+
   return {
-    id: node.id,
-    prismicId: node.prismicId,
-    lang: node.lang,
-    tags: node.tags,
-    name: node.data.name,
-    items: node.data.items.map((x: any) => {
+    id: node.id || '',
+    prismicId: node.prismicId || '',
+    lang: node.lang || 'is',
+    tags: node.tags || [],
+    name: node.data?.name || '',
+    items: (node.data?.items || []).map((x: any) => {
       return {
-        page: x.page.document ? pageResolver(x.page.document) : null,
+        page: x?.page?.document ? pageResolver(x.page.document) : null,
         submenu: null,
       }
     }),
@@ -99,17 +107,18 @@ export const submenuResolver = (node: any): MenuInterface => {
 }
 
 export const menuResolver = (node: any): MenuInterface => {
-  if (!node) return node
+  if (!node) return null as any
+
   return {
-    id: node.id,
-    prismicId: node.prismicId,
-    lang: node.lang,
-    tags: node.tags,
-    name: node.data.name,
-    items: node.data.items.map((x: any) => {
+    id: node.id || '',
+    prismicId: node.prismicId || '',
+    lang: node.lang || 'is',
+    tags: node.tags || [],
+    name: node.data?.name || '',
+    items: (node.data?.items || []).map((x: any) => {
       return {
-        page: x.page.document ? pageResolver(x.page.document) : null,
-        submenu: x.submenu.document
+        page: x?.page?.document ? pageResolver(x.page.document) : null,
+        submenu: x?.submenu?.document
           ? submenuResolver(x.submenu.document)
           : null,
       }
@@ -138,17 +147,19 @@ export interface NewsInterface {
 }
 
 export const newsResolver = (node: any): NewsInterface => {
+  if (!node) return null as any
+
   return {
-    url: node.url,
-    prismicId: node.prismicId,
-    uid: node.uid,
-    lang: node.lang,
-    type: node.type,
-    tags: node.tags,
-    date: node.data.date,
-    title: node.data.title,
-    featuredImage: node.data.featured_image,
-    body: node.data.body,
+    url: node.url || '',
+    prismicId: node.prismicId || '',
+    uid: node.uid || '',
+    lang: node.lang || 'is',
+    type: node.type || 'news',
+    tags: node.tags || [],
+    date: node.data?.date || '',
+    title: node.data?.title || { html: '', text: '' },
+    featuredImage: node.data?.featured_image || { url: '', alt: '', gatsbyImageData: null },
+    body: node.data?.body || [],
   }
 }
 
@@ -193,35 +204,39 @@ export interface ExhibitionInterface {
 }
 
 export const exhibitionResolver = (node: any): ExhibitionInterface => {
+  if (!node) return null as any
+
+  const opening = node.data?.opening || new Date().toISOString()
+
   return {
-    url: node.url,
-    prismicId: node.prismicId,
-    uid: node.uid,
-    lang: node.lang,
-    type: node.type,
-    tags: node.tags,
-    additionalLinks: node.data.additional_links.map((x: any) => {
-      return {
-        text: x.text,
+    url: node.url || '',
+    prismicId: node.prismicId || '',
+    uid: node.uid || '',
+    lang: node.lang || 'is',
+    type: node.type || 'exhibition',
+    tags: node.tags || [],
+    additionalLinks: (node.data?.additional_links || [])
+      .filter((x: any) => x?.link?.url)
+      .map((x: any) => ({
+        text: x.text || '',
         url: x.link.url,
-      }
-    }),
-    artist: node.data.artist,
-    artistBiography: node.data.artist_biography,
-    closing: node.data.closing,
-    opening: node.data.opening,
-    curator: node.data.curator,
-    detailedText: node.data.detailed_text,
-    excerpt: node.data.excerpt,
-    exhibitionView: node.data.exhibition_view.map((y: any) => {
-      return {
+      })),
+    artist: node.data?.artist || '',
+    artistBiography: node.data?.artist_biography || { html: '' },
+    closing: node.data?.closing || '',
+    opening,
+    curator: node.data?.curator || '',
+    detailedText: node.data?.detailed_text || { html: '' },
+    excerpt: node.data?.excerpt || { html: '' },
+    exhibitionView: (node.data?.exhibition_view || [])
+      .filter((y: any) => y?.image)
+      .map((y: any) => ({
         ...y.image,
-      }
-    }),
-    featuredImage: node.data.featured_image,
-    title: node.data.title,
-    year: new Date(node.data.opening).getFullYear(),
-    body: node.data.body,
+      })),
+    featuredImage: node.data?.featured_image || { url: '', alt: '' },
+    title: node.data?.title || { html: '', text: '' },
+    year: new Date(opening).getFullYear(),
+    body: node.data?.body || [],
   }
 }
 
@@ -250,20 +265,22 @@ export interface EventInterface {
 }
 
 export const eventResolver = (node: any): EventInterface => {
+  if (!node) return null as any
+
   return {
-    uid: node.uid,
-    prismicId: node.uid,
-    url: node.url,
-    type: node.type,
-    lang: node.lang,
-    tags: node.tags,
-    name: node.data.name,
-    image: node.data.image,
-    text: node.data.text,
-    date: node.data.date,
+    uid: node.uid || '',
+    prismicId: node.prismicId || node.uid || '',
+    url: node.url || '',
+    type: node.type || 'event',
+    lang: node.lang || 'is',
+    tags: node.tags || [],
+    name: node.data?.name || { html: '', text: '' },
+    image: node.data?.image || { url: '', alt: '', gatsbyImageData: null },
+    text: node.data?.text || { html: '' },
+    date: node.data?.date || '',
     time:
-      node.data.from && node.data.to ? `${node.data.from}—${node.data.to}` : '',
-    body: node.data.body,
+      node.data?.from && node.data?.to ? `${node.data.from}—${node.data.to}` : '',
+    body: node.data?.body || [],
   }
 }
 
@@ -278,21 +295,19 @@ export interface OpeningHourInterface {
   }
 }
 
-export const openingHourResolver = (node: any): OpeningHourInterface => ({
-  day: {
-    from: node.data.opening_hours.document
-      ? node.data.opening_hours.document.data.day_from
-      : '',
-    to: node.data.opening_hours.document
-      ? node.data.opening_hours.document.data.day_to
-      : '',
-  },
-  time: {
-    from: node.data.opening_hours.document
-      ? node.data.opening_hours.document.data.time_from
-      : '',
-    to: node.data.opening_hours.document
-      ? node.data.opening_hours.document.data.time_to
-      : '',
-  },
-})
+export const openingHourResolver = (node: any): OpeningHourInterface => {
+  if (!node) return null as any
+
+  const openingHoursDoc = node.data?.opening_hours?.document
+
+  return {
+    day: {
+      from: openingHoursDoc?.data?.day_from || '',
+      to: openingHoursDoc?.data?.day_to || '',
+    },
+    time: {
+      from: openingHoursDoc?.data?.time_from || '',
+      to: openingHoursDoc?.data?.time_to || '',
+    },
+  }
+}
