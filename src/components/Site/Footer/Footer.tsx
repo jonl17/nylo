@@ -26,6 +26,12 @@ const Footer = ({ lang }: { lang: Language }) => {
             <h3>Strætó: 14</h3>
             <h3>Stöð: Grandi</h3>
           </div>
+          {data.openingHours?.html && (
+            <div className='pb-3'>
+              <p className='mb-0'>{langSeek('Opening hours', lang)}</p>
+              <div dangerouslySetInnerHTML={{ __html: data.openingHours.html }} />
+            </div>
+          )}
         </div>
 
         {/* block */}
