@@ -6,7 +6,9 @@ import algoliaSearch from 'algoliasearch/lite'
 import { CustomInput, CustomResult } from './CustomComponents'
 
 const appId = process.env.GATSBY_ALGOLIA_APP_ID || ''
-const apiKey = process.env.GATSBY_ALGOLIA_API_KEY || ''
+// Search-only key. Never put the indexing/admin key in a GATSBY_ var:
+// Gatsby inlines GATSBY_* values into the public JS bundle.
+const apiKey = process.env.GATSBY_ALGOLIA_SEARCH_KEY || ''
 const indexName = process.env.GATSBY_ALGOLIA_INDEX_NAME || ''
 
 const searchClient = algoliaSearch(appId, apiKey)
