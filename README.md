@@ -1,3 +1,29 @@
+# nylo.is
+
+Gatsby 5 site for Nýló, content from Prismic, search with Algolia.
+
+## Environment variables
+
+See `.env.example` for the full list.
+
+| Variable                                             | Where it is used                                   | Public? |
+| ---------------------------------------------------- | -------------------------------------------------- | ------- |
+| `PRISMIC_REPO_NAME`, `PRISMIC_ACCESS_TOKEN`          | gatsby-source-prismic (build)                      | no      |
+| `MAILCHIMP_ENDPOINT`                                 | gatsby-plugin-mailchimp                            | yes     |
+| `GATSBY_ALGOLIA_APP_ID`, `GATSBY_ALGOLIA_INDEX_NAME` | Search.tsx (browser) and indexing                  | yes     |
+| `GATSBY_ALGOLIA_SEARCH_KEY`                          | Search.tsx (browser). **Search-only key.**         | yes     |
+| `ALGOLIA_ADMIN_KEY`                                  | gatsby-plugin-algolia-search indexing (build only) | **no**  |
+| `ALGOLIA_SKIP_INDEXING`                              | set to `true` to build without indexing            | no      |
+
+Anything prefixed `GATSBY_` is inlined into the public JS bundle, so never put a
+write-capable Algolia key in a `GATSBY_` variable.
+
+Algolia indexing runs on `gatsby build` when `GATSBY_ALGOLIA_APP_ID` is set and
+`ALGOLIA_SKIP_INDEXING` is not `true`. In that case `ALGOLIA_ADMIN_KEY` is
+required and the build fails if it is missing. `gatsby develop` and builds
+without any Algolia config skip indexing (search UI won't return results
+without the `GATSBY_ALGOLIA_*` vars).
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.com">
