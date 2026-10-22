@@ -1,33 +1,22 @@
 const React = require('react')
 
-// Google Tag Manager for nylo.is. The container ID is public.
-// CookieHub (consent) is set up by Nýló inside GTM, not in this repo.
-const GTM_ID = process.env.GATSBY_GTM_ID || 'GTM-5R8KWLDS'
+// Cookie consent (T-16): Google Tag Manager is NOT added to the static HTML.
+// It is injected in the browser only after the visitor accepts (see
+// src/utils/consent.ts and gatsby-browser.js). There is no <noscript> GTM
+// iframe on purpose: without JavaScript there is no consent, so no tracking.
+//
+// This tiny inline script only hides the consent bar before first paint when a
+// valid choice (max ~6 months old) is already stored. It loads nothing.
+const CONSENT_KEY = 'nylo-cookie-consent'
+const CONSENT_MAX_AGE_MS = 1000 * 60 * 60 * 24 * 182
 
-exports.onRenderBody = ({ setHeadComponents, setPreBodyComponents }) => {
-  if (process.env.NODE_ENV !== 'production' || !GTM_ID) return
-
+exports.onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <script
-      key='gtm-script'
+      key='cookie-consent-state'
       dangerouslySetInnerHTML={{
-        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');`,
+        __html: `try{var c=JSON.parse(localStorage.getItem('${CONSENT_KEY}'));if(c&&c.ts&&Date.now()-c.ts<${CONSENT_MAX_AGE_MS})document.documentElement.classList.add('cookie-consent-set')}catch(e){}`,
       }}
     />,
-  ])
-
-  setPreBodyComponents([
-    <noscript key='gtm-noscript'>
-      <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-        height='0'
-        width='0'
-        style={{ display: 'none', visibility: 'hidden' }}
-      />
-    </noscript>,
   ])
 }

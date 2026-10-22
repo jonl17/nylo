@@ -9,6 +9,7 @@ import cn from 'classnames'
 import { Language } from 'balkan-tungumal/lib/dict'
 import SEO from '~/components/Site/SEO'
 import MobileMenu from '~/components/Site/MobileMenu'
+import CookieConsent from '~/components/Site/CookieConsent'
 
 const Layout: React.FC<{
   page: any
@@ -62,6 +63,7 @@ const Layout: React.FC<{
       </main>
 
       <Banner ctx={pCtx} />
+      <CookieConsent lang={lang === 'en-us' ? 'en-us' : 'is'} />
     </Fragment>
   )
 }
