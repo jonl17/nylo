@@ -50,13 +50,6 @@ const CookieConsent = ({ lang }: { lang: Language }) => {
     if (open && reopened) acceptRef.current?.focus()
   }, [open, reopened])
 
-  // Lock page scroll while the shaded backdrop is up; the choice is explicit.
-  useEffect(() => {
-    const root = document.documentElement
-    root.classList.toggle('cookie-consent-lock', open)
-    return () => root.classList.remove('cookie-consent-lock')
-  }, [open])
-
   const choose = (accepted: boolean) => {
     const previous = readConsent()
     writeConsent(accepted ? 'accepted' : 'declined')
@@ -76,38 +69,36 @@ const CookieConsent = ({ lang }: { lang: Language }) => {
   const openClass = reopened ? ' cookie-consent--open' : ''
 
   return (
-    <>
-      {/* Soft shade behind the bar. Not clickable to dismiss. */}
-      <div
-        className={`cookie-consent-backdrop${openClass}`}
-        aria-hidden='true'
-      />
-      <div
-        className={`cookie-consent${openClass}`}
-        role='region'
-        aria-label={t.label}
-        lang={lang === 'en-us' ? 'en' : 'is'}
-      >
-        <p className='cookie-consent__text'>{t.message}</p>
-        <div className='cookie-consent__buttons'>
-          <button
-            ref={acceptRef}
-            type='button'
-            className='btn btn--primary cookie-consent__btn'
-            onClick={() => choose(true)}
-          >
-            {t.accept}
-          </button>
-          <button
-            type='button'
-            className='btn btn--primary cookie-consent__btn'
-            onClick={() => choose(false)}
-          >
-            {t.decline}
-          </button>
-        </div>
+    <div
+      className={`cookie-consent${openClass}`}
+      role='dialog'
+      aria-modal='false'
+      aria-label={t.label}
+      aria-describedby='cookie-consent-text'
+      lang={lang === 'en-us' ? 'en' : 'is'}
+    >
+      <h3 className='cookie-consent__title'>{t.label}</h3>
+      <p id='cookie-consent-text' className='cookie-consent__text'>
+        {t.message}
+      </p>
+      <div className='cookie-consent__buttons'>
+        <button
+          ref={acceptRef}
+          type='button'
+          className='btn btn--primary cookie-consent__btn'
+          onClick={() => choose(true)}
+        >
+          {t.accept}
+        </button>
+        <button
+          type='button'
+          className='btn btn--primary cookie-consent__btn'
+          onClick={() => choose(false)}
+        >
+          {t.decline}
+        </button>
       </div>
-    </>
+    </div>
   )
 }
 
