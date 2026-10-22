@@ -1,44 +1,31 @@
-// Full-viewport soft shade shown while the consent bar is open.
-// Sits above all page chrome (incl. mobile menu, 999) and below the bar.
-.cookie-consent-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba($black, 0.25);
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: cookie-consent-fade 0.25s ease-out;
-  }
-}
-
-@keyframes cookie-consent-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-html.cookie-consent-lock {
-  overflow: hidden;
-}
-
-// Cookie consent bar (T-16). Sits just above the fixed bottom banner.
+// Cookie consent card (T-16). A small, non-blocking card fixed bottom-right,
+// sitting just above the fixed bottom banner (search / EN buttons) so it
+// never covers them. Nýló look: white, 1px black border, square corners.
 .cookie-consent {
   position: fixed;
-  left: 0;
-  bottom: $banner-height;
-  width: 100%;
+  right: $spacer;
+  bottom: calc(#{$banner-height} + #{$spacer});
   z-index: 1001;
+  width: 380px;
+  max-width: calc(100vw - #{$spacer} * 2);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: $spacer;
-  padding: calc(#{$spacer} * 0.5) $spacer;
+  flex-direction: column;
+  gap: calc(#{$spacer} * 0.75);
+  padding: $spacer;
   background: $white;
-  border-top: 1px solid $black;
+  border: 1px solid $black;
+  border-radius: 0;
   color: $black;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: cookie-consent-in 0.25s ease-out;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 23px;
+    line-height: 1;
+  }
 
   &__text {
     margin: 0;
@@ -48,12 +35,16 @@ html.cookie-consent-lock {
 
   &__buttons {
     display: flex;
-    flex-shrink: 0;
     gap: calc(#{$spacer} * 0.5);
+    margin-top: calc(#{$spacer} * 0.25);
+
+    > .btn {
+      flex: 1 1 0;
+      min-width: 0;
+    }
   }
 
   &__btn.btn {
-    min-width: 8.5rem;
     font-size: 18px;
     color: $black;
 
@@ -69,26 +60,39 @@ html.cookie-consent-lock {
     }
   }
 
-  @include media-breakpoint-down('sm') {
-    flex-direction: column;
-    align-items: stretch;
+  // Phones: full width with small side margins, still above the banner.
+  @media (max-width: 599.98px) {
+    left: calc(#{$spacer} * 0.5);
+    right: calc(#{$spacer} * 0.5);
+    bottom: calc(#{$banner-height} + #{$spacer} * 0.5);
+    width: auto;
+    max-width: none;
     gap: calc(#{$spacer} * 0.5);
+
+    &__title {
+      font-size: 18px;
+    }
 
     &__text {
       font-size: 15px;
     }
-
-    &__buttons > .btn {
-      flex: 1 1 0;
-      min-width: 0;
-    }
   }
 }
 
-// A valid stored choice hides the bar before React hydrates; the footer
+@keyframes cookie-consent-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// A valid stored choice hides the card before React hydrates; the footer
 // "Vafrakökur / Cookies" link reopens it (.cookie-consent--open).
-html.cookie-consent-set .cookie-consent:not(.cookie-consent--open),
-html.cookie-consent-set .cookie-consent-backdrop:not(.cookie-consent--open) {
+html.cookie-consent-set .cookie-consent:not(.cookie-consent--open) {
   display: none;
 }
 
