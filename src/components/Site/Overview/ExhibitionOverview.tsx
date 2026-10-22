@@ -16,6 +16,7 @@ import cn from 'classnames'
 import { useExhibitionFilter } from '~/context/exhibitionFilter'
 import Filter from './Filter'
 import { mergeQueryParams, useQueryParams } from '~/utils/url'
+import useNow from '~/hooks/useNow'
 
 type BoxProps = {
   item: ExhibitionInterface
@@ -125,7 +126,8 @@ const Exhibitions = ({
 export default ({ lang }: { lang: Language }) => {
   const exhibitions = getAllExhibitions().filter(node => node.lang === lang)
 
-  const { past, open, upcoming } = groupExhibitionsByDate(exhibitions)
+  const now = useNow()
+  const { past, open, upcoming } = groupExhibitionsByDate(exhibitions, now)
 
   const qs = useQueryParams()
 

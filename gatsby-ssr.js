@@ -1,4 +1,8 @@
-const React = require('react')
+import React from 'react'
+
+// Shared with gatsby-browser.js so server HTML and the first client render
+// match (prevents React hydration errors #418/#423).
+export { wrapRootElement } from './src/wrapRootElement'
 
 // Cookie consent (T-16): Google Tag Manager is NOT added to the static HTML.
 // It is injected in the browser only after the visitor accepts (see
@@ -10,7 +14,7 @@ const React = require('react')
 const CONSENT_KEY = 'nylo-cookie-consent'
 const CONSENT_MAX_AGE_MS = 1000 * 60 * 60 * 24 * 182
 
-exports.onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <script
       key='cookie-consent-state'

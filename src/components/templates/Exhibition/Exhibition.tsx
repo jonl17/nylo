@@ -7,6 +7,7 @@ import CloseButton from '~/components/Site/CloseButton'
 import Breadcrumbs from '~/components/Site/Breadcrumbs'
 import Open from '~/components/Site/Open'
 import { formatDate, exhibitionIsOpen } from '~/utils'
+import useNow from '~/hooks/useNow'
 import Button from '~/components/Site/Button'
 import Slideshow from '~/components/Site/Slideshow/Slideshow'
 import { langSeek } from 'balkan-tungumal'
@@ -30,6 +31,7 @@ interface Props extends PageProps {
 
 const Exhibition = ({ data }: Props) => {
   const [readMore, setReadMore] = useState(false)
+  const now = useNow()
 
   const exhibition = exhibitionResolver(data.prismicExhibition)
 
@@ -59,7 +61,8 @@ const Exhibition = ({ data }: Props) => {
           <div className='d-flex align-items-center mt-4 mt-lg-0'>
             {exhibitionIsOpen(
               new Date(exhibition.opening),
-              new Date(exhibition.closing)
+              new Date(exhibition.closing),
+              now
             ) && <Open className='mr-3' />}
             <p className='pr-3'>
               {formatDate(exhibition.opening, exhibition.closing)}
