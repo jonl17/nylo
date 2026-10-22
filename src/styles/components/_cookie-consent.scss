@@ -1,10 +1,44 @@
+// Full-viewport blurred backdrop shown while the consent bar is open.
+// Sits above all page chrome (incl. mobile menu, 999) and below the bar.
+.cookie-consent-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba($black, 0.2);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  @supports not (
+    (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+  ) {
+    background: rgba($black, 0.5);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: cookie-consent-fade 0.25s ease-out;
+  }
+}
+
+@keyframes cookie-consent-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html.cookie-consent-lock {
+  overflow: hidden;
+}
+
 // Cookie consent bar (T-16). Sits just above the fixed bottom banner.
 .cookie-consent {
   position: fixed;
   left: 0;
   bottom: $banner-height;
   width: 100%;
-  z-index: 201;
+  z-index: 1001;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -61,7 +95,8 @@
 
 // A valid stored choice hides the bar before React hydrates; the footer
 // "Vafrakökur / Cookies" link reopens it (.cookie-consent--open).
-html.cookie-consent-set .cookie-consent:not(.cookie-consent--open) {
+html.cookie-consent-set .cookie-consent:not(.cookie-consent--open),
+html.cookie-consent-set .cookie-consent-backdrop:not(.cookie-consent--open) {
   display: none;
 }
 
