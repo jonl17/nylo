@@ -10,6 +10,7 @@ import { Language } from '~/lang'
 import { hasSubmenu, isCustomType } from './methods'
 import { useLocation } from '@reach/router'
 import { openNow } from '~/utils'
+import useNow from '~/hooks/useNow'
 
 const Menu = ({ lang, type }: { lang: Language; type: string }) => {
   const menu = useMenuQuery().find(m => m.lang === lang)
@@ -45,13 +46,13 @@ const Menu = ({ lang, type }: { lang: Language; type: string }) => {
 
 const Sidebar = ({ lang }: { lang: Language }) => {
   const sidebar = useSidebarQuery()
-  if (!sidebar) return null
-
   const openingHours = useOpeningHoursQuery()
+  const now = useNow()
+  if (!sidebar) return null
 
   const { day, time } = openingHours
 
-  const isOpen = openNow(day, time)
+  const isOpen = openNow(day, time, now)
 
   return (
     <div className='pb-3'>

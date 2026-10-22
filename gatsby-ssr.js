@@ -1,10 +1,11 @@
-const React = require('react')
+import React from 'react'
+export { wrapRootElement } from './src/wrapRootElement'
 
 // Google Tag Manager for nylo.is. The container ID is public.
 // CookieHub (consent) is set up by Nýló inside GTM, not in this repo.
 const GTM_ID = process.env.GATSBY_GTM_ID || 'GTM-5R8KWLDS'
 
-exports.onRenderBody = ({ setHeadComponents, setPreBodyComponents }) => {
+export const onRenderBody = ({ setHeadComponents, setPreBodyComponents }) => {
   if (process.env.NODE_ENV !== 'production' || !GTM_ID) return
 
   setHeadComponents([

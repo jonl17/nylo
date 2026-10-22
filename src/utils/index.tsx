@@ -25,12 +25,14 @@ export const formatDate = (
   const firstD = new Date(firstDate)
 
   const locale = 'en-GB'
+  // Fixed timezone so server (UTC) and visitors abroad get the same date.
+  const options = { timeZone: 'Atlantic/Reykjavik' }
 
-  const firstFormattedDateFull = Intl.DateTimeFormat(locale)
+  const firstFormattedDateFull = Intl.DateTimeFormat(locale, options)
     .format(firstD)
     .replace(/\//g, '.')
   const firstFormattedDateShort = firstFormattedDateFull.replace(
-    `.${firstD.getFullYear()}`,
+    `.${firstD.getUTCFullYear()}`,
     ''
   )
 
@@ -42,11 +44,11 @@ export const formatDate = (
     return firstFormattedDateFull
   } else {
     const secondD = new Date(secondDate)
-    const secondFormattedDateFull = Intl.DateTimeFormat(locale)
+    const secondFormattedDateFull = Intl.DateTimeFormat(locale, options)
       .format(secondD)
       .replace(/\//g, '.')
 
-    if (secondD.getFullYear() === firstD.getFullYear()) {
+    if (secondD.getUTCFullYear() === firstD.getUTCFullYear()) {
       return firstFormattedDateShort + '—' + secondFormattedDateFull
     } else {
       return firstFormattedDateFull + '—' + secondFormattedDateFull
@@ -135,7 +137,10 @@ export interface ExhibitionGroup {
   exhibitions: ExhibitionInterface[]
 }
 
-export const groupExhibitionsByDate = (exhibitions: ExhibitionInterface[]) => {
+export const groupExhibitionsByDate = (
+  exhibitions: ExhibitionInterface[],
+  now: Date = new Date()
+) => {
   // Liðnar / Past yfirstandandi / Current og Framundan / upcoming
 
   let open: ExhibitionGroup = { status: 'Current', exhibitions: [] }
@@ -144,9 +149,9 @@ export const groupExhibitionsByDate = (exhibitions: ExhibitionInterface[]) => {
 
   exhibitions.map(node => {
     // if it's open
-    if (exhibitionIsOpen(new Date(node.opening), new Date(node.closing))) {
+    if (exhibitionIsOpen(new Date(node.opening), new Date(node.closing), now)) {
       open.exhibitions.push(node)
-    } else if (new Date(node.opening) > new Date()) {
+    } else if (new Date(node.opening) > now) {
       upcoming.exhibitions.push(node)
     } else {
       past.exhibitions.push(node)
@@ -160,11 +165,12 @@ const daysoftheweek = ['Sun', 'Mán', 'Þrið', 'Mið', 'Fimt', 'Föst', 'Laug']
 
 export const openNow = (
   day: { from: string; to: string },
-  time: { from: number; to: number }
+  time: { from: number; to: number },
+  d: Date = new Date()
 ): boolean => {
-  const d = new Date()
-  const weekdayIdx = d.getDay()
-  const hour = d.getHours()
+  // Reykjavík time is UTC all year (no DST), independent of the visitor's zone.
+  const weekdayIdx = d.getUTCDay()
+  const hour = d.getUTCHours()
 
   const firstDayIdx = daysoftheweek.indexOf(day.from)
   const lastdayIdx = daysoftheweek.indexOf(day.to)

@@ -235,7 +235,7 @@ export const exhibitionResolver = (node: any): ExhibitionInterface => {
       })),
     featuredImage: node.data?.featured_image || { url: '', alt: '' },
     title: node.data?.title || { html: '', text: '' },
-    year: new Date(opening).getFullYear(),
+    year: new Date(opening).getUTCFullYear(),
     body: node.data?.body || [],
   }
 }

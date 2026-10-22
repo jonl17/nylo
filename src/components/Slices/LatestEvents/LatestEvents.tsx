@@ -4,9 +4,10 @@ import { Language } from '~/lang'
 import { formatDate } from '~/utils'
 import { langSeek } from 'balkan-tungumal'
 import { Link } from 'gatsby'
+import useNow from '~/hooks/useNow'
 
 const LatestEvents = ({ lang }: { lang: Language }) => {
-  const tdy = new Date()
+  const tdy = useNow()
   const events = useGetEvents().filter(node => {
     if (node.lang === lang && new Date(node.date) > tdy) {
       return node

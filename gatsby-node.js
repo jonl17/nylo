@@ -1,8 +1,13 @@
 const path = require('path')
 const slugify = require('slugify')
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+// One timestamp per build, shared by the SSR and browser bundles (see
+// src/hooks/useNow.ts).
+const BUILD_TIME = Date.now()
+
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   actions.setWebpackConfig({
+    plugins: [plugins.define({ __BUILD_TIME__: JSON.stringify(BUILD_TIME) })],
     resolve: {
       fallback: {
         fs: false,
