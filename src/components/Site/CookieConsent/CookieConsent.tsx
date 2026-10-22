@@ -50,7 +50,7 @@ const CookieConsent = ({ lang }: { lang: Language }) => {
     if (open && reopened) acceptRef.current?.focus()
   }, [open, reopened])
 
-  // Lock page scroll while the blurred backdrop is up; the choice is explicit.
+  // Lock page scroll while the shaded backdrop is up; the choice is explicit.
   useEffect(() => {
     const root = document.documentElement
     root.classList.toggle('cookie-consent-lock', open)
@@ -77,7 +77,7 @@ const CookieConsent = ({ lang }: { lang: Language }) => {
 
   return (
     <>
-      {/* Blurred backdrop behind the bar. Not clickable to dismiss. */}
+      {/* Soft shade behind the bar. Not clickable to dismiss. */}
       <div
         className={`cookie-consent-backdrop${openClass}`}
         aria-hidden='true'
