@@ -1,0 +1,122 @@
+// Full-viewport blurred backdrop shown while the consent bar is open.
+// Sits above all page chrome (incl. mobile menu, 999) and below the bar.
+.cookie-consent-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba($black, 0.2);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  @supports not (
+    (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+  ) {
+    background: rgba($black, 0.5);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: cookie-consent-fade 0.25s ease-out;
+  }
+}
+
+@keyframes cookie-consent-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html.cookie-consent-lock {
+  overflow: hidden;
+}
+
+// Cookie consent bar (T-16). Sits just above the fixed bottom banner.
+.cookie-consent {
+  position: fixed;
+  left: 0;
+  bottom: $banner-height;
+  width: 100%;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacer;
+  padding: calc(#{$spacer} * 0.5) $spacer;
+  background: $white;
+  border-top: 1px solid $black;
+  color: $black;
+
+  &__text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-shrink: 0;
+    gap: calc(#{$spacer} * 0.5);
+  }
+
+  &__btn.btn {
+    min-width: 8.5rem;
+    font-size: 18px;
+    color: $black;
+
+    @include media-breakpoint-up('lg') {
+      &:hover {
+        color: $white;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $black !important;
+      outline-offset: 2px;
+    }
+  }
+
+  @include media-breakpoint-down('sm') {
+    flex-direction: column;
+    align-items: stretch;
+    gap: calc(#{$spacer} * 0.5);
+
+    &__text {
+      font-size: 15px;
+    }
+
+    &__buttons > .btn {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+}
+
+// A valid stored choice hides the bar before React hydrates; the footer
+// "Vafrakökur / Cookies" link reopens it (.cookie-consent--open).
+html.cookie-consent-set .cookie-consent:not(.cookie-consent--open),
+html.cookie-consent-set .cookie-consent-backdrop:not(.cookie-consent--open) {
+  display: none;
+}
+
+.footer__cookies {
+  display: block;
+  margin-top: $spacer;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $white;
+  font-size: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: rgba($white, 0.8);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $white;
+    outline-offset: 2px;
+  }
+}

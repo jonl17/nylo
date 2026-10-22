@@ -3,6 +3,7 @@ import useGetFooter from '~/hooks/useGetFooter'
 import { langSeek } from 'balkan-tungumal'
 import { Language } from '~/lang'
 import PostlistSignup from '~/components/Site/PostlistSignup'
+import { openConsentBanner } from '~/utils/consent'
 
 const Footer = ({ lang }: { lang: Language }) => {
   const data = useGetFooter()
@@ -53,6 +54,13 @@ const Footer = ({ lang }: { lang: Language }) => {
             >
               <h3>Instagram</h3>
             </a>
+            <button
+              type='button'
+              className='footer__cookies'
+              onClick={openConsentBanner}
+            >
+              {lang === 'en-us' ? 'Cookies' : 'Vafrakökur'}
+            </button>
           </div>
 
           <div className='py-3'>
