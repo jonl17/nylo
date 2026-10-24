@@ -6,13 +6,24 @@ import { PageHit, ExhibitionHit, EventHit } from './Types'
 import { useLanguage } from '~/context/langContext'
 import useGetCurrentLanguage from '~/hooks/useGetCurrentLanguage'
 
+const SEARCH_DEBOUNCE_MS = 300
+
 const CustomInput = ({ refine }: { refine: (s: string) => void }) => {
   const { searchQuery } = useSearch()
 
   const { lang } = useLanguage()
 
+  // Every refine() is one billed Algolia search, so wait until typing
+  // pauses (SEARCH_DEBOUNCE_MS) before searching. An empty query (initial
+  // load, cleared input) is applied at once. The pending search is
+  // cancelled when the query changes again or the component unmounts.
   useEffect(() => {
-    refine(searchQuery)
+    if (searchQuery === '') {
+      refine(searchQuery)
+      return
+    }
+    const timer = setTimeout(() => refine(searchQuery), SEARCH_DEBOUNCE_MS)
+    return () => clearTimeout(timer)
   }, [searchQuery])
 
   return (
